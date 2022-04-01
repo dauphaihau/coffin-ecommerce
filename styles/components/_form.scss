@@ -1,0 +1,52 @@
+.form-control {
+  @apply mb-4;
+  label {
+    @apply block text-sm font-medium text-gray-900 dark:text-gray-400;
+  }
+}
+
+.form-input {
+  @apply mb-4 w-full;
+  input {
+    @apply border border-gray-300 text-gray-900 text-sm rounded-lg
+    focus:ring-black focus:border-black w-full p-2.5
+    focus:outline-none
+    py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out
+    text-xs lg:text-sm  rounded-md
+    transition duration-200 ease-in-out
+    bg-white border-gray-300 h-11 md:h-12 placeholder-gray-500
+  }
+
+  label {
+    @apply block mb-2 text-base;
+  }
+}
+
+.form-textarea-input {
+  @apply mb-3;
+  label {
+    @apply inline-block mb-2 text-black;
+  }
+
+  textarea {
+    @apply resize-none block w-full px-3 py-1.5 pt-4 pl-4 text-base font-normal
+    text-black bg-white bg-clip-padding border border-solid border-black rounded
+    transition duration-200 ease-in-out m-0 focus:text-black focus:bg-white
+    focus:border-black focus:outline-none placeholder-gray-500 text-sm font-light
+    border-gray-300 appearance-none
+
+  }
+}
+
+.form-check-input {
+  @apply mb-4 flex items-center;
+  label {
+    @apply inline-block;
+  }
+
+  input {
+    @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
+    checked:bg-black checked:border-black focus:outline-none transition duration-200
+    align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer;
+  }
+}

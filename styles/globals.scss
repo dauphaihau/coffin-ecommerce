@@ -1,0 +1,36 @@
+@tailwind base;
+
+
+@import "./components/form";
+@import "./components/button";
+@import "./components/drawer";
+@tailwind components;
+
+@tailwind utilities;
+
+@font-face {
+  font-family: "Eina";
+  src: url("/fonts/Eina.otf");
+}
+
+@font-face {
+  font-family: "Eina Light";
+  src: url("/fonts/Eina-Light.otf");
+}
+
+@font-face {
+  font-family: "Eina SemiBold";
+  src: url("/fonts/Eina-SemiBold.otf");
+}
+
+@layer base {
+  p, h1, h2, h3, h4, h5 , label{
+    color: rgba(0, 0, 0, .8);
+    font-family: Eina;
+  }
+}
+
+
+.Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--light Toastify__progress-bar--default {
+  color: gray;
+}

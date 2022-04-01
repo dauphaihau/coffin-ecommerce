@@ -1,0 +1,14 @@
+.btn {
+  @apply text-[13px] md:text-sm leading-4 items-center cursor-pointer transition
+  ease-in-out duration-300 font-semibold font-light text-center
+  justify-center border-0 border-transparent rounded-md placeholder-white focus-visible:outline-none
+  focus:outline-none bg-black text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white
+   hover:opacity-[0.8] w-full sm:w-auto
+}
+
+
+//.btn {
+//  @apply text-sm font-bold tracking-wider bg-transparent
+//  hover:bg-black text-black font-semibold rounded-lg hover:text-white py-4
+//  px-12 border-2 border-black hover:border-transparent
+//}

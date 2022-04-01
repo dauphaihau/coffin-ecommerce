@@ -20,8 +20,7 @@ const QuantityPicker = (props) => {
         focus:outline-none
         ${setBlack}
         `}
-        onClick={increment}
-      >+
+        onClick={decrement}>-
       </button>
       <p className={`
         w-10 h-10 pt-2 text-base
@@ -41,7 +40,7 @@ const QuantityPicker = (props) => {
         focus:outline-none
         ${setBlack}
         `}
-        onClick={decrement}>-
+        onClick={increment}>+
       </button>
     </div>
   )

@@ -33,7 +33,7 @@ const Layout = ({children, categories}) => {
   return (
     <div className='overflow-y-hidden'>
       <Navbar categories={categories}/>
-      {drawerOpen || modalOpen && <Backdrop />}
+      {drawerOpen && <Backdrop /> || modalOpen && <Backdrop/>}
       {/*<CartDrawer/>*/}
       <CartDrawer/>
       <ToastContainer

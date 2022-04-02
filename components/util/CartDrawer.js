@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {useState, useEffect} from 'react'
-import {XIcon, ArrowNarrowRightIcon} from "@heroicons/react/outline";
+import {XCircleIcon, XIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
 import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
@@ -10,17 +10,23 @@ import {slugify} from "../../utils/helpers";
 import Button from "../Button";
 
 const CartDrawer = ({context}) => {
-  const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
 
-  const {drawerOpen, drawerToggle} = useUtil();
+  const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
+  const {drawerOpen, drawerToggle, user, setUser} = useUtil();
 
   useEffect(() => {
     setRenderClientSideComponent(true)
   }, [])
 
   const {
-    numberOfItemsInCart, cart, removeFromCart, total, setItemQuantity
+    numberOfItemsInCart,
+    numberAllOfItemsInCart,
+    cart, removeFromCart, total, setItemQuantity
   } = context
+
+  useEffect(() => {
+    setUser({...user, numberAllOfItemsInCart})
+  }, [numberAllOfItemsInCart])
 
   const cartEmpty = numberOfItemsInCart === Number(0)
 
@@ -39,87 +45,92 @@ const CartDrawer = ({context}) => {
 
   return (
     <>
-      {/*<CartLink/>*/}
       <aside className={`drawer ${drawerOpen && 'open'}`}>
         <div className="flex flex-col w-full p-8">
-          <h1 className="text-2xl font-black py-4 border-b">Shopping cart</h1>
+          <div className='flex justify-between items-center'>
+            <h1 className="text-2xl font-black py-4 border-b">Shopping cart</h1>
+            <XIcon width={30} height={30}
+                className='text-black
+                 bg-transparent hover:bg-gray-200 hover:text-gray-900
+                  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
+                  dark:hover:bg-gray-800 dark:hover:text-white'
+                   onClick={() => drawerToggle()}
+            />
+          </div>
           {
             cartEmpty
-              ? (<h3>No items in cart.</h3>)
+              ? (
+                <div className='h-[780px]'>
+                  <img src="/images/empty.png" h alt=""/>
+                </div>
+              )
               : (
-                <div className="flex flex-col h-[780px] overflow-y-auto">
+                <div className="flex flex-col h-[780px] overflow-x-hidden">
                   <div>
                     {
                       cart.map((item) => {
                         return (
-                          <div className="border-b py-10" key={item.id}>
+                          <div className="border-t py-10" key={item.id}>
                             <div className="flex">
-                              <Link href={`/product/${slugify(item.name)}`}>
-                                <a aria-label={item.name} className='bg-light rounded-lg'>
-                                  <img className=" h-20 m-0" width={440} src={item.image} alt={item.name}
-                                  onClick={() => removeFromCart(item)}
-                                  />
-                                </a>
-                              </Link>
-                              <div className='ml-4'>
-                                <Link href={`/product/${slugify(item.name)}`}>
-                                  <a aria-label={item.name}>
-                                    <p className=" m-0 text-gray-600 w-80">
-                                      {item.name}
-                                    </p>
-                                  </a>
-                                </Link>
-                                <p className='text-gray-500 py-2'>Unit price: {DENOMINATION + item.price} </p>
-                                <QuantityPicker
-                                  theme='black'
-                                  numberOfItems={item.quantity}
-                                  increment={() => increment(item)}
-                                  decrement={() => decrement(item)}
-                                />
-                                <div className="flex flex-1 justify-end">
-                                  <p className="m-0 pl-10 text-gray-900 tracking-wider">
-                                    {DENOMINATION + item.price * item.quantity}
-                                  </p>
+                              <div className='
+                              cursor-pointer
+                                         relative bg-light rounded-lg p-1
+                              '
+
+                                   onClick={() => removeFromCart(item)}
+                              >
+                                <img className="h-28 m-0" width={440} src={item.image} alt={item.name}/>
+                                <div className='
+                                    absolute
+                                   top-0 left-0 z-10
+                                   w-full h-full
+                                   hover:bg-gradient-to-t from-black
+
+                                   rounded-lg
+                              '>
+                                  <XCircleIcon className='hidden hover:block h-20 w-2' width={50}/>
                                 </div>
                               </div>
-                              {/*<div*/}
-                              {/*  role="button" onClick={() => removeFromCart(item)}*/}
-                              {/*  className="m-0 ml-10 text-gray-900 text-s cursor-pointer">*/}
-                              {/*  <XIcon width={35}/>*/}
-                              {/*</div>*/}
-                            </div>
-                            <div className="flex items-center flex md:hidden">
-                              <Link href={`/product/${slugify(item.name)}`}>
-                                <a>
-                                  <img className="w-32 m-0" src={item.image} alt={item.name}/>
-                                </a>
-                              </Link>
-                              <div>
+
+
+                              {/*<Link href={`/product/${slugify(item.name)}`}>*/}
+                              {/*  <a aria-label={item.name} className='bg-light rounded-lg p-1*/}
+
+
+                              {/*           relative*/}
+                              {/*     before:absolute before:top-0 before:left-0 before:z-10*/}
+                              {/*     before:w-full before:h-full*/}
+                              {/*     hover:before:bg-gradient-to-t from-black*/}
+                              {/*     before:rounded-2xl*/}
+                              {/*    '*/}
+
+                              {/*     onClick={() => removeFromCart(item)}*/}
+                              {/*  >*/}
+                              {/*    <img className="h-28 m-0" width={440} src={item.image} alt={item.name}/>*/}
+                              {/*  </a>*/}
+                              {/*</Link>*/}
+                              <div className='ml-4 w-[65%]'>
                                 <Link href={`/product/${slugify(item.name)}`}>
                                   <a aria-label={item.name}>
-                                    <p className=" m-0 pl-6 text-gray-600 text-base">
+                                    <p className="m-0 text-gray-600 w-80 text-smaller">
                                       {item.name}
                                     </p>
                                   </a>
                                 </Link>
-                                <div className="ml-6 mt-4 mb-2">
+                                <p className='text-gray-500 py-2 text-smaller'>
+                                  Unit price: {DENOMINATION + item.price}
+                                </p>
+                                <div className='flex justify-between'>
                                   <QuantityPicker
-                                    hideQuantityLabel
-                                    numberOfitems={item.quantity}
+                                    theme='black'
+                                    numberOfItems={item.quantity}
                                     increment={() => increment(item)}
                                     decrement={() => decrement(item)}
                                   />
-                                </div>
-                                <div className="flex flex-1">
-                                  <p className="text-lg m-0 pl-6 pt-4 text-gray-900 tracking-wider">
-                                    {DENOMINATION + item.price}
+                                  <p className="m-0 pt-3 text-gray-900 tracking-wider">
+                                    {DENOMINATION + item.price * item.quantity}
                                   </p>
                                 </div>
-                              </div>
-                              <div
-                                role="button" onClick={() => removeFromCart(item)}
-                                className="m-0 ml-10 text-gray-900 text-s cursor-pointer mr-2">
-                                <XIcon width={35}/>
                               </div>
                             </div>
                           </div>
@@ -133,9 +144,9 @@ const CartDrawer = ({context}) => {
           <Button className='mt-3'>
             <Link href="/checkout">
               <a aria-label="Check out" className='block' onClick={() => drawerToggle()}>
-                <div className="cursor-pointer flex justify-between ">
-                  <p className="text-white text-sm mr-2">Proceed to check out</p>
-                  <p className="text-white border-l pl-4">{DENOMINATION + total}</p>
+                <div className="cursor-pointer flex justify-between text-base ">
+                  <p className="text-white text-base mr-2">Proceed to check out</p>
+                  <p className="text-white text-base border-l pl-4">{DENOMINATION + total}</p>
                 </div>
               </a>
             </Link>

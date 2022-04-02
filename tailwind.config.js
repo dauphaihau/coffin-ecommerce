@@ -42,7 +42,7 @@ module.exports = {
       screens: {
         'mobile': '600px',
         'c_large': '1200px',
-        'desktop': '1440px'
+        // 'desktop': '1440px'
       },
       width: {
         '28': '7rem',
@@ -195,6 +195,10 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px',
+
+      'ipad': '768px',
+      'laptop': '1280px',
+      'desktop': '1536px',
     },
     colors: ({ colors }) => ({
       inherit: colors.inherit,
@@ -289,18 +293,6 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
-    },
-    animation: {
-      none: 'none',
-      spin: 'spin 1s linear infinite',
-      ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-      pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-      bounce: 'bounce 1s infinite',
-    },
-    aspectRatio: {
-      auto: 'auto',
-      square: '1 / 1',
-      video: '16 / 9',
     },
     backdropBlur: ({ theme }) => theme('blur'),
     backdropBrightness: ({ theme }) => theme('brightness'),

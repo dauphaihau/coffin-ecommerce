@@ -8,134 +8,121 @@ import {useRouter} from "next/router";
 
 const Home = ({inventoryData = [], categories: categoryData = []}) => {
   const router = useRouter()
-  const inventory = inventoryData.slice(0, 4)
-  const categories = categoryData.slice(0, 2)
+  const inventory = inventoryData.slice(0, 10)
 
   return (
     <>
+      <Head>
+        <title>Coffin ECommerce</title>
+        <meta name="description"
+              content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
+        <meta property="og:title" content="Coffin ECommerce" key="title"/>
+      </Head>
       <div className="w-full">
-        <Head>
-          <title>Coffin ECommerce</title>
-          <meta name="description"
-                content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
-          <meta property="og:title" content="Coffin ECommerce" key="title"/>
-        </Head>
-        <div className="bg-gray-100 p-6 pb-10 smpb-6 flex lg:flex-row flex-col rounded-lg">
+        <div className="bg-gray-100 p-6 pb-10 sm:pb-6 flex laptop:flex-row flex-col rounded-lg">
           <div className="pt-4 pl-2 sm:pt-12 sm:pl-12 flex flex-col">
             <div className="border-l border-gray-900 px-3 pt-1 mb-10">
               <p className="text-xs tracking-wider m-0 leading-tight">COFFIN</p>
               <p className="text-xs tracking-wider m-0 leading-tight">2022</p>
             </div>
-            {/*<Center*/}
-            {/*  price="200"*/}
-            {/*  title={inventory[2].name}*/}
-            {/*  link={`/product/${slugify(inventory[2].name)}`}*/}
-            {/*/>*/}
             <div>
               <p className="text-4xl xl:text-5xl font-bold tracking-widest leading-none">
-                White Chased Solid
-                {/*{inventory[2].name}*/}
+                {inventoryData[4].name}
               </p>
-              <p className="py-6 tracking-wide">FROM <span>$2000</span></p>
-              <Button onClick={() => router.push(`/product/${slugify(inventory[2].name)}`)}>Shop Now</Button>
+              <p className="py-6 tracking-wide">FROM <span>${inventoryData[4].price}</span></p>
+              <Button onClick={() => router.push(`/product/${slugify(inventory[4].name)}`)}>Shop Now</Button>
             </div>
             <div className="flex flex-1 flex-col justify-end pb-10 mt-4">
               <p className="font-light text-xs tracking-tight m-0 leading-tight mb-2">Design by</p>
-              <p className="text-xxs font-semibold tracking-tight m-0 leading-tight">Unknown</p>
+              <p className="text-xxs font-semibold tracking-tight m-0 leading-tight">Hau</p>
             </div>
           </div>
           <div className="flex flex-1 justify-center items-center relative">
-            {/*<Showcase*/}
-            {/*  imageSrc={inventory[2].image}*/}
-            {/*/>*/}
             <div className="z-10">
-              <img src={inventory[2].image} className="w-[23rem]" alt="Showcase item"/>
+              <img src={inventoryData[4].image} className="w-[23rem]" alt="Showcase item"/>
             </div>
-            {/*<div className="absolute*/}
-            {/*  w-48 h-48 sm:w-72 sm:h-72 xl:w-88 xl:h-88*/}
-            {/*  bg-white z-0 rounded-full" />*/}
           </div>
         </div>
       </div>
-      <div className=" lg:my-8 lg:grid-cols-2 grid-cols-1 grid gap-4 my-4">
-        <CategoryCard
-          imageSrc={categories[0].image}
-          subtitle={`${categories[0].itemCount} items`}
-          title={titleIfy(categories[0].name)}
-          link={`/category/${slugify(categories[0].name)}`}
-        />
-        <CategoryCard
-          imageSrc={categories[1].image}
-          subtitle={`${categories[1].itemCount} items`}
-          title={titleIfy(categories[1].name)}
-          link={`/category/${slugify(categories[1].name)}`}
-        />
-      </div>
-
-      <h1 className='text-3xl mb-4'> Featured Products</h1>
-      <div className='grid grid-cols-2 gap-x-4'>
-        <div>
-          <ProductCard
-            imageSrc={inventory[2].image}
-            title={inventory[2].name}
-            subtitle={inventory[2].categories[0]}
-            link={`/product/${slugify(inventory[2].name)}`}
-          />
-        </div>
-        <div>
-          <div className="grid grid-cols-2 gap-x-4">
+      <div className='my-12'>
+        <h1 className='text-3xl mb-4'> Featured Products</h1>
+        <div className='grid laptop:grid-cols-2 gap-x-4'>
+          <div className='hidden laptop:block'>
             <ProductCard
-              imageSrc={inventory[2].image}
-              title={inventory[2].name}
-              subtitle={inventory[2].categories[0]}
-              link={`/product/${slugify(inventory[2].name)}`}
-            />
-            <ProductCard
-              imageSrc={inventory[2].image}
-              title={inventory[2].name}
-              subtitle={inventory[2].categories[0]}
-              link={`/product/${slugify(inventory[2].name)}`}
+              full
+              imageSrc={inventoryData[1].image}
+              title={inventoryData[1].name}
+              subtitle={inventoryData[1].categories[0]}
+              link={`/product/${slugify(inventoryData[1].name)}`}
+              description={inventoryData[1].description}
+              price={inventoryData[1].price}
+              salePrice={inventoryData[1].salePrice}
             />
           </div>
-          <div className="grid grid-cols-2 gap-x-4 mt-4">
-            <ProductCard
-              imageSrc={inventory[2].image}
-              title={inventory[2].name}
-              subtitle={inventory[2].categories[0]}
-              link={`/product/${slugify(inventory[2].name)}`}
-            />
-            <ProductCard
-              imageSrc={inventory[2].image}
-              title={inventory[2].name}
-              subtitle={inventory[2].categories[0]}
-              link={`/product/${slugify(inventory[2].name)}`}
-            />
+          <div>
+            <div className="grid ipad:grid-cols-2 laptop:grid-cols-2 gap-x-4 gap-y-4">
+              <ProductCard
+                mini
+                imageSrc={inventoryData[7].image}
+                title={inventoryData[7].name}
+                subtitle={inventoryData[7].categories[0]}
+                link={`/product/${slugify(inventoryData[7].name)}`}
+                description={inventoryData[7].description}
+                price={inventoryData[7].price}
+                salePrice={inventoryData[7].salePrice}
+              />
+              <ProductCard
+                mini
+                imageSrc={inventoryData[3].image}
+                title={inventoryData[3].name}
+                subtitle={inventoryData[3].categories[0]}
+                link={`/product/${slugify(inventoryData[3].name)}`}
+                description={inventoryData[3].description}
+                price={inventoryData[3].price}
+                salePrice={inventoryData[3].salePrice}
+              />
+            </div>
+            <div className="grid ipad:grid-cols-2 laptop:grid-cols-2 gap-x-4 mt-4 gap-y-4">
+              <ProductCard
+                mini
+                imageSrc={inventoryData[9].image}
+                title={inventoryData[9].name}
+                subtitle={inventoryData[9].categories[0]}
+                link={`/product/${slugify(inventoryData[9].name)}`}
+                description={inventoryData[9].description}
+                price={inventoryData[9].price}
+                salePrice={inventoryData[9].salePrice}
+              />
+              <ProductCard
+                mini
+                imageSrc={inventoryData[11].image}
+                title={inventoryData[11].name}
+                subtitle={inventoryData[11].categories[0]}
+                link={`/product/${slugify(inventoryData[11].name)}`}
+                description={inventoryData[11].description}
+                price={inventoryData[11].price}
+                salePrice={inventoryData[11].salePrice}
+              />
+            </div>
           </div>
         </div>
       </div>
-
-
       <div
-        className="my-8 md:my-12 lg:my-16 xl:my-20 3xl:my-24 pb-5 lg:pb-3.5 2xl:pb-5 pt-3 lg:pt-1.5 2xl:pt-2 3xl:pt-3 text-center">
-        <div className="max-w-md mx-auto mb-4 md:mb-5 xl:mb-8 2xl:mb-10 3xl:mb-12">
+        className="my-8 ipad:my-12 laptop:my-16 desktop:my-20 3xl:my-24 pb-5 laptop:pb-3.5 2xl:pb-5 pt-3 laptop:pt-1.5 2xl:pt-2 3xl:pt-3 text-center">
+        <div className="max-w-md mx-auto mb-4 ipad:mb-5 desktop:mb-8 2xl:mb-10 3xl:mb-12">
           <h3
-            className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl xl:leading-10 font-bold mb-2 md:mb-3 lg:mb-3.5">
+            className="text-heading text-lg ipad:text-xl laptop:text-2xl 2xl:text-3xl desktop:leading-10 font-bold mb-2 ipad:mb-3 laptop:mb-3.5">
             Talk To A Real Person
           </h3>
-          <p className="text-body text-xs md:text-sm leading-6 md:leading-7">Are you on the fence?
+          <p className="text-body text-xs ipad:text-sm leading-6 ipad:leading-7">Are you on the fence?
             Have a question? Need a recommendation? Member Services is always here to help. Send us a message.</p>
         </div>
-        <div className='mb-2.5 md:mb-0 xl:mb-2 2xl:mb-4 3xl:mb-6 md:px-20 lg:px-40 xl:px-0 flex justify-center'>
+        <div
+          className='mb-2.5 ipad:mb-0 desktop:mb-2 2xl:mb-4 3xl:mb-6 ipad:px-20 laptop:px-40 desktop:px-0 flex justify-center'>
           <img src="/images/people.png" width={700} alt="people"/>
         </div>
         <Button>Chat With Member Services</Button>
       </div>
-
-      {/*<div className="pt-10 pb-6 flex flex-col items-center">*/}
-      {/*  <h2 className="text-4xl mb-3">Trending Now</h2>*/}
-      {/*  <p className="text-gray-600 text-sm">Find the perfect piece or accessory to finish off your favorite room in the*/}
-      {/*    house.</p>*/}
-      {/*</div>*/}
     </>
   )
 }

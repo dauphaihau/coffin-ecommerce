@@ -1,27 +1,19 @@
+import {useState} from "react";
 import {
   CardElement,
   Elements,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js"
-import { loadStripe } from "@stripe/stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
 
-import banner from "../public/images/contemporary-banner.png";
 import {Button, Input} from "../components";
 import Textarea from "../components/Input/Textarea";
 import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/settings";
 import {ContextProviderComponent, SiteContext} from "../context/mainContext";
 
-import {useState} from "react";
-
-let sectionStyle = {
-  width: "100%",
-  height: "400px",
-  // backgroundImage: `url(${banner})`
-
-  backgroundImage: "url(" + banner + ")" // ES5
-};
+import banner from "../public/images/contemporary-banner.png";
 
 const stripePromise = loadStripe("xxx-xxx-xxx")
 
@@ -31,7 +23,7 @@ function CheckoutWithContext(props) {
       <SiteContext.Consumer>
         {context => (
           <Elements stripe={stripePromise}>
-            <Checkout {...props} context={context} />
+            <Checkout {...props} context={context}/>
           </Elements>
         )}
       </SiteContext.Consumer>
@@ -60,13 +52,13 @@ const Checkout = ({context}) => {
 
   const onChange = e => {
     setErrorMessage(null)
-    setInput({ ...input, [e.target.name]: e.target.value })
+    setInput({...input, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = async event => {
     event.preventDefault()
-    const { name, email, street, city, postal_code, state } = input
-    const { total, clearCart } = context
+    const {name, email, street, city, postal_code, state} = input
+    const {total, clearCart} = context
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -86,10 +78,10 @@ const Checkout = ({context}) => {
     const cardElement = elements.getElement(CardElement)
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
-      billing_details: { name: name },
+      billing_details: {name: name},
     })
 
     if (error) {
@@ -110,7 +102,7 @@ const Checkout = ({context}) => {
     clearCart()
   }
 
-  const { numberOfItemsInCart, cart, total } = context
+  const {numberOfItemsInCart, cart, total} = context
   const cartEmpty = numberOfItemsInCart === Number(0)
 
   if (orderCompleted) {
@@ -125,14 +117,18 @@ const Checkout = ({context}) => {
     <div>
       <div
         className='flex justify-center items-center p-6 h-40 md:p-10 2xl:p-8 relative bg-no-repeat bg-center bg-cover rounded-lg'
-        style={{backgroundImage: `url(https://www.comparethecoffin.com/wp-content/uploads/2020/12/contemporary-banner.jpg?id=14266)`}}
+        style={{
+          backgroundImage: `url(${banner.src})`,
+          width: '100%',
+          height: '100%',
+        }}
       >
          <span className='text-4xl text-white font-light'>
             Checkout
          </span>
       </div>
       <div className='mt-12 grid grid-cols-2 gap-x-12'>
-        <div className="">
+        <div>
           <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>
           <div>
             <div className="grid grid-cols-2 gap-x-4">
@@ -155,31 +151,33 @@ const Checkout = ({context}) => {
               className='mb-6'
               placeholder='Notes about your order, e.g. special notes for delivery'
             />
-            <Button title='Place Order'/>
+            <Button>Place Order</Button>
           </div>
         </div>
-        <div className="">
-          <h1 className='font-bold text-2xl'>Your Order</h1>
-
+        <div>
+          <h1 className='font-bold text-2xl mb-8'>Your Order</h1>
           {cartEmpty ? (
             <h3>No items in cart.</h3>
           ) : (
-            <div className="flex flex-col">
-              <div className="">
+            <div className="flex flex-col w-full">
+              <div className='flex justify-between bg-light-200 p-4 rounded-lg'>
+                <p>Product</p>
+                <p>Subtotal</p>
+              </div>
+              <div>
                 {cart.map((item, index) => {
                   return (
-                    <div className="border-b py-10" key={index}>
+                    <div className="border-b py-6 px-4" key={index}>
                       <div className="flex items-center">
-                        <img
-                          className="w-20 m-0"
-                          src={item.image}
-                          alt={item.name}
-                        />
+                        <div aria-label={item.name} className='bg-light rounded-lg p-1'>
+                          <img className="h-28 m-0 w-28"  src={item.image} alt={item.name}
+                          />
+                        </div>
                         <p className="m-0 pl-10 text-gray-600">
                           {item.name}
                         </p>
                         <div className="flex flex-1 justify-end">
-                          <p className="m-0 pl-10 text-gray-900 font-semibold">
+                          <p className="m-0 pl-10 text-gray-900">
                             {DENOMINATION + item.price}
                           </p>
                         </div>
@@ -188,8 +186,16 @@ const Checkout = ({context}) => {
                   )
                 })}
               </div>
+              <div className='flex justify-between px-4 py-4 border-b font-bold'>
+                <p>Shipping</p>
+                <p>Free</p>
+              </div>
+              <div className='flex justify-between px-4 py-4 font-bold'>
+                <p>Total</p>
+                <p>${total}</p>
+              </div>
             </div>
-            )}
+          )}
         </div>
       </div>
     </div>

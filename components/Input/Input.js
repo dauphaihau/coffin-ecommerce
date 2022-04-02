@@ -3,7 +3,7 @@ const Input = (props) => {
     type = 'text',
     label = '',
     name,
-    register,
+    register = () => {},
     errors,
     className = '',
     placeholder = '',
@@ -18,8 +18,9 @@ const Input = (props) => {
       <input
         type={type}
         name={name}
+        {...register(name)}
         className={`peer p-4 ${className}`}
-        placeholder={placeholder} required=""
+        placeholder={placeholder}
         {...others}
       />
       {errors && <p className="text-red-500">{errors[name]?.message}</p>}

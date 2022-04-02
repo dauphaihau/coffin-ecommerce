@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 const initialState = {
   cart: [],
   numberOfItemsInCart: 0,
+  numberAllOfItemsInCart: 0,
   total: 0,
 }
 
@@ -18,6 +19,8 @@ function calculateTotal(cart) {
   }, 0)
   return total
 }
+
+const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.quantity, 0);
 
 class ContextProviderComponent extends Component {
 
@@ -35,8 +38,11 @@ class ContextProviderComponent extends Component {
     const {cart} = storageState
     const index = cart.findIndex(cartItem => cartItem.id === item.id)
     cart[index].quantity = item.quantity
+
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cart, numberOfItemsInCart: cart.length, total: calculateTotal(cart)
+      cart, numberOfItemsInCart: cart.length,
+      numberAllOfItemsInCart: sumAllProduct(cart),
+      total: calculateTotal(cart)
     }))
     this.forceUpdate()
   }
@@ -47,19 +53,18 @@ class ContextProviderComponent extends Component {
     if (cart.length) {
       const index = cart.findIndex(cartItem => cartItem.id === item.id)
       if (index >= Number(0)) {
-        /* If this item is already in the cart, update the quantity */
         cart[index].quantity = cart[index].quantity + item.quantity
       } else {
-        /* If this item is not yet in the cart, add it */
         cart.push(item)
       }
     } else {
-      /* If no items in the cart, add the first item. */
       cart.push(item)
     }
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cart, numberOfItemsInCart: cart.length, total: calculateTotal(cart)
+      cart, numberOfItemsInCart: cart.length,
+      numberAllOfItemsInCart: sumAllProduct(cart),
+      total: calculateTotal(cart)
     }))
     toast("Successfully added item to cart!", {
       position: toast.POSITION.BOTTOM_RIGHT
@@ -73,7 +78,8 @@ class ContextProviderComponent extends Component {
     cart = cart.filter(c => c.id !== item.id)
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cart, numberOfItemsInCart: cart.length, total: calculateTotal(cart)
+      cart, numberOfItemsInCart: cart.length,
+      total: calculateTotal(cart)
     }))
     this.forceUpdate()
   }

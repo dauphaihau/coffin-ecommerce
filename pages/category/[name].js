@@ -3,14 +3,11 @@ import ListItem from '../../components/ListItem'
 import {titleIfy, slugify} from '../../utils/helpers'
 import fetchCategories from '../../utils/provider/categoryProvider'
 import inventoryForCategory from '../../utils/inventoryForCategory'
-// import CartLink from '../../components/CartLink'
 
 const Category = (props) => {
   const {inventory, title} = props
-  // console.log('inventory', inventory)
   return (
     <>
-      {/*<CartLink />*/}
       <Head>
         <title>Coffin ECommerce - {title}</title>
         <meta name="description" content={`Coffin ECommerce - ${title}`}/>

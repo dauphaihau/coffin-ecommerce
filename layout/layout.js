@@ -1,6 +1,3 @@
-import Link from 'next/link'
-import Image from "next/image";
-import {slugify} from '../utils/helpers'
 import Navbar from "../components/Navbar";
 import Login from "../components/form/Login";
 import 'react-toastify/dist/ReactToastify.css'
@@ -10,16 +7,9 @@ import Backdrop from "../components/Drawer/Backdrop";
 import {useUtil} from "../context/utilContext";
 import CartDrawer from "../components/util/CartDrawer";
 
-
 const contextClass = {
-  // success: "bg-blue-600",
-  // error: "bg-red-600",
-  // info: "bg-gray-600",
-  // warning: "bg-orange-400",
   default: "bg-black text-white",
-  // dark: "bg-black text-white",
 };
-
 
 const Layout = ({children, categories}) => {
 
@@ -34,9 +24,9 @@ const Layout = ({children, categories}) => {
     <div className='overflow-y-hidden'>
       <Navbar categories={categories}/>
       {drawerOpen && <Backdrop /> || modalOpen && <Backdrop/>}
-      {/*<CartDrawer/>*/}
       <CartDrawer/>
       <ToastContainer
+        autoClose={1500}
         position="bottom-right"
         toastClassName={({type}) => contextClass[type || "default"] +
           " relative flex p-1 min-h-20 rounded-md justify-between overflow-hidden cursor-pointer"
@@ -46,7 +36,7 @@ const Layout = ({children, categories}) => {
       />
       <div className='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
         <Login/>
-        <main className="pt-44">{children}</main>
+        <main className="pt-40">{children}</main>
         <Contact/>
         <Footer/>
       </div>

@@ -5,11 +5,11 @@ import {UtilProvider} from "../context/utilContext";
 
 function Ecommerce({Component, pageProps, categories}) {
   return (
-    <UtilProvider>
-      <Layout categories={categories}>
-        <Component {...pageProps} />
-      </Layout>
-    </UtilProvider>
+      <UtilProvider>
+        <Layout categories={categories}>
+          <Component {...pageProps} />
+        </Layout>
+      </UtilProvider>
   )
 }
 

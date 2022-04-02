@@ -1,34 +1,61 @@
 import Link from 'next/link'
 
-const ProductCard = ({imageSrc, title, subtitle, link}) => {
+const ProductCard = (props) => {
+
+  const {
+    imageSrc,
+    title,
+    price, salePrice,
+    description, link, full, mini
+  } = props;
+
   return (
-    <div className="mb-4 lg:mb-0 bg-light p-8 hover:bg-light-200 rounded-lg h-full">
+    <div className="mb-4 lg:mb-0 bg-light p-6 hover:bg-light-200 rounded-lg h-full">
       <Link href={`${link}`}>
         <a aria-label={title}>
+          {
+            salePrice
+              ? <span className="
+                  bg-black text-white text-sm font-medium mr-2
+                  px-2.5 py-1 rounded dark:bg-gray-700 dark:text-gray-300
+                ">
+                  {(((price - salePrice) / price) * 100).toFixed()}%
+                </span>
+              : <div className='h-5'/>
+          }
           <div className="h-full">
-            <img src={imageSrc} alt={title} className=""/>
+            <img
+              src={imageSrc} alt={title}
+              className={`w-[15rem] m-auto ${full && '!w-[70%] h-[40rem]'} `}
+            />
             <div className='flex justify-between mt-6'>
               <div>
-                <p className="text-3xl font-semibold mb-1">Name</p>
-                <p className="text-gray-600 leading-7 pb-6">acbaca
-                  {/*{description}*/}
+                <p className="text-xl font-semibold">{title.slice(0, 23)}</p>
+                <p className="text-gray-600">
+                  {mini ? description?.slice(0, 30) : description?.slice(0, 40)}...
                 </p>
-
-                {/*<p className="text-3xl font-semibold mb-1">{title}</p>*/}
-                <p className="text-xs text-gray-700">{subtitle}</p>
-
               </div>
-              <div>
-                <h2 className="text-4xl font-bold tracking-wide">
-                  50
-                  {/*${price}*/}
-                  {/*{salePrice && <span*/}
-                  {/*  className="absolute ml-[10px] line-through text-gray-400 text-sm md:text-base lg:text-sm xl:text-xl ps-2">*/}
-                  {/*  ${salePrice}</span>}*/}
-                </h2>
-                <p
-                  className="absolute ml-[10px] line-through text-gray-400 text-sm md:text-base lg:text-sm xl:text-xl ps-2">
-                  45</p>
+              <div className='text-right'>
+                {salePrice ?
+                  <>
+                    <p className="ml-[10px] line-through text-gray-700 text-sm
+                          md:text-base lg:text-sm xl:text-base ps-2"
+                    >
+                      ${price}
+                    </p>
+                    <h2 className="text-xl font-bold tracking-wide">
+                      ${salePrice}
+                    </h2>
+                  </>
+                  :
+                  <h2 className="text-xl pt-[26px] font-bold tracking-wide">
+                    ${price}
+                    {/*${price}*/}
+                    {/*{salePrice && <span*/}
+                    {/*  className="absolute ml-[10px] line-through text-gray-400 text-sm md:text-base lg:text-sm xl:text-xl ps-2">*/}
+                    {/*  ${salePrice}</span>}*/}
+                  </h2>
+                }
               </div>
             </div>
           </div>

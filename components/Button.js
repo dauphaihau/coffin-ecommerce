@@ -13,9 +13,6 @@ export default function Button(props) {
       className={`btn ${className}`}
       {...others}
     >
-      {/*<div>*/}
-      {/*  {title}*/}
-      {/*</div>*/}
       {children}
     </button>
   )

@@ -35,27 +35,23 @@ const Navbar = ({categories}) => {
   }, [])
 
   return (
-    <nav>
-      <div
-        className={`z-40 h-[96px] px-6 bg-white ${shadowHeader ? 'shadow-2xl' : ''} fixed w-full `}
-      >
-        <div className="mobile:px-12 sm:flex-row
-        {/*sm:pt-12 */}
-        sm:pb-6
-        desktop:px-0 px-4
-        {/*pt-8*/}
-         flex flex-col items-center justify-between">
-          <div className="sm:mr-16 max-w-48 sm:max-w-none">
-            <Link href="/">
-              <a aria-label="Home">
-                <img src="/images/logo.png" alt="logo" width="100" height="100"
-                     className='relative top-[-1px]'
-                />
-                {/*COFFIN SHOP*/}
-              </a>
-            </Link>
-          </div>
-          <div className="flex flex-wrap mt-1 ml-[-22rem]">
+    <nav className={`z-40 h-[96px] px-6 bg-white ${shadowHeader ? 'shadow-2xl' : ''} fixed w-full `}>
+      <div className="flex-row
+        pb-6
+        desktop:px-0 ipad:px-4
+         flex flex-row laptop:flex-row items-center justify-between">
+        <div className="sm:mr-16 max-w-48 sm:max-w-none">
+          <Link href="/">
+            <a aria-label="Home">
+              <img src="/images/logo.png" alt="logo" width="100" height="100"
+                   className='relative top-[-1px]'
+              />
+              {/*COFFIN SHOP*/}
+            </a>
+          </Link>
+        </div>
+        <div className="hidden laptop:block">
+          <div className="flex flex-row mt-1 ml-[-22rem] ">
             <Link href="/">
               <a aria-label="Home" className='mr-4'>
                 <p className="
@@ -73,7 +69,8 @@ const Navbar = ({categories}) => {
                 >
                   <a aria-label={category}>
                     <p className="
-                       p-[10px] hover:bg-gray-200 transition duration-200 ease-in-out rounded-md
+                       p-[10px] hover:bg-gray-200
+                       transition duration-200 ease-in-out rounded-md
                        sm:mr-8 sm:mb-0 mb-4 text-left text-smaller mr-4">
                       {category.charAt(0).toUpperCase() + category.slice(1)}
                     </p>
@@ -91,6 +88,8 @@ const Navbar = ({categories}) => {
               </a>
             </Link>
           </div>
+        </div>
+        <div className="hidden ipad:block">
           <CartLink/>
         </div>
       </div>

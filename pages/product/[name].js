@@ -1,37 +1,38 @@
 import {useEffect, useState} from 'react'
+import {useRouter} from "next/router";
 import Head from 'next/head'
+
 import Button from '../../components/Button'
-// import Image from '../../components/Image'
-// import QuantityPicker from '../../components/QuantityPicker'
 import {slugify} from '../../utils/helpers'
-// import CartLink from '../../components/CartLink'
 import {SiteContext, ContextProviderComponent} from '../../context/mainContext'
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import QuantityPicker from "../../components/QuantityPicker";
-import CartLink from "../../components/CartLink";
-import Sidebar from "../../components/Drawer/Drawer";
-import Breadcrumb from "../../components/Breadcrumb";
 import ListItem from "../../components/ListItem";
 import inventoryForCategory from "../../utils/inventoryForCategory";
+import {useUtil} from "../../context/utilContext";
 
 const ItemView = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
   const [numberOfItems, updateNumberOfItems] = useState(1)
   const {product} = props
   const {price, image, name, description, salePrice, id} = product
-  const {context: {addToCart}} = props
-
-  console.log('id', id)
+  const router = useRouter();
+  const {context: {addToCart, numberAllOfItemsInCart}} = props
+  const {user, setUser, closeDrawer} = useUtil();
 
   useEffect(() => {
     loadInit()
-  }, [])
+  }, [router.asPath])
 
-  console.log('related-products', relatedProducts)
+  useEffect(() => {
+    setUser({...user, numberAllOfItemsInCart})
+  }, [numberAllOfItemsInCart])
 
   const loadInit = async () => {
     const res = await inventoryForCategory(product.categories[0]);
     setRelatedProducts(res);
+    updateNumberOfItems(1);
+    closeDrawer();
   }
 
   const addItemToCart = (product) => {
@@ -71,8 +72,10 @@ const ItemView = (props) => {
           <h1 className=" sm:mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
           <p className="text-gray-600 leading-7 pb-6">{description}</p>
           <h2 className="text-4xl font-bold tracking-wide">${price}
-            {salePrice && <span
-              className="absolute ml-[10px] line-through text-gray-400 text-sm md:text-base lg:text-sm xl:text-xl ps-2">${salePrice}</span>}
+            {salePrice
+              && <span
+                className="absolute ml-[10px] line-through text-gray-400 font-light text-sm md:text-base lg:text-sm xl:text-xl ps-2">
+              ${salePrice}</span>}
           </h2>
           <div className="my-6">
             <QuantityPicker

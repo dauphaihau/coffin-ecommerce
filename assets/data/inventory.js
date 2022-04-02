@@ -2,9 +2,8 @@ import {v4 as uuid} from 'uuid'
 
 let inventory = [
   {
-    id: 1,
     categories: ['american caskets'],
-    name: 'Autumn Oak Hardwood Casket coffin',
+    name: 'Autumn Oak Hardwood',
     price: '2500',
     image: '/images/products/coffin3.png',
     description: ' Premium Traditional American Coffin Casket hardwood Oak, manufactured in the USA, White cream interior with side pleated panel and Stationary hardware and handles . Beautifully lined in cream velvetAdjustable bed and mattressPlease notify us if you require a name and message to be added to the outside of the coffin.',
@@ -12,40 +11,38 @@ let inventory = [
     currentInventory: 3
   },
   {
-    id: 2,
     categories: ['american caskets'],
-    name: 'Trinity Oak American Casket coffin',
+    name: 'Trinity Oak',
     price: '2100',
-    salePrice: '2280',
+    salePrice: '2000',
     image: '/images/products/coffin6.png',
     description: 'Premium Traditional American Coffin Casket hardwood Oak, manufactured in the USA, White cream interior with side pleated panel and Stationary hardware and handles . Beautifully lined in cream velvet and single panel lidAdjustable bed and mattressPlease notify us if you require a name and message to be added to the outside of the coffin.',
     brand: 'Manufacturers',
     currentInventory: 10
   },
   {
-    id: 3,
     categories: ['american caskets'],
-    name: 'White Chased Solid Wood Casket Coffin',
+    name: 'White Chased Solid Wood',
     price: '2845',
+    salePrice: '2600',
     image: '/images/products/coffin7.png',
     description: ' Traditional American Casket, manufactured in USA from Solid Hardwood timber, finished in White with metal handlesAdjustable bed and mattressPlease notify us if you require a name and message to be added to the outside of the coffin.',
     brand: 'Manufacturers',
     currentInventory: 12
   },
   {
-    id: 4,
     categories: ['american caskets'],
-    name: 'Last Supper Hardwood American Casket coffin',
+    name: 'Last Supper Hardwood',
     price: '2245',
+    salePrice: '2100',
     image: '/images/products/coffin8.png',
     description: ' Premium Traditional Last Supper American Coffin Casket hardwood Mahogany, manufactured in the USA, White cream interior with side pleated panel and Stationary hardware and handles . Beautifully lined in cream velvet . An insert panel can be installed at an extra cost .Adjustable bed and mattress',
     brand: 'Manufacturers',
     currentInventory: 1
   },
   {
-    id: 5,
     categories: ['natural material coffin'],
-    name: 'Willow Pod Coffin – Price Reduced !',
+    name: 'Willow Pod Coffin',
     price: '550',
     salePrice: '580',
     image: '/images/products/coffin14.png',
@@ -54,7 +51,6 @@ let inventory = [
     currentInventory: 1
   },
   {
-    id: 6,
     categories: ['traditional coffin'],
     name: 'Traditional Wreath Mould Lid and Side Coffin',
     price: '445',
@@ -64,7 +60,6 @@ let inventory = [
     currentInventory: 2
   },
   {
-    id: 7,
     categories: ['traditional coffin'],
     name: 'Traditional Box Lid Coffin',
     price: '425',
@@ -74,17 +69,16 @@ let inventory = [
     currentInventory: 20
   },
   {
-    id: 8,
     categories: ['traditional coffin'],
     name: 'Traditional High raised Lid Coffin',
     price: '535',
+    salePrice: '500',
     image: '/images/products/coffin15.png',
     description: 'Traditional British Coffin hand crafted in the UK, from Quality oak veneer. Excellent finish, simple lines and classic design. Includes handles, coffin Liner and Name plate. All traditional coffins are available in the following Wood Stains: Dark Oak, Light Oak, Mahogony, Mid Oak, and Rose Click here to review all the wood stain colours we have to choose from',
     brand: 'Jason Bourne',
     currentInventory: 6
   },
   {
-    id: 9,
     categories: ['traditional coffin'],
     name: 'Premium Traditional Casket',
     price: '795',
@@ -94,17 +88,16 @@ let inventory = [
     currentInventory: 2
   },
   {
-    id: 10,
     categories: ['natural material coffin', 'bamboo coffin'],
-    name: 'Willow Rounded Coffin – Natural',
+    name: 'Willow Rounded Coffin',
     price: '505',
+    salePrice: '450',
     image: '/images/products/coffin9.png',
     description: 'This beautifully made Willow Rounded coffin is a similar to the Willow traditional but with rounded ends. The willow is a deciduous tree found primarily on moist soil in cold and temperate regions. ',
     brand: 'Jason Bourne',
     currentInventory: 2
   },
   {
-    id: 11,
     categories: ['natural material coffin', 'bamboo coffin'],
     name: 'Bamboo Round Coffin',
     price: '415',
@@ -114,7 +107,6 @@ let inventory = [
     currentInventory: 2
   },
   {
-    id: 12,
     categories: ['natural material coffin', 'bamboo coffin'],
     name: 'Bamboo Lattice Round Coffin',
     price: '485',
@@ -124,11 +116,10 @@ let inventory = [
     currentInventory: 10
   },
   {
-    id: 13,
     categories: ['natural material coffin', 'child coffin'],
-    name: 'Pine Coffin Casket – Price Reduced!',
-    price: '180',
-    salePrice: '200',
+    name: 'Pine Coffin Casket',
+    price: '200',
+    salePrice: '180',
     image: '/images/products/coffin-child1.png',
     description: 'The Pine Coffin Casket is made from rapidly growing FSC certified pine from Poland. They grow to 80 metres in height and are among the most commercially important of tree species, valued for their timber and wood pulp throughout the world. Made by a co-operative of cottage industries in Poland using 100% natural materials. Includes cotton liner, headrest and name plate.Please notify us if you require a name and message to be added to the outside of the coffin.',
     brand: 'Jason Bourne',
@@ -163,7 +154,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Willow Round',
+    name: 'Willow Round',
     price: '65',
     image: '/images/products/cremation-urn1.png',
     description: 'Exclusive to Compare the Coffin. This cremation urn is beautifully made with natural BambooBamboo comes from a group of perennial evergreen plants in the grass family, and is the fastest growing plant in the world. Produced in a UK owned Fair Trade company in China. Made from 100% natural materials and 100% Bio-degradable. Includes natural cotton liner',
@@ -172,7 +163,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Square Pandanus',
+    name: 'Square Pandanus',
     price: '65',
     image: '/images/products/cremation-urn2.png',
     description: 'Exclusive to Compare the Coffin. This cremation urn is beautifully made with natural Pandanus grassesPandanus or wild pineapple is an environmentally friendly alternative to seagrass, a plant which grows in the coastal waters of East Africa, Southeast Asia and the Caribbean. Pandanus, it grows rapidly on land even in adverse conditions. When woven it is almost indistinguishable from seagrass. Produced in a Fair Trade company in Bali, Indonesia. Made from 100% natural materials. Includes natural cotton liner',
@@ -181,7 +172,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Pandanus Round Upright',
+    name: 'Pandanus Round Upright',
     price: '65',
     image: '/images/products/cremation-urn3.png',
     description: 'Exclusive to Compare the Coffin. This cremation urn is beautifully made with natural BambooBamboo comes from a group of perennial evergreen plants in the grass family, and is the fastest growing plant in the world. Produced in a UK owned Fair Trade company in China. Made from 100% natural materials and 100% Bio-degradable. Includes natural cotton liner',
@@ -190,7 +181,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Traditional Octagonal',
+    name: 'Traditional Octagonal',
     price: '65',
     image: '/images/products/cremation-urn4.png',
     description: 'Exclusive to compare the coffin. These beautifully made traditional Cremation Urn, and Ash containers are available in any wood stain and or solid colour.All traditional Urns are available in the following Wood Stains: Dark Oak, Light Oak, Mahogony, Mid Oak, and Rose wood. Alternatively they can be offered in a solid colour: Linen White, Mid Blue, Pink, Deep Pink, Post Office Red, Summer Blue, Dark Blue,',
@@ -199,7 +190,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Traditional – Dark Oak',
+    name: 'Traditional – Dark Oak',
     price: '70',
     image: '/images/products/cremation-urn5.png',
     description: 'Exclusive to Compare the Coffin. This cremation urn is beautifully made with natural BambooBamboo comes from a group of perennial evergreen plants in the grass family, and is the fastest growing plant in the world. Produced in a UK owned Fair Trade company in China. Made from 100% natural materials and 100% Bio-degradable. Includes natural cotton liner',
@@ -208,7 +199,7 @@ let inventory = [
   },
   {
     categories: ['cremation urns'],
-    name: 'Cremation Urn – Round Bamboo',
+    name: 'Round Bamboo',
     price: '65',
     image: '/images/products/cremation-urn6.png',
     description: 'Exclusive to Compare the Coffin. This cremation urn is beautifully made with natural BambooBamboo comes from a group of perennial evergreen plants in the grass family, and is the fastest growing plant in the world. Produced in a UK owned Fair Trade company in China. Made from 100% natural materials and 100% Bio-degradable. Includes natural cotton liner',

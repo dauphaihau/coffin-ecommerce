@@ -1,9 +1,9 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 const defaultValues = {
   drawerOpen: false,
-  user: {},
-  setUser: () => {}
+  modalSearchOpen: false,
+  modalOpen: false,
 };
 
 const UtilContext = createContext(defaultValues);
@@ -15,25 +15,39 @@ export function useUtil() {
 export function UtilProvider({children}) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
-  const [user, setUser] = useState({})
+  const [modalSearchOpen, setModalSearchOpen] = useState(false)
+
+  useEffect(() => {
+    if (modalSearchOpen || modalOpen || drawerOpen) {
+      document.getElementsByTagName('body')[0].style.overflow = "hidden";
+    }
+    return () => document.getElementsByTagName('body')[0].style.overflow = "auto";
+  },[drawerOpen, modalOpen, modalSearchOpen])
 
   const drawerToggle = () => {
     setDrawerOpen(!drawerOpen)
   }
 
-  const closeDrawer = () => {
-    setDrawerOpen(false)
+  const closeDrawerModal = () => {
+    setDrawerOpen(false);
+    setModalSearchOpen(false);
+    setModalOpen(false);
   }
 
   const modalToggle = () => {
     setModalOpen(!modalOpen)
   }
 
+  const modalSearchToggle = () => {
+    setModalSearchOpen(!modalSearchOpen)
+  }
+
+
   return (
     <UtilContext.Provider value={{
-      drawerOpen, drawerToggle, closeDrawer,
+      drawerOpen, drawerToggle, closeDrawerModal,
       modalOpen, modalToggle,
-      user , setUser
+      modalSearchOpen ,modalSearchToggle
     }}>
       {children}
     </UtilContext.Provider>

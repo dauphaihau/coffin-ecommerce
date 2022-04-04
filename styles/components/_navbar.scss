@@ -1,0 +1,40 @@
+.navbar {
+  @apply fixed  w-full z-40 h-[64px] laptop:h-24 px-6 bg-white
+  transition duration-300 ease-in-out;
+  &__container {
+    @apply desktop:px-0 ipad:px-4
+    flex flex-row laptop:flex-row items-center justify-between ;
+  }
+}
+
+.navbar-left {
+  @apply flex items-center;
+  &__logo {
+    @apply max-w-48 sm:max-w-none mr-4;
+  }
+
+  &__links {
+    @apply hidden laptop:block;
+  }
+}
+
+.navbar-links {
+  @apply flex flex-row mt-1;
+
+  &__item {
+    @apply mr-4 relative cursor-pointer;
+
+    .item-title {
+      @apply p-[10px] hover:bg-gray-200 transition duration-200 ease-in-out rounded-xl
+       mb-0 text-left text-smaller;
+    }
+    .item-content {
+      @apply hidden absolute bg-white w-52 z-40 shadow-2xl rounded-lg;
+
+      &__title {
+        @apply transition duration-200 ease-in-out
+        mb-0 text-left text-smaller;
+      }
+    }
+  }
+}

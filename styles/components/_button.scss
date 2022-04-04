@@ -7,3 +7,34 @@
   bg-black text-white px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white
   hover:opacity-[0.8] w-full sm:w-auto
 }
+
+.btn-group {
+  @apply flex items-center;
+  button:first-child {
+    @apply w-10 h-10 text-xl
+    md:w-8 md:h-8 md:text-sm
+    cursor-pointer text-center border pb-.5
+    rounded-tl-lg
+    transition ease-in-out duration-300
+    rounded-bl-lg
+    hover:bg-gray-900 hover:text-white
+    focus:outline-none
+  }
+
+  p {
+    @apply w-10 h-10 pt-2 text-base
+    md:w-8 md:h-8 md:pt-2 md:text-xs
+    m-0 border-t border-b text-center
+  }
+
+  button:last-child {
+    @apply rounded-tr-lg
+    rounded-br-lg
+    w-10 h-10 text-2xl
+    md:w-8 md:h-8 md:text-sm
+    transition ease-in-out duration-300
+    cursor-pointer text-center border pb-.5
+    hover:bg-gray-900 hover:text-white
+    focus:outline-none
+  }
+}

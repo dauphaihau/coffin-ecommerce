@@ -1,6 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
-
+import getConfig from 'next/config';
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const {serverRuntimeConfig} = getConfig();
 
 import {apiHandler} from "../../../helper/api";
 import {userRepo} from "../../../helper/api";
@@ -10,17 +12,21 @@ export default apiHandler({
 });
 
 function register(req: NextApiRequest, res: NextApiResponse) {
-    console.log('req-body', req.body)
     const {password, ...user} = req.body;
 
-    // validate
     if (userRepo.find(x => x.email === user.email))
         throw `User with the email "${user.email}" already exists`;
 
-    // hash password
     user.hash = bcrypt.hashSync(password, 10);
-    console.log('user', user)
-
     userRepo.create(user);
-    return res.status(200).json({});
+
+    const token = jwt.sign({sub: user.id}, serverRuntimeConfig.secret, {expiresIn: '7d'});
+
+    return res.status(200).json({
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        name: user.name,
+        token
+    });
 }

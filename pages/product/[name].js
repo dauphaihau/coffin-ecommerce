@@ -2,14 +2,16 @@ import {useEffect, useState} from 'react'
 import {useRouter} from "next/router";
 import Head from 'next/head'
 
-import Button from '../../components/Button'
-import {slugify} from '../../utils/helpers'
-import {SiteContext, ContextProviderComponent} from '../../context/mainContext'
-import {fetchInventory} from "../../utils/provider/inventoryProvider";
-import QuantityPicker from "../../components/QuantityPicker";
-import ListItem from "../../components/ListItem";
+import {Button} from "../../components";
 import inventoryForCategory from "../../utils/inventoryForCategory";
+import {useAuth} from "../../context/authContext";
 import {useUtil} from "../../context/utilContext";
+import QuantityPicker from "../../components/Button/QuantityPicker";
+import {fetchInventory} from "../../utils/provider/inventoryProvider";
+import {slugify} from "../../utils/helpers";
+import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
+import ShowMoreTextToggler from "../../components/Button/ShowMoreTextToggler";
+import Product from "../../components/Product";
 
 const ItemView = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
@@ -18,7 +20,8 @@ const ItemView = (props) => {
   const {price, image, name, description, salePrice, id} = product
   const router = useRouter();
   const {context: {addToCart, numberAllOfItemsInCart}} = props
-  const {user, setUser, closeDrawer} = useUtil();
+  const {closeDrawerModal} = useUtil();
+  const {user, setUser,} = useAuth();
 
   useEffect(() => {
     loadInit()
@@ -32,7 +35,7 @@ const ItemView = (props) => {
     const res = await inventoryForCategory(product.categories[0]);
     setRelatedProducts(res);
     updateNumberOfItems(1);
-    closeDrawer();
+    closeDrawerModal();
   }
 
   const addItemToCart = (product) => {
@@ -63,19 +66,19 @@ const ItemView = (props) => {
         {/*bg-light hover:bg-light-200*/}
         ">
           <div className="py-16 p10 flex flex-1 justify-center items-center">
-            <img src={image} alt="Inventory item"
-              // className="max-h-full"
-            />
+            <img src={image} alt="Inventory item"/>
           </div>
         </div>
-        <div className="pt-2 px-0 md:px-10 pb-8 w-full md:w-1/2">
+        <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full md:w-1/2">
           <h1 className=" sm:mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
-          <p className="text-gray-600 leading-7 pb-6">{description}</p>
-          <h2 className="text-4xl font-bold tracking-wide">${price}
-            {salePrice
+          <p className="text-gray-600 leading-7 pb-6">
+            <ShowMoreTextToggler text={description}/>
+          </p>
+          <h2 className="text-4xl font-bold tracking-wide">${salePrice}
+            {price
               && <span
                 className="absolute ml-[10px] line-through text-gray-400 font-light text-sm md:text-base lg:text-sm xl:text-xl ps-2">
-              ${salePrice}</span>}
+              ${price}</span>}
           </h2>
           <div className="my-6">
             <QuantityPicker
@@ -93,7 +96,7 @@ const ItemView = (props) => {
           {
             relatedProducts?.filter(p => p.id !== id).map((item, index) => {
               return (
-                <ListItem
+                <Product
                   key={index}
                   link={`/product/${slugify(item.name)}`}
                   title={item.name}
@@ -114,6 +117,7 @@ export async function getStaticPaths() {
   const paths = inventory.map(item => {
     return {params: {name: slugify(item.name)}}
   })
+  console.log('paths', paths)
   return {
     paths,
     fallback: false

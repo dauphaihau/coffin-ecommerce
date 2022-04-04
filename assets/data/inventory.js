@@ -113,7 +113,7 @@ let inventory = [
     image: '/images/products/coffin12.png',
     description: 'The Bamboo Lattice Rounded coffin is constructed of two layers of woven bamboo to give it its distinctive pattern. It is similar to the Bamboo Lattice Traditional coffin with rounded ends. Bamboo comes from a group of perennial evergreen plants in the grass family, and is the fastest growing plant in the world. Produced in a UK owned Fair Trade company in China. Made from 100% natural materials. Includes cotton liner, headrest and name plate.',
     brand: 'Jason Bourne',
-    currentInventory: 10
+    currentInventory: 8
   },
   {
     categories: ['natural material coffin', 'child coffin'],
@@ -123,11 +123,11 @@ let inventory = [
     image: '/images/products/coffin-child1.png',
     description: 'The Pine Coffin Casket is made from rapidly growing FSC certified pine from Poland. They grow to 80 metres in height and are among the most commercially important of tree species, valued for their timber and wood pulp throughout the world. Made by a co-operative of cottage industries in Poland using 100% natural materials. Includes cotton liner, headrest and name plate.Please notify us if you require a name and message to be added to the outside of the coffin.',
     brand: 'Jason Bourne',
-    currentInventory: 10
+    currentInventory: 18
   },
   {
     categories: ['natural material coffin', 'child coffin'],
-    name: 'Child’s Curved Painted Willow Coffin',
+    name: 'Child’s Curved Painted',
     price: '220',
     image: '/images/products/coffin-child2.png',
     description: 'Our Child’s Curved Painted Willow Coffin features tapered round ends, beautifully plaited edging and natural hand-woven willow handles. We make each Child’s coffins with sensitivity in mind, each one made in our workshops in Somerset using natural willow and using completely natural processes. Every wicker coffin is made with the same care and dedication that has driven our family business for over four generations.',
@@ -150,7 +150,7 @@ let inventory = [
     image: '/images/products/coffin13.png',
     description: 'Our Child’s Curved Buff Willow Coffin features tapered round ends, beautifully plaited edging and natural hand-woven willow handles. We make each Child’s coffins with sensitivity in mind, each one made in our workshops in Somerset using natural willow and using completely natural processes. Every wicker coffin is made with the same care and dedication that has driven our family business for over four generations.',
     brand: 'Jason Bourne',
-    currentInventory: 10
+    currentInventory: 4
   },
   {
     categories: ['cremation urns'],
@@ -220,12 +220,12 @@ let inventory = [
     name: 'Willow Rounded Coffin',
     price: '505',
     image: '/images/products/coffin5.png',
-    description: 'You know your dad’s incredible vintage bomber jacket? The Nirvana dakota tan leather sofa is that jacket, but in couch form. With super-plush down-filled cushions, a corner-blocked wooden frame, and a leather patina that only gets better with age, the Nirvana will have you looking cool and feeling peaceful every time you take a seat. Looks pretty great with a sheepskin throw, if we may say so. With use, this leather will become softer and more wrinkled and the cushions will take on a lived-in look, like your favorite leather jacket.',
+    description: 'You know your dad’s incredible vintage bomber jacket? The Nirvana dakota tan leather sofa is that jacket, but in couch Modal. With super-plush down-filled cushions, a corner-blocked wooden frame, and a leather patina that only gets better with age, the Nirvana will have you looking cool and feeling peaceful every time you take a seat. Looks pretty great with a sheepskin throw, if we may say so. With use, this leather will become softer and more wrinkled and the cushions will take on a lived-in look, like your favorite leather jacket.',
     brand: 'Jason Bourne',
-    currentInventory: 10
+    currentInventory: 11
   },
   {
-    categories: ['natural material coffin', 'Wicker'],
+    categories: ['natural material coffin', 'wicker'],
     name: 'Shroud and Wicker stretcher',
     price: '475',
     image: '/images/products/shroud-willow-stretcher-1.png',

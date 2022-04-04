@@ -13,7 +13,12 @@ import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/settings";
 import {ContextProviderComponent, SiteContext} from "../context/mainContext";
 
-import banner from "../public/images/contemporary-banner.png";
+import banner from "../public/images/banners/checkout.jpg";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import * as Yup from "yup";
+import ImgBannerCard from "../components/Card/ImgBannerCard";
+import Grid from "../components/Grid";
 
 const stripePromise = loadStripe("xxx-xxx-xxx")
 
@@ -36,39 +41,33 @@ const calculateShipping = () => {
 }
 
 const Checkout = ({context}) => {
-  const [errorMessage, setErrorMessage] = useState(null)
   const [orderCompleted, setOrderCompleted] = useState(false)
-  const [input, setInput] = useState({
-    name: "",
-    email: "",
-    street: "",
-    city: "",
-    postal_code: "",
-    state: "",
-  })
 
   const stripe = useStripe()
   const elements = useElements()
 
-  const onChange = e => {
-    setErrorMessage(null)
-    setInput({...input, [e.target.name]: e.target.value})
-  }
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required').min(6, 'Name must be at least 6 characters'),
+    lastName: Yup.string().required('First name is required').min(6, 'Name must be at least 6 characters'),
+    address: Yup.string().required('Address is required'),
+    phoneNumber: Yup.string().required('Phone number is required'),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
+  });
 
-  const handleSubmit = async event => {
-    event.preventDefault()
-    const {name, email, street, city, postal_code, state} = input
+  const formOptions = {resolver: yupResolver(validationSchema)};
+  const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
+  const {errors} = formState;
+
+  const onSubmit = async (values) => {
+    console.log('values', values)
+    return setOrderCompleted(true)
+
+    const {name, email, street, city, postal_code, state} = values
     const {total, clearCart} = context
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return
-    }
-
-    // Validate input
-    if (!street || !city || !postal_code || !state) {
-      setErrorMessage("Please fill in the form!")
+      // Modal submission until Stripe.js has loaded.
       return
     }
 
@@ -83,11 +82,6 @@ const Checkout = ({context}) => {
       card: cardElement,
       billing_details: {name: name},
     })
-
-    if (error) {
-      setErrorMessage(error.message)
-      return
-    }
 
     const order = {
       email,
@@ -115,35 +109,24 @@ const Checkout = ({context}) => {
 
   return (
     <div>
-      <div
-        className='flex justify-center items-center p-6 h-40 md:p-10 2xl:p-8 relative bg-no-repeat bg-center bg-cover rounded-lg'
-        style={{
-          backgroundImage: `url(${banner.src})`,
-          width: '100%',
-          height: '100%',
-        }}
-      >
-         <span className='text-4xl text-white font-light'>
-            Checkout
-         </span>
-      </div>
-      <div className='mt-12 grid grid-cols-2 gap-x-12'>
-        <div>
+      <ImgBannerCard srcImg={banner} title='Checkout'/>
+      <Grid md={2} gapx={12} css='mt-12'>
+        <div className='mb-12'>
           <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>
-          <div>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Input label='First Name *'/>
-              <Input label='Last Name *'/>
-            </div>
-            <Input label='Address *'/>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Input label='Phone/Mobile *'/>
-              <Input label='Email *'/>
-            </div>
-            <div className="grid grid-cols-2 gap-x-4">
-              <Input label='City/Town *'/>
-              <Input label='Postcode *'/>
-            </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid md={2} gapx={4}>
+              <Input label='First Name *' name='firstName' register={register} errors={errors}/>
+              <Input label='Last Name *' name='lastName' register={register} errors={errors}/>
+            </Grid>
+            <Input label='Address *' name='address' register={register} errors={errors}/>
+            <Grid md={2} gapx={4}>
+              <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
+              <Input label='Email *' name='email' register={register} errors={errors}/>
+            </Grid>
+            <Grid md={2} gapx={4}>
+              <Input label='City/Town *' name='city' register={register} errors={errors}/>
+              <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
+            </Grid>
             <Checkbox label='Save this information for next time'/>
             <Textarea
               label='Order Notes (Optional)'
@@ -152,7 +135,7 @@ const Checkout = ({context}) => {
               placeholder='Notes about your order, e.g. special notes for delivery'
             />
             <Button>Place Order</Button>
-          </div>
+          </form>
         </div>
         <div>
           <h1 className='font-bold text-2xl mb-8'>Your Order</h1>
@@ -167,10 +150,10 @@ const Checkout = ({context}) => {
               <div>
                 {cart.map((item, index) => {
                   return (
-                    <div className="border-b py-6 px-4" key={index}>
+                    <div className="border-b py-6 laptop:px-4" key={index}>
                       <div className="flex items-center">
                         <div aria-label={item.name} className='bg-light rounded-lg p-1'>
-                          <img className="h-28 m-0 w-28"  src={item.image} alt={item.name}
+                          <img className="h-28 m-0 w-28" src={item.image} alt={item.name}
                           />
                         </div>
                         <p className="m-0 pl-10 text-gray-600">
@@ -178,7 +161,7 @@ const Checkout = ({context}) => {
                         </p>
                         <div className="flex flex-1 justify-end">
                           <p className="m-0 pl-10 text-gray-900">
-                            {DENOMINATION + item.price}
+                            {DENOMINATION + item.price * item.quantity}
                           </p>
                         </div>
                       </div>
@@ -197,7 +180,7 @@ const Checkout = ({context}) => {
             </div>
           )}
         </div>
-      </div>
+      </Grid>
     </div>
   );
 }

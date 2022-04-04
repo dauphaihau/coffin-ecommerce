@@ -1,4 +1,5 @@
 import React, {createContext, Component} from 'react'
+
 import {STORAGE_KEY} from "../utils/settings";
 import {toast} from "react-toastify";
 
@@ -66,7 +67,7 @@ class ContextProviderComponent extends Component {
       numberAllOfItemsInCart: sumAllProduct(cart),
       total: calculateTotal(cart)
     }))
-    toast("Successfully added item to cart!", {
+    toast("Added item to cart", {
       position: toast.POSITION.BOTTOM_RIGHT
     })
     this.forceUpdate()
@@ -78,7 +79,9 @@ class ContextProviderComponent extends Component {
     cart = cart.filter(c => c.id !== item.id)
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      cart, numberOfItemsInCart: cart.length,
+      cart,
+      numberAllOfItemsInCart: sumAllProduct(cart),
+      numberOfItemsInCart: cart.length,
       total: calculateTotal(cart)
     }))
     this.forceUpdate()

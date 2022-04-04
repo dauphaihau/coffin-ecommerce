@@ -1,6 +1,5 @@
 .drawer {
-  @apply h-full bg-white fixed top-0 right-0;
-  width: 450px;
+  @apply h-full bg-white fixed top-0 right-0 w-[420px] laptop:w-[450px];
   z-index: 200;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);

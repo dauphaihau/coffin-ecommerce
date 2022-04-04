@@ -1,14 +1,12 @@
 import Head from 'next/head'
-import {Center, Footer, Tag, Showcase, Button} from '../components'
-import {titleIfy, slugify} from '../utils/helpers'
+import {Button} from '../components'
+import {slugify} from '../utils/helpers'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
-import ProductCard from "../components/hero/ProductCard";
-import CategoryCard from "../components/hero/CategoryCard";
-import {useRouter} from "next/router";
+import ProductCard from "../components/Card/ProductCard";
+import HomeBannerCard from "../components/Card/HomeBannerCard";
+import Grid from "../components/Grid";
 
-const Home = ({inventoryData = [], categories: categoryData = []}) => {
-  const router = useRouter()
-  const inventory = inventoryData.slice(0, 10)
+const Home = ({inventoryData = []}) => {
 
   return (
     <>
@@ -18,32 +16,7 @@ const Home = ({inventoryData = [], categories: categoryData = []}) => {
               content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
         <meta property="og:title" content="Coffin ECommerce" key="title"/>
       </Head>
-      <div className="w-full">
-        <div className="bg-gray-100 p-6 pb-10 sm:pb-6 flex laptop:flex-row flex-col rounded-lg">
-          <div className="pt-4 pl-2 sm:pt-12 sm:pl-12 flex flex-col">
-            <div className="border-l border-gray-900 px-3 pt-1 mb-10">
-              <p className="text-xs tracking-wider m-0 leading-tight">COFFIN</p>
-              <p className="text-xs tracking-wider m-0 leading-tight">2022</p>
-            </div>
-            <div>
-              <p className="text-4xl xl:text-5xl font-bold tracking-widest leading-none">
-                {inventoryData[4].name}
-              </p>
-              <p className="py-6 tracking-wide">FROM <span>${inventoryData[4].price}</span></p>
-              <Button onClick={() => router.push(`/product/${slugify(inventory[4].name)}`)}>Shop Now</Button>
-            </div>
-            <div className="flex flex-1 flex-col justify-end pb-10 mt-4">
-              <p className="font-light text-xs tracking-tight m-0 leading-tight mb-2">Design by</p>
-              <p className="text-xxs font-semibold tracking-tight m-0 leading-tight">Hau</p>
-            </div>
-          </div>
-          <div className="flex flex-1 justify-center items-center relative">
-            <div className="z-10">
-              <img src={inventoryData[4].image} className="w-[23rem]" alt="Showcase item"/>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <div className='my-12'>
         <h1 className='text-3xl mb-4'> Featured Products</h1>
         <div className='grid laptop:grid-cols-2 gap-x-4'>
@@ -60,7 +33,7 @@ const Home = ({inventoryData = [], categories: categoryData = []}) => {
             />
           </div>
           <div>
-            <div className="grid ipad:grid-cols-2 laptop:grid-cols-2 gap-x-4 gap-y-4">
+            <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4'>
               <ProductCard
                 mini
                 imageSrc={inventoryData[7].image}
@@ -82,7 +55,7 @@ const Home = ({inventoryData = [], categories: categoryData = []}) => {
                 salePrice={inventoryData[3].salePrice}
               />
             </div>
-            <div className="grid ipad:grid-cols-2 laptop:grid-cols-2 gap-x-4 mt-4 gap-y-4">
+            <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4 mt-4'>
               <ProductCard
                 mini
                 imageSrc={inventoryData[9].image}
@@ -95,13 +68,13 @@ const Home = ({inventoryData = [], categories: categoryData = []}) => {
               />
               <ProductCard
                 mini
-                imageSrc={inventoryData[11].image}
-                title={inventoryData[11].name}
-                subtitle={inventoryData[11].categories[0]}
-                link={`/product/${slugify(inventoryData[11].name)}`}
-                description={inventoryData[11].description}
-                price={inventoryData[11].price}
-                salePrice={inventoryData[11].salePrice}
+                imageSrc={inventoryData[10].image}
+                title={inventoryData[10].name}
+                subtitle={inventoryData[10].categories[0]}
+                link={`/product/${slugify(inventoryData[10].name)}`}
+                description={inventoryData[10].description}
+                price={inventoryData[10].price}
+                salePrice={inventoryData[10].salePrice}
               />
             </div>
           </div>
@@ -121,7 +94,9 @@ const Home = ({inventoryData = [], categories: categoryData = []}) => {
           className='mb-2.5 ipad:mb-0 desktop:mb-2 2xl:mb-4 3xl:mb-6 ipad:px-20 laptop:px-40 desktop:px-0 flex justify-center'>
           <img src="/images/people.png" width={700} alt="people"/>
         </div>
-        <Button>Chat With Member Services</Button>
+        <div className='px-6 laptop:px-0'>
+          <Button>Chat With Member Services</Button>
+        </div>
       </div>
     </>
   )

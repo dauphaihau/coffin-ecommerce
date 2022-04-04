@@ -3,6 +3,13 @@ import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 
+interface ReqType {
+    method: string,
+    headers: any,
+    credentials: string | any,
+    body: string,
+}
+
 const authHeader = (url) => {
     // return auth header with jwt if user is logged in and request is to the api url
     const user = userService.userValue;
@@ -37,7 +44,7 @@ const get = (url: string) => {
 };
 
 const post = (url, body) => {
-    const requestOptions = {
+    const requestOptions: ReqType = {
         method: 'POST',
         // headers: {'Content-Type': 'application/json', ...authHeader(url)},
         headers: {'Content-Type': 'application/json'},

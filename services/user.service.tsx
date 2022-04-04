@@ -2,6 +2,7 @@ import {BehaviorSubject} from "rxjs";
 import getConfig from "next/config";
 
 import {fetchWrapper} from "../helper";
+
 const {publicRuntimeConfig} = getConfig();
 
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
@@ -9,43 +10,48 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 const register = (user) => {
-  return fetchWrapper.post(`${baseUrl}/register`, user);
+    return fetchWrapper.post(`${baseUrl}/register`, user)
+        .then(user => {
+            userSubject.next(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+        })
 }
 
-const login = (username, password) => {
-  return fetchWrapper.post(`${baseUrl}/authenticate`, {username, password})
-    .then(user => {
-      userSubject.next(user);
-      localStorage.setItem('user', JSON.stringify(user));
-      return user;
-    })
+const login = (email, password) => {
+    return fetchWrapper.post(`${baseUrl}/authenticate`, {email, password})
+        .then(user => {
+            userSubject.next(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            return user;
+        })
 }
 
 const getAll = () => {
-  return fetchWrapper.get(baseUrl)
+    return fetchWrapper.get(baseUrl)
 };
 
 const getById = (id) => {
-  return fetchWrapper.get(`${baseUrl}/${id}`)
+    return fetchWrapper.get(`${baseUrl}/${id}`)
 };
 
 const create = (params) => {
-  return fetchWrapper.post(baseUrl, params);
+    return fetchWrapper.post(baseUrl, params);
 };
 
-const update = (id , params) => {
-  return fetchWrapper.put(`${baseUrl}/${id}`, params)
+const update = (id, params) => {
+    return fetchWrapper.put(`${baseUrl}/${id}`, params)
 };
 
 export const userService = {
-  user: userSubject.asObservable(),
-  get userValue() {
-    return userSubject.value
-  },
-  register,
-  login,
-  getAll,
-  getById,
-  create,
-  update,
+    user: userSubject.asObservable(),
+    get userValue() {
+        return userSubject.value
+    },
+    register,
+    login,
+    getAll,
+    getById,
+    create,
+    update,
 };

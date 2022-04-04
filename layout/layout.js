@@ -1,11 +1,12 @@
-import Navbar from "../components/Navbar";
-import Login from "../components/form/Login";
 import 'react-toastify/dist/ReactToastify.css'
-import {Contact, Footer} from "../components";
 import {ToastContainer} from "react-toastify";
+
+import Navbar from "../components/Layout/Navbar";
+import {Contact, Footer} from "../components";
 import Backdrop from "../components/Drawer/Backdrop";
 import {useUtil} from "../context/utilContext";
-import CartDrawer from "../components/util/CartDrawer";
+import CartDrawer from "../components/Drawer/CartDrawer";
+import {LoginModal, SearchModal} from "../components/Modal";
 
 const contextClass = {
   default: "bg-black text-white",
@@ -13,7 +14,7 @@ const contextClass = {
 
 const Layout = ({children, categories}) => {
 
-  const {drawerOpen, modalOpen} = useUtil();
+  const {drawerOpen, modalOpen,modalSearchOpen} = useUtil();
 
   let navItemLength = 5;
   if (categories.length > navItemLength) {
@@ -21,9 +22,15 @@ const Layout = ({children, categories}) => {
   }
 
   return (
-    <div className='overflow-y-hidden'>
+    <div>
+      <SearchModal/>
+      <LoginModal/>
       <Navbar categories={categories}/>
-      {drawerOpen && <Backdrop /> || modalOpen && <Backdrop/>}
+      {
+        drawerOpen && <Backdrop /> ||
+        modalOpen && <Backdrop/> ||
+        modalSearchOpen && <Backdrop/>
+      }
       <CartDrawer/>
       <ToastContainer
         autoClose={1500}
@@ -35,8 +42,7 @@ const Layout = ({children, categories}) => {
         progressClassName='text-gray-300'
       />
       <div className='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
-        <Login/>
-        <main className="pt-40">{children}</main>
+        <main className="pt-28">{children}</main>
         <Contact/>
         <Footer/>
       </div>

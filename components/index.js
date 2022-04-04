@@ -1,7 +1,6 @@
-import Button from "./Button";
-import Footer from "./Footer";
-import Contact from "./Contact";
-import Link from "./Link";
+import Button from "./Button/Button";
+import Footer from "./Layout/Footer";
+import Contact from "./Layout/Contact";
 import Input from "./Input/Input";
 
 
@@ -10,5 +9,6 @@ export {
   Footer,
   Contact,
   Input,
-  Link,
 }
+
+export { default as Link} from './Link'

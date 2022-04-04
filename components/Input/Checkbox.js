@@ -16,7 +16,7 @@ const Checkbox = (props) => {
         checked={value || defaultChecked}
         {...others}
       />
-      <label>{label}</label>
+      <label className='text-smaller'>{label}</label>
     </div>
   );
 }

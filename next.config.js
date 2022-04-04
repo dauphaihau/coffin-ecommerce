@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   serverRuntimeConfig: {
-    secret: 'hauuntkc'
+    secret: 'dauphaihau'
   },
   publicRuntimeConfig: {
     apiUrl: process.env.NODE_ENV === 'development'

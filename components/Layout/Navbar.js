@@ -51,7 +51,7 @@ const Navbar = ({categories}) => {
                               categories.map((category, index) => (
                                 <li>
                                   <Link
-                                    href={`/category/${slugify(category)}`}
+                                    href={`/categories/${slugify(category)}`}
                                     key={index}
                                   >
                                     <a aria-label={category}>

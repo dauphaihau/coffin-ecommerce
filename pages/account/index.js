@@ -1,12 +1,10 @@
 import {HomeIcon, ShoppingCartIcon, CogIcon, UsersIcon, LogoutIcon} from "@heroicons/react/outline";
 import banner from '../../public/images/contemporary-banner.png';
-import {useAuth} from "../../context/authContext";
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";
 
 const MyAccount = () => {
-
 
   return (
     <div>

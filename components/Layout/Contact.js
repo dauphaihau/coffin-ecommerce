@@ -4,9 +4,11 @@ import {Button} from "../index";
 const Contact = () => {
   return (
     <div className='
-    flex flex-col laptop:flex-row justify-between
+    flex flex-col items-center
+    justify-between
+    laptop:flex-row py-8
     mt-12 text-center laptop:text-left
-    ipad:bg-[#f9f9f9]
+    bg-[#f9f9f9]
     ipad:p-16 rounded-lg
     '>
       <div className='mb-6'>
@@ -14,8 +16,8 @@ const Contact = () => {
         <p className='text-[0.75rem] laptop:text-base font-light'>Subscribe to our newsletter and stay updated.</p>
       </div>
       <div className='
-      px-6 ipad:px-24
-      flex flex-col laptop:flex-row
+      px-6 ipad:pl-24 w-full
+      flex flex-col ipad:flex-row
        gap-x-4 laptop:w-1/2
        '>
         <Input className='!p-4 w-full !h-[55px] !bg-white !text-black' placeholder='Write your email here'/>

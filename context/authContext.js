@@ -17,8 +17,6 @@ export function AuthProvider({children}) {
   const [user, setUser] = useState({});
   const [isAuthorize, setIsAuthorize] = useState(false)
 
-  console.log('user', user)
-
   const router = useRouter()
 
   useEffect(() => {

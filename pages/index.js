@@ -35,7 +35,6 @@ const Home = ({inventoryData = []}) => {
           <div>
             <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4'>
               <ProductCard
-                mini
                 imageSrc={inventoryData[7].image}
                 title={inventoryData[7].name}
                 subtitle={inventoryData[7].categories[0]}
@@ -45,7 +44,6 @@ const Home = ({inventoryData = []}) => {
                 salePrice={inventoryData[7].salePrice}
               />
               <ProductCard
-                mini
                 imageSrc={inventoryData[3].image}
                 title={inventoryData[3].name}
                 subtitle={inventoryData[3].categories[0]}
@@ -57,7 +55,6 @@ const Home = ({inventoryData = []}) => {
             </div>
             <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4 mt-4'>
               <ProductCard
-                mini
                 imageSrc={inventoryData[9].image}
                 title={inventoryData[9].name}
                 subtitle={inventoryData[9].categories[0]}
@@ -67,7 +64,6 @@ const Home = ({inventoryData = []}) => {
                 salePrice={inventoryData[9].salePrice}
               />
               <ProductCard
-                mini
                 imageSrc={inventoryData[10].image}
                 title={inventoryData[10].name}
                 subtitle={inventoryData[10].categories[0]}

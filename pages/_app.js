@@ -5,6 +5,8 @@ import {UtilProvider} from "../context/utilContext";
 import {AuthProvider} from "../context/authContext";
 
 function Ecommerce({Component, pageProps, categories}) {
+
+
   return (
     <AuthProvider>
       <UtilProvider>
@@ -17,6 +19,7 @@ function Ecommerce({Component, pageProps, categories}) {
 }
 
 Ecommerce.getInitialProps = async () => {
+
   const categories = await fetchCategories()
   return {
     categories

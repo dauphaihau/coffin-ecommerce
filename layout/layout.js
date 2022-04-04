@@ -51,3 +51,4 @@ const Layout = ({children, categories}) => {
 }
 
 export default Layout;
+

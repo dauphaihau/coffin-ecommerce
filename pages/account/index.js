@@ -18,7 +18,8 @@ const MyAccount = () => {
                   href='/account'
                   className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:hover:bg-gray-700'
                 >
-                  <HomeIcon className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
+                  <HomeIcon
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="ml-3">Dashboard</span>
                 </Link>
               </li>
@@ -27,7 +28,8 @@ const MyAccount = () => {
                   href='/account/order'
                   className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                 >
-                  <ShoppingCartIcon className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
+                  <ShoppingCartIcon
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="ml-3">Order</span>
                 </Link>
               </li>
@@ -36,7 +38,8 @@ const MyAccount = () => {
                   href='/account/detail'
                   className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                 >
-                  <UsersIcon className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
+                  <UsersIcon
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="flex-1 ml-3 whitespace-nowrap">Account detail</span>
                 </Link>
               </li>
@@ -45,19 +48,23 @@ const MyAccount = () => {
                   href='/account/change-pass'
                   className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                 >
-                  <CogIcon className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
+                  <CogIcon
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="flex-1 ml-3 whitespace-nowrap">Change Password</span>
                 </Link>
               </li>
               <li>
-                <a href="/"
-                   onClick={() => {
-                     localStorage.removeItem('user');
-                   }}
-                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <LogoutIcon className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
+                <Link
+                  href="/"
+                  onClick={() => {
+                    localStorage.removeItem('user');
+                  }}
+                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  <LogoutIcon
+                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="flex-1 ml-3 whitespace-nowrap">Logout</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

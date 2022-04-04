@@ -1,7 +1,7 @@
 import {userRepo} from "../../../helper/api";
 import {NextApiRequest, NextApiResponse} from "next";
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
+export default function (req: NextApiRequest, res: NextApiResponse) {
 
     switch (req.method) {
         case 'GET':
@@ -32,5 +32,3 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     }
 
 }
-
-export default handler;

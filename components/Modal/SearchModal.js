@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import {XIcon, SearchIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
 import Input from "../Input/Input";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
-import {XIcon, SearchIcon} from "@heroicons/react/solid";
 import {DENOMINATION} from "../../utils/settings";
 
 const SearchModal = () => {
@@ -62,14 +62,14 @@ const SearchModal = () => {
       {
         filteredResults.length !== 0 &&
         <div className="flex flex-col h-auto
-         h-[700px] max-h-[500px]
+          max-h-[500px]
          overflow-y-auto overflow-x-hidden
          rounded-lg bg-white  px-4 overflow-x-hidden">
           <div>
             {
               filteredResults.map((item) => {
-                console.log('item', item)
                 return (
+
                   <div className="border-t py-4" key={item.id}>
                     <div className="flex">
                       <div className='cursor-pointer relative bg-light rounded-lg p-1'>

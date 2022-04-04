@@ -61,23 +61,20 @@ const ItemView = (props) => {
       </Head>
 
       {/*<Breadcrumb/>*/}
-      <div className=" sm:py-12 md:flex-row py-4 w-full flex flex-1 flex-col my-0 mx-auto">
-        <div className="w-full md:w-1/2 h-120 flex flex-1
-        {/*bg-light hover:bg-light-200*/}
-        ">
+      <div className="py-12 ipad:flex-row py-4 w-full flex flex-1 flex-col my-0 mx-auto">
+        <div className="w-full ipad:w-1/2 h-120 flex flex-1">
           <div className="py-16 p10 flex flex-1 justify-center items-center">
             <img src={image} alt="Inventory item"/>
           </div>
         </div>
-        <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full md:w-1/2">
-          <h1 className=" sm:mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
-          <p className="text-gray-600 leading-7 pb-6">
-            <ShowMoreTextToggler text={description}/>
-          </p>
-          <h2 className="text-4xl font-bold tracking-wide">${salePrice}
-            {price
+        <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
+          <h1 className="mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
+          <ShowMoreTextToggler text={description}/>
+
+          <h2 className="text-4xl font-bold tracking-wide">${salePrice ? salePrice : price}
+            {price && salePrice
               && <span
-                className="absolute ml-[10px] line-through text-gray-400 font-light text-sm md:text-base lg:text-sm xl:text-xl ps-2">
+                className="absolute ml-[10px] line-through text-gray-400 font-light text-sm ipad:text-base lg:text-sm xl:text-xl ps-2">
               ${price}</span>}
           </h2>
           <div className="my-6">

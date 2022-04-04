@@ -32,7 +32,7 @@ function NavControl() {
       <div className='cursor-pointer'>
         {
           isAuthorize
-            ? <Link href={`/account`}><UserIconSolid width={35} height={30}/></Link>
+            ? <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
             : <UserIcon width={35} height={30} onClick={() => modalToggle()}/>
         }
       </div>

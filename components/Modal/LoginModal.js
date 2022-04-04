@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -27,8 +27,12 @@ const LoginModal = () => {
       .min(6, 'Password must be at least 6 characters'),
   });
 
+  useEffect(() => {
+      reset()
+  },[user])
+
   const formOptions = {resolver: yupResolver(validationSchema),};
-  const {register, handleSubmit, reset, formState, setError} = useForm();
+  const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
   const onSubmit = (data) => {
@@ -61,6 +65,7 @@ const LoginModal = () => {
       .then((res) => {
         setUser({...user, ...res})
         modalToggle();
+        setIsAuthorize(true)
       })
       .catch((err) => {
           if (errors) {
@@ -107,22 +112,23 @@ const LoginModal = () => {
           <Input name='email' type='email' label='Your email' register={register} errors={errors}/>
           <Input name='password' type='password' label='Your password' register={register} errors={errors}/>
 
-          <div className="flex justify-between">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember" aria-describedby="remember" type="checkbox"
-                  className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                  required=""
-                />
+          {!registerForm &&
+            <div className="flex justify-between">
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="remember" aria-describedby="remember" type="checkbox"
+                    className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                    required=""
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                </div>
               </div>
-              <div className="ml-3 text-sm">
-                <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-              </div>
+              <a href="#" className="text-sm text-black hover:underline dark:text-blue-500">Lost Password?</a>
             </div>
-            <a href="#" className="text-sm text-black hover:underline dark:text-blue-500">Lost Password?</a>
-          </div>
-
+          }
           <Button type="submit" className='w-full'>{!registerForm ? 'Login to your account' : 'Register'}</Button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
             {
@@ -130,14 +136,15 @@ const LoginModal = () => {
                 ? <span className='mr-2'>Already have an account?</span>
                 : <span className='mr-2'>Not registered?</span>
             }
-            <button className="text-black font-medium hover:underline dark:text-blue-500"
-                    onClick={() => {
-                      setRegisterForm(!registerForm)
-                      reset();
-                    }}
+            <span
+              className="text-black font-medium hover:underline cursor-pointer"
+              onClick={() => {
+                setRegisterForm(!registerForm)
+                reset();
+              }}
             >
               {registerForm ? 'Login' : 'Create account'}
-            </button>
+            </span>
           </div>
         </form>
       </div>

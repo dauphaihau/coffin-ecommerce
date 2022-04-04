@@ -35,72 +35,66 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            {/*<div className="mb-8 ipad:mt-0">*/}
-            {/*  <h5 className="text-xl font-bold mb-6">Contact</h5>*/}
-            {/*  <ul className="list-none footer-links">*/}
-            {/*    {['Contact Us', 'Deck 5, ISS, LEO 51.603.', 'dauphaihau@outlook.com', 'Call us: 84901111921'].map((li) => (*/}
-            {/*      <>*/}
-            {/*        <li className="mb-3" key={li}>*/}
-            {/*          <a href="#"*/}
-            {/*             className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">{li}</a>*/}
-            {/*        </li>*/}
-            {/*      </>*/}
-            {/*    ))}*/}
-            {/*  </ul>*/}
-            {/*</div>*/}
-            {/*<div className="mb-8 ipad:mt-0">*/}
-            {/*  <h5 className="text-xl font-bold mb-6">About</h5>*/}
-            {/*  <ul className="list-none footer-links">*/}
-            {/*    {['Support center', 'Customer Support', 'About Us', 'Copyright'].map((li) => (*/}
-            {/*      <>*/}
-            {/*        <li className="mb-3" key={li}>*/}
-            {/*          <a href="#"*/}
-            {/*             className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">{li}</a>*/}
-            {/*        </li>*/}
-            {/*      </>*/}
-            {/*    ))}*/}
-            {/*  </ul>*/}
-            {/*</div>*/}
-            {/*<div className="mb-8 ipad:mt-0">*/}
-            {/*  <h5 className="text-xl font-bold mb-6">Customer Care</h5>*/}
-            {/*  <ul className="list-none footer-links">*/}
-            {/*    {['FAQ & Helps', 'Shipping & Delivery', 'Return & Exchanges'].map((li) => (*/}
-            {/*      <>*/}
-            {/*        <li className="mb-3" key={li}>*/}
-            {/*          <a href="#"*/}
-            {/*             className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">{li}</a>*/}
-            {/*        </li>*/}
-            {/*      </>*/}
-            {/*    ))}*/}
-            {/*  </ul>*/}
-            {/*</div>*/}
-            {/*<div className="mt-8 ipad:mt-0">*/}
-            {/*  <h5 className="text-xl font-bold mb-6">Our Information</h5>*/}
-            {/*  <ul className="list-none footer-links">*/}
-            {/*    {['Privacy policy update', 'Terms & conditions', 'Return Policy', 'Site Map'].map((li) => (*/}
-            {/*      <>*/}
-            {/*        <li className="mb-3" key={li}>*/}
-            {/*          <a href="#"*/}
-            {/*             className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">{li}</a>*/}
-            {/*        </li>*/}
-            {/*      </>*/}
-            {/*    ))}*/}
-            {/*  </ul>*/}
-            {/*</div>*/}
-            {/*<div className="mt-8 ipad:mt-0">*/}
-            {/*  <h5 className="text-xl font-bold mb-6">Top Categories</h5>*/}
-            {/*  <ul className="list-none footer-links">*/}
-            {/*    {['Natural material coffin', 'Traditional coffin', 'American caskets'].map((li) => (*/}
-            {/*      <>*/}
-            {/*        <li className="mb-3" key={li}>*/}
-            {/*          <a href="#"*/}
-            {/*             className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">{li}</a>*/}
-            {/*        </li>*/}
-            {/*      </>*/}
-            {/*    ))}*/}
-            {/*  </ul>*/}
-            {/*</div>*/}
+            <div className="mb-8 ipad:mt-0">
+              <h5 className="text-xl font-bold mb-6">Contact</h5>
+              <ul className="list-none footer-links">
+                {['Contact Us', 'Deck 5, ISS, LEO 51.603.', 'dauphaihau@outlook.com', 'Call us: 84901111921'].map((nameLink, id) => (
+                  <li className="mb-3" key={id}>
+                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                      {nameLink}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mb-8 ipad:mt-0">
+              <h5 className="text-xl font-bold mb-6">About</h5>
+              <ul className="list-none footer-links">
+                {['Support center', 'Customer Support', 'About Us', 'Copyright'].map((nameLink, id) => (
+                  <li className="mb-3" key={id}>
+                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                      {nameLink}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mb-8 ipad:mt-0">
+              <h5 className="text-xl font-bold mb-6">Customer Care</h5>
+              <ul className="list-none footer-links">
+                {['FAQ & Helps', 'Shipping & Delivery', 'Return & Exchanges'].map((nameLink, id) => (
+                  <li className="mb-3" key={id}>
+                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                      {nameLink}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-8 ipad:mt-0">
+              <h5 className="text-xl font-bold mb-6">Our Information</h5>
+              <ul className="list-none footer-links">
+                {['Privacy policy update', 'Terms & conditions', 'Return Policy', 'Site Map'].map((nameLink, id) => (
+                  <li className="mb-3" key={id}>
+                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                      {nameLink}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-8 ipad:mt-0">
+              <h5 className="text-xl font-bold mb-6">Top Categories</h5>
+              <ul className="list-none footer-links">
+                {['Natural material coffin', 'Traditional coffin', 'American caskets'].map((nameLink, id) => (
+                  <li className="mb-3" key={id}>
+                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                      {nameLink}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
           </div>
         </div>

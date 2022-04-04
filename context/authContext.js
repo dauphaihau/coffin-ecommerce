@@ -28,6 +28,7 @@ export function AuthProvider({children}) {
     const path = url.split('?')[0];
     if (!userService.userValue && !publicPaths.includes(path)) {
       router.push('/');
+
     } else {
       setIsAuthorize(true)
     }

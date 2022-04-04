@@ -28,58 +28,50 @@ const Navbar = ({categories}) => {
         <div className='navbar-left'>
           <div className="navbar-left__logo">
             <Link href="/">
-              <a aria-label="Home">
-                <img
-                  src="/images/logo.png"
-                  alt="logo" width="100" height="100"
-                  className='relative left-[-31px] top-[-17px] ipad:left-0 laptop:top-[-1px]'
-                />
-              </a>
+              <img
+                src="/images/logo.png"
+                alt="logo" width="100" height="100"
+                className='relative left-[-31px] top-[-17px] ipad:left-0 laptop:top-[-1px]'
+              />
             </Link>
           </div>
           <div className="navbar-left__links">
             <div className="navbar-links">
-              {/*{MENU.data?.map((item) => {*/}
-              {/*  if (item.subNav) {*/}
-              {/*    return (*/}
-              {/*      <Link href={item.link} key={item.id}>*/}
-              {/*        <div className='navbar-links__item group'>*/}
-              {/*          <p className="item-title">{item.title}</p>*/}
-              {/*          <div className='item-content group-hover:block'>*/}
-              {/*            <ul>*/}
-              {/*              {*/}
-              {/*                categories.map((category, index) => (*/}
-              {/*                  <li>*/}
-              {/*                    <Link*/}
-              {/*                      href={`/categories/${slugify(category)}`}*/}
-              {/*                      key={index}*/}
-              {/*                    >*/}
-              {/*                      <a aria-label={category}>*/}
-              {/*                        <p className="item-content__title*/}
-              {/*                          hover:text-gray-500 py-4 px-4*/}
-              {/*                          ">*/}
-              {/*                          {category.charAt(0).toUpperCase() + category.slice(1)}*/}
-              {/*                        </p>*/}
-              {/*                      </a>*/}
-              {/*                    </Link>*/}
-              {/*                  </li>*/}
-              {/*                ))*/}
-              {/*              }*/}
-              {/*            </ul>*/}
-              {/*          </div>*/}
-              {/*        </div>*/}
-              {/*      </Link>*/}
-              {/*    )*/}
-              {/*  }*/}
-              {/*  return (*/}
-              {/*    <Link href={item.link} key={item.id} className='mr-4'>*/}
-              {/*      <p className="transition duration-200 ease-in-out p-[10px] hover:bg-gray-200 rounded-lg ">*/}
-              {/*        {item.title}*/}
-              {/*      </p>*/}
-              {/*    </Link>*/}
-              {/*  )*/}
-              {/*})}*/}
-
+              {MENU.data?.map((item) => {
+                if (item.subNav) {
+                  return (
+                    <div className='navbar-links__item group' key={item.id}>
+                      <Link href={item.link}>
+                        <p className="item-title">{item.title}</p>
+                      </Link>
+                      <div className='item-content group-hover:block '>
+                        <ul>
+                          {
+                            categories.map((category, index) => (
+                              <li key={index}>
+                                <Link href={`/categories/${slugify(category)}`}>
+                                  <p className="item-content__title
+                                        hover:text-gray-500 py-4 px-4
+                                        ">
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                  </p>
+                                </Link>
+                              </li>
+                            ))
+                          }
+                        </ul>
+                      </div>
+                    </div>
+                  )
+                }
+                return (
+                  <Link href={item.link} key={item.id} className='mr-4'>
+                    <p className="transition duration-200 ease-in-out p-[10px] hover:bg-gray-200 rounded-lg ">
+                      {item.title}
+                    </p>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </div>

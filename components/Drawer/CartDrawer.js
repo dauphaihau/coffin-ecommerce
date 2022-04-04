@@ -53,7 +53,7 @@ const CartDrawer = ({context}) => {
             <h1 className="text-2xl font-black py-4 ">Shopping cart</h1>
             <XIcon
               width={30} height={30}
-              className='text-black
+              className='text-black cursor-pointer
                  bg-transparent hover:bg-gray-200 hover:text-gray-900
                   rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
                   dark:hover:bg-gray-800 dark:hover:text-white

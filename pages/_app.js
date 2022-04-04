@@ -6,7 +6,6 @@ import {AuthProvider} from "../context/authContext";
 
 function Ecommerce({Component, pageProps, categories}) {
 
-
   return (
     <AuthProvider>
       <UtilProvider>

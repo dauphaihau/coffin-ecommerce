@@ -6,7 +6,6 @@ import {fetchWrapper} from "../helper";
 const {publicRuntimeConfig} = getConfig();
 
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
-
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 const register = (user) => {

@@ -10,9 +10,6 @@ const saveData = () => {
 const create = ({name, password, hash, email, phoneNumber}) => {
     const user: User = {name, password, hash, email, phoneNumber};
 
-    if (users.find(x => x.email === user.email))
-        throw `User with the email ${user.email} already exists`;
-
     user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
 
     user.dateCreated = new Date().toISOString();

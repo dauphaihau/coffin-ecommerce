@@ -1,50 +1,10 @@
 [
     {
         "name": "Sir Tran",
-        "hash": "$2a$10$Y7wUxA.JuO0x0dQMByP5Ie/ubihT.ogwDlIUR1rpUMSPL0v5qDneu",
-        "email": "sirtran@gmail.com",
-        "id": 17,
-        "dateCreated": "2022-04-03T01:19:27.998Z",
-        "dateUpdated": "2022-04-03T01:19:27.998Z"
-    },
-    {
-        "name": "Sir Tran",
-        "hash": "$2a$10$IC54zfD1IAUkstCm4xYDn.SmUkzOpOcrv2BcG4FSAEW6QGSAPi4zS",
-        "email": "sirtran12@gmail.com",
-        "id": 18,
-        "dateCreated": "2022-04-03T01:20:52.411Z",
-        "dateUpdated": "2022-04-03T01:20:52.411Z"
-    },
-    {
-        "name": "Hau Le",
-        "hash": "$2a$10$XO.kamyIXXpVDFCNdpv/wOEllR2KHGXf7ntYad5nnAYLB2u198gPK",
-        "email": "sirtran13@gmail.com",
-        "id": 19,
-        "dateCreated": "2022-04-03T01:21:20.618Z",
-        "dateUpdated": "2022-04-03T01:21:20.618Z"
-    },
-    {
-        "name": "Kim Tran",
-        "hash": "$2a$10$64n4fNrZzCI/d3fYo4ydwOt3Q9SVLPQQY4NpOTK2lRoL.8oBLP7Bi",
-        "email": "jioo12a@gmail.ccom",
-        "id": 20,
-        "dateCreated": "2022-04-03T01:22:13.702Z",
-        "dateUpdated": "2022-04-03T01:22:13.702Z"
-    },
-    {
-        "name": "Kim Tran",
-        "hash": "$2a$10$Eew1gC9VGDn5QjN79sVQ4OAR135R9Y4hy51H0c2SX8IYrmLklx7Ve",
-        "email": "jioo12a1@gmail.ccom",
-        "id": 21,
-        "dateCreated": "2022-04-03T01:25:10.352Z",
-        "dateUpdated": "2022-04-03T01:25:10.352Z"
-    },
-    {
-        "name": "Hau Op",
-        "hash": "$2a$10$iytX9QvBN0H6BHKqkxAI2.FtD8qXNdxkmlmVQRGFK2xNvlrGWT.c.",
-        "email": "daunnckc@gmail.com",
-        "id": 22,
-        "dateCreated": "2022-04-03T01:26:12.555Z",
-        "dateUpdated": "2022-04-03T01:26:12.555Z"
+        "hash": "$2a$10$05d2mVtvXjK.Gx6OloWd3uO5glKdRk0yghtIv2fuC9.P5SOtuc7eG",
+        "email": "dauphaihau@email.com",
+        "id": 1,
+        "dateCreated": "2022-04-05T04:04:08.260Z",
+        "dateUpdated": "2022-04-05T04:04:08.260Z"
     }
 ]

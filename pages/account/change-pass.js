@@ -25,23 +25,23 @@ const ChangePass = () => {
     console.log('values', values)
     const {id, body, type} = values
 
-    return userService.update(id, body, type)
-      .then(() => {
-        // setUser({...user, ...res})
-        // setIsAuthorize(true)
-        // modalToggle();
-        alert('success')
-      })
-      .catch((err) => {
-        alert('error')
-          // if (errors) {
-          //   setError('password', {
-          //     type: "server",
-          //     message: err,
-          //   });
-          // }
-        }
-      )
+    // return userService.update(id, body, type)
+    //   .then(() => {
+    //     // setUser({...user, ...res})
+    //     // setIsAuthorize(true)
+    //     // modalToggle();
+    //     alert('success')
+    //   })
+    //   .catch((err) => {
+    //     alert('error')
+    //       // if (errors) {
+    //       //   setError('password', {
+    //       //     type: "server",
+    //       //     message: err,
+    //       //   });
+    //       // }
+    //     }
+    //   )
   }
 
   return (

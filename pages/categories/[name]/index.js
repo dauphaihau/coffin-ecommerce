@@ -3,11 +3,9 @@ import Product from '../../../components/Card/Product'
 import {titleIfy, slugify} from '../../../utils/helpers'
 import fetchCategories from '../../../utils/provider/categoryProvider'
 import inventoryForCategory from '../../../utils/inventoryForCategory'
-import {useRouter} from "next/router";
 
 const Category = (props) => {
   const {inventory, title} = props
-  const router = useRouter();
 
   return (
     <>
@@ -25,7 +23,6 @@ const Category = (props) => {
             <div className="flex flex-1 flex-wrap flex-row">
               {
                 inventory?.map((item, index) => {
-              console.log('log', `${router.asPath}/product/${slugify(item.name)}`)
                   return (
                     <Product
                       key={index}

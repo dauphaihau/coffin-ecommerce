@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import Link from "next/link";
+import {useEffect, useState} from "react";
 import {XIcon, SearchIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
@@ -7,6 +6,7 @@ import Input from "../Input/Input";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {DENOMINATION} from "../../utils/settings";
+import {Link} from "../index";
 
 const SearchModal = () => {
 
@@ -48,7 +48,7 @@ const SearchModal = () => {
           top-[3%] ipad:left-[4%]
           laptop:left-[23%] 
           justify-center items-center`}>
-      <Input name='search' onChange={(e) => searchItems(e.target.value)}
+      <Input name='search'  onChange={(e) => searchItems(e.target.value)}
              className='!pl-[3.5rem] !h-[60px] !focus:ring-white !focus:border-white'
       />
       <div className="absolute top-[17px] left-[14px]">
@@ -69,7 +69,6 @@ const SearchModal = () => {
             {
               filteredResults.map((item) => {
                 return (
-
                   <div className="border-t py-4" key={item.id}>
                     <div className="flex">
                       <div className='cursor-pointer relative bg-light rounded-lg p-1'>
@@ -77,13 +76,10 @@ const SearchModal = () => {
                       </div>
                       <div className='ml-4 w-[65%]'>
                         <Link href={`/product/${slugify(item.name)}`}>
-                          <a aria-label={item.name}>
-                            <p className="m-0 text-gray-600 w-80 text-smaller">
-                              {item.name}
-                            </p>
-                          </a>
+                          <p className="m-0 text-gray-600 w-80 text-smaller">
+                            {item.name}
+                          </p>
                         </Link>
-
                         <div className="flex">
                           <h2 className="text-2xl font-bold tracking-wide">{DENOMINATION + item.price}</h2>
                           {item.salePrice

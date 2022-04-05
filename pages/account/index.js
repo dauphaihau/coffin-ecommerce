@@ -3,11 +3,11 @@ import banner from '../../public/images/contemporary-banner.png';
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";
-import {router} from "next/client";
-import {useAuth} from "../../context/authContext";
+import {useRouter} from "next/router";
 
 const MyAccount = () => {
   const {setIsAuthorize} = useAuth();
+  const router = useRouter();
 
   return (
     <div>

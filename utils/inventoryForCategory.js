@@ -17,12 +17,8 @@ function inventoryByCategory (inventory) {
 }
 
 async function inventoryForCategory (category) {
-  // console.log('category', category)
   const inventory = await fetchInventory()
-  // console.log('inventory', inventory)
   const byCategory = inventoryByCategory(inventory)
-  // console.log('by-category', byCategory)
   return byCategory[category]?.items
 }
-
 export default inventoryForCategory

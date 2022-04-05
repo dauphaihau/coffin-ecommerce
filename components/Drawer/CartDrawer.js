@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {useState, useEffect} from 'react'
 import {XCircleIcon, XIcon} from "@heroicons/react/solid";
 
@@ -9,6 +8,7 @@ import {DENOMINATION} from "../../utils/settings";
 import {slugify} from "../../utils/helpers";
 import Button from "../Button/Button";
 import {useAuth} from "../../context/authContext";
+import {Link} from "../index";
 
 const CartDrawer = ({context}) => {
 
@@ -64,8 +64,8 @@ const CartDrawer = ({context}) => {
           {
             cartEmpty
               ? (<div className='h-[540px] laptop:h-[780px]'>
-                  <img src="/images/empty.png" className='h-auto' alt="empty"/>
-                </div>)
+                <img src="/images/empty.png" className='h-auto' alt="empty"/>
+              </div>)
               : (
                 <div className="flex flex-col h-[540px] laptop:h-[780px] overflow-x-hidden">
                   <div>
@@ -86,16 +86,15 @@ const CartDrawer = ({context}) => {
                                    hover:bg-black
                                    opacity-20 rounded-lg
                               '>
-                                  <XCircleIcon className='h-20 w-10 text-white !opacity-1 absolute z-10 right-[33%] top-[16%]'/>
+                                  <XCircleIcon
+                                    className='h-20 w-10 text-white !opacity-1 absolute z-10 right-[33%] top-[16%]'/>
                                 </div>
                               </div>
                               <div className='ml-4 w-[65%]'>
                                 <Link href={`/product/${slugify(item.name)}`}>
-                                  <a aria-label={item.name}>
-                                    <p className="m-0 text-gray-600 w-80 text-smaller">
-                                      {item.name}
-                                    </p>
-                                  </a>
+                                  <p className="m-0 text-gray-600 w-80 text-smaller">
+                                    {item.name}
+                                  </p>
                                 </Link>
                                 <p className='text-gray-500 py-2 text-smaller'>
                                   Unit price: {DENOMINATION + item.price}
@@ -121,14 +120,12 @@ const CartDrawer = ({context}) => {
                 </div>
               )
           }
-          <Button className='mt-3'>
+          <Button className='mt-3' onClick={() => drawerToggle()}>
             <Link href="/checkout">
-              <a aria-label="Check out" className='block' onClick={() => drawerToggle()}>
-                <div className="cursor-pointer flex justify-between text-base ">
-                  <p className="text-white text-base mr-2">Proceed to check out</p>
-                  <p className="text-white text-base border-l pl-4">{DENOMINATION + total}</p>
-                </div>
-              </a>
+              <div className="cursor-pointer flex justify-between text-base ">
+                <p className="text-white text-base mr-2">Proceed to check out</p>
+                <p className="text-white text-base border-l pl-4">{DENOMINATION + total}</p>
+              </div>
             </Link>
           </Button>
         </div>

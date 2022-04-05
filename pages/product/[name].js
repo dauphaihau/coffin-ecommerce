@@ -11,7 +11,7 @@ import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
 import ShowMoreTextToggler from "../../components/Button/ShowMoreTextToggler";
-import Product from "../../components/Product";
+import Product from "../../components/Card/Product";
 
 const ItemView = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
@@ -69,13 +69,10 @@ const ItemView = (props) => {
         </div>
         <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
           <h1 className="mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
-
           <ShowMoreTextToggler classes='block laptop:hidden' text={description}/>
           <p className='text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>
-
-
           <h2 className="text-4xl font-bold tracking-wide">${salePrice ? salePrice : price}
             {price && salePrice
               && <span

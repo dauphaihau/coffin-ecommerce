@@ -39,7 +39,11 @@ const create = (params) => {
     return fetchWrapper.post(baseUrl, params);
 };
 
-const update = (id, params) => {
+const update = (id, params, type) => {
+    if (type === 'updatePassword') {
+        console.log('base-url', baseUrl)
+        return fetchWrapper.put(`${baseUrl}/updatePassword`, params)
+    }
     return fetchWrapper.put(`${baseUrl}/${id}`, params)
 };
 

@@ -1,5 +1,5 @@
-import {DENOMINATION} from "../utils/settings";
-import {Link} from "./index";
+import {DENOMINATION} from "../../utils/settings";
+import {Link} from "../index";
 
 const Product = ({link, title, imageSrc, price}) => {
 
@@ -22,7 +22,6 @@ const Product = ({link, title, imageSrc, price}) => {
         <p className="text-center text-gray-700 mb-4">{`${DENOMINATION}${price}`}</p>
       </div>
     </div>
-
   )
 }
 

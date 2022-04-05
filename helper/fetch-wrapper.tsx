@@ -57,7 +57,8 @@ const post = (url, body) => {
 const put = (url, body) => {
     const requestOptions = {
         method: 'PUT',
-        headers: {'Content-Type': 'application/json', ...authHeader(url)},
+        // headers: {'Content-Type': 'application/json', ...authHeader(url)},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)
     };
     return fetch(url, requestOptions).then(handleResponse);

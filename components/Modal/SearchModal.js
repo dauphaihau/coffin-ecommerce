@@ -12,14 +12,14 @@ const SearchModal = () => {
 
   const {modalSearchOpen} = useUtil();
 
-  const [APIData, setAPIData] = useState([]);
+  const [inventory, setInventory] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     const loadInit = async () => {
       const inventory = await fetchInventory()
-      setAPIData(inventory)
+      setInventory(inventory)
     }
     loadInit();
   }, []);
@@ -27,7 +27,7 @@ const SearchModal = () => {
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
     if (searchInput !== "") {
-      const filteredData = APIData.filter((item) => {
+      const filteredData = inventory.filter((item) => {
         return Object.values(item.name)
           .join("")
           .toLowerCase()
@@ -35,7 +35,7 @@ const SearchModal = () => {
       });
       setFilteredResults(filteredData);
     } else {
-      setFilteredResults(APIData);
+      setFilteredResults(inventory);
     }
   };
 
@@ -43,11 +43,11 @@ const SearchModal = () => {
     <div
       className={`${!modalSearchOpen && 'hidden'}
           fixed top-0 right-0 left-0
-           z-[200] w-[380px] ipad:w-[700px] laptop:w-[930px] 
-           left-[5%]
-            top-[3%] ipad:left-[4%]
-            laptop:left-[23%] 
-           justify-center items-center`}>
+          z-[200] w-[380px] ipad:w-[700px] laptop:w-[930px] 
+          left-[5%]
+          top-[3%] ipad:left-[4%]
+          laptop:left-[23%] 
+          justify-center items-center`}>
       <Input name='search' onChange={(e) => searchItems(e.target.value)}
              className='!pl-[3.5rem] !h-[60px] !focus:ring-white !focus:border-white'
       />

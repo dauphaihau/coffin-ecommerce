@@ -1,5 +1,4 @@
 import { fetchInventory } from './provider/inventoryProvider'
-// import { inventoryByCategory } from './inventoryByCategory'
 
 function inventoryByCategory (inventory) {
   return inventory.reduce((acc, next) => {

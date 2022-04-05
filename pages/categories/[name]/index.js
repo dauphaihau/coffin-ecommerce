@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Product from '../../../components/Product'
+import Product from '../../../components/Card/Product'
 import {titleIfy, slugify} from '../../../utils/helpers'
 import fetchCategories from '../../../utils/provider/categoryProvider'
 import inventoryForCategory from '../../../utils/inventoryForCategory'

@@ -22,8 +22,8 @@ const create = ({name, password, hash, email, phoneNumber}) => {
     saveData();
 }
 
-const update = (id, {name, password, email, phoneNumber}) => {
-    const params = {name, password, email, phoneNumber};
+const update = (id, {name, password, newPassword, hash, email, phoneNumber}) => {
+    const params = {name, password, newPassword, hash, email, phoneNumber};
     const user = users.find(x => x.id.toString() === id.toString());
 
     if (params.email !== user.email && users.find(x => x.email === params.email))

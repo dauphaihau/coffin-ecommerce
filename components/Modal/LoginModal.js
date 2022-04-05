@@ -28,7 +28,7 @@ const LoginModal = () => {
 
   useEffect(() => {
     reset();
-    // setRegisterForm(false);
+    setRegisterForm(false);
   }, [user])
 
   const formOptions = {resolver: yupResolver(validationSchema),};

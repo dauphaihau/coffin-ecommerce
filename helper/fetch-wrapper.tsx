@@ -46,8 +46,8 @@ const get = (url: string) => {
 const post = (url, body) => {
     const requestOptions: ReqType = {
         method: 'POST',
-        // headers: {'Content-Type': 'application/json', ...authHeader(url)},
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', ...authHeader(url)},
+        // headers: {'Content-Type': 'application/json'},
         credentials: 'include',
         body: JSON.stringify(body)
     };

@@ -1,9 +1,11 @@
+import {useRouter} from "next/router";
+
 import {HomeIcon, ShoppingCartIcon, CogIcon, UsersIcon, LogoutIcon} from "@heroicons/react/outline";
 import banner from '../../public/images/contemporary-banner.png';
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";
-import {useRouter} from "next/router";
+import {useAuth} from "../../context/authContext";
 
 const MyAccount = () => {
   const {setIsAuthorize} = useAuth();
@@ -24,7 +26,6 @@ const MyAccount = () => {
                   <HomeIcon
                     className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
                   <span className="ml-3">Dashboard</span>
-
                 </Link>
               </li>
               <li>

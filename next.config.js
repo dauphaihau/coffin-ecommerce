@@ -6,8 +6,8 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     apiUrl: process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000/api' // development api
-      : '' // production api
+      ? 'https://coffin-ecommerce.vercel.app/api' // development api
+      : 'https://coffin-ecommerce.vercel.app/api' // production api
   }
   // webpack: (config, {isServer}) => {
   //   if (!isServer) {

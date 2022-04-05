@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {MENU} from "../../constants/menu";
+import {MENU} from "../../utils/menu";
 import {slugify} from "../../utils/helpers";
 import NavControl from "../NavControl";
 import {Link} from "../index";
@@ -26,15 +26,13 @@ const Navbar = ({categories}) => {
     <nav className={`navbar ${shadowHeader && 'shadow-2xl'}`}>
       <div className="navbar__container">
         <div className='navbar-left'>
-          <div className="navbar-left__logo">
-            <Link href="/">
-              <img
-                src="/images/logo.png"
-                alt="logo" width="100" height="100"
-                className='relative left-[-31px] top-[-17px] ipad:left-0 laptop:top-[-1px]'
-              />
-            </Link>
-          </div>
+          <Link href="/" className="navbar-left__logo">
+            <img
+              src="/images/logo.png"
+              alt="logo"
+              className='w-[100px] ipad:h-[80px]'
+            />
+          </Link>
           <div className="navbar-left__links">
             <div className="navbar-links">
               {MENU.data?.map((item) => {

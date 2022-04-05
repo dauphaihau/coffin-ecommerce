@@ -9,10 +9,7 @@ function NavControl() {
   const {user, isAuthorize} = useAuth();
 
   return (
-    <div className="top-53 ipad:right-[44px] ipad:top-40 flex
-         absolute top-[14px] right-[12px]
-         ipad:top-[16px] laptop:top-[36px]"
-    >
+    <div className="flex">
       <button className='mr-4' onClick={() => modalSearchToggle()}>
         <div className="flex flex-1 justify-end relative">
           <SearchIcon width={35} height={30}/>

@@ -40,7 +40,8 @@ const Footer = () => {
               <ul className="list-none footer-links">
                 {['Contact Us', 'Deck 5, ISS, LEO 51.603.', 'dauphaihau@outlook.com', 'Call us: 84901111921'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
-                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                    <Link href='#'
+                          className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                       {nameLink}
                     </Link>
                   </li>
@@ -52,7 +53,8 @@ const Footer = () => {
               <ul className="list-none footer-links">
                 {['Support center', 'Customer Support', 'About Us', 'Copyright'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
-                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                    <Link href='#'
+                          className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                       {nameLink}
                     </Link>
                   </li>
@@ -64,7 +66,8 @@ const Footer = () => {
               <ul className="list-none footer-links">
                 {['FAQ & Helps', 'Shipping & Delivery', 'Return & Exchanges'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
-                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                    <Link href='#'
+                          className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                       {nameLink}
                     </Link>
                   </li>
@@ -76,7 +79,8 @@ const Footer = () => {
               <ul className="list-none footer-links">
                 {['Privacy policy update', 'Terms & conditions', 'Return Policy', 'Site Map'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
-                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                    <Link href='#'
+                          className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                       {nameLink}
                     </Link>
                   </li>
@@ -88,7 +92,8 @@ const Footer = () => {
               <ul className="list-none footer-links">
                 {['Natural material coffin', 'Traditional coffin', 'American caskets'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
-                    <Link href='#' className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
+                    <Link href='#'
+                          className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                       {nameLink}
                     </Link>
                   </li>
@@ -99,13 +104,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
       <div className="flex flex-col items-center justify-around
-      border-solid border-t border-gray-300 py-4
+      border-solid border-t border-gray-300 py-3
       ipad:flex-row ipad:px-0
       ">
-        <span className="block text-gray-700 text-xs text-center py-4 ipad:pb-0">Copyright © 2022 Coffin Store, Inc. All rights reserved.</span>
+        <span className="block text-gray-700 text-xs text-center ipad:pb-0">Copyright © 2022 Coffin Store, Inc. All rights reserved.</span>
         <div className="
-        justify-end m-0 flex flex-1 mt-4
+        justify-end m-0 flex flex-1
         flex hidden ipad:block
          ">
           <ul className="
@@ -126,7 +132,9 @@ const Footer = () => {
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <img src="/images/payment/amazon.png" alt="Master Card" width="86" height="20"/>
+                <figure >
+                  <img src="/images/payment/amazon.png" alt='Amazon' width="86" height="20"/>
+                </figure>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
@@ -136,7 +144,7 @@ const Footer = () => {
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <img src="/images/payment/skrill-logo.png" alt="Skrill" width="79" height="20"/>
+                <img src="/images/payment/skrill.png" alt="Skrill" width="69" height="20"/>
               </Link>
             </li>
           </ul>

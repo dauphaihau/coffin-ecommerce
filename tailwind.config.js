@@ -1,7 +1,4 @@
 module.exports = {
-
-  // purge: ['./pages/**/*.js', './components/**/*.js'],
-  // purge: ["./pages/**/*.js", "./components/**/*.js"],
   presets: [],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -12,7 +9,6 @@ module.exports = {
   // darkMode: false, // or 'media' or 'class'
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-
 
     extend: {
       spacing: {
@@ -42,7 +38,6 @@ module.exports = {
       },
       screens: {
         'mobile': '600px',
-        'c_large': '1200px',
         // 'desktop': '1440px'
       },
       width: {

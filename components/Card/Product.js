@@ -19,7 +19,7 @@ const Product = ({link, title, imageSrc, price}) => {
       </Link>
       <div>
         <p className="m-4 text-center text-l font-semibold mb-1">{title}</p>
-        <p className="text-center text-gray-700 mb-4">{`${DENOMINATION}${price}`}</p>
+        <p className="text-center text-gray-700 mb-4">{`${DENOMINATION}${price.toLocaleString()}`}</p>
       </div>
     </div>
   )

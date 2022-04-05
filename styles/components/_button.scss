@@ -9,32 +9,43 @@
 }
 
 .btn-group {
-  @apply flex items-center;
+  @apply flex items-center text-[13px] ipad:text-sm;
   button:first-child {
-    @apply w-10 h-10 text-xl
-    md:w-8 md:h-8 md:text-sm
-    cursor-pointer text-center border pb-.5
+    @apply w-8 h-8 laptop:w-10 laptop:h-10
+    md:w-8 md:h-8
+    cursor-pointer text-center border laptop:pb-.5
     rounded-tl-lg
     transition ease-in-out duration-300
     rounded-bl-lg
-    hover:bg-gray-900 hover:text-white
+    hover:bg-gray-800 hover:text-white
     focus:outline-none
+    flex-center
   }
 
   p {
-    @apply w-10 h-10 pt-2 text-base
-    md:w-8 md:h-8 md:pt-2 md:text-xs
+    @apply w-8 h-8 laptop:w-10 laptop:h-10
+    md:w-8 md:h-8
     m-0 border-t border-b text-center
+    flex-center
   }
 
   button:last-child {
     @apply rounded-tr-lg
+    flex-center
     rounded-br-lg
-    w-10 h-10 text-2xl
-    md:w-8 md:h-8 md:text-sm
+    w-8 h-8 laptop:w-10 laptop:h-10
+    md:w-8 md:h-8
     transition ease-in-out duration-300
-    cursor-pointer text-center border pb-.5
-    hover:bg-gray-900 hover:text-white
+    cursor-pointer text-center border laptop:pb-.5
+    hover:bg-gray-800 hover:text-white
     focus:outline-none
   }
+}
+
+.btn-close {
+  @apply w-[30px] h-[30px]
+  text-gray-400 bg-transparent hover:bg-gray-200
+  hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto
+  inline-flex items-center cursor-pointer
+  dark:hover:bg-gray-800 dark:hover:text-white ;
 }

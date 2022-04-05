@@ -47,11 +47,11 @@ const Checkout = ({context}) => {
   const elements = useElements()
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required').min(6, 'Name must be at least 6 characters'),
-    lastName: Yup.string().required('First name is required').min(6, 'Name must be at least 6 characters'),
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('First name is required'),
     address: Yup.string().required('Address is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
-    email: Yup.string().email('Email is invalid').required('Email is required'),
+    email: Yup.string().email('Email is invalid')
   });
 
   const formOptions = {resolver: yupResolver(validationSchema)};
@@ -121,7 +121,7 @@ const Checkout = ({context}) => {
             <Input label='Address *' name='address' register={register} errors={errors}/>
             <Grid md={2} gapx={4}>
               <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
-              <Input label='Email *' name='email' register={register} errors={errors}/>
+              <Input label='Email ' name='email' register={register} errors={errors}/>
             </Grid>
             <Grid md={2} gapx={4}>
               <Input label='City/Town *' name='city' register={register} errors={errors}/>
@@ -153,8 +153,7 @@ const Checkout = ({context}) => {
                     <div className="border-b py-6 laptop:px-4" key={index}>
                       <div className="flex items-center">
                         <div aria-label={item.name} className='bg-light rounded-lg p-1'>
-                          <img className="h-28 m-0 w-28" src={item.image} alt={item.name}
-                          />
+                          <img className="h-28 m-0 w-28" src={item.image} alt={item.name}/>
                         </div>
                         <p className="m-0 pl-10 text-gray-600">
                           {item.name}

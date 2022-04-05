@@ -48,26 +48,19 @@ const CartDrawer = ({context}) => {
   return (
     <>
       <aside className={`drawer ${drawerOpen && 'open'}`}>
-        <div className="flex flex-col w-full py-4 px-5 laptop:px-8 laptop:p-8">
+        <div className="flex flex-col w-full h-full py-4 px-5 laptop:px-8 laptop:p-8">
           <div className='flex justify-between items-center border-b'>
             <h1 className="text-2xl font-black py-4 ">Shopping cart</h1>
-            <XIcon
-              width={30} height={30}
-              className='text-black cursor-pointer
-                 bg-transparent hover:bg-gray-200 hover:text-gray-900
-                  rounded-lg text-sm p-1.5 ml-auto inline-flex items-center
-                  dark:hover:bg-gray-800 dark:hover:text-white
-                  '
-              onClick={() => drawerToggle()}
-            />
+            <XIcon className='btn-close' onClick={() => drawerToggle()}/>
           </div>
           {
             cartEmpty
-              ? (<div className='h-[540px] laptop:h-[780px]'>
-                <img src="/images/empty.png" className='h-auto' alt="empty"/>
+              ? (<div className='h-full text-center flex flex-col items-center justify-center '>
+                <img src="/images/empty.png" className='h-88 w-[60%]  laptop:h-auto' alt="empty"/>
+                <p className='mb-8 font-bold text-xl'>Your cart is empty.</p>
               </div>)
               : (
-                <div className="flex flex-col h-[540px] laptop:h-[780px] overflow-x-hidden">
+                <div className="flex flex-col h-full overflow-x-hidden">
                   <div>
                     {
                       cart.map((item) => {
@@ -97,7 +90,7 @@ const CartDrawer = ({context}) => {
                                   </p>
                                 </Link>
                                 <p className='text-gray-500 py-2 text-smaller'>
-                                  Unit price: {DENOMINATION + item.price}
+                                  Unit price: {DENOMINATION + item.price.toLocaleString()}
                                 </p>
                                 <div className='flex justify-between'>
                                   <QuantityPicker
@@ -107,7 +100,7 @@ const CartDrawer = ({context}) => {
                                     decrement={() => decrement(item)}
                                   />
                                   <p className="m-0 pt-3 text-gray-900 tracking-wider">
-                                    {DENOMINATION + item.price * item.quantity}
+                                    {DENOMINATION + (item.price * item.quantity).toLocaleString()}
                                   </p>
                                 </div>
                               </div>
@@ -120,11 +113,11 @@ const CartDrawer = ({context}) => {
                 </div>
               )
           }
-          <Button className='mt-3' onClick={() => drawerToggle()}>
+          <Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>
             <Link href="/checkout">
               <div className="cursor-pointer flex justify-between text-base ">
                 <p className="text-white text-base mr-2">Proceed to check out</p>
-                <p className="text-white text-base border-l pl-4">{DENOMINATION + total}</p>
+                <p className="text-white text-base border-l pl-4">{DENOMINATION + total.toLocaleString()}</p>
               </div>
             </Link>
           </Button>

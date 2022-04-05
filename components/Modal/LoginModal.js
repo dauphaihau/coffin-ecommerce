@@ -8,6 +8,7 @@ import {Button} from "../index";
 import {userService} from "../../services";
 import Input from "../Input/Input";
 import {useAuth} from "../../context/authContext";
+import {XIcon} from "@heroicons/react/solid";
 
 const LoginModal = () => {
 
@@ -22,7 +23,8 @@ const LoginModal = () => {
       .required('Email is required'),
     password: Yup.string()
       .transform(x => x === '' ? undefined : x)
-      .concat(registerForm ? Yup.string().required('Password is required') : null)
+      .required('Password is required')
+      // .concat(registerForm ? Yup.string().required('Password is required') : null)
       .min(6, 'Password must be at least 6 characters'),
   });
 
@@ -31,8 +33,30 @@ const LoginModal = () => {
     setRegisterForm(false);
   }, [user])
 
-  const formOptions = {resolver: yupResolver(validationSchema),};
-  const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setValue('email', '')
+      setValue('password', '')
+    } else {
+      if (!registerForm) {
+        setValue('email', 'dauphaihau@email.com')
+        setValue('password', '111111')
+      } else {
+        setValue('email', '')
+        setValue('password', '')
+      }
+    }
+  }, [registerForm])
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      email: 'dauphaihau@email.com',
+      password: '111111'
+    }
+  };
+
+  const {register, handleSubmit, reset, formState, setError, setValue} = useForm(formOptions);
   const {errors} = formState;
 
   const onSubmit = (data) => {
@@ -79,31 +103,24 @@ const LoginModal = () => {
 
   return (
     <div className={`${!modalOpen && 'hidden'}
-          fixed inset-0 z-[200] 
+          fixed z-[200] justify-center items-center
+          p-4 w-full h-full 
+          inset-0 
           top-[10%]
-          ipad:top-[20%] 
-          laptop:left-[39%] laptop:top-[15%] 
-          justify-center items-center
-          p-4 w-full laptop:max-w-md h-full md:h-auto
+          ipad:left-[23%] ipad:top-[15%] 
+          laptop:left-[36%]
+          ipad:max-w-md ipad:h-auto
            `}>
       <div className="bg-white rounded-lg shadow">
         <div className="flex justify-end p-2">
-          <button
-            type="button"
-            onClick={() => modalToggle()}
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-            data-modal-toggle="authentication-modal">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"/>
-            </svg>
-          </button>
+          <XIcon className='btn-close' onClick={() => modalToggle()}/>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
+          className="px-6 pb-4 space-y-6 lg:px-8 pb-6 xl:pb-8"
         >
-          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-            {registerForm ? 'Register' : 'Sign in to our platform'}
+          <h3 className="text-xl font-medium text-gray-900">
+            {registerForm ? 'Register' : 'Sign in'}
           </h3>
           {registerForm && <Input name='name' label='Name' register={register} errors={errors}/>}
           <Input name='email' type='email' label='Your email' register={register} errors={errors}/>
@@ -136,7 +153,7 @@ const LoginModal = () => {
             <span
               className="text-black font-medium hover:underline cursor-pointer"
               onClick={() => {
-                setRegisterForm(!registerForm)
+                setRegisterForm(!registerForm);
                 reset();
               }}
             >

@@ -1,7 +1,7 @@
 @tailwind base;
 
-
 @import "./components/form";
+@import "./components/table";
 @import "./components/button";
 @import "./components/drawer";
 @import "./components/navbar";
@@ -33,7 +33,6 @@
   }
 }
 
-
-//.Toastify__progress-bar Toastify__progress-bar--animated Toastify__progress-bar-theme--light Toastify__progress-bar--default {
-//  color: gray;
-//}
+.flex-center {
+  @apply flex justify-center items-center
+}

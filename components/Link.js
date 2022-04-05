@@ -1,8 +1,8 @@
 import NextLink from 'next/link';
 
-const Link = ({href, children, ...props}) => {
+const Link = ({href, children, scroll, ...props}) => {
   return (
-    <NextLink href={href}>
+    <NextLink href={href} scroll={scroll}>
       <a {...props}>
         {children}
       </a>

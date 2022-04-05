@@ -1,0 +1,89 @@
+
+.table-container {
+  @apply min-w-full w-[5px]
+  py-8 laptop:py-0
+  rounded-lg
+  overflow-x-auto
+  lg:overflow-x-visible;
+
+  section {
+    border: 1px solid #f7f7f7;
+
+    @apply p-4 laptop:drop-shadow-xl overflow-x-visible
+    rounded-[19px] bg-white dark:bg-black w-fit
+    border-gray-200 laptop:border-[#f7f7f7];
+
+    .table {
+      @apply min-w-full ;
+
+      thead {
+        th {
+          @apply
+          bg-gray-100 dark:bg-[#111111]
+          py-3 px-6 text-xs font-medium tracking-wider
+          text-gray-700 uppercase dark:text-gray-400;
+        }
+
+        th:first-child {
+          border-radius: 12px 0 0 12px;
+        }
+
+        th:last-child {
+          border-radius: 0 12px 12px 0;
+        }
+      }
+
+      tbody {
+        tr {
+          @apply bg-white dark:bg-black;
+          td {
+            @apply py-4 px-6 text-sm font-medium text-gray-900
+            whitespace-nowrap dark:text-white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pagination {
+  @apply px-4 mt-4 flex justify-between ;
+
+  &__num {
+    @apply flex items-center justify-end;
+
+    &__item {
+      @apply block mb-[6px] flex flex-row items-center;
+
+      figure {
+        @apply h-[1.8rem] w-4 cursor-pointer dark:text-white;
+      }
+
+      figure:first-child {
+        @apply mr-4
+      }
+
+      figure.disabled {
+        @apply text-gray-300;
+      }
+
+      p {
+        @apply text-black cursor-pointer hover:bg-black  hover:text-white duration-300 transition ease-in-out rounded;
+        padding: 7px 14px;
+      }
+
+      a {
+        @apply cursor-pointer mx-1 text-center rounded-xl text-black dark:text-white;
+        padding: 7px 14px;
+      }
+
+      a.selected {
+        @apply bg-black text-white dark:bg-white dark:text-black
+      }
+
+      a:hover {
+        @apply bg-black text-white dark:hover:bg-white dark:hover:text-black transition duration-300 ease-in-out;
+      }
+    }
+  }
+}

@@ -1,76 +1,45 @@
+import {useRouter} from "next/router";
+
 import banner from "../../public/images/contemporary-banner.png";
-import {CogIcon, HomeIcon, LogoutIcon, ShoppingCartIcon, UsersIcon} from "@heroicons/react/outline";
-import {Link} from "../../components";
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
+import SidebarProfile from "../../components/SidebarProfile";
+import {EyeIcon} from "@heroicons/react/outline";
+import {Link, Table} from "../../components";
+import {rows} from "../../assets/data/orders";
 
 const Order = () => {
+  const router = useRouter();
+  const columns = [
+    {id: 'id', title: 'Order'},
+    {id: 'date', title: 'Date',},
+    {id: 'status', title: 'Status',},
+    {id: 'total', title: 'Total',},
+    {
+      id: '', title: 'Action',
+      render: (row) => <>
+        <div className='flex gap-x-4 justify-center'>
+          <Link href={`${router.pathname}/${row.id}`}>
+            <EyeIcon className='cursor-pointer' height={30} width={30}/>
+          </Link>
+        </div>
+      </>
+    },
+  ];
+
   return (
     <div>
       <ImgBannerCard srcImg={banner} title='Profile'/>
       <div className='mt-12 grid ipad:grid-cols-2 laptop:grid-cols-6 gap-x-12 '>
-        <div className='col-span-1'>
-          <div className="overflow-y-auto py-4 px-3">
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href='/account'
-                  className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-                >
-                  <HomeIcon
-                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-                  <span className="ml-3">Dashboard</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/account/order'
-                  className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white bg-gray-100 dark:hover:bg-gray-700'
-                >
-                  <ShoppingCartIcon
-                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-                  <span className="ml-3">Order</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/account/detail'
-                  className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-                >
-                  <UsersIcon
-                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Account detail</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/account/change-pass'
-                  className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-                >
-                  <CogIcon
-                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Change Password</span>
-                </Link>
-              </li>
-              <li>
-                <button
-                  href="/"
-                  onClick={() => {
-                    localStorage.removeItem('user');
-                  }}
-                  className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                  <LogoutIcon
-                    className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Logout</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <SidebarProfile active='order'/>
         <div className='col-span-3'>
           <div className="flex flex-col w-full">
             <div className='p-4 rounded-lg'>
               <h1 className='text-3xl font-bold mb-6'>Order</h1>
-              <p>table order...</p>
+              <Table
+                itemsPerPage={4}
+                columns={columns}
+                rows={rows}
+              />
             </div>
           </div>
         </div>

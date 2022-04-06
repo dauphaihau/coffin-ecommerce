@@ -1,8 +1,6 @@
 # Coffin E-commerce
 Coffin store where peoples can purchase their coffin when near death
 
-<a href="https://coffin-ecommerce.vercel.app/">Visit the live app</a>
-
 ![Screenshot](./public/images/preview/screen1.png)
 ![Screenshot](./public/images/preview/screen2.png)
 
@@ -21,7 +19,7 @@ Current functionality includes:
 - Payments with Stripe (Testing Mode)
 
 ## Known Bugs
-Feel free to email me at lakshman.gope2@gmail.com if you run into any issues or have questions, ideas or concerns. Please enjoy
+Feel free to email me at dauphaihau@gmail.com if you run into any issues or have questions, ideas or concerns. Please enjoy
 and feel free to share your opinion, constructive criticism, or comments about my work. Thank you! 🙂
 
 ## Future Updates
@@ -47,5 +45,4 @@ yarn dev
 
 
 ## Deployed Version
-Feel free to visit 👉 https://coffin-ecommerce.vercel.app/
-
+<a href="https://coffin-ecommerce.vercel.app/">Visit the live app</a>

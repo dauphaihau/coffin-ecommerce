@@ -26,10 +26,6 @@ const CartDrawer = ({context}) => {
     cart, removeFromCart, total, setItemQuantity
   } = context
 
-
-  console.log('render')
-  console.log('cart', cart)
-
   useEffect(() => {
     setUser({...user, numberAllOfItemsInCart})
   }, [numberAllOfItemsInCart])
@@ -53,10 +49,11 @@ const CartDrawer = ({context}) => {
     <>
       <aside className={`drawer ${drawerOpen && 'open'}`}>
         <div className="flex flex-col w-full h-full py-4 px-5 laptop:px-8 laptop:p-8">
-          <div className='flex justify-between items-center border-b'>
-            <h1 className="text-2xl font-black py-4 ">Shopping cart</h1>
+          <div className='flex justify-between items-center h-[11%] ipad:h-[6.6%] laptop:h-[7%] '>
+            <h1 className="text-2xl font-black">Shopping cart</h1>
             <XIcon className='btn-close' onClick={() => drawerToggle()}/>
           </div>
+          <div className='border-b'></div>
           {
             cartEmpty
               ? (<div className='h-full text-center flex flex-col items-center justify-center '>
@@ -117,14 +114,15 @@ const CartDrawer = ({context}) => {
                 </div>
               )
           }
-          <Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>
-            <Link href="/checkout">
+          <Link href="/checkout">
+            <Button className='w-full' onClick={() => drawerToggle()}>
+            {/*<Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>*/}
               <div className="cursor-pointer flex justify-between text-base ">
                 <p className="text-white text-base mr-2">Proceed to check out</p>
                 <p className="text-white text-base border-l pl-4">{DENOMINATION + total.toLocaleString()}</p>
               </div>
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </aside>
     </>

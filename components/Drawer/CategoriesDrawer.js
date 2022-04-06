@@ -29,6 +29,7 @@ const CategoriesDrawer = ({context, categories}) => {
             <h1>Menu</h1>
             <XIcon className='btn-close' onClick={() => drawerCategoriesToggle()}/>
           </div>
+          <div className='border-b'></div>
           <div className="categories-drawer__links">
             {MENU.data?.map((item) => {
               if (item.subNav) {

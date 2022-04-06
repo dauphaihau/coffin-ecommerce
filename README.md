@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coffin E-commerce
+Coffin store where peoples can purchase their coffin when near death
 
-## Getting Started
+<a href="https://coffin-ecommerce.vercel.app/">Visit the live app</a>
 
-First, run the development server:
+![Screenshot](./public/images/preview/screen1.png)
+![Screenshot](./public/images/preview/screen2.png)
 
+## Technologies
+1. Next.js (React.js)
+2. SASS and Tailwind (Styling)
+3. Typescript (Statically Checked Types)
+
+## Work In Progress
+The app is being under maintenance, as more work needs to be done.
+
+Current functionality includes:
+- Sign In, Register (register currently only works on dev )
+- Add or Remove item/items from cart
+- Responsive design (mobile, ipad, desktop)
+- Payments with Stripe (Testing Mode)
+
+## Known Bugs
+Feel free to email me at lakshman.gope2@gmail.com if you run into any issues or have questions, ideas or concerns. Please enjoy
+and feel free to share your opinion, constructive criticism, or comments about my work. Thank you! 🙂
+
+## Future Updates
+
+- Product Page
+- Improve overall UX/UI and fix bugs
+- Featured Products
+- Admin dashboard manage CRUD users/products
+- Recently Viewed Products
+
+And More ! There's always room for improvement!
+
+## Installation
+Install deps:
 ```bash
-npm run dev
-# or
+yarn
+```
+
+Run Next dev server:
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/layout.js`. The page auto-updates as you edit the file.
+## Deployed Version
+Feel free to visit 👉 https://coffin-ecommerce.vercel.app/
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

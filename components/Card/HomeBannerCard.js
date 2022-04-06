@@ -13,7 +13,7 @@ const HomeBannerCard = ({data, link}) => {
               <p className="text-xs tracking-wider m-0 leading-tight">2022</p>
             </div>
             <div>
-              <p className="text-4xl xl:text-5xl font-bold tracking-widest leading-none">
+              <p className="text-xl ipad:text-3xl laptop:text-4xl font-bold tracking-widest leading-none">
                 {data.name}
               </p>
               <p className="py-6 tracking-wide">FROM <span>${data.price}</span></p>

@@ -68,15 +68,18 @@ const ItemView = (props) => {
           </div>
         </div>
         <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
-          <h1 className="mt-0 mt-2 text-5xl font-light leading-large pb-6">{name}</h1>
-          <ShowMoreTextToggler classes='block laptop:hidden' text={description}/>
-          <p className='text-gray-600 leading-7 pb-6 hidden laptop:block'>
+          <h1 className="mt-0 mt-2 text-lg mb-3.5
+          laptop:text-5xl font-light leading-large ">{name}</h1>
+          <ShowMoreTextToggler classes='block laptop:hidden text-sm' text={description}/>
+          <p className='text-sm text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>
-          <h2 className="text-4xl font-bold tracking-wide">${salePrice ? salePrice : price}
+          <h2 className="text-xl ipad:text-4xl font-bold tracking-wide relative
+          ">${salePrice ? salePrice : price}
             {price && salePrice
               && <span
-                className="absolute ml-[10px] line-through text-gray-400 font-light text-sm ipad:text-base lg:text-sm xl:text-xl ps-2">
+                className="absolute top-[-3px] ipad:top-[1px] ml-[10px] line-through text-gray-400 font-light
+                 text-sm ipad:text-lg lg:text-sm xl:text-xl ps-2">
               ${price}</span>}
           </h2>
           <div className="my-6">
@@ -90,7 +93,7 @@ const ItemView = (props) => {
         </div>
       </div>
       <div>
-        <h1 className='text-2xl font-bold pl-2'>Related Products</h1>
+        <h1 className='text-lg ipad:text-2xl font-bold pl-2'>Related Products</h1>
         <div className="flex flex-1 flex-wrap flex-row">
           {
             relatedProducts?.filter(p => p.id !== id).map((item, index) => {

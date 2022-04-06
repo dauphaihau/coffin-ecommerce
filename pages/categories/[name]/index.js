@@ -16,8 +16,8 @@ const Category = (props) => {
       </Head>
       <div className="flex flex-col">
         <div className="flex flex-col w-full">
-          <div className="pt-4 sm:pt-10 pb-8">
-            <h1 className="text-5xl font-light">{titleIfy(title)}</h1>
+          <div className="pt-4 pt-0 laptop:pt-10 pb-8">
+            <h1 className="text-3xl laptop:text-5xl font-light">{titleIfy(title)}</h1>
           </div>
           <div>
             <div className="flex flex-1 flex-wrap flex-row">

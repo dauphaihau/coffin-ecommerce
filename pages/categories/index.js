@@ -13,8 +13,8 @@ const Categories = ({categories = []}) => {
         <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
       </Head>
       <div className="w-full">
-        <div className="pt-4 pt-10 pb-8">
-          <h1 className="text-5xl font-light">All categories</h1>
+        <div className="pt-4 pt-0 laptop:pt-10 pb-8">
+          <h1 className="text-3xl laptop:text-5xl font-light">All categories</h1>
         </div>
         <div className="flex flex-col items-center">
           <Grid gap={4} lg={3} md={2} sx={1}>

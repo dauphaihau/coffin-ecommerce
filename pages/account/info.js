@@ -32,16 +32,16 @@ const Info = () => {
           <div className='p-4 rounded-lg'>
             <h1 className='text-3xl font-bold mb-6'>Account Details</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Grid md={2} gapx={4}>
+              <Grid md={1} lg={2} gapx={4}>
                 <Input label='First Name *' name='firstName' register={register} errors={errors}/>
                 <Input label='Last Name *' name='lastName' register={register} errors={errors}/>
               </Grid>
               <Input label='Address *' name='address' register={register} errors={errors}/>
-              <Grid md={2} gapx={4}>
+              <Grid md={1} lg={2} gapx={4}>
                 <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
                 <Input label='Email *' name='email' register={register} errors={errors}/>
               </Grid>
-              <Grid md={2} gapx={4}>
+              <Grid md={1} lg={2} gapx={4}>
                 <Input label='City/Town *' name='city' register={register} errors={errors}/>
                 <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
               </Grid>

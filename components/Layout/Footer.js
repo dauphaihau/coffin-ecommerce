@@ -1,4 +1,5 @@
 import {Link} from "../index";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -77,7 +78,7 @@ const Footer = () => {
             <div className="mt-8 ipad:mt-0">
               <h5 className="text-xl font-bold mb-6">Our Information</h5>
               <ul className="list-none footer-links">
-                {['Privacy policy update', 'Terms & conditions', 'Return Policy', 'Site Map'].map((nameLink, id) => (
+                {['Privacy policy', 'Terms & conditions', 'Return Policy', 'Site Map'].map((nameLink, id) => (
                   <li className="mb-3" key={id}>
                     <Link href='#'
                           className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
@@ -122,19 +123,17 @@ const Footer = () => {
           ">
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <img src="/images/payment/visa.png" alt="Visa" width="50" height="20"/>
+                <Image src="/images/payment/visa.png" alt="Visa" width="65" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <img src="/images/payment/paypal.png" alt="Paypal" width="76" height="20"/>
+                <Image src="/images/payment/paypal.png" alt="Paypal" width="76" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <figure >
-                  <img src="/images/payment/amazon.png" alt='Amazon' width="86" height="20"/>
-                </figure>
+                <img src="/images/payment/amazon.png" alt='Amazon' width="86" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
@@ -144,7 +143,7 @@ const Footer = () => {
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
               <Link href="/" target="_blank">
-                <img src="/images/payment/skrill.png" alt="Skrill" width="69" height="20"/>
+                <Image src="/images/payment/skrill.png" alt="Skrill" width="69" height="20"/>
               </Link>
             </li>
           </ul>

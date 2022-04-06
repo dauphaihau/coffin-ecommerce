@@ -1,20 +1,18 @@
 import 'react-toastify/dist/ReactToastify.css'
+
 import {ToastContainer} from "react-toastify";
 
 import Navbar from "../components/Layout/Navbar";
 import {Contact, Footer} from "../components";
 import Backdrop from "../components/Drawer/Backdrop";
-import {useUtil} from "../context/utilContext";
-import CartDrawer from "../components/Drawer/CartDrawer";
-import {LoginModal, SearchModal} from "../components/Modal";
+import AllModal from "../components/Modal";
+import AllDrawer from "../components/Drawer";
 
 const contextClass = {
   default: "bg-black text-white",
 };
 
 const Layout = ({children, categories}) => {
-
-  const {drawerOpen, modalOpen,modalSearchOpen} = useUtil();
 
   let navItemLength = 5;
   if (categories.length > navItemLength) {
@@ -23,15 +21,10 @@ const Layout = ({children, categories}) => {
 
   return (
     <div>
-      <SearchModal/>
-      <LoginModal/>
+      <AllModal/>
+      <AllDrawer categories={categories}/>
+      <Backdrop/>
       <Navbar categories={categories}/>
-      {
-        drawerOpen && <Backdrop /> ||
-        modalOpen && <Backdrop/> ||
-        modalSearchOpen && <Backdrop/>
-      }
-      <CartDrawer/>
       <ToastContainer
         autoClose={1500}
         position="bottom-right"

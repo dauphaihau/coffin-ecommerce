@@ -19,6 +19,7 @@ import {useForm} from "react-hook-form";
 import * as Yup from "yup";
 import ImgBannerCard from "../components/Card/ImgBannerCard";
 import Grid from "../components/Grid";
+import {useAuth} from "../context/authContext";
 
 const stripePromise = loadStripe("xxx-xxx-xxx")
 
@@ -42,6 +43,8 @@ const calculateShipping = () => {
 
 const Checkout = ({context}) => {
   const [orderCompleted, setOrderCompleted] = useState(false)
+  const {user, setUser} = useAuth();
+  console.log('user', user)
 
   const stripe = useStripe()
   const elements = useElements()
@@ -114,16 +117,16 @@ const Checkout = ({context}) => {
         <div className='mb-12'>
           <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid md={2} gapx={4}>
+            <Grid md={1} lg={2} gapx={4}>
               <Input label='First Name *' name='firstName' register={register} errors={errors}/>
               <Input label='Last Name *' name='lastName' register={register} errors={errors}/>
             </Grid>
             <Input label='Address *' name='address' register={register} errors={errors}/>
-            <Grid md={2} gapx={4}>
+            <Grid md={1} lg={2} gapx={4}>
               <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
               <Input label='Email ' name='email' register={register} errors={errors}/>
             </Grid>
-            <Grid md={2} gapx={4}>
+            <Grid md={1} lg={2} gapx={4}>
               <Input label='City/Town *' name='city' register={register} errors={errors}/>
               <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
             </Grid>
@@ -134,7 +137,12 @@ const Checkout = ({context}) => {
               className='mb-6'
               placeholder='Notes about your order, e.g. special notes for delivery'
             />
-            <Button>Place Order</Button>
+            <Button onClick={() => {
+              localStorage.removeItem('COFFIN_ECOMMERCE');
+              setUser({...user, numberAllOfItemsInCart: 0})
+            }}
+            >
+              Place Order</Button>
           </form>
         </div>
         <div>
@@ -155,11 +163,11 @@ const Checkout = ({context}) => {
                         <div aria-label={item.name} className='bg-light rounded-lg p-1'>
                           <img className="h-28 m-0 w-28" src={item.image} alt={item.name}/>
                         </div>
-                        <p className="m-0 pl-10 text-gray-600">
+                        <p className="m-0 pl-[9px] ipad:pl-10 text-gray-600">
                           {item.name}
                         </p>
                         <div className="flex flex-1 justify-end">
-                          <p className="m-0 pl-10 text-gray-900">
+                          <p className="m-0 pl-0 ipad:pl-10 text-gray-900">
                             {DENOMINATION + item.price * item.quantity}
                           </p>
                         </div>

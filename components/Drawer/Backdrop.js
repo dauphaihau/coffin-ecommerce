@@ -2,18 +2,16 @@ import {useUtil} from "../../context/utilContext";
 
 const Backdrop = () => {
   const {
-    drawerToggle, modalToggle,
     drawerOpen, modalOpen,
-    modalSearchOpen ,modalSearchToggle
+    modalSearchOpen,
+    drawerCategoriesOpen,
+    closeDrawerModal
   } = useUtil();
 
-  if (drawerOpen) {
-    return (<div onClick={() => drawerToggle()} className="backdrop overflow-y-auto overflow-y-hidden"/>);
-  } else if (modalOpen) {
-    return (<div onClick={() => modalToggle()} className="backdrop overflow-y-auto overflow-y-hidden"/>);
-  } else if (modalSearchOpen) {
-    return (<div onClick={() => modalSearchToggle()} className="backdrop overflow-y-auto overflow-y-hidden"/>);
+  if (modalSearchOpen || modalOpen || drawerOpen || drawerCategoriesOpen) {
+    return (<div onClick={() => closeDrawerModal()} className="backdrop overflow-y-auto overflow-y-hidden"/>);
   }
+  return ''
 }
 
 export default Backdrop;

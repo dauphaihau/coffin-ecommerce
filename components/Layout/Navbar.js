@@ -3,10 +3,13 @@ import {MENU} from "../../utils/menu";
 import {slugify} from "../../utils/helpers";
 import NavControl from "../NavControl";
 import {Link} from "../index";
+import {MenuIcon} from "@heroicons/react/solid";
+import {useUtil} from "../../context/utilContext";
 
 const Navbar = ({categories}) => {
 
   const [shadowHeader, setShadowHeader] = useState(false)
+  const {drawerCategoriesToggle} = useUtil();
 
   useEffect(() => {
     const scrollListener = () => {
@@ -26,11 +29,15 @@ const Navbar = ({categories}) => {
     <nav className={`navbar ${shadowHeader && 'shadow-2xl'}`}>
       <div className="navbar__container">
         <div className='navbar-left'>
-          <Link href="/" className="navbar-left__logo">
+          <MenuIcon
+            className='cursor-pointer w-[30px] h-[30px] laptop:hidden'
+            onClick={() => drawerCategoriesToggle()}
+          />
+          <Link href="/" className="navbar-left__logo hidden laptop:block">
             <img
               src="/images/logo.png"
               alt="logo"
-              className='w-[100px] ipad:h-[80px]'
+              className='w-[60px] ipad:h-[60px]'
             />
           </Link>
           <div className="navbar-left__links">

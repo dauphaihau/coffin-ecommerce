@@ -42,14 +42,11 @@ const SearchModal = () => {
   return (
     <div
       className={`${!modalSearchOpen && 'hidden'}
-          fixed top-0 right-0 left-0
-          z-[200] w-[380px] ipad:w-[700px] laptop:w-[930px] 
-          left-[5%]
-          top-[3%] ipad:left-[4%]
-          laptop:left-[23%] 
-          justify-center items-center`}>
+          fixed top-0 right-0 left-0 z-[200] 
+          mx-auto w-[90%] laptop:w-1/2 mt-6 
+          `}>
       <Input name='search'  onChange={(e) => searchItems(e.target.value)}
-             className='!pl-[3.5rem] !h-[60px] !focus:ring-white !focus:border-white'
+             className='!pl-[3.5rem] !h-[60px] '
       />
       <div className="absolute top-[17px] left-[14px]">
         <SearchIcon width={30} height={25}/>
@@ -71,20 +68,20 @@ const SearchModal = () => {
                 return (
                   <div className="border-t py-4" key={item.id}>
                     <div className="flex">
-                      <div className='cursor-pointer relative bg-light rounded-lg p-1'>
-                        <img className="h-28 m-0" width={200} src={item.image} alt={item.name}/>
+                      <div className='cursor-pointer w-[43%] ipad:w-auto  relative bg-light rounded-lg p-1'>
+                        <img className="h-28 m-0 " src={item.image} alt={item.name}/>
                       </div>
-                      <div className='ml-4 w-[65%]'>
+                      <div className='ml-4 w-[65%] flex flex-col justify-center'>
                         <Link href={`/product/${slugify(item.name)}`}>
-                          <p className="m-0 text-gray-600 w-80 text-smaller">
+                          <p className="m-0 text-gray-600 text-[12px]">
                             {item.name}
                           </p>
                         </Link>
                         <div className="flex">
-                          <h2 className="text-2xl font-bold tracking-wide">{DENOMINATION + item.price}</h2>
+                          <h2 className="text-[12px] laptop:text-2xl font-bold tracking-wide">{DENOMINATION + item.price}</h2>
                           {item.salePrice
-                            && <p className="ml-[10px] text-base
-                            line-through text-gray-400 font-light text-sm
+                            && <p className="ml-[10px]
+                            line-through text-gray-400 font-light text-[12px]
                             ipad:text-base laptop:text-base ps-2">
                               {DENOMINATION + item.salePrice}</p>}
                         </div>

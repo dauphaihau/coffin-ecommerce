@@ -10,7 +10,7 @@ const ProductCard = (props) => {
   } = props;
 
   return (
-    <div className="mb-4 lg:mb-0 bg-light p-6 hover:bg-light-200 rounded-lg h-full">
+    <div className="mb-4 lg:mb-0 bg-light p-4 laptop:p-6 hover:bg-light-200 rounded-lg h-full">
       <Link href={link}>
         {
           salePrice
@@ -22,12 +22,12 @@ const ProductCard = (props) => {
                 </span>
             : <div className='h-5'/>
         }
-        <div className="h-full">
+        <div>
           <img
             src={imageSrc} alt={title}
             className={`w-[15rem] m-auto ${full && '!w-[70%] h-[40rem]'} `}
           />
-          <div className='flex justify-between mt-6'>
+          <div className='flex justify-between mt-0 laptop:mt-6'>
             <div>
               <p className="text-xl font-semibold">{title.slice(0, 23)}</p>
               <p className="text-gray-600">

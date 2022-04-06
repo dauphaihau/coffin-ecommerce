@@ -1,2 +1,13 @@
-export { default as SearchModal} from './SearchModal'
-export { default as LoginModal} from './LoginModal'
+import LoginModal from "./LoginModal";
+import SearchModal from "./SearchModal";
+
+const AllModal = () => {
+  return (
+    <>
+      <LoginModal/>
+      <SearchModal/>
+    </>
+  );
+}
+
+export default AllModal;

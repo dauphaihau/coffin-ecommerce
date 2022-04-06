@@ -7,6 +7,7 @@ import {Contact, Footer} from "../components";
 import Backdrop from "../components/Drawer/Backdrop";
 import AllModal from "../components/Modal";
 import AllDrawer from "../components/Drawer";
+import {useUtil} from "../context/utilContext";
 
 const contextClass = {
   default: "bg-black text-white",
@@ -18,6 +19,8 @@ const Layout = ({children, categories}) => {
   if (categories.length > navItemLength) {
     categories = categories.slice(0, navItemLength)
   }
+
+  const {} = useUtil();
 
   return (
     <div>

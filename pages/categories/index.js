@@ -17,7 +17,7 @@ const Categories = ({categories = []}) => {
           <h1 className="text-3xl laptop:text-5xl font-light">All categories</h1>
         </div>
         <div className="flex flex-col items-center">
-          <Grid gap={4} lg={3} md={2} sx={1}>
+          <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-3'>
             {
               categories.map((category, index) => (
                 <CategoryCard
@@ -29,7 +29,7 @@ const Categories = ({categories = []}) => {
                 />
               ))
             }
-          </Grid>
+          </div>
         </div>
       </div>
     </>

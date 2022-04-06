@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "name": "Sir Tran",
+        "hash": "$2a$10$aAv695GUQUVrWKx/S/NPWOJJRGOPkGgjta5p/y.kiDFON1PQLbZtm",
+        "email": "dauphaihau@email.com",
+        "id": 1,
+        "dateCreated": "2022-04-06T07:12:00.973Z",
+        "dateUpdated": "2022-04-06T07:12:00.973Z"
+    }
+]

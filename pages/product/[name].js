@@ -72,12 +72,12 @@ const ItemView = (props) => {
         </div>
         <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
           <h1 className="mt-0 mt-2 text-lg mb-3.5
-          laptop:text-5xl font-light leading-large ">{name}</h1>
+          ipad:text-2xl laptop:text-4xl font-light leading-large ">{name}</h1>
           <ShowMoreTextToggler classes='block laptop:hidden text-sm' text={description}/>
           <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>
-          <h2 className="text-xl ipad:text-4xl font-bold tracking-wide relative
+          <h2 className="text-xl ipad:text-2xl laptop:text-4xl font-bold tracking-wide relative
           ">${salePrice ? salePrice : price}
             {price && salePrice
               && <span

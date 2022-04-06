@@ -13,25 +13,26 @@ const Footer = () => {
                 <li className="mb-3">
                   <Link href="#"
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
-                    <i className="fa text-2xl">&#xf099;</i> Twitter
+                    {/*<i className="fa text-2xl">&#xf099;</i> Twitter*/}
+                    <i className="fa-brands fa-twitter text-2xl mr-2"></i>Twitter
                   </Link>
                 </li>
                 <li className="mb-3">
                   <Link href="#"
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
-                    <i className="fa-brands fa-instagram  text-2xl mr-2"/> Instagram
+                    <i className="fa-brands fa-instagram text-2xl mr-2"/> Instagram
                   </Link>
                 </li>
                 <li className="mb-3">
                   <Link href="#"
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
-                    <i className="fa-brands fa-facebook-square  text-2xl mr-3"/>Facebook
+                    <i className="fa-brands fa-facebook-square text-2xl mr-3"/>Facebook
                   </Link>
                 </li>
                 <li className="mb-3">
                   <Link href="#"
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
-                    <i className="fa-brands fa-youtube  text-2xl mr-2"/> Youtube
+                    <i className="fa-brands fa-youtube text-2xl mr-[2px]"/> Youtube
                   </Link>
                 </li>
               </ul>

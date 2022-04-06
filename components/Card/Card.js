@@ -10,7 +10,7 @@ const Card = ({title, content = '', imgSrc}) => {
       </div>
       <div>
         <a href="#">
-          <h5 className="mb-2 text-[18px] ipad:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          <h5 className="mb-2 text-[18px] ipad:text-2xl font-bold  text-gray-900 dark:text-white">
             {title}
           </h5>
         </a>

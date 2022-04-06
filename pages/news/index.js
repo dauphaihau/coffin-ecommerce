@@ -7,7 +7,7 @@ const News = () => {
       <div className="pt-4 pt-0 laptop:pt-10 pb-8">
         <h1 className="text-3xl laptop:text-5xl font-light">News</h1>
       </div>
-      <div className='grid ipad:grid-cols-2 laptop:grid-cols-3 gap-8'>
+      <div className='grid ipad:grid-cols-2 laptop:grid-cols-4 gap-8'>
         <Card
           imgSrc='/images/news/Coffin-Casket.png'
           title='What is the difference between a casket and a coffin?'

@@ -26,6 +26,10 @@ const CartDrawer = ({context}) => {
     cart, removeFromCart, total, setItemQuantity
   } = context
 
+
+  console.log('render')
+  console.log('cart', cart)
+
   useEffect(() => {
     setUser({...user, numberAllOfItemsInCart})
   }, [numberAllOfItemsInCart])

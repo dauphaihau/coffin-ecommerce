@@ -82,14 +82,4 @@ const CategoriesDrawer = ({context, categories}) => {
   )
 }
 
-function CategoriesWithContext(props) {
-  return (
-    <ContextProviderComponent>
-      <SiteContext.Consumer>
-        {context => <CategoriesDrawer {...props} context={context}/>}
-      </SiteContext.Consumer>
-    </ContextProviderComponent>
-  )
-}
-
-export default CategoriesWithContext
+export default CategoriesDrawer

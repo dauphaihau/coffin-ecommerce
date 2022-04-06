@@ -49,7 +49,6 @@ export function UtilProvider({children}) {
     setModalSearchOpen(!modalSearchOpen)
   }
 
-
   return (
     <UtilContext.Provider value={{
       drawerOpen, drawerToggle, closeDrawerModal,

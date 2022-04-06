@@ -94,12 +94,15 @@ class ContextProviderComponent extends Component {
 
   render() {
     let state = initialState
+
+    // console.log('state', state)
     if (typeof window !== 'undefined') {
       const storageState = window.localStorage.getItem(STORAGE_KEY)
       if (storageState) {
         state = JSON.parse(storageState)
       }
     }
+    // console.log('state', state)
 
     return (
       <SiteContext.Provider value={{

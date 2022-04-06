@@ -27,6 +27,9 @@ const ItemView = (props) => {
     loadInit()
   }, [router.asPath])
 
+  // console.log('number-all-of-items-in-cart', numberAllOfItemsInCart)
+  // console.log('user', user)
+
   useEffect(() => {
     setUser({...user, numberAllOfItemsInCart})
   }, [numberAllOfItemsInCart])
@@ -71,7 +74,7 @@ const ItemView = (props) => {
           <h1 className="mt-0 mt-2 text-lg mb-3.5
           laptop:text-5xl font-light leading-large ">{name}</h1>
           <ShowMoreTextToggler classes='block laptop:hidden text-sm' text={description}/>
-          <p className='text-sm text-gray-600 leading-7 pb-6 hidden laptop:block'>
+          <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>
           <h2 className="text-xl ipad:text-4xl font-bold tracking-wide relative

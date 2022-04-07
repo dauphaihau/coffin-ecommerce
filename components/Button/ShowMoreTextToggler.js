@@ -7,7 +7,7 @@ const ShowMoreTextToggler = ({text = '', classes = ''}) => {
   }, [text]);
   return <p className={`text-gray-600 leading-7 pb-6 ${classes}`}>{showMore ? text : truncateText}
     <span className='cursor-pointer font-bold'
-          onClick={() => setShowMore(!showMore)}> {showMore ? 'less' : 'more'}</span></p>
+          onClick={() => setShowMore(!showMore)}> {showMore ? 'See less' : 'See more'}</span></p>
 }
 
 export default ShowMoreTextToggler

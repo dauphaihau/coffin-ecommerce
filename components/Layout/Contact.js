@@ -20,7 +20,7 @@ const Contact = () => {
       flex flex-col ipad:flex-row
        gap-x-4 laptop:w-1/2
        '>
-        <Input className='!p-4 w-full !h-[55px] !bg-white !text-black' placeholder='Write your email here'/>
+        <Input className='!p-4 w-full !h-[55px] !bg-white ' placeholder='Write your email here'/>
         <Button css='h-[3.4rem]'>Subscribe</Button>
       </div>
     </div>

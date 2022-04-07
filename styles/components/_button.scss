@@ -11,7 +11,7 @@
 .btn-group {
   @apply flex items-center text-[13px] ipad:text-sm;
   button:first-child {
-    @apply w-8 h-8 laptop:w-10 laptop:h-10
+    @apply w-10 h-10 laptop:w-10 laptop:h-10
     md:w-8 md:h-8
     cursor-pointer text-center border laptop:pb-.5
     rounded-tl-lg
@@ -23,7 +23,7 @@
   }
 
   p {
-    @apply w-8 h-8 laptop:w-10 laptop:h-10
+    @apply w-10 h-10 laptop:w-10 laptop:h-10
     md:w-8 md:h-8
     m-0 border-t border-b text-center
     flex-center
@@ -33,7 +33,7 @@
     @apply rounded-tr-lg
     flex-center
     rounded-br-lg
-    w-8 h-8 laptop:w-10 laptop:h-10
+    w-10 h-10 laptop:w-10 laptop:h-10
     md:w-8 md:h-8
     transition ease-in-out duration-300
     cursor-pointer text-center border laptop:pb-.5

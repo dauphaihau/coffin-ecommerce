@@ -6,7 +6,7 @@ const HomeBannerCard = ({data, link}) => {
   const router = useRouter()
     return (
       <div className="w-full">
-        <div className="bg-gray-100 p-6 pb-10 pb-16 laptop:pb-6 flex laptop:flex-row flex-col rounded-lg">
+        <div className="bg-light-200 p-6 pb-10 pb-16 laptop:pb-6 flex laptop:flex-row flex-col rounded-lg">
           <div className="pt-4 pl-2 pt-12 ipad:pl-12 flex flex-col">
             <div className="border-l border-gray-900 px-3 pt-1 mb-10">
               <p className="text-xs tracking-wider m-0 leading-tight">COFFIN</p>

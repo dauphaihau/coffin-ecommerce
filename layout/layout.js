@@ -32,7 +32,7 @@ const Layout = ({children, categories}) => {
         autoClose={1500}
         position="bottom-right"
         toastClassName={({type}) => contextClass[type || "default"] +
-          " relative flex p-1 min-h-20 rounded-md justify-between overflow-hidden cursor-pointer"
+          " relative flex p-1 min-h-20 rounded-md justify-between overflow-hidden cursor-pointer hidden ipad:block"
         }
         bodyClassName={() => "text-sm font-white font-med block p-3"}
         progressClassName='text-gray-300'

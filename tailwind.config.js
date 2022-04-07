@@ -1,4 +1,5 @@
 module.exports = {
+
   presets: [],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -35,10 +36,6 @@ module.exports = {
       fontFamily: {
         'light': ['Eina Light'],
         'semibold': ['Eina SemiBold'],
-      },
-      screens: {
-        'mobile': '600px',
-        // 'desktop': '1440px'
       },
       width: {
         '28': '7rem',

@@ -31,7 +31,7 @@ export default function Select(props) {
           <div className="relative">
             <Listbox.Button
               className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm
-               pl-3 pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1
+               pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1
                 focus:ring-black focus:border-black text-sm">
               <span className="flex items-center">
                 <span className="block truncate">{selected.label}</span>

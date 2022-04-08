@@ -10,7 +10,7 @@ const ProductCard = (props) => {
   } = props;
 
   return (
-    <div className="mb-4 lg:mb-0 bg-light p-4 laptop:p-6 hover:bg-light-200 rounded-lg h-full">
+    <div className="lg:mb-0 bg-light p-4 laptop:p-6 hover:bg-light-200 rounded-lg h-full">
       <Link href={link}>
         {
           salePrice

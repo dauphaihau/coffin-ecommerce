@@ -73,7 +73,7 @@ const ItemView = (props) => {
         <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
           <h1 className="mt-0 mt-2 text-2xl mb-3.5
           ipad:text-2xl laptop:text-4xl font-light leading-large ">{name}</h1>
-          <ShowMoreTextToggler classes='block laptop:hidden text-sm' text={description}/>
+          <ShowMoreTextToggler limit={400} classes='block laptop:hidden text-sm' text={description}/>
           <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>

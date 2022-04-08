@@ -5,11 +5,13 @@ import {MENU} from "../../utils/menu";
 import {Link} from "../index";
 import {slugify} from "../../utils/helpers";
 import {useRouter} from "next/router";
+import fetchCategories from "../../utils/provider/categoryProvider";
 
 const SubNav = ({links, title}) => {
 
   const [active, setActive] = useState(false)
   if (!links) return null;
+
   return (
     <>
       <div
@@ -27,8 +29,7 @@ const SubNav = ({links, title}) => {
             links.map((link, index) => (
               <li key={index}>
                 <Link href={`/categories/${slugify(link)}`}>
-                  <p>{link.charAt(0).toUpperCase() + link.slice(1)}</p>
-                </Link>
+                  <p>{link.charAt(0).toUpperCase() + link.slice(1)}</p></Link>
               </li>
             ))
           }
@@ -38,14 +39,23 @@ const SubNav = ({links, title}) => {
   )
 }
 
-const NavDrawer = ({context, categories}) => {
+const NavDrawer = () => {
 
   const router = useRouter();
+  const [categories, setCategories] = useState([])
 
   const {
-    drawerCategoriesOpen, drawerCategoriesToggle,
-    closeDrawerModal
+    drawerNavToggle,
+    closeDrawerModal, drawerNavOpen
   } = useUtil();
+
+  useEffect(() => {
+    const initLoad = async () => {
+      const categories = await fetchCategories()
+      setCategories(categories)
+    }
+    initLoad()
+  }, [])
 
   useEffect(() => {
     closeDrawerModal()
@@ -53,11 +63,11 @@ const NavDrawer = ({context, categories}) => {
 
   return (
     <>
-      <aside className={`menu-drawer ${drawerCategoriesOpen && 'open'}`}>
+      <aside className={`menu-drawer ${drawerNavOpen && 'open'}`}>
         <div className="menu-drawer__container">
           <div className='menu-drawer__title'>
             <h1>Menu</h1>
-            <XIcon className='btn-icon' onClick={() => drawerCategoriesToggle()}/>
+            <XIcon className='btn-icon' onClick={() => drawerNavToggle()}/>
           </div>
           <div className='border-b'></div>
           <div className="menu-drawer__links">

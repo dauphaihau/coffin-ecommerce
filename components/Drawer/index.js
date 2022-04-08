@@ -1,10 +1,12 @@
-import MenuDrawer from "./NavDrawer";
+import NavDrawer from "./NavDrawer";
 import CartDrawer from "./CartDrawer";
+import FilterDrawer from "./FilterDrawer";
 
-const AllDrawer = ({categories}) => {
+const AllDrawer = () => {
   return (
     <>
-      <MenuDrawer categories={categories}/>
+      <NavDrawer/>
+      <FilterDrawer/>
       <CartDrawer/>
     </>
   );

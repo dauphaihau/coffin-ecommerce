@@ -9,7 +9,7 @@ import {useUtil} from "../../context/utilContext";
 const Navbar = ({categories}) => {
 
   const [shadowHeader, setShadowHeader] = useState(false)
-  const {drawerCategoriesToggle} = useUtil();
+  const {drawerNavToggle} = useUtil();
 
   useEffect(() => {
     const scrollListener = () => {
@@ -31,7 +31,7 @@ const Navbar = ({categories}) => {
         <div className='navbar-left'>
           <MenuIcon
             className='cursor-pointer w-[30px] h-[30px] laptop:hidden'
-            onClick={() => drawerCategoriesToggle()}
+            onClick={() => drawerNavToggle()}
           />
           <Link href="/" className="navbar-left__logo hidden laptop:block">
             <img

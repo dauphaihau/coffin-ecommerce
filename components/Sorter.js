@@ -36,13 +36,13 @@ const Sorter = () => {
 
   return (
     <div className='flex gap-x-8'>
-      <div className='flex items-center'>
+      <div className='hidden ipad:flex items-center'>
         <p className='mr-4'>View:</p>
         <ViewGridIcon className={`btn-icon mr-1 ${gridView && 'text-black bg-gray-200'}`} onClick={() => setGridView()}/>
         <MenuIcon className={`btn-icon ${!gridView && 'text-black bg-gray-200'}`} onClick={() => setListView()}/>
       </div>
       <div className='flex gap-x-4 items-center'>
-        <p>Short by:</p>
+        <p className='hidden laptop:block'>Short by:</p>
         <Select
           options={options}
           onChange={updateSort}

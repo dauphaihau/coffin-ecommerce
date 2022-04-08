@@ -32,5 +32,4 @@ export const MENU = {
     //   id: 'contact',
     // },
   ],
-
 };

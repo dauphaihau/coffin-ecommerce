@@ -1,6 +1,6 @@
 import {useFilterContext} from "../context/filterContext";
 import {Button} from "./index";
-import {formatPrice, getUniqueValues} from "../utils/helpers";
+import {formatPrice, getUniqueValues, titleIfy} from "../utils/helpers";
 
 const Filters = ({categories}) => {
   const {
@@ -15,6 +15,7 @@ const Filters = ({categories}) => {
     all_products,
     updateFilters, clearFilters,
   } = useFilterContext()
+
   const colors = getUniqueValues(all_products, 'colors')
 
   return (
@@ -22,16 +23,16 @@ const Filters = ({categories}) => {
       <div className='mb-8'>
         <h3 className='mb-4 text-xl'>Categories</h3>
         <div>
-          {categories.map(({name}, idz) => (
+          {categories?.map(({name}, idz) => (
             <button
               key={idz}
               type='button'
-              className={`block text-[#6a6a6a] Linklist__Item ${category === name && 'is-selected'} `}
+              className={`filterBtn ${category === name && 'is-selected'} `}
               name='category'
               onClick={updateFilters}
             >
-              {/*{titleIfy(name)}*/}
-              {name}
+              {titleIfy(name)}
+              {/*{name}*/}
             </button>
           ))}
         </div>
@@ -43,7 +44,7 @@ const Filters = ({categories}) => {
             <button
               key={idz}
               type='button'
-              className={`block text-[#6a6a6a] Linklist__Item ${brand === name && 'is-selected'} `}
+              className={`filterBtn ${brand === name && 'is-selected'} `}
               name='brand'
               onClick={updateFilters}
             >
@@ -95,7 +96,7 @@ const Filters = ({categories}) => {
           onChange={updateFilters}
         />
       </div>
-      <Button onClick={() => clearFilters()}>clear all</Button>
+      <Button className='w-fit' onClick={() => clearFilters()}>clear all</Button>
     </div>
   );
 }

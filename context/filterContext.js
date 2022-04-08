@@ -66,7 +66,7 @@ export const FilterProvider = ({children}) => {
     let value = e.target.value;
 
     if (name === 'category') {
-      value = e.target.textContent;
+      value = e.target.textContent.toLowerCase();
     }
 
     if (name === "color") {
@@ -75,7 +75,6 @@ export const FilterProvider = ({children}) => {
 
     if (name === 'brand') {
       value = e.target.textContent;
-      console.log('value', value)
     }
 
     if (name === "price") {

@@ -25,7 +25,7 @@ const Layout = ({children, categories}) => {
   return (
     <div>
       <AllModal/>
-      <AllDrawer categories={categories}/>
+      <AllDrawer/>
       <Backdrop/>
       <Navbar categories={categories}/>
       <ToastContainer

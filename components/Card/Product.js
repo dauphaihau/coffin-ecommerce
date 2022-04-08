@@ -4,12 +4,9 @@ import {Link} from "../index";
 const Product = ({link, title, imageSrc, price}) => {
 
   return (
-    <div className="w-100
-      {/*ipad:w-1/2*/}
-      {/*laptop:w-1/4*/}
-    ">
+    <div className="w-100">
       <Link href={link}>
-        <div className="h-72 flex justify-center items-center rounded-lg bg-light hover:bg-light-200">
+        <div className="h-[11rem] laptop:h-72 flex justify-center items-center rounded-lg bg-light hover:bg-light-200">
           <div className="flex flex-column justify-center items-center">
             <img alt={title} src={imageSrc} className="w-3/5"/>
             <div className='my-div'>

@@ -22,6 +22,22 @@ function titleIfy(slug) {
   return words.join(' ')
 }
 
+const formatPrice = (number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(number / 1);
+};
+
+const getUniqueValues = (data, type) => {
+  let unique = data.map((item) => item[type]);
+  if (type === "colors") {
+    unique = unique.flat();
+    unique = unique.filter(u => u !== undefined);
+  }
+  return ["all", ...new Set(unique)];
+};
+
 export {
-  slugify, titleIfy
+  slugify, titleIfy, formatPrice, getUniqueValues
 }

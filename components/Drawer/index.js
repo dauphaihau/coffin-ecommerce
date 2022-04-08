@@ -1,10 +1,10 @@
-import CategoriesDrawer from "./CategoriesDrawer";
+import MenuDrawer from "./NavDrawer";
 import CartDrawer from "./CartDrawer";
 
 const AllDrawer = ({categories}) => {
   return (
     <>
-      <CategoriesDrawer categories={categories}/>
+      <MenuDrawer categories={categories}/>
       <CartDrawer/>
     </>
   );

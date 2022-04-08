@@ -11,6 +11,11 @@ export const MENU = {
     //   id: 'about',
     // },
     {
+      title: "Products",
+      link: "/products",
+      id: 'products',
+    },
+    {
       title: "Categories",
       link: "/categories",
       id: 'categories',

@@ -97,7 +97,7 @@ const ItemView = (props) => {
       </div>
       <div>
         <h1 className='text-lg ipad:text-2xl font-bold pl-2'>Related Products</h1>
-        <div className="flex flex-1 flex-wrap flex-row">
+        <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-4'>
           {
             relatedProducts?.filter(p => p.id !== id).map((item, index) => {
               return (

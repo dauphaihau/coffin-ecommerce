@@ -64,6 +64,7 @@ const SearchModal = () => {
          rounded-lg bg-white  px-4 overflow-x-hidden">
           <div>
             {
+
               filteredResults.map((item) => {
                 return (
                   <div className="border-t py-4" key={item.id}>

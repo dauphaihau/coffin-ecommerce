@@ -20,7 +20,8 @@ const Category = (props) => {
             <h1 className="text-3xl laptop:text-5xl font-light">{titleIfy(title)}</h1>
           </div>
           <div>
-            <div className="flex flex-1 flex-wrap flex-row">
+            {/*<div className="flex flex-1 flex-wrap flex-row">*/}
+              <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-4'>
               {
                 inventory?.map((item, index) => {
                   return (

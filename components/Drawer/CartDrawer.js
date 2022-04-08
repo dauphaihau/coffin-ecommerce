@@ -51,7 +51,7 @@ const CartDrawer = ({context}) => {
         <div className="flex flex-col w-full h-full py-4 px-5 laptop:px-8 laptop:p-8">
           <div className='flex justify-between items-center h-[11%] ipad:h-[6.6%] laptop:h-[7%] '>
             <h1 className="text-2xl font-black">Shopping cart</h1>
-            <XIcon className='btn-close' onClick={() => drawerToggle()}/>
+            <XIcon className='btn-icon' onClick={() => drawerToggle()}/>
           </div>
           <div className='border-b'></div>
           {

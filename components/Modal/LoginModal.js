@@ -113,7 +113,7 @@ const LoginModal = () => {
            `}>
       <div className="bg-white rounded-lg shadow">
         <div className="flex justify-end p-2">
-          <XIcon className='btn-close' onClick={() => modalToggle()}/>
+          <XIcon className='btn-icon' onClick={() => modalToggle()}/>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}

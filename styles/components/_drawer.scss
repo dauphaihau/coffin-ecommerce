@@ -17,7 +17,7 @@
   }
 }
 
-.categories-drawer {
+.menu-drawer {
   @apply laptop:hidden h-full bg-[#1c1b1b] fixed top-0 left-0
   w-4/5 ipad:w-[300px];
   z-index: 200;
@@ -45,13 +45,24 @@
   }
 
   &__dropdown {
-    @apply relative cursor-pointer;
+    @apply flex justify-between cursor-pointer;
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
+
+    //@apply relative cursor-pointer;
+    //animation: growDown 300ms ease-in-out forwards;
+    //transform-origin: top center;
   }
 
   &__suvlink {
-    @apply hidden absolute w-52 z-40 shadow-2xl rounded-lg;
+    @apply hidden w-4/5 border-l h-auto ml-[13%] mt-[5%] z-40  ;
+  ul {
+      li {
+        p {
+          @apply text-[#ffffff80] px-4 mb-4;
+        }
+      }
+    }
   }
 }
 

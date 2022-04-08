@@ -4,9 +4,9 @@ import {Link} from "../index";
 const Product = ({link, title, imageSrc, price}) => {
 
   return (
-    <div className="w-100 p1 p-2
-      ipad:w-1/2
-      laptop:w-1/4
+    <div className="w-100
+      {/*ipad:w-1/2*/}
+      {/*laptop:w-1/4*/}
     ">
       <Link href={link}>
         <div className="h-72 flex justify-center items-center rounded-lg bg-light hover:bg-light-200">

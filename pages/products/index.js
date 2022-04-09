@@ -71,8 +71,8 @@ const ProductsPage = ({categories = []}) => {
           <meta name="description" content='Coffin ECommerce - All categories'/>
           <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
         </Head>
-        <div className='grid grid-cols-5 h-auto'>
-          <Filters categories={categories}/>
+        <div className='grid grid-cols-5 min-h-full'>
+          <Filters categories={categories} launchSticky={products.length > 6}/>
           <div className="w-full col-span-4">
             <div className="mb-6 flex justify-between">
               <h1 className="text-3xl laptop:text-xl font-light">{products.length} results found</h1>

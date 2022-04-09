@@ -2,7 +2,7 @@ import {useFilterContext} from "../context/filterContext";
 import {Button} from "./index";
 import {formatPrice, getUniqueValues, titleIfy} from "../utils/helpers";
 
-const Filters = ({categories}) => {
+const Filters = ({categories, launchSticky}) => {
   const {
     filters: {
       brand,
@@ -19,7 +19,7 @@ const Filters = ({categories}) => {
   const colors = getUniqueValues(all_products, 'colors')
 
   return (
-    <div className='laptop:sticky top-[12%] h-[57%]'>
+    <div className={`${launchSticky && 'laptop:sticky top-[12%] h-[57%]'}`}>
       <div className='mb-8'>
         <h3 className='mb-4 text-xl'>Categories</h3>
         <div>
@@ -53,9 +53,9 @@ const Filters = ({categories}) => {
           ))}
         </div>
       </div>
-      <div className="mb-8">
+      <div className="mb-8 ">
         <h3 className='mb-4 text-xl'>Colors</h3>
-        <div className="flex gap-x-4">
+        <div className="flex gap-x-4  ml-[5px] ">
           {colors.map((c, index) => {
             if (c === "all") {
               return (
@@ -96,7 +96,7 @@ const Filters = ({categories}) => {
           onChange={updateFilters}
         />
       </div>
-      <Button className='w-fit' onClick={() => clearFilters()}>clear all</Button>
+      <Button className='w-fit hidden laptop:block' onClick={() => clearFilters()}>clear all</Button>
     </div>
   );
 }

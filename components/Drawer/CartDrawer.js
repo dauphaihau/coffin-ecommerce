@@ -52,10 +52,12 @@ const CartDrawer = ({context}) => {
         <Drawer.Content>
           {
             cartEmpty
-              ? (<div className='h-full text-center flex flex-col items-center justify-center '>
-                <img src="/images/empty.png" className='h-88 w-[60%]  laptop:h-auto' alt="empty"/>
-                <p className='mb-8 font-bold text-xl'>Your cart is empty.</p>
-              </div>)
+              ? (
+                <div className='h-full text-center flex flex-col items-center justify-center '>
+                  <img src="/images/empty.png" className='h-88 w-[60%]  laptop:h-auto' alt="empty"/>
+                  <p className='mb-8 font-bold text-xl'>Your cart is empty.</p>
+                </div>
+              )
               : (
                 <div className="flex flex-col h-full overflow-x-hidden">
                   <div>
@@ -114,7 +116,6 @@ const CartDrawer = ({context}) => {
         <Drawer.Footer>
           <Link href="/checkout">
             <Button className='w-full' onClick={() => closeDrawerModal()}>
-              {/*<Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>*/}
               <div className="cursor-pointer flex justify-between text-base ">
                 <p className="text-white text-base mr-2">Proceed to check out</p>
                 <p className="text-white text-base border-l pl-4">{DENOMINATION + total.toLocaleString()}</p>

@@ -1,7 +1,7 @@
 import {createContext, useContext, useEffect, useState} from "react";
 
 const defaultValues = {
-  drawerOpen: false,
+  drawerCartOpen: false,
   modalSearchOpen: false,
   modalOpen: false,
   drawerMenuOpen: false,
@@ -16,14 +16,14 @@ export function useUtil() {
 export function UtilProvider({children}) {
   const [launchBackdrop, setLaunchBackdrop] = useState(false)
   const [categories, setCategories] = useState([])
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerCartOpen, setDrawerCartOpen] = useState(false)
   const [drawerNavOpen, setDrawerNavOpen] = useState(false)
   const [drawerFiltersOpen, setDrawerFiltersOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalSearchOpen, setModalSearchOpen] = useState(false)
 
   useEffect(() => {
-    if (modalSearchOpen || modalOpen || drawerOpen || drawerNavOpen || drawerFiltersOpen) {
+    if (modalSearchOpen || modalOpen || drawerCartOpen || drawerNavOpen || drawerFiltersOpen) {
       document.getElementsByTagName('body')[0].style.overflow = "hidden";
       setLaunchBackdrop(true)
     }
@@ -31,10 +31,10 @@ export function UtilProvider({children}) {
       document.getElementsByTagName('body')[0].style.overflow = "auto";
       setLaunchBackdrop(false)
     }
-  }, [drawerOpen, modalOpen, modalSearchOpen, drawerNavOpen, drawerFiltersOpen])
+  }, [drawerCartOpen, modalOpen, modalSearchOpen, drawerNavOpen, drawerFiltersOpen])
 
   const drawerToggle = () => {
-    setDrawerOpen(!drawerOpen)
+    setDrawerCartOpen(!drawerCartOpen)
   }
 
   const drawerNavToggle = () => {
@@ -46,7 +46,7 @@ export function UtilProvider({children}) {
   }
 
   const closeDrawerModal = () => {
-    setDrawerOpen(false);
+    setDrawerCartOpen(false);
     setDrawerNavOpen(false);
     setDrawerFiltersOpen(false);
     setModalSearchOpen(false);
@@ -65,7 +65,7 @@ export function UtilProvider({children}) {
     <UtilContext.Provider value={{
       launchBackdrop,
       setCategories, categories,
-      drawerOpen, drawerToggle, closeDrawerModal,
+      drawerCartOpen, drawerToggle, closeDrawerModal,
       drawerNavOpen, drawerNavToggle,
       modalOpen, modalToggle,
       modalSearchOpen, modalSearchToggle,

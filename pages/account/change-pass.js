@@ -1,13 +1,12 @@
-import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import banner from "../../public/images/contemporary-banner.png";
 import Grid from "../../components/Grid";
-import {Button} from "../../components";
-import Input from "../../components/Input/Input";
 import {useForm} from "react-hook-form";
-import {userService} from "../../services";
 import {useAuth} from "../../context/authContext";
 import {useRouter} from "next/router";
 import SidebarProfile from "../../components/SidebarProfile";
+import {ImgBannerCard} from "../../components/Card";
+import {Input} from "../../components/Input";
+import {Button} from "../../components/Button";
 
 const ChangePass = () => {
 

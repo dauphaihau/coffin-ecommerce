@@ -1,13 +1,11 @@
 .backdrop {
-  @apply w-full h-full fixed top-0 right-0;
+  @apply w-full h-full fixed top-0 right-0 z-[100];
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100;
 }
 
 .drawer {
-  @apply h-full bg-white fixed top-0 right-0
+  @apply h-full bg-white fixed top-0 right-0 z-[200]
   w-screen ipad:w-[450px];
-  z-index: 200;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   transition: transform 0.3s ease-out;
@@ -15,30 +13,19 @@
   &.open {
     transform: translateX(0);
   }
-}
-
-.menu-drawer {
-  @apply laptop:hidden h-full bg-[#1c1b1b] fixed top-0 left-0
-  w-4/5 ipad:w-[300px];
-  z-index: 200;
-  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
-
-  &.open {
-    transform: translateX(0);
-  }
 
   &__container {
-    @apply flex flex-col w-full h-full py-4 px-5 laptop:px-8 laptop:p-8;
+    @apply flex flex-col w-full h-full py-4 px-5 laptop:p-8;
   }
 
   &__title {
-    @apply flex justify-between items-center h-[6%];
+    @apply flex justify-between items-center h-[4%] ipad:h-[6.6%] laptop:h-[8%]
+    mb-4 ipad:mb-0;
     h1 {
-      @apply text-2xl font-black text-white;
+      @apply text-2xl font-black ;
     }
   }
+
 
   &__links {
     @apply flex flex-col mt-8 ;
@@ -48,15 +35,11 @@
     @apply flex justify-between cursor-pointer;
     animation: growDown 300ms ease-in-out forwards;
     transform-origin: top center;
-
-    //@apply relative cursor-pointer;
-    //animation: growDown 300ms ease-in-out forwards;
-    //transform-origin: top center;
   }
 
   &__suvlink {
     @apply hidden w-4/5 border-l h-auto ml-[13%] mt-[5%] z-40  ;
-  ul {
+    ul {
       li {
         p {
           @apply text-[#ffffff80] px-4 mb-4;

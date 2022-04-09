@@ -1,5 +1,5 @@
-import Card from "../../components/Card/Card";
 import Grid from "../../components/Grid";
+import {Card} from "../../components/Card";
 
 const News = () => {
   return (

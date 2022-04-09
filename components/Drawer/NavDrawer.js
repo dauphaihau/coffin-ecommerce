@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
-import {XIcon} from "@heroicons/react/solid";
 import {useUtil} from "../../context/utilContext";
 import {MENU} from "../../utils/menu";
 import {Link} from "../index";
 import {slugify} from "../../utils/helpers";
 import {useRouter} from "next/router";
 import fetchCategories from "../../utils/provider/categoryProvider";
+import Drawer from "./Drawer";
 
 const SubNav = ({links, title}) => {
 
@@ -15,15 +15,15 @@ const SubNav = ({links, title}) => {
   return (
     <>
       <div
-        className={`menu-drawer__dropdown`}
+        className={`drawer__dropdown`}
         onClick={() => setActive(!active)}
       >
         <p className="p-[10px] text-white group">{title}</p>
-        <button className='text-white text-xl'>
+        <button className='text-white text-xl px-[0.7rem]'>
           {active ? '-' : '+'}
         </button>
       </div>
-      <div className={`menu-drawer__suvlink  ${active && 'block'}`}>
+      <div className={`drawer__suvlink  ${active && 'block'}`}>
         <ul>
           {
             links.map((link, index) => (
@@ -63,14 +63,15 @@ const NavDrawer = () => {
 
   return (
     <>
-      <aside className={`menu-drawer ${drawerNavOpen && 'open'}`}>
-        <div className="menu-drawer__container">
-          <div className='menu-drawer__title'>
-            <h1>Menu</h1>
-            <XIcon className='btn-icon' onClick={() => drawerNavToggle()}/>
-          </div>
-          <div className='border-b'></div>
-          <div className="menu-drawer__links">
+      <Drawer
+        theme='black' isOpen={drawerNavOpen}
+        classes='
+        w-4/5 ipad:w-[300px] left-0 translate-x-[-100%]
+        laptop:hidden
+        '>
+        <Drawer.Title title='Menu'/>
+        <Drawer.Content>
+          <div className="drawer__links">
             {
               MENU.data?.map((item) => {
                 if (item.subNav) {
@@ -86,8 +87,8 @@ const NavDrawer = () => {
               })
             }
           </div>
-        </div>
-      </aside>
+        </Drawer.Content>
+      </Drawer>
     </>
   )
 }

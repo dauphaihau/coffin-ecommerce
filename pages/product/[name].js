@@ -2,16 +2,14 @@ import {useEffect, useState} from 'react'
 import {useRouter} from "next/router";
 import Head from 'next/head'
 
-import {Button} from "../../components";
 import inventoryForCategory from "../../utils/inventoryForCategory";
 import {useAuth} from "../../context/authContext";
 import {useUtil} from "../../context/utilContext";
-import QuantityPicker from "../../components/Button/QuantityPicker";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
-import ShowMoreTextToggler from "../../components/Button/ShowMoreTextToggler";
-import Product from "../../components/Card/Product";
+import {Button, QuantityPicker, ShowMoreTextToggler} from "../../components/Button";
+import {Product} from "../../components/Card";
 
 const ItemView = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
@@ -74,6 +72,7 @@ const ItemView = (props) => {
           <h1 className="mt-0 mt-2 text-2xl mb-3.5
           ipad:text-2xl laptop:text-4xl font-light leading-large ">{name}</h1>
           <ShowMoreTextToggler limit={400} classes='block laptop:hidden text-sm' text={description}/>
+
           <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
               {description}
           </p>

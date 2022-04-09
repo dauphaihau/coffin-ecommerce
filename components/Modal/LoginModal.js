@@ -4,11 +4,11 @@ import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 
 import {useUtil} from "../../context/utilContext";
-import {Button} from "../index";
 import {userService} from "../../services";
-import Input from "../Input/Input";
 import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
+import {Button} from "../Button";
+import {Input} from "../Input";
 
 const LoginModal = () => {
 

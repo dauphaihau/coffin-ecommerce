@@ -2,12 +2,10 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import {ToastContainer} from "react-toastify";
 
-import Navbar from "../components/Layout/Navbar";
-import {Contact, Footer} from "../components";
-import Backdrop from "../components/Drawer/Backdrop";
 import AllModal from "../components/Modal";
-import AllDrawer from "../components/Drawer";
+import AllDrawer, {Backdrop} from "../components/Drawer";
 import {useUtil} from "../context/utilContext";
+import {Contact, Footer, Navbar} from "../components/Layout";
 
 const contextClass = {
   default: "bg-black text-white",
@@ -17,6 +15,7 @@ const Layout = ({children, categories}) => {
 
   let navItemLength = 5;
   if (categories.length > navItemLength) {
+
     categories = categories.slice(0, navItemLength)
   }
 
@@ -32,9 +31,9 @@ const Layout = ({children, categories}) => {
         autoClose={1500}
         position="bottom-right"
         toastClassName={({type}) => contextClass[type || "default"] +
-          " relative flex p-1 min-h-20 rounded-md justify-between overflow-hidden cursor-pointer hidden ipad:block"
+          " relative flex p-1  rounded-md justify-between overflow-hidden cursor-pointer hidden ipad:block"
         }
-        bodyClassName={() => "text-sm font-white font-med block p-3"}
+        bodyClassName={() => "text-sm font-light font-med px-4 "}
         progressClassName='text-gray-300'
       />
       <div className='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>

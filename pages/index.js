@@ -2,9 +2,7 @@ import Head from 'next/head'
 import {Button} from '../components'
 import {slugify} from '../utils/helpers'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
-import ProductCard from "../components/Card/ProductCard";
-import HomeBannerCard from "../components/Card/HomeBannerCard";
-import Grid from "../components/Grid";
+import {HomeBannerCard, ProductCard} from "../components/Card";
 
 const Home = ({inventoryData = []}) => {
 

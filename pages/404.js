@@ -1,4 +1,5 @@
-import {Button, Link} from "../components";
+import {Button} from "../components/Button";
+import {Link} from "../components";
 
 export default function Custom404() {
   return (

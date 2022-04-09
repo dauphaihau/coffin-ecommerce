@@ -3,17 +3,17 @@ import {XCircleIcon, XIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
 import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
-import QuantityPicker from "../Button/QuantityPicker";
 import {DENOMINATION} from "../../utils/settings";
 import {slugify} from "../../utils/helpers";
-import Button from "../Button/Button";
 import {useAuth} from "../../context/authContext";
 import {Link} from "../index";
+import {Button, QuantityPicker} from "../Button";
+import Drawer from "./Drawer";
 
 const CartDrawer = ({context}) => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {drawerOpen, drawerToggle,} = useUtil();
+  const {drawerCartOpen, closeDrawerModal} = useUtil();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
@@ -47,13 +47,9 @@ const CartDrawer = ({context}) => {
 
   return (
     <>
-      <aside className={`drawer ${drawerOpen && 'open'}`}>
-        <div className="flex flex-col w-full h-full py-4 px-5 laptop:px-8 laptop:p-8">
-          <div className='flex justify-between items-center h-[11%] ipad:h-[6.6%] laptop:h-[7%] '>
-            <h1 className="text-2xl font-black">Shopping cart</h1>
-            <XIcon className='btn-icon' onClick={() => drawerToggle()}/>
-          </div>
-          <div className='border-b'></div>
+      <Drawer isOpen={drawerCartOpen}>
+        <Drawer.Title title='Your Cart'/>
+        <Drawer.Content>
           {
             cartEmpty
               ? (<div className='h-full text-center flex flex-col items-center justify-center '>
@@ -114,17 +110,19 @@ const CartDrawer = ({context}) => {
                 </div>
               )
           }
+        </Drawer.Content>
+        <Drawer.Footer>
           <Link href="/checkout">
-            <Button className='w-full' onClick={() => drawerToggle()}>
-            {/*<Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>*/}
+            <Button className='w-full' onClick={() => closeDrawerModal()}>
+              {/*<Button className='pb-[13px] laptop:py-4 mt-3' onClick={() => drawerToggle()}>*/}
               <div className="cursor-pointer flex justify-between text-base ">
                 <p className="text-white text-base mr-2">Proceed to check out</p>
                 <p className="text-white text-base border-l pl-4">{DENOMINATION + total.toLocaleString()}</p>
               </div>
             </Button>
           </Link>
-        </div>
-      </aside>
+        </Drawer.Footer>
+      </Drawer>
     </>
   )
 }

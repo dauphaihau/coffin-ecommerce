@@ -1,12 +1,12 @@
 import {useForm} from "react-hook-form";
 
-import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import banner from "../../public/images/contemporary-banner.png";
 import Grid from "../../components/Grid";
 import {Button} from "../../components";
-import Input from "../../components/Input/Input";
 import {useAuth} from "../../context/authContext";
 import SidebarProfile from "../../components/SidebarProfile";
+import {ImgBannerCard} from "../../components/Card";
+import {Input} from "../../components/Input";
 
 const Info = () => {
 

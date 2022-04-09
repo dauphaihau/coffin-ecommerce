@@ -19,7 +19,7 @@ const Filters = ({categories}) => {
   const colors = getUniqueValues(all_products, 'colors')
 
   return (
-    <div className=''>
+    <div className='laptop:sticky top-[12%] h-[57%]'>
       <div className='mb-8'>
         <h3 className='mb-4 text-xl'>Categories</h3>
         <div>

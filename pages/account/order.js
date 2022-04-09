@@ -4,8 +4,9 @@ import banner from "../../public/images/contemporary-banner.png";
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import SidebarProfile from "../../components/SidebarProfile";
 import {EyeIcon} from "@heroicons/react/outline";
-import {Link, Table} from "../../components";
+import {Link} from "../../components";
 import {rows} from "../../assets/data/orders";
+import {Table} from "../../components/Table";
 
 const Order = () => {
   const router = useRouter();

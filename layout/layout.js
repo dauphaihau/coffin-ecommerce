@@ -6,6 +6,7 @@ import AllModal from "../components/Modal";
 import AllDrawer, {Backdrop} from "../components/Drawer";
 import {useUtil} from "../context/utilContext";
 import {Contact, Footer, Navbar} from "../components/Layout";
+import {useEffect} from "react";
 
 const contextClass = {
   default: "bg-black text-white",
@@ -18,6 +19,9 @@ const Layout = ({children, categories}) => {
 
     categories = categories.slice(0, navItemLength)
   }
+  useEffect(() => {
+    window.scrollTo(0,0);
+  },[])
 
   const {} = useUtil();
 

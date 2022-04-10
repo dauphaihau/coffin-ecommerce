@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 
-import banner from "../../public/images/contemporary-banner.png";
+import banner from "../../public/images/banners/contemporary-banner.png";
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import SidebarProfile from "../../components/SidebarProfile";
 import {EyeIcon} from "@heroicons/react/outline";

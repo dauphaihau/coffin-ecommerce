@@ -1,4 +1,4 @@
-import banner from '../../public/images/contemporary-banner.png';
+import banner from '../../public/images/banners/contemporary-banner.png';
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";

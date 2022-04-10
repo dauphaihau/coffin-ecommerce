@@ -1,4 +1,4 @@
-import banner from "../../public/images/contemporary-banner.png";
+import banner from "../../public/images/banners/contemporary-banner.png";
 import Grid from "../../components/Grid";
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../context/authContext";

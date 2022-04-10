@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
+
+const {publicRuntimeConfig} = getConfig();
 
 const connection = {};
 
@@ -18,8 +19,13 @@ async function connect() {
     await mongoose.disconnect();
   }
 
-  const db = await mongoose.connect(publicRuntimeConfig.MONGODB_URI);
-  // const db = await mongoose.connect(process.env.MONGODB_URI);
+  // console.log('process-env', process.env.MONGODB_URI)
+  // console.log('testtt', process.env.NEXT_PUBLIC_VAR)
+  // const db = await mongoose.connect(publicRuntimeConfig.MONGODB_URI);
+// const db = await mongoose.connect(process.env.MONGODB_URI);
+  const db = await mongoose.connect(process.env.NEXT_PUBLIC_MONGODB_URI);
+  console.log('process-env-next-public-mongodb-uri', process.env.NEXT_PUBLIC_MONGODB_URI)
+
   connection.isConnected = db.connections[0].readyState;
 }
 

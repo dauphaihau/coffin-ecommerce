@@ -35,25 +35,14 @@ const LoginModal = () => {
   }, [user])
 
   useEffect(() => {
-  //   if (process.env.NODE_ENV === 'development') {
-  //     setValue('email', '')
-  //     setValue('password', '')
-  //   } else {
-  //     if (!registerForm) {
-  //       setValue('email', 'dauphaihau@email.com')
-  //       setValue('password', '111111')
-  //     } else {
-  //       setValue('email', '')
-  //       setValue('password', '')
-  //     }
-  //   }
-        if (!registerForm) {
-          setValue('email', 'dauphaihau@email.com')
-          setValue('password', '111111')
-        } else {
-          setValue('email', '')
-          setValue('password', '')
-        }
+    if (!registerForm) {
+      setValue('email', 'dauphaihau@email.com')
+      setValue('password', '111111')
+    } else {
+      setValue('email', '')
+
+      setValue('password', '')
+    }
   }, [registerForm])
 
   const formOptions = {
@@ -82,11 +71,13 @@ const LoginModal = () => {
       Cookie.set('userInfo', JSON.stringify(data));
     } catch (err) {
       const {message} = JSON.parse(err.response.request.responseText);
-      if (errors) {
-        setError('email', {
-          type: "server",
-          message
-        });
+      if (message) {
+        if (errors) {
+          setError('email', {
+            type: "server",
+            message
+          });
+        }
       }
     }
   }

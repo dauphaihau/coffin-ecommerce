@@ -24,6 +24,7 @@ export function AuthProvider({children}) {
     authCheck();
   }, [router.asPath]);
 
+
   const authCheck = async () => {
 
     const privatePaths = [`/account${router.asPath.slice(8)}`];

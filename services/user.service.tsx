@@ -16,6 +16,7 @@ const register = (user) => {
             return user;
         })
 }
+//
 
 const login = (email, password) => {
     return fetchWrapper.post(`${baseUrl}/authenticate`, {email, password})

@@ -10,8 +10,8 @@ const nextConfig = {
     apiUrl: process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/api' // development api
       : 'https://coffin-ecommerce.vercel.app/api', // production api
-    MONGODB_URI: process.env.MONGODB_URI,
-    JWT_SECRET: process.env.JWT_SECRET,
+    NEXT_PUBLIC_MONGODB_URI: process.env.NEXT_PUBLIC_MONGODB_URI,
+    NEXT_PUBLIC_JWT_SECRET: process.env.NEXT_PUBLIC_JWT_SECRET,
   },
   // webpack: (config, {isServer}) => {
   //   if (isServer) {

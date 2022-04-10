@@ -2,10 +2,10 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  // publicRuntimeConfig: {
-  //   MONGODB_URI: process.env.MONGODB_URI,
-  //   JWT_SECRET: process.env.JWT_SECRET,
-  // },
+  publicRuntimeConfig: {
+    NEXT_PUBLIC_MONGODB_URI: process.env.NEXT_PUBLIC_MONGODB_URI,
+    NEXT_PUBLIC_JWT_SECRET: process.env.NEXT_PUBLIC_JWT_SECRET,
+  },
 }
 
 module.exports = nextConfig

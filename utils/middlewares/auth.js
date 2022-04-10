@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 const signToken = (user) => {
   return jwt.sign(
@@ -9,7 +11,8 @@ const signToken = (user) => {
       isAdmin: user.isAdmin,
     },
 
-    process.env.JWT_SECRET,
+    // process.env.JWT_SECRET,
+    publicRuntimeConfig.JWT_SECRET,
     {
       expiresIn: '30d',
     }

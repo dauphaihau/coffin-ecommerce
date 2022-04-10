@@ -41,7 +41,6 @@ import {NextApiRequest, NextApiResponse} from "next";
 const handler = nc();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-    console.log('req', req)
     await db.connect();
     const newUser = new User({
         name: req.body.name,

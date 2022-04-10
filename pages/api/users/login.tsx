@@ -8,6 +8,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 const handler = nc();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+
     await db.connect();
     const user = await User.findOne({email: req.body.email});
     await db.disconnect();

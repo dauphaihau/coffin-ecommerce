@@ -1,6 +1,6 @@
 import React, {createContext, Component} from 'react'
 
-import {STORAGE_KEY} from "../utils/settings";
+import {STORAGE_KEY} from "../utils/constant";
 import {toast} from "react-toastify";
 
 const initialState = {

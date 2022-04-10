@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import * as Yup from 'yup';
+import Cookie from "cookie-cutter";
 import {yupResolver} from '@hookform/resolvers/yup';
+import axios from "axios";
 
 import {useUtil} from "../../context/utilContext";
-import {userService} from "../../services";
 import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
 import {Button} from "../Button";
@@ -34,18 +35,25 @@ const LoginModal = () => {
   }, [user])
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      setValue('email', '')
-      setValue('password', '')
-    } else {
-      if (!registerForm) {
-        setValue('email', 'dauphaihau@email.com')
-        setValue('password', '111111')
-      } else {
-        setValue('email', '')
-        setValue('password', '')
-      }
-    }
+  //   if (process.env.NODE_ENV === 'development') {
+  //     setValue('email', '')
+  //     setValue('password', '')
+  //   } else {
+  //     if (!registerForm) {
+  //       setValue('email', 'dauphaihau@email.com')
+  //       setValue('password', '111111')
+  //     } else {
+  //       setValue('email', '')
+  //       setValue('password', '')
+  //     }
+  //   }
+        if (!registerForm) {
+          setValue('email', 'dauphaihau@email.com')
+          setValue('password', '111111')
+        } else {
+          setValue('email', '')
+          setValue('password', '')
+        }
   }, [registerForm])
 
   const formOptions = {
@@ -65,40 +73,40 @@ const LoginModal = () => {
       : handleLogin(data)
   };
 
-  const handleLogin = ({email = '', password = ''}) => {
-    return userService.login(email, password)
-      .then((res) => {
-        setUser({...user, ...res})
-        setIsAuthorize(true)
-        modalToggle();
-      })
-      .catch((err) => {
-          if (errors) {
-            setError('email', {
-              type: "server",
-              message: err,
-            });
-          }
-        }
-      )
+  const handleLogin = async (values) => {
+    try {
+      const {data} = await axios.post('/api/users/login', values);
+      setUser({...user, ...data})
+      setIsAuthorize(true)
+      modalToggle();
+      Cookie.set('userInfo', JSON.stringify(data));
+    } catch (err) {
+      const {message} = JSON.parse(err.response.request.responseText);
+      if (errors) {
+        setError('email', {
+          type: "server",
+          message
+        });
+      }
+    }
   }
 
-  const handleRegister = (values) => {
-    return userService.register(values)
-      .then((res) => {
-        setUser({...user, ...res})
-        modalToggle();
-        setIsAuthorize(true)
-      })
-      .catch((err) => {
-          if (errors) {
-            setError('email', {
-              type: "server",
-              message: err,
-            });
-          }
-        }
-      )
+  const handleRegister = async (values) => {
+    try {
+      const {data} = await axios.post('/api/users/register', values);
+      setUser({...user, ...data})
+      setIsAuthorize(true)
+      modalToggle();
+      Cookie.set('userInfo', JSON.stringify(data));
+    } catch (err) {
+      const {message} = JSON.parse(err.response.request.responseText);
+      if (errors) {
+        setError('email', {
+          type: "server",
+          message
+        });
+      }
+    }
   }
 
   return (

@@ -1,6 +1,7 @@
 import {createContext, useContext, useState, useEffect} from "react";
 import {useRouter} from "next/router";
-import {userService} from "../services";
+import Cookie from "cookie-cutter";
+import axios from "axios";
 
 const defaultValues = {
   user: {},
@@ -20,17 +21,36 @@ export function AuthProvider({children}) {
   const router = useRouter()
 
   useEffect(() => {
-    authCheck(router.asPath);
-  }, []);
+    authCheck();
+  }, [router.asPath]);
 
-  function authCheck(url) {
-    const publicPaths = ['/account'];
-    const path = url.split('?')[0];
-    if (!userService.userValue && !publicPaths.includes(path)) {
-      router.push('/');
+  const authCheck = async () => {
 
+    const privatePaths = [`/account${router.asPath.slice(8)}`];
+    const path = router.asPath.split('?')[0];
+    if (privatePaths.includes(path)) {
+      if (!isAuthorize) {
+        return router.push('/');
+      }
     } else {
-      setIsAuthorize(true)
+      return ''
+    }
+
+    try {
+      let userInfo = Cookie.get("userInfo");
+      if (userInfo) {
+        userInfo = JSON.parse(userInfo)
+      }
+      const {data} = await axios.get(
+        '/api/users/me',
+        {headers: {authorization: `Bearer ${userInfo.token}`}}
+      );
+      if (data) {
+        setUser({...user, ...data})
+        setIsAuthorize(true)
+      }
+    } catch (err) {
+      setIsAuthorize(false)
     }
   }
 

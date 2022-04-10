@@ -5,7 +5,7 @@ import {useUtil} from "../../context/utilContext";
 import Input from "../Input/Input";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
-import {DENOMINATION} from "../../utils/settings";
+import {DENOMINATION} from "../../utils/constant";
 import {Link} from "../index";
 
 const SearchModal = () => {

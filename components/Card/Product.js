@@ -1,4 +1,4 @@
-import {DENOMINATION} from "../../utils/settings";
+import {DENOMINATION} from "../../utils/constant";
 import {Link} from "../index";
 
 const Product = ({link, title, imageSrc, price}) => {

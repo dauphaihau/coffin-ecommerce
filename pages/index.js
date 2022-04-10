@@ -10,8 +10,7 @@ const Home = ({inventoryData = []}) => {
     <>
       <Head>
         <title>Coffin ECommerce</title>
-        <meta name="description"
-              content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
+        <meta name="description" content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
         <meta property="og:title" content="Coffin ECommerce" key="title"/>
       </Head>
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>

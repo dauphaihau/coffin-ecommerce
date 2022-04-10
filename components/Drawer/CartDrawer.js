@@ -3,7 +3,7 @@ import {XCircleIcon, XIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
 import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
-import {DENOMINATION} from "../../utils/settings";
+import {DENOMINATION} from "../../utils/constant";
 import {slugify} from "../../utils/helpers";
 import {useAuth} from "../../context/authContext";
 import {Link} from "../index";

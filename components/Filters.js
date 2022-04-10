@@ -55,7 +55,7 @@ const Filters = ({categories, launchSticky}) => {
       </div>
       <div className="mb-8 ">
         <h3 className='mb-4 text-xl'>Colors</h3>
-        <div className="flex gap-x-4  ml-[5px] ">
+        <div className="flex gap-x-4 ml-[5px] ">
           {colors.map((c, index) => {
             if (c === "all") {
               return (

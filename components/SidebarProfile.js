@@ -2,13 +2,25 @@ import {Link} from "./index";
 import {CogIcon, HomeIcon, IdentificationIcon, LogoutIcon, ShoppingCartIcon} from "@heroicons/react/outline";
 import {useAuth} from "../context/authContext";
 import {useRouter} from "next/router";
+import Cookie from "cookie-cutter";
 
 const SidebarProfile = ({active}) => {
 
-  const {setIsAuthorize} = useAuth();
+  const {setIsAuthorize, setUser, user} = useAuth();
   const router = useRouter();
 
   let css = 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg'
+
+  const logout = () => {
+    Cookie.set("userInfo", "", {
+      path: "/",
+      expires: new Date(0),
+    });
+    setUser({numberAllOfItemsInCart: user.numberAllOfItemsInCart})
+    // localStorage.removeItem('user');
+    router.push('/');
+    setIsAuthorize(false);
+  }
 
   return (
     <div className='col-span-1'>
@@ -60,11 +72,7 @@ const SidebarProfile = ({active}) => {
           </li>
           <li>
             <div
-              onClick={() => {
-                localStorage.removeItem('user');
-                router.push('/');
-                setIsAuthorize(false);
-              }}
+              onClick={() => logout()}
               className="flex items-center p-2 text-base font-normal text-gray-900
                   cursor-pointer
                    rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"

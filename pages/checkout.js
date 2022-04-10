@@ -6,17 +6,17 @@ import {
   useElements,
 } from "@stripe/react-stripe-js"
 import {loadStripe} from "@stripe/stripe-js"
+import {yupResolver} from "@hookform/resolvers/yup";
+import {useForm} from "react-hook-form";
+import * as Yup from "yup";
 
 import {Button, Input} from "../components";
 import Textarea from "../components/Input/Textarea";
 import Checkbox from "../components/Input/Checkbox";
-import {DENOMINATION} from "../utils/settings";
+import {DENOMINATION} from "../utils/constant";
 import {ContextProviderComponent, SiteContext} from "../context/mainContext";
 
 import banner from "../public/images/banners/checkout.jpg";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useForm} from "react-hook-form";
-import * as Yup from "yup";
 import ImgBannerCard from "../components/Card/ImgBannerCard";
 import Grid from "../components/Grid";
 import {useAuth} from "../context/authContext";

@@ -193,3 +193,13 @@
 // }
 //
 // export default CheckoutWithContext;
+
+const Checkout = () => {
+    return (
+        <div>
+          abc
+        </div>
+    );
+}
+
+export default Checkout;

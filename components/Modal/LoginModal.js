@@ -15,6 +15,7 @@ const LoginModal = () => {
 
   const [registerForm, setRegisterForm] = useState(false)
   const {modalOpen, modalToggle,} = useUtil();
+  const [isBtnLoading, setIsBtnLoading] = useState(false)
   const {setUser, user, setIsAuthorize} = useAuth();
 
   const validationSchema = Yup.object().shape({
@@ -64,12 +65,15 @@ const LoginModal = () => {
 
   const handleLogin = async (values) => {
     try {
+      setIsBtnLoading(true)
       const {data} = await axios.post('/api/users/login', values);
       setUser({...user, ...data})
       setIsAuthorize(true)
       modalToggle();
       Cookie.set('userInfo', JSON.stringify(data));
+      setIsBtnLoading(false)
     } catch (err) {
+      setIsBtnLoading(false)
       const {message} = JSON.parse(err.response.request.responseText);
       if (message) {
         if (errors) {
@@ -142,7 +146,9 @@ const LoginModal = () => {
               <a href="#" className="text-sm text-black hover:underline dark:text-blue-500">Lost Password?</a>
             </div>
           }
-          <Button type="submit" className='w-full'>{!registerForm ? 'Login to your account' : 'Register'}</Button>
+          <Button type="submit" className='w-full' isLoading={isBtnLoading}>
+            {!registerForm ? 'Login to your account' : 'Register'}
+          </Button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
             {
               registerForm

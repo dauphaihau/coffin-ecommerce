@@ -13,7 +13,7 @@ Coffin store where peoples can purchase their coffin when near death
 The app is being under maintenance, as more work needs to be done.
 
 Current functionality includes:
-- Sign In, Register (register currently only works on dev )
+- Sign In, Register 
 - Add or Remove item/items from cart
 - Responsive design (mobile, ipad, desktop)
 - Payments with Stripe (Testing Mode)
@@ -24,7 +24,7 @@ and feel free to share your opinion, constructive criticism, or comments about m
 
 ## Future Updates
 
-- Product Page
+- Checkout Page
 - Improve overall UX/UI and fix bugs
 - Featured Products
 - Admin dashboard manage CRUD users/products

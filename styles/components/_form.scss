@@ -1,4 +1,5 @@
 .form-control {
+
   @apply mb-4;
   label {
     @apply block text-sm font-medium text-gray-900 dark:text-gray-400;
@@ -41,11 +42,12 @@
 .form-check-input {
   @apply mb-4 flex items-center;
   label {
-    @apply inline-block;
+    @apply inline-block pt-[4px];
   }
+//<Checkbox label='Remember me'/>
 
-  input {
-    @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
+input {
+  @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
     checked:bg-black checked:border-black focus:outline-none transition duration-200
     align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer;
   }

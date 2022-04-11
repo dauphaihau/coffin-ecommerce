@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
   CardElement,
   Elements,
@@ -14,26 +14,28 @@ import {Button, Input} from "../components";
 import Textarea from "../components/Input/Textarea";
 import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/constant";
-import {ContextProviderComponent, SiteContext} from "../context/mainContext";
 
 import banner from "../public/images/banners/checkout.jpg";
 import ImgBannerCard from "../components/Card/ImgBannerCard";
 import Grid from "../components/Grid";
 import {useAuth} from "../context/authContext";
+import {CartProvider, CartContext} from "../context/cartContext";
 
-const stripePromise = loadStripe("xxx-xxx-xxx")
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 function CheckoutWithContext(props) {
   return (
-    <ContextProviderComponent>
-      <SiteContext.Consumer>
+    <CartProvider>
+      <CartContext.Consumer>
         {context => (
           <Elements stripe={stripePromise}>
             <Checkout {...props} context={context}/>
           </Elements>
         )}
-      </SiteContext.Consumer>
-    </ContextProviderComponent>
+      </CartContext.Consumer>
+    </CartProvider>
   )
 }
 
@@ -42,12 +44,24 @@ const calculateShipping = () => {
 }
 
 const Checkout = ({context}) => {
+  const [isPayOnline, setIsPayOnline] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
   const {user, setUser} = useAuth();
-  console.log('user', user)
 
   const stripe = useStripe()
   const elements = useElements()
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('success')) {
+      console.log('Order placed! You will receive an email confirmation.');
+    }
+
+    if (query.get('canceled')) {
+      console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+    }
+  }, []);
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -137,12 +151,19 @@ const Checkout = ({context}) => {
               className='mb-6'
               placeholder='Notes about your order, e.g. special notes for delivery'
             />
-            <Button onClick={() => {
-              localStorage.removeItem('COFFIN_ECOMMERCE');
-              setUser({...user, numberAllOfItemsInCart: 0})
-            }}
-            >
-              Place Order</Button>
+            <div className="flex gap-x-4">
+              <Button onClick={() => {
+                localStorage.removeItem('COFFIN_ECOMMERCE');
+                setUser({...user, numberAllOfItemsInCart: 0})
+              }}
+              >
+                Place Order</Button>
+              <form action="/api/checkout_sessions" method="POST">
+                <section>
+                  <Button type="submit" role="link">Pay with card</Button>
+                </section>
+              </form>
+            </div>
           </form>
         </div>
         <div>
@@ -188,6 +209,7 @@ const Checkout = ({context}) => {
           )}
         </div>
       </Grid>
+
     </div>
   );
 }

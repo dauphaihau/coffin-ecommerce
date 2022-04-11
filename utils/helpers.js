@@ -38,6 +38,23 @@ const getUniqueValues = (data, type) => {
   return ["all", ...new Set(unique)];
 };
 
+
+const calculateTotal = (cart) => {
+  const total = cart.reduce((acc, next) => {
+    const quantity = next.quantity
+    acc = acc + JSON.parse(next.price) * quantity
+    return acc
+  }, 0)
+  return total
+}
+
+const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.quantity, 0);
+
 export {
-  slugify, titleIfy, formatPrice, getUniqueValues
+  slugify,
+  titleIfy,
+  formatPrice,
+  getUniqueValues,
+  sumAllProduct,
+  calculateTotal,
 }

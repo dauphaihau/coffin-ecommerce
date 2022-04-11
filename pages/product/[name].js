@@ -7,11 +7,11 @@ import {useAuth} from "../../context/authContext";
 import {useUtil} from "../../context/utilContext";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
-import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
+import {CartProvider, CartContext} from "../../context/cartContext";
 import {Button, QuantityPicker, ShowMoreTextToggler} from "../../components/Button";
-import {Product} from "../../components/Card";
+import {Product as ProductCard} from "../../components/Card";
 
-const ItemView = (props) => {
+const Product = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
   const [numberOfItems, updateNumberOfItems] = useState(1)
   const {product} = props
@@ -19,14 +19,11 @@ const ItemView = (props) => {
   const router = useRouter();
   const {context: {addToCart, numberAllOfItemsInCart}} = props
   const {closeDrawerModal} = useUtil();
-  const {user, setUser,} = useAuth();
+  const {user, setUser} = useAuth();
 
   useEffect(() => {
     loadInit()
   }, [router.asPath])
-
-  // console.log('number-all-of-items-in-cart', numberAllOfItemsInCart)
-  // console.log('user', user)
 
   useEffect(() => {
     setUser({...user, numberAllOfItemsInCart})
@@ -74,7 +71,7 @@ const ItemView = (props) => {
           <ShowMoreTextToggler limit={400} classes='block laptop:hidden text-sm' text={description}/>
 
           <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
-              {description}
+            {description}
           </p>
           <h2 className="text-xl ipad:text-2xl laptop:text-4xl font-bold tracking-wide relative
           ">${salePrice ? salePrice : price}
@@ -100,7 +97,7 @@ const ItemView = (props) => {
           {
             relatedProducts?.filter(p => p.id !== id).map((item, index) => {
               return (
-                <Product
+                <ProductCard
                   key={index}
                   link={`/product/${slugify(item.name)}`}
                   title={item.name}
@@ -139,14 +136,14 @@ export async function getStaticProps({params}) {
   }
 }
 
-function ItemViewWithContext(props) {
+function ProductWithContext(props) {
   return (
-    <ContextProviderComponent>
-      <SiteContext.Consumer>
-        {context => <ItemView {...props} context={context}/>}
-      </SiteContext.Consumer>
-    </ContextProviderComponent>
+    <CartProvider>
+      <CartContext.Consumer>
+        {context => <Product {...props} context={context}/>}
+      </CartContext.Consumer>
+    </CartProvider>
   )
 }
 
-export default ItemViewWithContext
+export default ProductWithContext

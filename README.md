@@ -8,6 +8,7 @@ Coffin store where peoples can purchase their coffin when near death
 1. Next.js (React.js)
 2. SASS and Tailwind (Styling)
 3. Typescript (Statically Checked Types)
+4. MongoDB (Database)
 
 ## Work In Progress
 The app is being under maintenance, as more work needs to be done.

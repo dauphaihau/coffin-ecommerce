@@ -3,7 +3,7 @@ const Checkbox = (props) => {
   const {
     value,
     checked,
-    className = '',
+    classes = '',
     defaultChecked = null,
     label = '',
     ...others
@@ -15,8 +15,10 @@ const Checkbox = (props) => {
         type="checkbox"
         checked={value || defaultChecked}
         {...others}
+        className={classes}
       />
       <label className='text-smaller'>{label}</label>
+
     </div>
   );
 }

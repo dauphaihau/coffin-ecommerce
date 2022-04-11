@@ -10,6 +10,7 @@ import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
 import {Button} from "../Button";
 import {Input} from "../Input";
+import Checkbox from "../Input/Checkbox";
 
 const LoginModal = () => {
 
@@ -131,17 +132,8 @@ const LoginModal = () => {
 
           {!registerForm &&
             <div className="flex justify-between">
-              <div className="flex items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id="remember" aria-describedby="remember" type="checkbox"
-                    className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                    required=""
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-                </div>
+              <div className="h-5">
+                <Checkbox label='Remember me'/>
               </div>
               <a href="#" className="text-sm text-black hover:underline dark:text-blue-500">Lost Password?</a>
             </div>

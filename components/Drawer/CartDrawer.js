@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
-import {XCircleIcon, XIcon} from "@heroicons/react/solid";
+import {XCircleIcon} from "@heroicons/react/solid";
 
 import {useUtil} from "../../context/utilContext";
-import {ContextProviderComponent, SiteContext} from "../../context/mainContext";
+import {CartProvider, CartContext} from "../../context/cartContext";
 import {DENOMINATION} from "../../utils/constant";
 import {slugify} from "../../utils/helpers";
 import {useAuth} from "../../context/authContext";
@@ -130,11 +130,11 @@ const CartDrawer = ({context}) => {
 
 function CartWithContext(props) {
   return (
-    <ContextProviderComponent>
-      <SiteContext.Consumer>
+    <CartProvider>
+      <CartContext.Consumer>
         {context => <CartDrawer {...props} context={context}/>}
-      </SiteContext.Consumer>
-    </ContextProviderComponent>
+      </CartContext.Consumer>
+    </CartProvider>
   )
 }
 

@@ -1,7 +1,7 @@
 import React, {createContext, Component} from 'react'
-
-import {STORAGE_KEY} from "../utils/constant";
 import {toast} from "react-toastify";
+import {STORAGE_KEY} from "../utils/constant";
+import {calculateTotal, sumAllProduct} from "../utils/helpers";
 
 const initialState = {
   cart: [],
@@ -10,20 +10,9 @@ const initialState = {
   total: 0,
 }
 
-const SiteContext = createContext()
+const CartContext = createContext(initialState)
 
-function calculateTotal(cart) {
-  const total = cart.reduce((acc, next) => {
-    const quantity = next.quantity
-    acc = acc + JSON.parse(next.price) * quantity
-    return acc
-  }, 0)
-  return total
-}
-
-const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.quantity, 0);
-
-class ContextProviderComponent extends Component {
+class CartProvider extends Component {
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
@@ -94,18 +83,15 @@ class ContextProviderComponent extends Component {
 
   render() {
     let state = initialState
-
-    // console.log('state', state)
     if (typeof window !== 'undefined') {
       const storageState = window.localStorage.getItem(STORAGE_KEY)
       if (storageState) {
         state = JSON.parse(storageState)
       }
     }
-    // console.log('state', state)
 
     return (
-      <SiteContext.Provider value={{
+      <CartContext.Provider value={{
         ...state,
         addToCart: this.addToCart,
         clearCart: this.clearCart,
@@ -113,12 +99,12 @@ class ContextProviderComponent extends Component {
         setItemQuantity: this.setItemQuantity
       }}>
         {this.props.children}
-      </SiteContext.Provider>
+      </CartContext.Provider>
     )
   }
 }
 
 export {
-  SiteContext,
-  ContextProviderComponent
+  CartContext,
+  CartProvider
 }

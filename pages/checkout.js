@@ -5,7 +5,6 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js"
-import {loadStripe} from "@stripe/stripe-js"
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import * as Yup from "yup";
@@ -20,10 +19,9 @@ import ImgBannerCard from "../components/Card/ImgBannerCard";
 import Grid from "../components/Grid";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
+import getStripejs from "../utils/get-stripejs";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+const stripePromise = getStripejs();
 
 function CheckoutWithContext(props) {
   return (
@@ -209,7 +207,6 @@ const Checkout = ({context}) => {
           )}
         </div>
       </Grid>
-
     </div>
   );
 }

@@ -5,17 +5,9 @@ import db from "../../../utils/db/db";
 import {signToken} from '../../../utils/middlewares/auth';
 import {NextApiRequest, NextApiResponse} from "next";
 
-type Data = {
-    _id: string,
-    name: string,
-    role: string,
-    email: string,
-    token: string,
-}
-
 const handler = nc();
 
-handler.post(async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     await db.connect();
     const user = await User.findOne({email: req.body.email});

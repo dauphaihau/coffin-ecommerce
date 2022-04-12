@@ -23,7 +23,8 @@ const signToken = (user) => {
 
 const isAuth = async (req, res, next) => {
   const {authorization} = req.headers;
-  console.log('authorization at middleware isAuth', authorization)
+  // console.log('authorization at middleware isAuth', authorization)
+
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);
@@ -43,19 +44,11 @@ const isAuth = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-  if (req.user.role === 'customer') {
+  if (req.user.role !== 'admin') {
     res.status(401).send({message: 'User is not admin'});
   } else {
     next();
   }
 };
-
-// const isAdmin = async (req, res, next) => {
-//   if (req.user.isAdmin) {
-//     next();
-//   } else {
-//     res.status(401).send({message: 'User is not admin'});
-//   }
-// };
 
 export {signToken, isAuth, isAdmin};

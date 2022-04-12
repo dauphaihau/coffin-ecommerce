@@ -55,7 +55,6 @@
   @apply block relative text-[#6a6a6a] mb-[12px] w-full leading-6 text-left
   transition-all duration-200 ease-in-out;
 
-
   &.is-selected {
     padding-left: 18px;
     color: black;
@@ -90,6 +89,41 @@
     border: 0.0625rem solid #383633;
     box-shadow: 0 0.25rem 0.3125rem -0.125rem rgba(71, 69, 67, 0.3);
     transition: all 0.25s;
+  }
+}
+
+
+.suvlink-sidebar {
+  @apply block relative text-[#6a6a6a] w-full leading-6 text-left
+  transition-all duration-200 pl-[28px] ease-in-out;
+
+  &::after {
+    @apply absolute inline-block w-[6px] h-[6px] rounded-full
+    bg-[#7e8a88] left-0 transition duration-100 ease-in-out ;
+    content: "";
+    top: calc(50% - 3px);
+  }
+
+
+  &.is-selected::after {
+    @apply opacity-[1] bg-black;
+    transition-delay: .1s;
+  }
+
+  &.is-selected {
+    @apply pl-[28px] text-black;
+  }
+
+  &.is-selected::before {
+    @apply opacity-[1] ;
+    transition-delay: .1s;
+  }
+
+  &::before {
+    @apply absolute inline-block w-[6px] h-[6px] rounded-full opacity-0
+    bg-[#1c1b1b] left-0 transition duration-100 ease-in-out ;
+    content: "";
+    top: calc(50% - 3px);
   }
 }
 

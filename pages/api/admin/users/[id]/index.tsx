@@ -14,6 +14,21 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(user);
 });
 
+handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
+    await db.connect();
+    const user = await User.findById(req.query.id);
+    if (user) {
+        user.name = req.body.name;
+        user.isAdmin = Boolean(req.body.isAdmin);
+        await user.save();
+        await db.disconnect();
+        res.send({ message: 'User Updated Successfully' });
+    } else {
+        await db.disconnect();
+        res.status(404).send({ message: 'User Not Found' });
+    }
+});
+
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
     const user = await User.findById(req.query.id);

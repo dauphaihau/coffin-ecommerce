@@ -1,5 +1,5 @@
 export const MENU = {
-  data: [
+  navbar: [
     {
       title: "Home",
       link: "/",
@@ -31,5 +31,40 @@ export const MENU = {
     //   link: "/contact",
     //   id: 'contact',
     // },
+  ],
+
+  admin: [
+    {
+      title: "Dashboard",
+      href: "/admin",
+      icon: 'fa-solid fa-store',
+    },
+    {
+      title: "Products",
+      href: "/admin/products",
+      icon: 'fa-solid fa-diamond',
+      // icon: 'fa-solid fa-coffin-cross',
+      // icon: 'fa-solid fa-coffin',
+    },
+    {
+      title: "Users",
+      icon: 'fa-solid fa-user',
+      subLinks: [
+        {
+          title: "List Users",
+          href: "/admin/users",
+        },
+        {
+          title: "New Users",
+          href: "/admin/users/new",
+        },
+      ],
+    },
+    {
+      title: "Posts",
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
   ],
 };

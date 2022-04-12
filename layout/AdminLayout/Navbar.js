@@ -33,7 +33,7 @@ function useOuterClick(callback) {
 const Navbar = () => {
 
   const [dropdown, setDropdown] = useState(false)
-  const {setIsAuthorize} = useAuth();
+  const {setIsAuthorize, user} = useAuth();
   const innerRef = useOuterClick(() => {
     setDropdown(false)
   });
@@ -68,48 +68,46 @@ const Navbar = () => {
                       d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                       clipRule="evenodd"/>
               </svg>
+
             </div>
             <input type="text" id="email-adress-icon"
-                   className="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-black focus:border-black dark:bg-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-black dark:focus:border-black"
+                   className="block p-2 pl-10 w-full text-gray-900 rounded-lg border border-gray-300 sm:text-sm focus:ring-black focus:border-black dark:bg-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-black dark:focus:border-black"
                    placeholder="Search..."/>
           </div>
         </div>
         <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
-          <div className='navbar-right'>
-            <div className='navbar-right__info' ref={innerRef} onClick={() => setDropdown(!dropdown)}>
-              <div>
-                {/*<p>{user?.fullName}</p>*/}
-                {/*<p>{handleRole(user?.role, user?.schoolWorking?.schoolName)}</p>*/}
-              </div>
-              {/*<img src="https://i.pravatar.cc/300" alt='avatar'/>*/}
-
+          <div className='navbar-admin'>
+            <div className="navbar-admin__notification">
+              <i className="fa-solid fa-message"/>
+              <i className="fa-solid fa-bell"/>
+            </div>
+            <div className='navbar-admin__info' ref={innerRef} onClick={() => setDropdown(!dropdown)}>
               <img
                 className="h-8 w-8 rounded-full"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt="profile"
               />
+              {/*<p>{user?.name}</p>*/}
+              {/*<img src="https://i.pravatar.cc/300" alt='avatar'/>*/}
             </div>
-
             {/*Dropdown profile*/}
-            <div className={`navbar-right__profile ${dropdown ? 'block' : 'hidden'}`}>
+            <div className={`navbar-admin__profile ${dropdown ? 'block' : 'hidden'} `}>
               <div>
-                <div role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                  {navigation.map(item => {
-                      if (item.logout) {
-                        return <Link
-                          onClick={() => item.logout()}
-                          href={item.href} key={item.name}>
-                          {item.name}
-                        </Link>
-                      }
-                      return (
-                        <Link href={item.href} key={item.name}>
-                          {item.name}
-                        </Link>
-                      )
+                {navigation.map(item => {
+                    if (item.logout) {
+                      return <Link
+                        onClick={() => item.logout()}
+                        href={item.href} key={item.name}>
+                        {item.name}
+                      </Link>
                     }
-                  )}
-                </div>
+                    return (
+                      <Link href={item.href} key={item.name}>
+                        {item.name}
+                      </Link>
+                    )
+                  }
+                )}
               </div>
             </div>
             {/*end Dropdown profile*/}

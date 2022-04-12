@@ -12,7 +12,6 @@ import Checkbox from "../Input/Checkbox";
 import {accountService} from "../../services/account";
 
 const LoginModal = () => {
-
   const [registerForm, setRegisterForm] = useState(false)
   const {modalOpen, modalToggle,} = useUtil();
   const [isBtnLoading, setIsBtnLoading] = useState(false)

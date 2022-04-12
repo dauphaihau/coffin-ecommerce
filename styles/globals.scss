@@ -35,5 +35,9 @@
 }
 
 .flex-center {
-  @apply flex justify-center items-center
+  @apply flex justify-center items-center;
+}
+
+.animate {
+ @apply transition-all duration-500 ease-in-out;
 }

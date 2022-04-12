@@ -1,38 +1,48 @@
 import {Link} from "../index";
-import {CogIcon, HomeIcon, IdentificationIcon, LogoutIcon, ShoppingCartIcon} from "@heroicons/react/outline";
 import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import {MENU} from "../../utils/menu";
+
+const SubMenu = ({open, suvLinks}) => {
+
+  // console.log('suv-links', suvLinks)
+  if (!suvLinks) return null;
+  const router = useRouter();
+
+  // suvLinks.map((item) => {
+  //   if ([item.href, item.link + "/[id]"].includes(router.pathname)) open = true;
+  // })
+
+  return (
+    <ul className={`${open ? '' : 'hidden'} `}>
+      {suvLinks?.map((link, idz) => (
+        <Link
+          href={link.href} key={idz}
+          className='block px-3 mt-4'
+        >
+          <button className={`suvlink-sidebar ${router.pathname === link.href && 'is-selected'} `}>
+            <span
+              className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
+              ${router.pathname === link.href && '!text-black'} `}>
+              {link.title}
+            </span>
+          </button>
+        </Link>
+      ))}
+    </ul>
+  );
+}
 
 const AdminSidebar = () => {
 
   const router = useRouter();
-  const [active, setActive] = useState()
+  const [active, setActive] = useState(false)
 
-  // console.log('router-pathname', router.pathname)
-  const paths = [`${router.pathname.slice(7)}/`]
-  const links = ['users', 'admin']
-  // console.log('paths', paths)
-  // console.log('active', active)
+  const handleActive = (link) => router.pathname === link.href && '!text-gray-600';
 
-
-  console.log('paths', paths)
-  useEffect(() => {
-    links.map(l => {
-      // console.log('active', active)
-      console.log('link', l)
-      if (paths.includes(l)) {
-        return setActive(l)
-      }
-    })
-  }, [router.asPath])
-
-  let css = 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg'
   return (
-    <aside className="w-[15%] h-full shadow-2xl rounded-lg" aria-label="Sidebar">
-      <div className="overflow-y-auto h-full py-4 px-3
-              {/*bg-gray-50*/} bg-white rounded-lg
-               dark:bg-black">
-
+    <aside className="w-[15%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
+      <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-black">
         <div className='flex justify-center'>
           <Link href="/">
             <img
@@ -44,66 +54,48 @@ const AdminSidebar = () => {
         </div>
         <div className={`border-b border-gray-100 my-4 w-4/5 mx-auto`}></div>
         <ul className="space-y-2">
-          <li>
-            <Link
-              scroll={false}
-              href='/admin'
-              className={`${css} ${active === '/admin' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
-            >
-              <HomeIcon
-                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-              <span className="ml-3">Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              scroll={false}
-              href='/admin/products'
-              className={`${css} ${active === 'order' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
-            >
-              <ShoppingCartIcon
-                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-              <span className="ml-3">Products</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              scroll={false}
-              href='/admin/users'
-              className={`${css} ${active === 'users' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
-            >
-              <IdentificationIcon
-                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-              <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              scroll={false}
-              href='/admin/post'
-              className={`${css} ${active === 'change-pass' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
-            >
-              <CogIcon
-                className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
-              <span className="flex-1 ml-3 whitespace-nowrap">Posts</span>
-            </Link>
-          </li>
-          {/*<li>*/}
-          {/*  <div*/}
-          {/*    onClick={() => logout()}*/}
-          {/*    className="flex items-center p-2 text-base font-normal text-gray-900*/}
-          {/*        cursor-pointer*/}
-          {/*         rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"*/}
-          {/*  >*/}
-          {/*    <LogoutIcon*/}
-          {/*      className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>*/}
-          {/*    <span className="flex-1 ml-3 whitespace-nowrap">Logout</span>*/}
-          {/*  </div>*/}
-          {/*</li>*/}
+          {MENU.admin.map((link, id) => {
+            if (!Array.isArray(link.subLinks)) {
+              return <li className='mx-3 p-[10px]' key={id}>
+                <Link scroll={false} href={link.href}>
+                  <div className='flex justify-between w-full items-center'>
+                    <div className='flex items-center'>
+                      <div className='drop-shadow rounded-lg'>
+                        <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
+                      </div>
+                      <span
+                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link)} `}>{link.title}</span>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            }
+            return (
+              <li className='mx-3 p-[10px]' key={id}>
+                <div
+                  className='cursor-pointer'
+                  onClick={() => setActive(!active)}
+                >
+                  <div className='flex justify-between w-full items-center'>
+                    <div className='flex items-center'>
+                      <div className='drop-shadow rounded-lg'>
+                        <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
+                      </div>
+                      <span
+                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link)} `}>{link.title}</span>
+                    </div>
+                    <i className={` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
+                      text-[10px] 
+                      text-[#7e8a88] transition-all duration-300
+                      ease-in-out hover:text-gray-600 block `}/>
+                  </div>
+                  <SubMenu open={active} suvLinks={link.subLinks}/>
+                </div>
+              </li>
+            )
+          })}
         </ul>
-
       </div>
-
     </aside>
   );
 }

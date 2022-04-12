@@ -13,28 +13,39 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Select(props) {
-  const {options, title = '', onChange, size=''} = props
+export default function SelectFormEdit(props) {
+  const {options, title = '', onChange, size='', value, name} = props
   const [selected, setSelected] = useState(options[0])
+  console.log('value', value)
+  console.log('options', options)
+
+  console.log('options-value-', options.find(opt => opt.value === value))
+
+  const opt = options.find(opt => opt.value === value)
 
   return (
-    <Listbox value={selected} onChange={(e) => {
-      setSelected(e);
-      onChange(e);
-    }}>
+    <Listbox
+      value={value}
+      name={name}
+      // value={selected}
+      onChange={(e) => {
+        setSelected(e);
+        onChange(e);
+      }}>
       {({open}) => (
         <>
           {title !== '' &&
-            <Listbox.Label className="block text-sm font-medium text-gray-700">
+            <Listbox.Label className="block text-base font-medium text-gray-700">
               {title}</Listbox.Label>
           }
           <div className="relative">
             <Listbox.Button
               className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm
                pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1
-                focus:ring-black focus:border-black text-sm ${size === 'medium' && 'py-4'}`}>
+                focus:ring-black focus:border-black text-sm ${size === 'medium' && '!py-4'}`}>
               <span className="flex items-center">
-                <span className="block truncate">{selected.label}</span>
+                <span className="block truncate">{opt.label}</span>
+                {/*<span className="block truncate">{selected.label}</span>*/}
               </span>
               <span className="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
@@ -58,7 +69,8 @@ export default function Select(props) {
                         'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
-                    value={option}
+                    value={value}
+                    // value={option}
                   >
                     {({selected, active}) => (
                       <>
@@ -92,4 +104,4 @@ export default function Select(props) {
   )
 }
 
-Select.propTypes = propTypes;
+SelectFormEdit.propTypes = propTypes;

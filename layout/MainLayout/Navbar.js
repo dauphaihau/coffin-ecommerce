@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-
 import {MENU} from "../../utils/menu";
 import {slugify} from "../../utils/helpers";
 import NavControl from "../../components/NavControl";
@@ -43,7 +42,7 @@ const Navbar = ({categories}) => {
           </Link>
           <div className="navbar-left__links">
             <div className="navbar-links">
-              {MENU.data?.map((item) => {
+              {MENU.navbar?.map((item) => {
                 if (item.subNav) {
                   return (
                     <div className='navbar-links__item group' key={item.id}>

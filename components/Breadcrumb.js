@@ -6,22 +6,24 @@ const Breadcrumb = ({links}) => {
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
         {links.map(link => {
           if (link.firstLink) {
-            return <li className="inline-flex items-center">
-              <Link
-                href={link.path}
-                className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
-              >
-                {link.name}
-              </Link>
-            </li>
+            return (
+              <li className="inline-flex items-center" key={link.name}>
+                <Link
+                  href={link.path}
+                  className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            )
           }
           if (link.lastLink) {
             return (
-              <li>
-                <div className="flex items-center">
+              <li key={link.name}>
+                <div className="flex items-center" >
                   <p className='pt-1'>/</p>
                   <div
-                        className='text-gray-400 ml-1 text-sm font-medium md:ml-2'>
+                    className='text-gray-400 ml-1 text-sm font-medium md:ml-2'>
                     {link.name}
                   </div>
                 </div>
@@ -30,7 +32,7 @@ const Breadcrumb = ({links}) => {
             )
           }
           return (
-            <li>
+            <li key={link.name}>
               <div className="flex items-center">
                 <p className='pt-1'>/</p>
                 <Link href={link.path}

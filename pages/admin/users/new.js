@@ -71,9 +71,6 @@ const NewUser = () => {
       <Helmet title='Create a new user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white p-6 rounded-lg shadow-lg'>
           <Input label='Full Name *' name='name' register={register} errors={errors}/>
-          {/*<Grid md={1} lg={2} gapx={4}>*/}
-          {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
-          {/*</Grid>*/}
           <Grid md={1} lg={2} gapx={4}>
             <Input label='Address' name='address' register={register} errors={errors}/>
             <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
@@ -91,7 +88,7 @@ const NewUser = () => {
             onChange={(e) => console.log(e)}
           />
           <div className="flex gap-x-4 mt-6">
-            <Button type='submit' isLoading={isBtnLoading}>Create User</Button>
+            <Button type='submit' isLoading={isBtnLoading}>Create</Button>
           </div>
         </form>
       </Helmet>

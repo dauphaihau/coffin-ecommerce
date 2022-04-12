@@ -5,13 +5,16 @@ import {MENU} from "../../utils/menu";
 
 const SubMenu = ({open, suvLinks}) => {
 
-  // console.log('suv-links', suvLinks)
-  if (!suvLinks) return null;
   const router = useRouter();
+  if (!suvLinks) return null;
 
   // suvLinks.map((item) => {
   //   if ([item.href, item.link + "/[id]"].includes(router.pathname)) open = true;
   // })
+
+  const handleActive = (currentPath, linkActive) => {
+    if (currentPath === linkActive) return true
+  }
 
   return (
     <ul className={`${open ? '' : 'hidden'} `}>
@@ -20,10 +23,13 @@ const SubMenu = ({open, suvLinks}) => {
           href={link.href} key={idz}
           className='block px-3 mt-4'
         >
-          <button className={`suvlink-sidebar ${router.pathname === link.href && 'is-selected'} `}>
+          <button className={`suvlink-sidebar ${handleActive(router.pathname, link.href) && 'is-selected'} `}
+            // onClick={() => handleActive(router.pathname,link.href)}
+          >
+
             <span
               className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
-              ${router.pathname === link.href && '!text-black'} `}>
+              ${handleActive(router.pathname, link.href) && '!text-black'} `}>
               {link.title}
             </span>
           </button>

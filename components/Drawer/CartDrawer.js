@@ -1,6 +1,4 @@
 import {useState, useEffect} from 'react'
-import {XCircleIcon} from "@heroicons/react/solid";
-
 import {useUtil} from "../../context/utilContext";
 import {CartProvider, CartContext} from "../../context/cartContext";
 import {DENOMINATION} from "../../utils/constant";
@@ -78,8 +76,7 @@ const CartDrawer = ({context}) => {
                                    hover:bg-black
                                    opacity-20 rounded-lg
                               '>
-                                  <XCircleIcon
-                                    className='h-20 w-10 text-white !opacity-1 absolute z-10 right-[33%] top-[16%]'/>
+                                  <i className="fa-solid fa-x h-20 w-10 text-white !opacity-1 absolute z-10 right-[33%] top-[16%]"/>
                                 </div>
                               </div>
                               <div className='ml-4 w-[65%]'>

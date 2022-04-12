@@ -4,10 +4,10 @@ const Breadcrumb = ({links}) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
-        {links.map(link => {
+        {links.map((link, id) => {
           if (link.firstLink) {
             return (
-              <li className="inline-flex items-center" key={link.name}>
+              <li className="inline-flex items-center" key={id}>
                 <Link
                   href={link.path}
                   className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
@@ -19,8 +19,8 @@ const Breadcrumb = ({links}) => {
           }
           if (link.lastLink) {
             return (
-              <li key={link.name}>
-                <div className="flex items-center" >
+              <li key={id}>
+                <div className="flex items-center">
                   <p className='pt-1'>/</p>
                   <div
                     className='text-gray-400 ml-1 text-sm font-medium md:ml-2'>
@@ -32,7 +32,7 @@ const Breadcrumb = ({links}) => {
             )
           }
           return (
-            <li key={link.name}>
+            <li key={id}>
               <div className="flex items-center">
                 <p className='pt-1'>/</p>
                 <Link href={link.path}

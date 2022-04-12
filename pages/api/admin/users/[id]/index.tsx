@@ -19,7 +19,12 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     const user = await User.findById(req.query.id);
     if (user) {
         user.name = req.body.name;
-        user.isAdmin = Boolean(req.body.isAdmin);
+        user.password = req.body.password;
+        user.address = req.body.address;
+        user.email = req.body.email;
+        user.phoneNumber = req.body.phoneNumber;
+        user.role = req.body.role;
+        // user.isAdmin = Boolean(req.body.isAdmin);
         await user.save();
         await db.disconnect();
         res.send({ message: 'User Updated Successfully' });

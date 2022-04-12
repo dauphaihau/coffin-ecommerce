@@ -1,7 +1,9 @@
 // const env = process.env.RUN_ENV || 'develop';
-const env = process.env.RUN_ENV || 'local';
+const env = process.env.RUN_ENV || 'production' ;
+console.log('process-env-run-env', process.env.RUN_ENV)
 
-const config = {
+
+  const config = {
   local: {
     endpoint: "http://localhost:3000",
   },
@@ -12,6 +14,8 @@ const config = {
     endpoint: "https://coffin-ecommerce.vercel.app",
   },
 }[env];
+
+console.log('config', config)
 
 export {config};
 

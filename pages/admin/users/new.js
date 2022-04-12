@@ -10,6 +10,7 @@ import Select from "../../../components/Input/Select";
 import {useState} from "react";
 import {userService} from "../../../services/users";
 import {useRouter} from "next/router";
+import {toast} from "react-hot-toast";
 
 const options = [
   {
@@ -52,10 +53,11 @@ const NewUser = () => {
 
     setIsBtnLoading(true)
     const res = await userService.create(values)
-    // setIsBtnLoading(res.isLoading)
+    setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
       router.push('/admin/users')
+      toast.success('Create success!')
     } else {
       if (errors) {
         setError('email', {
@@ -67,7 +69,7 @@ const NewUser = () => {
   }
 
   return (
-    <div className='flex justify-between items-center'>
+    <div className='w-1/2'>
       <Helmet title='Create a new user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white p-6 rounded-lg shadow-lg'>
           <Input label='Full Name *' name='name' register={register} errors={errors}/>

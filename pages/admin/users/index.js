@@ -1,18 +1,17 @@
+import moment from "moment/moment";
 import {useRouter} from "next/router";
-import {TrashIcon} from "@heroicons/react/outline";
-import {EyeIcon} from "@heroicons/react/outline";
+import {toast} from "react-hot-toast";
+import {useEffect, useState} from "react";
 
 import {Link} from "../../../components";
 import {Table} from "../../../components/Table";
 import Helmet from "../../../layout/AdminLayout/Content";
-import {UsersProvider, UsersContext} from "../../../context/userContext";
-import moment from "moment/moment";
+import {userService} from "../../../services/users";
 
-const UserList = ({context}) => {
-
+const UserList = () => {
   const router = useRouter();
-
-  function handleDelete(id) {}
+  const [users, setUsers] = useState()
+  console.log('users', users)
 
   const columns = [
     {
@@ -41,10 +40,10 @@ const UserList = ({context}) => {
       render: (row) => <>
         <div className='flex gap-x-4 justify-center'>
           <Link href={`${router.pathname}/${row._id}`}>
-            <EyeIcon className='cursor-pointer' height={30} width={30}/>
+            <i className="fa-solid fa-pen text-xl"/>
           </Link>
-          <button onClick={() => handleDelete(row.id)}>
-            <TrashIcon height={30} width={30}/>
+          <button onClick={() => handleDelete(row._id)}>
+            <i className="fa-solid fa-trash-can text-xl"/>
           </button>
         </div>
       </>
@@ -57,29 +56,40 @@ const UserList = ({context}) => {
     {path: "", name: "List", lastLink: true}
   ];
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await userService.getAll();
+      setUsers(res.data)
+    }
+    fetchData();
+  }, [])
+
+  async function handleDelete(id) {
+    if (!window.confirm('Are you sure?')) {
+      return;
+    }
+    const res = await userService.delete(id)
+
+    if (res.isSuccess) {
+      const res = await userService.getAll();
+      setUsers(res.data)
+      toast.success('Delete success!')
+    } else {
+      toast.error(res.message)
+    }
+  }
+
   return (
-    <div>
-      <Helmet title='User List' dataBreadcrumb={dataBreadcrumb}>
-        <Table
-          itemsPerPage={6}
-          columns={columns}
-          rows={context?.users}
-        />
-      </Helmet>
-    </div>
+    <Helmet title='User List' dataBreadcrumb={dataBreadcrumb}>
+      <Table
+        itemsPerPage={6}
+        columns={columns}
+        rows={users}
+      />
+    </Helmet>
   )
 }
 
-UsersWithContext.layout = 'admin';
+UserList.layout = 'admin';
 
-function UsersWithContext(props) {
-  return (
-    <UsersProvider>
-      <UsersContext.Consumer>
-        {context => <UserList {...props} context={context}/>}
-      </UsersContext.Consumer>
-    </UsersProvider>
-  )
-}
-
-export default UsersWithContext
+export default UserList

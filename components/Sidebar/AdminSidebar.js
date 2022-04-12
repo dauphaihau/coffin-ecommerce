@@ -1,6 +1,6 @@
 import {Link} from "../index";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {MENU} from "../../utils/menu";
 
 const SubMenu = ({open, suvLinks}) => {
@@ -8,9 +8,12 @@ const SubMenu = ({open, suvLinks}) => {
   const router = useRouter();
   if (!suvLinks) return null;
 
-  // suvLinks.map((item) => {
-  //   if ([item.href, item.link + "/[id]"].includes(router.pathname)) open = true;
-  // })
+  useEffect(() => {
+    suvLinks.map((item) => {
+      if ([item.href, item.href+ "/[id]"].includes(router.pathname)) open = true;
+    })
+    return () => {}
+  }, [router.isReady])
 
   const handleActive = (currentPath, linkActive) => {
     if (currentPath === linkActive) return true
@@ -23,10 +26,7 @@ const SubMenu = ({open, suvLinks}) => {
           href={link.href} key={idz}
           className='block px-3 mt-4'
         >
-          <button className={`suvlink-sidebar ${handleActive(router.pathname, link.href) && 'is-selected'} `}
-            // onClick={() => handleActive(router.pathname,link.href)}
-          >
-
+          <button className={`suvlink-sidebar ${handleActive(router.pathname, link.href) && 'is-selected'} `}>
             <span
               className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
               ${handleActive(router.pathname, link.href) && '!text-black'} `}>
@@ -58,7 +58,7 @@ const AdminSidebar = () => {
             />
           </Link>
         </div>
-        <div className={`border-b border-gray-100 my-4 w-4/5 mx-auto`}></div>
+        <div className={`border-b border-gray-100 my-4 w-4/5 mx-auto`}/>
         <ul className="space-y-2">
           {MENU.admin.map((link, id) => {
             if (!Array.isArray(link.subLinks)) {

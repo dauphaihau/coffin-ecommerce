@@ -1,7 +1,8 @@
 import React, {createContext, Component} from 'react'
-import {toast} from "react-toastify";
+// import {toast} from "react-toastify";
 import {STORAGE_KEY} from "../utils/constant";
 import {calculateTotal, sumAllProduct} from "../utils/helpers";
+import {toast} from "react-hot-toast";
 
 const initialState = {
   cart: [],
@@ -56,9 +57,7 @@ class CartProvider extends Component {
       numberAllOfItemsInCart: sumAllProduct(cart),
       total: calculateTotal(cart)
     }))
-    toast("Added item to cart", {
-      position: toast.POSITION.BOTTOM_RIGHT
-    })
+    toast.success('Added item to cart')
     this.forceUpdate()
   }
 

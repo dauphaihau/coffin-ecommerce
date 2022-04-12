@@ -57,9 +57,7 @@ const Navbar = () => {
     <nav className=" border-gray-200 bg-transparent dark:border-gray-700 py-4">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <div className="flex ">
-          <MenuIcon className='btn-icon w-10 h-10 mr-4 text-gray-600' onClick={() => {
-          }}/>
-
+          {/*<MenuIcon className='btn-icon w-10 h-10 mr-4 text-gray-600' onClick={() => {}}/>*/}
           <div className="hidden relative mr-3 md:mr-0 md:block">
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"

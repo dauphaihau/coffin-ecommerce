@@ -30,10 +30,15 @@ export function AuthProvider({children}) {
         setUser({...user, ...userInfo})
       }
 
-      const res = await accountService.me(userInfo);
-      console.log('res', res)
-      if (res) {
-        setUser({...user, ...res})
+      // const res = await accountService.me(userInfo);
+      // console.log('res', res)
+      // if (res) {
+      //   setUser({...user, ...res})
+      //   setIsAuthorize(true)
+      // }
+
+      if (userInfo) {
+        setUser({...user, ...userInfo})
         setIsAuthorize(true)
       }
     } catch (err) {

@@ -30,9 +30,10 @@ export const userService = {
     }
   },
 
-  update: async (id) => {
+  create: async (data) => {
     try {
-      const res = await api.put("/api/admin/users", id)
+      const res = await api.post("/api/admin/users", data)
+      console.log('res', res)
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -43,10 +44,24 @@ export const userService = {
     }
   },
 
-  create: async (data) => {
+  update: async (values) => {
+    const {_id} = values
     try {
-      const res = await api.post("/api/admin/users", data)
-      console.log('res', res)
+      await api.put(`/api/admin/users/${_id}`, values)
+      return {isLoading: false, isSuccess: true};
+    } catch ({response}) {
+      return {
+        isSuccess: false,
+        isLoading: false,
+        message: response?.data.message,
+      };
+    }
+
+  },
+
+  delete: async (_id) => {
+    try {
+      await api.delete(`/api/admin/users/${_id}`)
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

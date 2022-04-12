@@ -8,12 +8,12 @@ const SubMenu = ({open, suvLinks}) => {
   const router = useRouter();
   if (!suvLinks) return null;
 
-  useEffect(() => {
-    suvLinks.map((item) => {
-      if ([item.href, item.href+ "/[id]"].includes(router.pathname)) open = true;
-    })
-    return () => {}
-  }, [router.isReady])
+  // useEffect(() => {
+  //   suvLinks.map((item) => {
+  //     if ([item.href, item.href+ "/[id]"].includes(router.pathname)) open = true;
+  //   })
+  //   return () => {}
+  // }, [router.isReady])
 
   const handleActive = (currentPath, linkActive) => {
     if (currentPath === linkActive) return true

@@ -27,7 +27,6 @@ const Input = (props) => {
     <div className="form-input group">
       {label && <label htmlFor={name}>{label}</label>}
       <input
-        autoFocus
         type={type}
         name={name}
         {...register(name)}
@@ -41,7 +40,6 @@ const Input = (props) => {
 }
 
 Input.propTypes = propTypes;
-
 Input.defaultProps = defaultProps;
 
 export default Input;

@@ -1,5 +1,5 @@
 import {ShoppingBagIcon, UserIcon, SearchIcon} from "@heroicons/react/outline";
-import {UserIcon as UserIconSolid} from "@heroicons/react/solid";
+import {UserIcon as UserIconSolid, UserGroupIcon} from "@heroicons/react/solid";
 import {Link} from "./index";
 import {useUtil} from "../context/utilContext";
 import {useAuth} from "../context/authContext";
@@ -29,7 +29,13 @@ function NavControl() {
       <div className='cursor-pointer'>
         {
           isAuthorize
-            ? <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
+            ?
+            <>
+              {user.role === 'admin'
+                ? <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>
+                : <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
+              }
+            </>
             : <UserIcon width={35} height={30} onClick={() => modalToggle()}/>
         }
       </div>

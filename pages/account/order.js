@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
-import SidebarProfile from "../../components/SidebarProfile";
+import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../components";
 import {rows} from "../../assets/data/orders";
@@ -31,7 +31,7 @@ const Order = () => {
     <div>
       <ImgBannerCard srcImg={banner} title='Profile'/>
       <div className='mt-12 grid ipad:grid-cols-2 laptop:grid-cols-6 gap-x-12 '>
-        <SidebarProfile active='order'/>
+        <ProfileSidebar active='order'/>
         <div className='col-span-3'>
           <div className="flex flex-col w-full">
             <div className='p-4 rounded-lg'>

@@ -16,7 +16,7 @@ const ProductCard = (props) => {
           salePrice
             ? <span className="
                   bg-black text-white text-sm font-medium mr-2
-                  px-2.5 py-1 rounded dark:bg-gray-700 dark:text-gray-300
+                  px-2.5 py-1 rounded
                 ">
                   {(((price - salePrice) / price) * 100).toFixed()}%
                 </span>

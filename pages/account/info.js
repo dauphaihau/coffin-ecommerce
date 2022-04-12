@@ -4,7 +4,7 @@ import banner from "../../public/images/banners/contemporary-banner.png";
 import Grid from "../../components/Grid";
 import {Button} from "../../components";
 import {useAuth} from "../../context/authContext";
-import SidebarProfile from "../../components/SidebarProfile";
+import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 import {ImgBannerCard} from "../../components/Card";
 import {Input} from "../../components/Input";
 
@@ -27,7 +27,7 @@ const Info = () => {
     <div>
       <ImgBannerCard srcImg={banner} title='Profile'/>
       <Grid md={2} lg={6} gapx={12} css='mt-12'>
-        <SidebarProfile active='info'/>
+        <ProfileSidebar active='info'/>
         <div className='laptop:col-span-3'>
           <div className='p-4 rounded-lg'>
             <h1 className='text-3xl font-bold mb-6'>Account Details</h1>

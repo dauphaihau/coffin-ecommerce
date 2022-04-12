@@ -2,26 +2,28 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import {ToastContainer} from "react-toastify";
 
-import AllModal from "../components/Modal";
-import AllDrawer, {Backdrop} from "../components/Drawer";
-import {useUtil} from "../context/utilContext";
-import {Contact, Footer, Navbar} from "../components/Layout";
+import AllModal from "../../components/Modal";
+import AllDrawer, {Backdrop} from "../../components/Drawer";
+import {useUtil} from "../../context/utilContext";
 import {useEffect} from "react";
+import Navbar from "./Navbar";
+import Contact from "./Contact";
+import Footer from "./Footer";
 
 const contextClass = {
   default: "bg-black text-white",
 };
 
-const Layout = ({children, categories}) => {
+const MainLayout = ({ children, categories }) => {
 
   let navItemLength = 5;
   if (categories.length > navItemLength) {
-
     categories = categories.slice(0, navItemLength)
   }
+
   useEffect(() => {
-    window.scrollTo(0,0);
-  },[])
+    window.scrollTo(0, 0);
+  }, [])
 
   const {} = useUtil();
 
@@ -49,5 +51,5 @@ const Layout = ({children, categories}) => {
   );
 }
 
-export default Layout;
+export default MainLayout;
 

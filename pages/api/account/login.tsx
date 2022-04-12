@@ -5,9 +5,17 @@ import db from "../../../utils/db/db";
 import {signToken} from '../../../utils/middlewares/auth';
 import {NextApiRequest, NextApiResponse} from "next";
 
+type Data = {
+    _id: string,
+    name: string,
+    role: string,
+    email: string,
+    token: string,
+}
+
 const handler = nc();
 
-handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.post(async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     await db.connect();
     const user = await User.findOne({email: req.body.email});
@@ -20,7 +28,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            role: user.role,
         });
     } else {
         res.status(401).send({message: 'Invalid email or password'});

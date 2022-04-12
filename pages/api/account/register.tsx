@@ -8,12 +8,18 @@ import {NextApiRequest, NextApiResponse} from "next";
 const handler = nc();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+    console.log('req-body', req.body)
     await db.connect();
+
+    if (await User.findOne({email: req.body.email})) {
+        res.status(409).send({message: `User with the username "${req.body.email}" already exists`});
+    }
+
     const newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password),
-        isAdmin: false,
+        role: 'customer'
     });
 
     const user = await newUser.save();
@@ -25,7 +31,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
+        role: user.role,
     });
 });
 

@@ -2,7 +2,7 @@ import banner from '../../public/images/banners/contemporary-banner.png';
 import ImgBannerCard from "../../components/Card/ImgBannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";
-import SidebarProfile from "../../components/SidebarProfile";
+import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 
 const MyAccount = () => {
 
@@ -10,7 +10,7 @@ const MyAccount = () => {
     <div>
       <ImgBannerCard srcImg={banner} title='Profile'/>
       <Grid md={2} lg={6} gapx={12} css='mt-12'>
-        <SidebarProfile active='dashboard'/>
+        <ProfileSidebar active='dashboard'/>
         <div className='laptop:col-span-3'>
           <div className="flex flex-col w-full">
             <div className='p-4 rounded-lg'>

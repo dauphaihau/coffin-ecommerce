@@ -10,7 +10,7 @@
     border: 1px solid #f7f7f7;
 
     @apply p-4 laptop:drop-shadow-xl overflow-x-visible
-    rounded-[19px] bg-white dark:bg-black w-fit
+    rounded-[19px] bg-white dark:bg-black
     border-gray-200 laptop:border-[#f7f7f7];
 
     .table {

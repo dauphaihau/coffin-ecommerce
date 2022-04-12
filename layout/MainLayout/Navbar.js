@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
+
 import {MENU} from "../../utils/menu";
 import {slugify} from "../../utils/helpers";
-import NavControl from "../NavControl";
-import {Link} from "../index";
+import NavControl from "../../components/NavControl";
+import {Link} from "../../components";
 import {MenuIcon} from "@heroicons/react/solid";
 import {useUtil} from "../../context/utilContext";
 

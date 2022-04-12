@@ -1,4 +1,4 @@
-import {Link} from "../index";
+import {Link} from "../../components";
 import Image from "next/image";
 
 const Footer = () => {

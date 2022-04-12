@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
+
+const {publicRuntimeConfig} = getConfig();
 
 const signToken = (user) => {
   return jwt.sign(
@@ -8,7 +9,7 @@ const signToken = (user) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      isAdmin: user.isAdmin,
+      role: user.role,
     },
 
     // process.env.JWT_SECRET,
@@ -21,30 +22,40 @@ const signToken = (user) => {
 };
 
 const isAuth = async (req, res, next) => {
-  const { authorization } = req.headers;
+  const {authorization} = req.headers;
+  console.log('authorization at middleware isAuth', authorization)
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);
+    // console.log('token', token)
     jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET, (err, decode) => {
-    // jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
+      // jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
-        res.status(401).send({ message: 'Token is not valid' });
+        res.status(401).send({message: 'Token is not valid'});
       } else {
         req.user = decode;
         next();
       }
     });
   } else {
-    res.status(401).send({ message: 'Token is not suppiled' });
+    res.status(401).send({message: 'Token is not suppiled'});
   }
 };
 
 const isAdmin = async (req, res, next) => {
-  if (req.user.isAdmin) {
-    next();
+  if (req.user.role === 'customer') {
+    res.status(401).send({message: 'User is not admin'});
   } else {
-    res.status(401).send({ message: 'User is not admin' });
+    next();
   }
 };
 
-export { signToken, isAuth, isAdmin };
+// const isAdmin = async (req, res, next) => {
+//   if (req.user.isAdmin) {
+//     next();
+//   } else {
+//     res.status(401).send({message: 'User is not admin'});
+//   }
+// };
+
+export {signToken, isAuth, isAdmin};

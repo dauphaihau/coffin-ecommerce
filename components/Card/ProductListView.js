@@ -1,5 +1,5 @@
 import {DENOMINATION} from "../../utils/constant";
-import {Button, Link} from "../index";
+import {Link} from "../index";
 
 const ProductListView = ({link, title, imageSrc, price, description}) => {
 

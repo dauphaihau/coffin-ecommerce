@@ -45,7 +45,7 @@ const SearchModal = () => {
           fixed top-0 right-0 left-0 z-[200] 
           mx-auto w-[90%] laptop:w-1/2 mt-6 
           `}>
-      <Input name='search' autoFocus  onChange={(e) => searchItems(e.target.value)}
+      <Input name='search' autoFocus onChange={(e) => searchItems(e.target.value)}
              className='!pl-[3.5rem] !h-[60px] '
       />
       <div className="absolute top-[17px] left-[14px]">

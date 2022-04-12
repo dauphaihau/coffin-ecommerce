@@ -104,7 +104,4 @@ class CartProvider extends Component {
   }
 }
 
-export {
-  CartContext,
-  CartProvider
-}
+export {CartContext, CartProvider}

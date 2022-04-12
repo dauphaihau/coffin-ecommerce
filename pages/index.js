@@ -126,4 +126,6 @@ export async function getStaticProps() {
   }
 }
 
+// Home.layout = 'main';
+
 export default Home

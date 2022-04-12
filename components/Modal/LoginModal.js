@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import * as Yup from 'yup';
-import Cookie from "cookie-cutter";
 import {yupResolver} from '@hookform/resolvers/yup';
-import axios from "axios";
 
 import {useUtil} from "../../context/utilContext";
 import {useAuth} from "../../context/authContext";
@@ -11,6 +9,7 @@ import {XIcon} from "@heroicons/react/solid";
 import {Button} from "../Button";
 import {Input} from "../Input";
 import Checkbox from "../Input/Checkbox";
+import {accountService} from "../../services/account";
 
 const LoginModal = () => {
 
@@ -50,7 +49,7 @@ const LoginModal = () => {
   const formOptions = {
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      email: 'dauphaihau@email.com',
+      email: 'customer@email.com',
       password: '111111'
     }
   };
@@ -65,41 +64,38 @@ const LoginModal = () => {
   };
 
   const handleLogin = async (values) => {
-    try {
-      setIsBtnLoading(true)
-      const {data} = await axios.post('/api/users/login', values);
-      setUser({...user, ...data})
+    setIsBtnLoading(true)
+    const res = await accountService.login(values)
+    setIsBtnLoading(res.isLoading)
+
+    if (res.isSuccess) {
+      setUser({...user, ...res})
       setIsAuthorize(true)
       modalToggle();
-      Cookie.set('userInfo', JSON.stringify(data));
-      setIsBtnLoading(false)
-    } catch (err) {
-      setIsBtnLoading(false)
-      const {message} = JSON.parse(err.response.request.responseText);
-      if (message) {
-        if (errors) {
-          setError('email', {
-            type: "server",
-            message
-          });
-        }
+    } else {
+      if (errors) {
+        setError('email', {
+          type: "server",
+          message: res.message
+        });
       }
     }
   }
 
   const handleRegister = async (values) => {
-    try {
-      const {data} = await axios.post('/api/users/register', values);
-      setUser({...user, ...data})
+    setIsBtnLoading(true)
+    const res = await accountService.register(values)
+    setIsBtnLoading(res.isLoading)
+
+    if (res.isSuccess) {
+      setUser({...user, ...res})
       setIsAuthorize(true)
       modalToggle();
-      Cookie.set('userInfo', JSON.stringify(data));
-    } catch (err) {
-      const {message} = JSON.parse(err.response.request.responseText);
+    } else {
       if (errors) {
         setError('email', {
           type: "server",
-          message
+          message: res.message
         });
       }
     }

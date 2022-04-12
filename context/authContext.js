@@ -1,7 +1,6 @@
 import {createContext, useContext, useState, useEffect} from "react";
-import {useRouter} from "next/router";
 import Cookie from "cookie-cutter";
-import axios from "axios";
+import {accountService} from "../services/account";
 
 const defaultValues = {
   user: {},
@@ -18,36 +17,23 @@ export function AuthProvider({children}) {
   const [user, setUser] = useState({});
   const [isAuthorize, setIsAuthorize] = useState(false)
 
-  const router = useRouter()
-
   useEffect(() => {
     authCheck();
-  }, [router.asPath]);
-
+  }, []);
 
   const authCheck = async () => {
-
-    const privatePaths = [`/account${router.asPath.slice(8)}`];
-    const path = router.asPath.split('?')[0];
-    if (privatePaths.includes(path)) {
-      if (!isAuthorize) {
-        return router.push('/');
-      }
-    } else {
-      return ''
-    }
 
     try {
       let userInfo = Cookie.get("userInfo");
       if (userInfo) {
         userInfo = JSON.parse(userInfo)
+        setUser({...user, ...userInfo})
       }
-      const {data} = await axios.get(
-        '/api/users/me',
-        {headers: {authorization: `Bearer ${userInfo.token}`}}
-      );
-      if (data) {
-        setUser({...user, ...data})
+
+      const res = await accountService.me(userInfo);
+      console.log('res', res)
+      if (res) {
+        setUser({...user, ...res})
         setIsAuthorize(true)
       }
     } catch (err) {

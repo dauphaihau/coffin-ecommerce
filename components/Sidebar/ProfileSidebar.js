@@ -1,10 +1,10 @@
-import {Link} from "./index";
+import {Link} from "../index";
 import {CogIcon, HomeIcon, IdentificationIcon, LogoutIcon, ShoppingCartIcon} from "@heroicons/react/outline";
-import {useAuth} from "../context/authContext";
+import {useAuth} from "../../context/authContext";
 import {useRouter} from "next/router";
 import Cookie from "cookie-cutter";
 
-const SidebarProfile = ({active}) => {
+const ProfileSidebar = ({active}) => {
 
   const {setIsAuthorize, setUser, user} = useAuth();
   const router = useRouter();
@@ -17,7 +17,6 @@ const SidebarProfile = ({active}) => {
       expires: new Date(0),
     });
     setUser({numberAllOfItemsInCart: user.numberAllOfItemsInCart})
-    // localStorage.removeItem('user');
     router.push('/');
     setIsAuthorize(false);
   }
@@ -83,9 +82,10 @@ const SidebarProfile = ({active}) => {
             </div>
           </li>
         </ul>
+
       </div>
     </div>
   );
 }
 
-export default SidebarProfile;
+export default ProfileSidebar;

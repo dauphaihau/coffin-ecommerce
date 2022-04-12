@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 
 const Breadcrumb = () => {
   const router = useRouter();
-  console.log('router', router)
+  // console.log('router', router)
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">

@@ -1,13 +1,20 @@
 import Pagination from "./Pagination";
-import {useState} from "react";
-import PropTypes from "prop-types";
+import {ReactNode, useState} from "react";
 
-const propTypes = {
-  columns: PropTypes.array,
-  rows: PropTypes.array,
-  itemsPerPage: PropTypes.number,
-  align: PropTypes.string,
+interface TableProps {
+  fitContent?: boolean,
+  columns: [{
+    render: ReactNode,
+    align: string,
+    key: string | number
+    id: number,
+    title: string,
+  }],
+  rows: [],
+  itemsPerPage?: number,
+  align?: string,
 }
+
 
 const TableRow = (props) => {
   const {rows, columns} = props;
@@ -15,7 +22,8 @@ const TableRow = (props) => {
     <>
       {rows?.map((row, index) => {
         return (
-          <tr key={row.id}>
+          <tr key={index}>
+          {/*<tr key={row.id}>*/}
             {columns.map((column) => {
               if (column.render) {
                 return <td className={column.align} key={column.id}>{column.render(row)}</td>
@@ -46,9 +54,9 @@ const TableRow = (props) => {
   )
 };
 
-const Table = (props) => {
+const Table = (props: TableProps) => {
 
-  const {columns, rows, itemsPerPage = 10} = props;
+  const {columns, rows, itemsPerPage = 10, ...res} = props;
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -58,7 +66,7 @@ const Table = (props) => {
 
   return (
     <div className="table-container">
-      <section>
+      <section className={res.fitContent && 'w-fit'}>
         <table className="table">
           <thead>
              <tr>
@@ -88,7 +96,5 @@ const Table = (props) => {
     </div>
   );
 };
-
-Table.propsType = propTypes;
 
 export default Table;

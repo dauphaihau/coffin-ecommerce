@@ -37,7 +37,7 @@ const LoginModal = () => {
 
   useEffect(() => {
     if (!registerForm) {
-      setValue('email', 'dauphaihau@email.com')
+      setValue('email', 'customer@email.com')
       setValue('password', '111111')
     } else {
       setValue('email', '')

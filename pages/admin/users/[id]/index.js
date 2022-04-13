@@ -3,13 +3,13 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm, Controller} from "react-hook-form";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Helmet from "../../../../layout/AdminLayout/Content";
-import {Input, } from "../../../../components/Input";
-import Grid from "../../../../components/Grid";
-import {Button} from "../../../../components";
-import {userService} from "../../../../services/users";
-import SelectFormEdit from "../../../../components/Input/SelectFormEdit";
 import {toast} from "react-hot-toast";
+
+import Helmet from "@components/Helmet";
+import {Input, Select,} from "@components/Input";
+import Grid from "@components/Grid";
+import {Button} from "@components";
+import {userService} from "@services/users";
 
 const options = [
   {
@@ -124,7 +124,7 @@ const UserEdit = () => {
             control={control}
             name='role'
             render={({field: {onChange, onBlur, value, ref}}) => (
-              <SelectFormEdit
+              <Select
               size='medium'
               name='role'
               title='Select Role'

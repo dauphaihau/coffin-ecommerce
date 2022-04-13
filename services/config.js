@@ -1,8 +1,10 @@
-// const env = process.env.RUN_ENV || 'develop';
-const env = process.env.RUN_ENV || 'production' ;
+import axios from "axios";
+import Cookie from "cookie-cutter";
+
+const env = process.env.RUN_ENV || 'production';
 console.log('process-env-run-env', process.env.RUN_ENV)
 
-  const config = {
+const config = {
   local: {
     endpoint: "http://localhost:3000",
   },
@@ -14,7 +16,18 @@ console.log('process-env-run-env', process.env.RUN_ENV)
   },
 }[env];
 
-// console.log('config', config)
+export const api = axios.create({
+  baseURL: config.endpoint,
+  timeout: 1000,
+})
 
-export {config};
-
+api.interceptors.request.use((config) => {
+  let user = JSON.parse(Cookie.get("userInfo"))
+  config.headers = {
+    ...config.headers,
+    Authorization: `Bearer ${user.token}`
+  }
+  return config
+}, (errors) => {
+  return Promise.reject(errors)
+})

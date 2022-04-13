@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import PropTypes from "prop-types";
@@ -14,13 +14,18 @@ function classNames(...classes) {
 }
 
 export default function Select(props) {
-  const {options, title = '', onChange, size=''} = props
+  const {options, title = '', onChange, size = '', value} = props
   const [selected, setSelected] = useState(options[0])
+
+  const opt = options.find(opt => opt.value === value)
+  useEffect(() => {
+    if (opt) setSelected(opt)
+  }, [value])
 
   return (
     <Listbox value={selected} onChange={(e) => {
-      setSelected(e);
-      onChange(e);
+      setSelected(e)
+      onChange(e)
     }}>
       {({open}) => (
         <>
@@ -58,6 +63,7 @@ export default function Select(props) {
                         'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
+                    // value={value}
                     value={option}
                   >
                     {({selected, active}) => (

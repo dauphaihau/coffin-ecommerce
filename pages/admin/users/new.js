@@ -1,4 +1,4 @@
-import Helmet from "../../../layout/AdminLayout/Content";
+import Helmet from "../../../components/Helmet";
 import {Button, Input} from "../../../components";
 import Grid from "../../../components/Grid";
 import Checkbox from "../../../components/Input/Checkbox";

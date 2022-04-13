@@ -1,10 +1,10 @@
-import LoginModal from "./LoginModal";
 import SearchModal from "./SearchModal";
+import LoginRegisterModal from "./LoginModal";
 
 const AllModal = () => {
   return (
     <>
-      <LoginModal/>
+      <LoginRegisterModal/>
       <SearchModal/>
     </>
   );

@@ -3,15 +3,22 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-import {Link} from "../../../components";
-import {Table} from "../../../components/Table";
-import Helmet from "../../../layout/AdminLayout/Content";
-import {userService} from "../../../services/users";
-import Cookie from "cookie-cutter";
+import {Link} from "@components";
+import {Table} from "@components/Table";
+import Helmet from "@components/Helmet";
+import {userService} from "@services/users";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await userService.getAll();
+      setUsers(res.data)
+    }
+    fetchData();
+  }, [])
 
   const columns = [
     {
@@ -55,17 +62,6 @@ const UserList = () => {
     {path: "", name: "List", lastLink: true}
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let userInfo
-      if (Cookie.get("userInfo")) {
-        userInfo = JSON.parse(Cookie.get("userInfo"))
-      }
-      const res = await userService.getAll(userInfo);
-      setUsers(res.data)
-    }
-    fetchData();
-  }, [])
 
   async function handleDelete(id) {
     if (!window.confirm('Are you sure?')) {

@@ -1,7 +1,7 @@
 import {Link} from "../index";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
-import {MENU} from "../../utils/menu";
+import {MENU} from "@utils/menu";
 
 const SubMenu = ({open, suvLinks}) => {
 

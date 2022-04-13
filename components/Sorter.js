@@ -1,6 +1,6 @@
 import {useFilterContext} from "../context/filterContext";
 import {ViewGridIcon, MenuIcon} from "@heroicons/react/outline";
-import Select from "./Input/Select";
+import {Select} from "./Input";
 
 const options = [
   {

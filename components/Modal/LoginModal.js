@@ -7,11 +7,10 @@ import {useUtil} from "../../context/utilContext";
 import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
 import {Button} from "../Button";
-import {Input} from "../Input";
-import Checkbox from "../Input/Checkbox";
-import {accountService} from "../../services/account";
+import {Checkbox, Input} from "../Input";
+import {accountService} from "@services/account";
 
-const LoginModal = () => {
+const LoginRegisterModal = () => {
   const [registerForm, setRegisterForm] = useState(false)
   const {modalOpen, modalToggle,} = useUtil();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
@@ -23,7 +22,6 @@ const LoginModal = () => {
       .email('Email is invalid')
       .required('Email is required'),
     password: Yup.string()
-      .transform(x => x === '' ? undefined : x)
       .required('Password is required')
       // .concat(registerForm ? Yup.string().required('Password is required') : null)
       .min(6, 'Password must be at least 6 characters'),
@@ -40,7 +38,6 @@ const LoginModal = () => {
       setValue('password', '111111')
     } else {
       setValue('email', '')
-
       setValue('password', '')
     }
   }, [registerForm])
@@ -130,7 +127,7 @@ const LoginModal = () => {
               <div className="h-5">
                 <Checkbox label='Remember me'/>
               </div>
-              <a href="#" className="text-sm text-black hover:underline dark:text-blue-500">Lost Password?</a>
+              <a href="#" className="text-sm text-black hover:underline">Lost Password?</a>
             </div>
           }
           <Button type="submit" className='w-full' isLoading={isBtnLoading}>
@@ -158,4 +155,4 @@ const LoginModal = () => {
   );
 }
 
-export default LoginModal;
+export default LoginRegisterModal;

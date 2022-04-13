@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
 
 const nextConfig = {
   env: {
@@ -8,7 +9,22 @@ const nextConfig = {
   publicRuntimeConfig: {
     NEXT_PUBLIC_MONGODB_URI: process.env.NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_JWT_SECRET: process.env.NEXT_PUBLIC_JWT_SECRET,
-  }
+  },
+  webpack: (config, {buildId, dev, isServer, defaultLoaders, webpack}) => {
+    // Note: we provide webpack above so you should not `require` it
+    // Perform customizations to webpack config
+    config.plugins.push(
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery",
+      })
+    );
+    config.resolve.alias["@components"] = path.resolve(__dirname, "components");
+    config.resolve.alias["@services"] = path.resolve(__dirname, "services");
+    config.resolve.alias["@utils"] = path.resolve(__dirname, "utils");
+    return config;
+  },
 }
 
 module.exports = nextConfig

@@ -1,5 +1,4 @@
 .form-control {
-
   @apply mb-4;
   label {
     @apply block text-sm font-medium text-gray-900 dark:text-gray-400;
@@ -44,12 +43,29 @@
   label {
     @apply inline-block pt-[4px];
   }
-//<Checkbox label='Remember me'/>
 
-input {
-  @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
+  //<Checkbox label='Remember me'/>
+
+  input {
+    @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
     checked:bg-black checked:border-black focus:outline-none transition duration-200
     align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer;
+  }
+}
+
+.form-select-input {
+  @apply relative;
+
+  &__btn {
+    @apply relative w-full bg-white border border-gray-300 rounded-md shadow-sm
+    pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1
+    focus:ring-black focus:border-black text-sm
+  }
+
+  &__options {
+    @apply absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56
+    rounded-md py-1 text-base ring-1 ring-black
+    ring-opacity-5 overflow-auto focus:outline-none text-sm;
   }
 }
 

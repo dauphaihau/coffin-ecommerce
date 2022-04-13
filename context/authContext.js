@@ -9,7 +9,6 @@ const defaultValues = {
 
 const AuthContext = createContext(defaultValues);
 
-
 export function useAuth() {
   return useContext(AuthContext);
 }

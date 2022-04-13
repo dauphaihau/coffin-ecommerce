@@ -1,5 +1,5 @@
 # Coffin E-commerce
-Coffin store where peoples can purchase their coffin when near death
+Coffin store where peoples can purchase their coffin/casket when near death
 
 ![Screenshot](./public/images/preview/screen1.png)
 ![Screenshot](./public/images/preview/screen2.png)
@@ -16,6 +16,7 @@ The app is being under maintenance, as more work needs to be done.
 Current functionality includes:
 - Sign In, Register 
 - Add or Remove item/items from cart
+- Admin can CRUD users (use id: admin@email.com, pass: 111111 -> login then <a href="https://coffin-ecommerce.vercel.app/">Test</a> )
 - Responsive design (mobile, ipad, desktop)
 - Payments with Stripe (Testing Mode)
 
@@ -24,11 +25,10 @@ Feel free to email me at dauphaihau@gmail.com if you run into any issues or have
 and feel free to share your opinion, constructive criticism, or comments about my work. Thank you! 🙂
 
 ## Future Updates
-
 - Checkout Page
 - Improve overall UX/UI and fix bugs
 - Featured Products
-- Admin dashboard manage CRUD users/products
+- Admin dashboard manage CRUD products
 - Recently Viewed Products
 
 And More ! There's always room for improvement!

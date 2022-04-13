@@ -1,17 +1,10 @@
-import apiRequest from './request';
-import axios from "axios";
-import Cookie from "cookie-cutter";
-
-const api = apiRequest.init("users");
+import {api} from "./config";
 
 export const userService = {
 
-  getAll: async (userInfo) => {
+  getAll: async () => {
     try {
-      // const res = await api.get("/api/admin/users")
-      const res = await axios.get("/api/admin/users", {
-        headers: {authorization: `Bearer ${userInfo.token}`},
-      })
+      const res = await api.get("/api/admin/users")
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

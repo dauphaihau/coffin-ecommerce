@@ -15,6 +15,9 @@ const config = {
     endpoint: "https://coffin-ecommerce.vercel.app",
   },
 }[env];
+console.log('config', config)
+console.log('config', config.endpoint)
+
 
 export const api = axios.create({
   baseURL: config.endpoint,
@@ -23,11 +26,10 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   let user = JSON.parse(Cookie.get("userInfo"))
-  console.log('user', user)
+  // console.log('user', user)
   config.headers = {
     authorization: `Bearer ${user.token}`
-
-      // headers: { authorization: `Bearer ${user.token}` },
+    // headers: { authorization: `Bearer ${user.token}` },
   }
   // console.log('config', config)
   return config

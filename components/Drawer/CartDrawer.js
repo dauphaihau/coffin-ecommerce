@@ -76,7 +76,8 @@ const CartDrawer = ({context}) => {
                                    hover:bg-black
                                    opacity-20 rounded-lg
                               '>
-                                  <i className="fa-solid fa-x h-20 w-10 text-white !opacity-1 absolute z-10 right-[33%] top-[16%]"/>
+                                  <i className="fa-solid fa-circle-xmark text-3xl h-20 w-10 text-white
+                                  !opacity-1 absolute z-10 right-[30%] top-[32%]"/>
                                 </div>
                               </div>
                               <div className='ml-4 w-[65%]'>

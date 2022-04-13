@@ -1,10 +1,17 @@
 import {api} from "./config";
+import axios from "axios";
 
 export const userService = {
 
-  getAll: async () => {
+  getAll: async (user) => {
     try {
-      const res = await api.get("/api/admin/users")
+      // const res = await api.get("/api/admin/users")
+      const res = await axios.get("/api/admin/users", {
+        headers: { authorization: `Bearer ${user.token}` },
+      })
+
+
+
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

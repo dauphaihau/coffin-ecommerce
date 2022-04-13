@@ -23,11 +23,15 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   let user = JSON.parse(Cookie.get("userInfo"))
+  console.log('user', user)
   config.headers = {
-    ...config.headers,
-    Authorization: `Bearer ${user.token}`
+    authorization: `Bearer ${user.token}`
+
+      // headers: { authorization: `Bearer ${user.token}` },
   }
+  // console.log('config', config)
   return config
 }, (errors) => {
+  console.log('errors', errors)
   return Promise.reject(errors)
 })

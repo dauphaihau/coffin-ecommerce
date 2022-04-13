@@ -49,8 +49,6 @@ const NewUser = () => {
   const {errors} = formState;
 
   const onSubmit = async (values) => {
-    console.log('values', values)
-
     setIsBtnLoading(true)
     const res = await userService.create(values)
     setIsBtnLoading(res.isLoading)

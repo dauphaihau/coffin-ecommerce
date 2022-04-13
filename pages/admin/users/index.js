@@ -6,7 +6,8 @@ import {useEffect, useState} from "react";
 import {Link} from "@components";
 import {Table} from "@components/Table";
 import Helmet from "@components/Helmet";
-import {userService} from "@services/users";
+import {userService} from "../../../services/users";
+import Cookie from "cookie-cutter";
 
 const UserList = () => {
   const router = useRouter();
@@ -14,7 +15,8 @@ const UserList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await userService.getAll();
+      let user = JSON.parse(Cookie.get("userInfo"))
+      const res = await userService.getAll(user);
       setUsers(res.data)
     }
     fetchData();

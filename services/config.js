@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookie from "cookie-cutter";
 
 const env = process.env.RUN_ENV || 'production';
-console.log('process-env-run-env', process.env.RUN_ENV)
 
 const config = {
   local: {
@@ -15,9 +14,6 @@ const config = {
     endpoint: "https://coffin-ecommerce.vercel.app",
   },
 }[env];
-console.log('config', config)
-console.log('config', config.endpoint)
-
 
 export const api = axios.create({
   baseURL: config.endpoint,
@@ -34,6 +30,5 @@ api.interceptors.request.use((config) => {
   // console.log('config', config)
   return config
 }, (errors) => {
-  console.log('errors', errors)
   return Promise.reject(errors)
 })

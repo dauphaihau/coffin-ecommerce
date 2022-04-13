@@ -1,16 +1,33 @@
 import {api} from "./config";
 import axios from "axios";
+import Cookie from "cookie-cutter";
+
+// let user
+// if (Cookie.get("userInfo")) {
+//   user = JSON.parse(Cookie.get("userInfo"))
+// }
+
+// let user = JSON.parse(Cookie.get("userInfo"))
+
+const getToken = () => {
+  const user = JSON.parse(Cookie.get("userInfo"))
+  return {
+    headers: {
+      authorization: `Bearer ${user.token}`
+    }
+  }
+}
 
 export const userService = {
 
-  getAll: async (user) => {
+  getAll: async () => {
     try {
-      const res = await api.get("/api/admin/users")
+      // const res = await api.get("/api/admin/users")
+      // const user = JSON.parse(Cookie.get("userInfo"))
+      const res = await axios.get("/api/admin/users", getToken())
       // const res = await axios.get("/api/admin/users", {
-      //   headers: { authorization: `Bearer ${user.token}` },
+      //   headers: {authorization: `Bearer ${getToken()}`},
       // })
-
-
 
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
@@ -24,7 +41,8 @@ export const userService = {
 
   detail: async (id) => {
     try {
-      const res = await api.get(`/api/admin/users/${id}`)
+      // const res = await api.get(`/api/admin/users/${id}`)
+      const res = await axios.get(`/api/admin/users/${id}`, getToken())
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

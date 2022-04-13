@@ -9,6 +9,7 @@ const defaultValues = {
 
 const AuthContext = createContext(defaultValues);
 
+
 export function useAuth() {
   return useContext(AuthContext);
 }
@@ -18,33 +19,22 @@ export function AuthProvider({children}) {
   const [isAuthorize, setIsAuthorize] = useState(false)
 
   useEffect(() => {
-    authCheck();
+    if (Cookie.get("userInfo")) {
+      const userInfo = JSON.parse(Cookie.get("userInfo"))
+
+      const verifyAuth = async () => {
+        const res = await accountService.me(userInfo);
+        if (res.isSuccess) {
+          setUser({...user, ...res.data})
+          setIsAuthorize(true)
+        } else {
+          setIsAuthorize(false)
+        }
+      }
+      verifyAuth();
+    }
   }, []);
 
-  const authCheck = async () => {
-
-    try {
-      let userInfo = Cookie.get("userInfo");
-      if (userInfo) {
-        userInfo = JSON.parse(userInfo)
-        setUser({...user, ...userInfo})
-      }
-
-      // const res = await accountService.me(userInfo);
-      // console.log('res', res)
-      // if (res) {
-      //   setUser({...user, ...res})
-      //   setIsAuthorize(true)
-      // }
-
-      if (userInfo) {
-        setUser({...user, ...userInfo})
-        setIsAuthorize(true)
-      }
-    } catch (err) {
-      setIsAuthorize(false)
-    }
-  }
 
   return (
     <AuthContext.Provider

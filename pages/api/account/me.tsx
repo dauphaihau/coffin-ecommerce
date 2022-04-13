@@ -3,7 +3,6 @@ import nc from 'next-connect';
 import jwt from "jsonwebtoken";
 
 const handler = nc();
-
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
     const {authorization} = req.headers;
@@ -19,7 +18,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
             }
         });
     } else {
-        res.status(401).send({message: 'Token is not suppiled'});
+        res.status(401).send({message: 'Token is not supplied'});
     }
 });
 

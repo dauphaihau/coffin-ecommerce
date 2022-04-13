@@ -19,7 +19,7 @@ function NavControl() {
         <div className="flex flex-1 justify-end relative">
           <ShoppingBagIcon width={35} height={30}/>
           {
-            user.numberAllOfItemsInCart > Number(0) && (
+            user?.numberAllOfItemsInCart > Number(0) && (
               <div className='absolute inset-0 left-4 bg-black w-[60%] rounded-2xl h-5 text-[13px]'>
                 <span className='text-white text-[10px]'>{user.numberAllOfItemsInCart}</span></div>
             )

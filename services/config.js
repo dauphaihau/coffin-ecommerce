@@ -2,7 +2,6 @@
 const env = process.env.RUN_ENV || 'production' ;
 console.log('process-env-run-env', process.env.RUN_ENV)
 
-
   const config = {
   local: {
     endpoint: "http://localhost:3000",
@@ -15,7 +14,7 @@ console.log('process-env-run-env', process.env.RUN_ENV)
   },
 }[env];
 
-console.log('config', config)
+// console.log('config', config)
 
 export {config};
 

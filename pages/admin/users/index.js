@@ -7,11 +7,11 @@ import {Link} from "../../../components";
 import {Table} from "../../../components/Table";
 import Helmet from "../../../layout/AdminLayout/Content";
 import {userService} from "../../../services/users";
+import Cookie from "cookie-cutter";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
-  console.log('users', users)
 
   const columns = [
     {
@@ -30,8 +30,7 @@ const UserList = () => {
     // {id: 'verified', title: 'Verified'},
     {
       id: 'status', title: 'Status',
-      render: (row) => (
-        <span className="badge-green">{row ? 'Active' : 'Banned'}</span>
+      render: (row) => (<span className="badge-green">{row ? 'Active' : 'Banned'}</span>
       )
     },
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('DD/MM/YYYY')}</>},
@@ -58,7 +57,11 @@ const UserList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await userService.getAll();
+      let userInfo
+      if (Cookie.get("userInfo")) {
+        userInfo = JSON.parse(Cookie.get("userInfo"))
+      }
+      const res = await userService.getAll(userInfo);
       setUsers(res.data)
     }
     fetchData();

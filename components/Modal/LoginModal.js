@@ -68,7 +68,7 @@ const LoginModal = () => {
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
-      setUser({...user, ...res})
+      setUser({...user, ...res.data})
       setIsAuthorize(true)
       modalToggle();
     } else {

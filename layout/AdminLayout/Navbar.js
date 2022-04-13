@@ -1,6 +1,5 @@
 import {useEffect, useRef, useState} from "react";
 import {Link} from "../../components";
-import {MenuIcon} from "@heroicons/react/solid";
 import Cookie from "cookie-cutter";
 import {useAuth} from "../../context/authContext";
 
@@ -38,12 +37,12 @@ const Navbar = () => {
     setDropdown(false)
   });
 
-
   const navigation = [
     {name: 'Profile', href: '/profile'},
     {name: 'Settings', href: '/'},
     {
-      name: 'Logout', href: '/account/login', logout: () => {
+      name: 'Logout', href: '/account/login',
+      logout: () => {
         Cookie.set("userInfo", "", {
           path: "/",
           expires: new Date(0),
@@ -86,7 +85,6 @@ const Navbar = () => {
                 alt="profile"
               />
               {/*<p>{user?.name}</p>*/}
-              {/*<img src="https://i.pravatar.cc/300" alt='avatar'/>*/}
             </div>
             {/*Dropdown profile*/}
             <div className={`navbar-admin__profile ${dropdown ? 'block' : 'hidden'} `}>

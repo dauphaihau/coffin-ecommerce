@@ -8,13 +8,6 @@ const SubMenu = ({open, suvLinks}) => {
   const router = useRouter();
   if (!suvLinks) return null;
 
-  // useEffect(() => {
-  //   suvLinks.map((item) => {
-  //     if ([item.href, item.href+ "/[id]"].includes(router.pathname)) open = true;
-  //   })
-  //   return () => {}
-  // }, [router.isReady])
-
   const handleActive = (currentPath, linkActive) => {
     if (currentPath === linkActive) return true
   }
@@ -43,6 +36,13 @@ const AdminSidebar = () => {
 
   const router = useRouter();
   const [active, setActive] = useState(false)
+  const [suvLinks, setSuvLinks] = useState()
+
+  useEffect(() => {
+    suvLinks?.map((item) => {
+      if ([item.href, item.href+ "/[id]"].includes(router.pathname)) setActive(true);
+    })
+  }, [router.asPath])
 
   const handleActive = (link) => router.pathname === link.href && '!text-gray-600';
 
@@ -95,7 +95,9 @@ const AdminSidebar = () => {
                       text-[#7e8a88] transition-all duration-300
                       ease-in-out hover:text-gray-600 block `}/>
                   </div>
-                  <SubMenu open={active} suvLinks={link.subLinks}/>
+                  <div onClick={() => setSuvLinks(link.subLinks)}>
+                    <SubMenu open={active} suvLinks={link.subLinks}/>
+                  </div>
                 </div>
               </li>
             )

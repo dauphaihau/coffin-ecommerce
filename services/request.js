@@ -14,7 +14,6 @@ const api = {
         function (config) {
           let user = Cookie.get("userInfo");
           user = JSON.parse(user)
-          // console.log('user', user)
           if (user.token) {
             config.headers.Authorization = `Bearer ${user.token}`;
           }
@@ -29,20 +28,10 @@ const api = {
         }
       );
       api.instances[instanceName].interceptors.response.use(
-
         (response) => {
-          // Any status code that lie within the range of 2xx cause this function to trigger
-          // Do something with response data
           return response;
         },
         (error) => {
-          // if (error.response?.status === 401) {
-          //   Cookie.set("accessToken", "", {
-          //     path: "/",
-          //     expires: new Date(0),
-          //   });
-          //   Router.reload();
-          // }
           return Promise.reject(error);
         }
       );

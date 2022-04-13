@@ -1,11 +1,17 @@
 import apiRequest from './request';
+import axios from "axios";
+import Cookie from "cookie-cutter";
 
 const api = apiRequest.init("users");
+
 export const userService = {
 
-  getAll: async () => {
+  getAll: async (userInfo) => {
     try {
-      const res = await api.get("/api/admin/users")
+      // const res = await api.get("/api/admin/users")
+      const res = await axios.get("/api/admin/users", {
+        headers: {authorization: `Bearer ${userInfo.token}`},
+      })
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -19,7 +25,6 @@ export const userService = {
   detail: async (id) => {
     try {
       const res = await api.get(`/api/admin/users/${id}`)
-      console.log('res', res)
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

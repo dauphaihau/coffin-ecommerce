@@ -53,7 +53,7 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className=" border-gray-200 bg-transparent dark:border-gray-700 py-4">
+    <nav className="border-gray-200 bg-transparent dark:border-gray-700 py-4">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <div className="flex ">
           {/*<MenuIcon className='btn-icon w-10 h-10 mr-4 text-gray-600' onClick={() => {}}/>*/}

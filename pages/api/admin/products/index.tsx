@@ -1,5 +1,4 @@
 import nc from 'next-connect';
-import bcrypt from 'bcryptjs';
 import Product from '../../../../models/Product';
 import {NextApiRequest, NextApiResponse} from "next";
 import {isAdmin, isAuth} from "../../../../utils/middlewares/auth";

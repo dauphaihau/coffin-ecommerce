@@ -12,7 +12,6 @@ const ChangePass = () => {
 
   const {user, setIsAuthorize} = useAuth();
   const router = useRouter();
-  console.log('user', user)
 
   const {register, handleSubmit, reset, formState, setError} = useForm({
     defaultValues: {

@@ -9,16 +9,14 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import * as Yup from "yup";
 
-import {Button, Input} from "../components";
-import Textarea from "../components/Input/Textarea";
-import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/constant";
 import banner from "../public/images/banners/checkout.jpg";
-import BannerCard from "../components/Card/BannerCard";
-import Grid from "../components/Grid";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
+import {Button} from "../components/Button";
+import {Checkbox, Input, Textarea} from "../components/Input";
+import {Grid} from "../components";
 
 const stripePromise = getStripejs();
 

@@ -1,5 +1,4 @@
 import React, {createContext, Component} from 'react'
-// import {toast} from "react-toastify";
 import {STORAGE_KEY} from "../utils/constant";
 import {calculateTotal, sumAllProduct} from "../utils/helpers";
 import {toast} from "react-hot-toast";

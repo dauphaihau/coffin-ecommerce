@@ -5,28 +5,12 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import Helmet from "@components/Helmet";
-import {Button, Input} from "@components";
-import Grid from "@components/Grid";
-import Checkbox from "@components/Input/Checkbox";
-import Textarea from "@components/Input/Textarea";
-import Select from "@components/Input/Select";
+import {Helmet, Grid} from "@components";
+import {Input, Select, Checkbox, Textarea} from "@components/Input";
+import {Button} from "@components/Button";
 import {userService} from "@services/users";
+import {roleOpts} from "@assets/data/options";
 
-const options = [
-  {
-    value: 'staff',
-    label: 'Staff',
-  },
-  {
-    value: 'admin',
-    label: 'Admin',
-  },
-  {
-    value: 'customer',
-    label: 'Customer',
-  },
-]
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -35,7 +19,6 @@ const dataBreadcrumb = [
 ];
 
 const NewUser = () => {
-
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
 
@@ -83,13 +66,6 @@ const NewUser = () => {
             {/*<Input label='Repeat Password' name='repeatPassword' register={register} errors={errors}/>*/}
           </Grid>
           {/*<Checkbox label='Save this information for next time'/>*/}
-          {/*<Select*/}
-          {/*  size='medium'*/}
-          {/*  title='Select Role'*/}
-          {/*  options={options}*/}
-          {/*  onChange={(e) => console.log(e)}*/}
-          {/*/>*/}
-
           <Controller
             control={control}
             name='role'
@@ -98,7 +74,7 @@ const NewUser = () => {
                 size='medium'
                 name='role'
                 title='Select Role'
-                options={options}
+                options={roleOpts}
                 value={value}
                 onChange={onChange}
               />
@@ -114,5 +90,4 @@ const NewUser = () => {
 }
 
 NewUser.layout = 'admin';
-
 export default NewUser;

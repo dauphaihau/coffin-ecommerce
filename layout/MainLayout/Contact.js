@@ -1,5 +1,5 @@
 import Input from "../../components/Input/Input";
-import {Button} from "../../components";
+import {Button} from "../../components/Button";
 
 const Contact = () => {
   return (

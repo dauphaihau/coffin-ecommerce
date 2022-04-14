@@ -1,9 +1,9 @@
-import nc from 'next-connect';
+import {NextApiRequest, NextApiResponse} from "next";
 import bcrypt from 'bcryptjs';
+import nc from 'next-connect';
 import User from '../../../models/User';
 import {signToken} from '../../../utils/middlewares/auth';
 import db from "../../../utils/db/db";
-import {NextApiRequest, NextApiResponse} from "next";
 
 const handler = nc();
 

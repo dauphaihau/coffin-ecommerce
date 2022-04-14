@@ -1,14 +1,13 @@
 import {useRouter} from "next/router";
+import moment from "moment";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-import {Link} from "@components";
+import {Link, Helmet, Tooltip} from "@components";
 import {Table} from "@components/Table";
-import Helmet from "@components/Helmet";
 import {productService} from "@services/products";
-import {useUtil} from "../../../context/utilContext";
-import {formatPrice} from "../../../utils/helpers";
-import moment from "moment";
+import {useUtil} from "@context/utilContext";
+import {formatPrice} from "@utils/helpers";
 
 const ProductList = () => {
   const router = useRouter();
@@ -37,7 +36,7 @@ const ProductList = () => {
 
   const columns = [
     {
-      id: 'name', title: 'Name',
+      id: 'name', title: 'Product',
       render: (row) => {
         // return <div className='flex items-center'>
         //   <div className='rounded-lg '>
@@ -50,37 +49,33 @@ const ProductList = () => {
     },
     {id: 'category', title: 'Category',},
     {id: 'price', title: 'Price', render: (row) => <>{formatPrice(row.price)}</>},
+    {id: 'sku', title: 'SKU'},
     {id: 'quantity', title: 'quantity'},
     // {id: 'brand', title: 'Brand'},
-    {id: 'sku', title: 'SKU'},
     {
       id: 'status', title: 'Status',
       render: (row) => (<>{handleQuantity(row.quantity)}</>)
     },
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('LL')}</>},
-
     {
       id: '', title: '',
       render: (row) => <>
         <div className='flex gap-x-4 justify-center'>
-          {/*<Link href={`${router.pathname}/${row._id}`}>*/}
-          {/*  <div className="relative mx-2 group ">*/}
-          {/*    <div className="group-hover:block hidden bg-black text-white text-xs rounded py-1 px-4 right-0 bottom-0">Edit*/}
-          {/*      /!*<svg className="absolute text-black h-2 z-[999] w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255"><polygon className="fill-current" points="0,0 127.5,127.5 255,0"/></svg>*!/*/}
-          {/*    </div>*/}
-          {/*    <i className=" fa-solid fa-pen text-xl group-hover:block"/>*/}
-          {/*  </div>*/}
-          {/*</Link>*/}
-          <Link href={`${router.pathname}/${row._id}`}>
-            <i className="fa-solid fa-pen text-xl"/>
-          </Link>
-          <button onClick={() => handleDelete(row._id)}>
-            <i className="fa-solid fa-trash-can text-xl"/>
-          </button>
+          <Tooltip title='Edit'>
+            <Link href={`${router.pathname}/${row._id}`}>
+              <i className=" fa-solid fa-pen text-xl "/>
+            </Link>
+          </Tooltip>
+          <Tooltip title='Delete'>
+            <button onClick={() => handleDelete(row._id)}>
+              <i className="fa-solid fa-trash-can text-xl"/>
+            </button>
+          </Tooltip>
         </div>
       </>
     },
   ];
+
 
   const dataBreadcrumb = [
     {path: "/admin", name: "Dashboard", firstLink: true},

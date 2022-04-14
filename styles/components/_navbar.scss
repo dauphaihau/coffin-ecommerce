@@ -1,5 +1,5 @@
 .navbar {
-  @apply fixed w-full z-40 h-[64px] ipad:h-20 laptop:h-24 px-6 bg-white
+  @apply fixed w-full z-30 h-[64px] ipad:h-20 laptop:h-24 px-6 bg-white
   transition duration-300 ease-in-out;
   &__container {
     @apply desktop:px-0 ipad:px-4 h-full
@@ -10,8 +10,7 @@
 .navbar-left {
   @apply flex items-center;
   &__logo {
-    @apply max-w-48
-    sm:max-w-none mr-4;
+    @apply max-w-48 sm:max-w-none mr-4;
   }
 
   &__links {
@@ -30,7 +29,7 @@
        mb-0 text-left text-smaller;
     }
     .item-content {
-      @apply hidden absolute bg-white w-52 z-40 shadow-2xl rounded-lg;
+      @apply hidden absolute bg-white w-52 shadow-2xl rounded-lg;
 
       &__title {
         @apply transition duration-200 ease-in-out
@@ -66,7 +65,7 @@
   }
 
   &__profile {
-    @apply  mt-8  relative z-[9999999] transition-all duration-300 ease-in-out ;
+    @apply  mt-8  relative z-10 transition-all duration-300 ease-in-out ;
       div {
         @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg rounded-md bg-white shadow-2xl;
         a {

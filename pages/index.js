@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import {Button} from '../components'
 import {slugify} from '../utils/helpers'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 import {HomeBannerCard, ProductCard} from "../components/Card";
+import {Button} from "../components/Button";
 
 const Home = ({inventoryData = []}) => {
 

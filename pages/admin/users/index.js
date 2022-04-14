@@ -3,11 +3,10 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-import {Link} from "@components";
+import {Link, Tooltip, Helmet} from "@components";
 import {Table} from "@components/Table";
-import Helmet from "@components/Helmet";
 import {userService} from "@services/users";
-import {useUtil} from "../../../context/utilContext";
+import {useUtil} from "@context/utilContext";
 
 const UserList = () => {
   const router = useRouter();
@@ -27,14 +26,14 @@ const UserList = () => {
   const columns = [
     {
       id: 'name', title: 'Name',
-      render: (row) => {
-        return <div className='flex items-center'>
+      render: (row) => (
+        <div className='flex items-center'>
           <div className='rounded-lg '>
             <img src={`https://i.pravatar.cc/150?u=${row._id}`} className='h-9 w-9 rounded-md ' alt='avatar'/>
           </div>
           <p className='ml-4 text-sm font-bold'>{row.name}</p>
         </div>
-      }
+      )
     },
     {id: 'email', title: 'Email',},
     {id: 'role', title: 'Role',},
@@ -49,12 +48,16 @@ const UserList = () => {
       id: '', title: '',
       render: (row) => <>
         <div className='flex gap-x-4 justify-center'>
-          <Link href={`${router.pathname}/${row._id}`}>
-            <i className="fa-solid fa-pen text-xl"/>
-          </Link>
-          <button onClick={() => handleDelete(row._id)}>
-            <i className="fa-solid fa-trash-can text-xl"/>
-          </button>
+          <Tooltip title='Edit'>
+            <Link href={`${router.pathname}/${row._id}`}>
+              <i className=" fa-solid fa-pen text-xl "/>
+            </Link>
+          </Tooltip>
+          <Tooltip title='Delete'>
+            <button onClick={() => handleDelete(row._id)}>
+              <i className="fa-solid fa-trash-can text-xl"/>
+            </button>
+          </Tooltip>
         </div>
       </>
     },
@@ -81,7 +84,7 @@ const UserList = () => {
   }
 
   return (
-    <Helmet title='User List' dataBreadcrumb={dataBreadcrumb}>
+    <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}>
       <Table
         itemsPerPage={6}
         columns={columns}

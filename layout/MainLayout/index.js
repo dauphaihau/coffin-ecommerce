@@ -12,6 +12,7 @@ import BannerHomeCard from "../../components/Card/BannerHomeCard";
 
 const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)
+  const [isMobileScreen, setIsMobileScreen] = useState(false)
   const router = useRouter();
 
   let navItemLength = 5;
@@ -20,19 +21,25 @@ const MainLayout = ({children, categories}) => {
   }
 
   useEffect(() => {
+    if (window.matchMedia('(max-width: 414px)').matches) {
+      setIsMobileScreen(true)
+    }
+  }, [])
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     if (router.pathname === '/') {
       setShowBanner(true)
     } else {
       setShowBanner(false)
-    };
+    }
   }, [router.asPath])
 
   const {} = useUtil();
 
   return (
     <div>
-      <Toaster position="bottom-right" reverseOrder={false}/>
+      <Toaster position={`${isMobileScreen ? "top-center" : "bottom-right"}`} reverseOrder={false}/>
       <AllModal/>
       <AllDrawer/>
       <Backdrop/>

@@ -1,8 +1,8 @@
+import nc from "next-connect";
+import {NextApiRequest, NextApiResponse} from "next";
 import User from "../../../../../models/User";
 import db from "../../../../../utils/db/db";
 import {isAdmin, isAuth} from "../../../../../utils/middlewares/auth";
-import nc from "next-connect";
-import {NextApiRequest, NextApiResponse} from "next";
 
 const handler = nc();
 handler.use(isAuth, isAdmin);

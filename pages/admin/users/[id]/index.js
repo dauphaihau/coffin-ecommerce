@@ -13,7 +13,6 @@ import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 
 const UserEdit = () => {
-
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
   const [user, setUser] = useState()
@@ -22,7 +21,6 @@ const UserEdit = () => {
     if (!router.isReady) return;
     loadInit();
   }, [router.isReady])
-
 
   const loadInit = async () => {
     const {id} = router.query;
@@ -36,11 +34,11 @@ const UserEdit = () => {
     {path: "", name: user?.name, lastLink: true}
   ];
 
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Email is invalid').required('Email is required'),
   });
-
   const formOptions = {resolver: yupResolver(validationSchema)};
 
   if (user) {
@@ -57,7 +55,10 @@ const UserEdit = () => {
   }, [user, reset])
 
   const onSubmit = async (values) => {
-    const formatForm = {...values, role: values.role.value}
+    const formatForm = {
+      ...values,
+      role: typeof values.role === 'object' ? values.role.value : values.role
+    }
     setIsBtnLoading(true)
     const res = await userService.update(formatForm)
     setIsBtnLoading(res.isLoading)
@@ -98,12 +99,12 @@ const UserEdit = () => {
             name='role'
             render={({field: {onChange, onBlur, value, ref}}) => (
               <Select
-              size='medium'
-              name='role'
-              title='Select Role'
-              options={roleOpts}
-              value={value}
-              onChange={onChange}
+                size='medium'
+                name='role'
+                title='Select Role'
+                options={roleOpts}
+                value={value}
+                onChange={onChange}
               />
             )}
           />

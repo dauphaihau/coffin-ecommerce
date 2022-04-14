@@ -1,14 +1,13 @@
-import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import Head from "next/head";
-import {slugify} from "../../utils/helpers";
-import Filters from "../../components/Filters";
-import Sorter from "../../components/Sorter";
-import {useFilterContext} from "../../context/filterContext";
-import Product from "../../components/Card/Product";
-import ProductListView from "../../components/Card/ProductListView";
-import {Button} from "../../components";
 import {useEffect, useState} from "react";
+
+import {fetchInventory} from "../../utils/provider/inventoryProvider";
+import {slugify} from "../../utils/helpers";
+import {useFilterContext} from "../../context/filterContext";
 import {useUtil} from "../../context/utilContext";
+import {Button} from "../../components/Button";
+import {Product, ProductListView} from "../../components/Card";
+import {Filters, Sorter} from "../../components";
 
 const ProductsPage = ({categories = []}) => {
 

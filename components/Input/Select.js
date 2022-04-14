@@ -14,7 +14,7 @@ function classNames(...classes) {
 }
 
 export default function Select(props) {
-  const {options, title = '', onChange, size = '', value} = props
+  const {options, title = '', onChange, size = '', value, margin = ''} = props
   const [selected, setSelected] = useState(options[0])
 
   const opt = options.find(opt => opt.value === value)
@@ -30,11 +30,11 @@ export default function Select(props) {
     >
       {({open}) => (
         <>
-          <div className="form-select-input">
-          {title !== '' &&
-            <Listbox.Label className="block text-base font-medium text-gray-700">
-              {title}</Listbox.Label>
-          }
+          <div className={`form-select-input ${margin}`}>
+            {title !== '' &&
+              <Listbox.Label className="block text-base font-medium text-gray-700">
+                {title}</Listbox.Label>
+            }
             <Listbox.Button
               className={`form-select-input__btn ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
               <span className="flex items-center">

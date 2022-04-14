@@ -43,11 +43,7 @@ const NavDrawer = () => {
 
   const router = useRouter();
   const [categories, setCategories] = useState([])
-
-  const {
-    drawerNavToggle,
-    closeDrawerModal, drawerNavOpen
-  } = useUtil();
+  const {closeDrawerModal, drawerNavOpen} = useUtil();
 
   useEffect(() => {
     const initLoad = async () => {
@@ -73,7 +69,7 @@ const NavDrawer = () => {
         <Drawer.Content>
           <div className="drawer__links">
             {
-              MENU.data?.map((item) => {
+              MENU.navbar?.map((item) => {
                 if (item.subNav) {
                   return (<SubNav key={item.id} title={item.title} links={categories}/>)
                 }

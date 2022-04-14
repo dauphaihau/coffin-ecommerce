@@ -9,7 +9,6 @@ import {ImgBannerCard} from "../../components/Card";
 import {Input} from "../../components/Input";
 
 const Info = () => {
-
   const {user} = useAuth();
 
   const {register, handleSubmit, reset, formState, setError} = useForm({

@@ -1,6 +1,6 @@
 import {useFilterContext} from "../context/filterContext";
-import {Button} from "./index";
 import {formatPrice, getUniqueValues, titleIfy} from "../utils/helpers";
+import {Button} from "./Button";
 
 const Filters = ({categories, launchSticky}) => {
   const {

@@ -7,7 +7,6 @@ import {MenuIcon} from "@heroicons/react/solid";
 import {useUtil} from "../../context/utilContext";
 
 const Navbar = ({categories}) => {
-
   const [shadowHeader, setShadowHeader] = useState(false)
   const {drawerNavToggle} = useUtil();
 

@@ -1,32 +1,9 @@
 import {useFilterContext} from "../context/filterContext";
 import {ViewGridIcon, MenuIcon} from "@heroicons/react/outline";
 import {Select} from "./Input";
-
-const options = [
-  {
-    value: '',
-    label: 'Sort Options',
-  },
-  {
-    value: 'price-lowest',
-    label: 'price (lowest)',
-  },
-  {
-    value: 'price-highest',
-    label: 'price (highest)',
-  },
-  {
-    value: 'name-a',
-    label: 'name (a-z)',
-  },
-  {
-    value: 'name-z',
-    label: 'name (z-a)',
-  },
-]
+import {sortOpts} from "../assets/data/options";
 
 const Sorter = () => {
-
   const {
     setGridView,
     setListView,
@@ -44,7 +21,8 @@ const Sorter = () => {
       <div className='flex gap-x-4 items-center'>
         <p className='hidden laptop:block'>Short by:</p>
         <Select
-          options={options}
+          margin='m-0'
+          options={sortOpts}
           onChange={updateSort}
         />
       </div>

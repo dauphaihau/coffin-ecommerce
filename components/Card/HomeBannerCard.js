@@ -1,6 +1,6 @@
-import {Button} from "../index";
 import {slugify} from "../../utils/helpers";
 import {useRouter} from "next/router";
+import {Button} from "../Button";
 
 const HomeBannerCard = ({data = '', link}) => {
   const router = useRouter()
@@ -18,6 +18,7 @@ const HomeBannerCard = ({data = '', link}) => {
             </p>
             <p className="py-6 tracking-wide">FROM <span>${data.price}</span></p>
             <Button css='w-auto' onClick={() => router.push(`/product/${slugify(link.name)}`)}>Shop Now</Button>
+
           </div>
           <div className="flex flex-1 flex-col justify-end pb-10 mt-4">
             <p className="font-light text-xs tracking-tight m-0 leading-tight mb-2">Design by</p>

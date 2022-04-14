@@ -64,4 +64,27 @@ const roleOpts = [
   },
 ]
 
-export {colorOpts, categoryOpts, brandOpts, roleOpts}
+const sortOpts = [
+  {
+    value: '',
+    label: 'Sort Options',
+  },
+  {
+    value: 'price-lowest',
+    label: 'price (lowest)',
+  },
+  {
+    value: 'price-highest',
+    label: 'price (highest)',
+  },
+  {
+    value: 'name-a',
+    label: 'name (a-z)',
+  },
+  {
+    value: 'name-z',
+    label: 'name (z-a)',
+  },
+]
+
+export {colorOpts, categoryOpts, brandOpts, roleOpts, sortOpts}

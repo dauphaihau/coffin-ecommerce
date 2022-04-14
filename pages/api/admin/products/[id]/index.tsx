@@ -1,8 +1,7 @@
-import User from "../../../../../models/User";
-import db from "../../../../../utils/db/db";
-import {isAdmin, isAuth} from "../../../../../utils/middlewares/auth";
 import nc from "next-connect";
 import {NextApiRequest, NextApiResponse} from "next";
+import db from "../../../../../utils/db/db";
+import {isAdmin, isAuth} from "../../../../../utils/middlewares/auth";
 import Product from "../../../../../models/Product";
 
 const handler = nc();

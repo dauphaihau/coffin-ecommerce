@@ -5,15 +5,13 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import Helmet from "@components/Helmet";
-import Grid from "@components/Grid";
-import {Button} from "@components";
+import { Helmet, Grid } from "@components";
+import {Button} from "@components/Button";
 import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
 
 const ProductEdit = () => {
-
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
   const [product, setProduct] = useState()
@@ -23,9 +21,6 @@ const ProductEdit = () => {
     const loadInit = async () => {
       const {id} = router.query;
       const res = await productService.detail(id);
-
-      console.log('res', res)
-
       setProduct(res.data)
     }
     loadInit();
@@ -51,7 +46,6 @@ const ProductEdit = () => {
     quantity: Yup.number()
       .required('quantity is required')
       .typeError('quantity must be a number'),
-      // .positive('quantity must be greater than zero'),
     sku: Yup.string().required('SKU is required')
       .min(11, 'description must be at least 11 characters')
       .max(12, 'the max length of 12 characters is reached'),
@@ -78,18 +72,12 @@ const ProductEdit = () => {
   }, [product, reset])
 
   const onSubmit = async (values) => {
-
-    console.log('values', values)
     const formatData = {
       ...values,
-      // brand: values.brand.value,
-      // category: values.category.value,
-      // color: values.color.value,
       brand: typeof values.brand === 'object' ? values.brand.value : values.brand,
       category: typeof values.category === 'object' ? values.category.value : values.category,
       color: typeof values.color === 'object' ? values.color.value : values.color
     }
-    console.log('format-form', formatData)
 
     setIsBtnLoading(true)
     const res = await productService.update(formatData)
@@ -124,7 +112,6 @@ const ProductEdit = () => {
                 <Select
                   size='medium'
                   value={value}
-                  // name='category'
                   title='Category *'
                   options={categoryOpts}
                   onChange={onChange}
@@ -191,5 +178,4 @@ const ProductEdit = () => {
 }
 
 ProductEdit.layout = 'admin';
-
 export default ProductEdit;

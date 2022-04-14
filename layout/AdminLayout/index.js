@@ -1,7 +1,8 @@
 import {Toaster} from "react-hot-toast";
+import LoadingBar from "react-top-loading-bar";
+
 import {AdminSidebar} from "../../components/Sidebar";
 import Navbar from "./Navbar";
-import LoadingBar from "react-top-loading-bar";
 import {useUtil} from "../../context/utilContext";
 
 const AdminLayout = ({children}) => {

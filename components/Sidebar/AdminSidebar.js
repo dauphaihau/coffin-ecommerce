@@ -4,13 +4,12 @@ import {useEffect, useState} from "react";
 import {MENU} from "@utils/menu";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
-  if (!subLinks) return null;
-  const router = useRouter();
-
+  // const router = useRouter();
   // subLinks.map((item) => {
   //   if ([item.link].includes(router.pathname)) open = true;
   //   // if ([item.link, item.link + "/[id]"].includes(router.pathname)) open = true;
   // })
+  if (!subLinks) return null;
 
   return (
     <ul className={`${open ? '' : 'hidden'}`}>
@@ -38,11 +37,14 @@ const Menu = ({link, handleActive}) => {
 
   useEffect(() => {
     link.subLinks?.map((item) => {
-      if ([item.href, item.href+ "/[id]"].includes(router.pathname)) setActive(true);
+      if ([item.href, item.href + "/[id]"].includes(router.pathname)) setActive(true);
     })
   }, [router.asPath])
 
-  return <li className='mx-3 p-[10px]' >
+  if (!link) return null;
+
+
+  return <li className='mx-3 p-[10px]'>
     <div
       className='cursor-pointer'
       onClick={() => setActive(!active)}
@@ -55,14 +57,14 @@ const Menu = ({link, handleActive}) => {
           <span
             className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
         </div>
-        <i className={` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
-                      text-[10px] 
-                      text-[#7e8a88] transition-all duration-300
-                      ease-in-out hover:text-gray-600 block `}/>
+        <i className={
+          ` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
+            text-[10px] 
+            text-[#7e8a88] transition-all duration-300
+            ease-in-out hover:text-gray-600 block 
+         `}/>
       </div>
-      {/*<div onClick={() => setSubLinks(link.subLinks)}>*/}
       <SubMenu open={active} subLinks={link.subLinks} handleActive={handleActive}/>
-      {/*</div>*/}
     </div>
   </li>
 }

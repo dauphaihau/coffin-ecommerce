@@ -13,7 +13,6 @@ import {Button, Input} from "../components";
 import Textarea from "../components/Input/Textarea";
 import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/constant";
-
 import banner from "../public/images/banners/checkout.jpg";
 import BannerCard from "../components/Card/BannerCard";
 import Grid from "../components/Grid";

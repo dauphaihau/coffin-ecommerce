@@ -17,6 +17,7 @@ import getStripejs from "../utils/get-stripejs";
 import {Button} from "../components/Button";
 import {Checkbox, Input, Textarea} from "../components/Input";
 import {Grid} from "../components";
+import {BannerCard} from "../components/Card";
 
 const stripePromise = getStripejs();
 

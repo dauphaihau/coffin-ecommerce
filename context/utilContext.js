@@ -21,6 +21,7 @@ export function UtilProvider({children}) {
   const [drawerFiltersOpen, setDrawerFiltersOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalSearchOpen, setModalSearchOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     if (modalSearchOpen || modalOpen || drawerCartOpen || drawerNavOpen || drawerFiltersOpen) {
@@ -69,7 +70,8 @@ export function UtilProvider({children}) {
       drawerNavOpen, drawerNavToggle,
       modalOpen, modalToggle,
       modalSearchOpen, modalSearchToggle,
-      drawerFiltersOpen, drawerFiltersToggle
+      drawerFiltersOpen, drawerFiltersToggle,
+      progress, setProgress,
     }}>
       {children}
     </UtilContext.Provider>

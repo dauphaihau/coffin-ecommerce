@@ -31,10 +31,10 @@
   textarea {
     @apply resize-none block w-full px-3 py-1.5 pt-4 pl-4 text-base font-normal
     text-black bg-white bg-clip-padding border border-solid border-black rounded
+    focus:ring-black
     transition duration-200 ease-in-out m-0 focus:text-black focus:bg-white
     focus:border-black focus:outline-none placeholder-gray-500 text-sm font-light
     border-gray-300 appearance-none
-
   }
 }
 
@@ -43,9 +43,6 @@
   label {
     @apply inline-block pt-[4px];
   }
-
-  //<Checkbox label='Remember me'/>
-
   input {
     @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
     checked:bg-black checked:border-black focus:outline-none transition duration-200

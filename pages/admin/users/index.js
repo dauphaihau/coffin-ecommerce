@@ -6,17 +6,19 @@ import {useEffect, useState} from "react";
 import {Link} from "@components";
 import {Table} from "@components/Table";
 import Helmet from "@components/Helmet";
-import {userService} from "../../../services/users";
-import Cookie from "cookie-cutter";
+import {userService} from "@services/users";
+import {useUtil} from "../../../context/utilContext";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
+  const {progress, setProgress} = useUtil();
 
   useEffect(() => {
     const fetchData = async () => {
-      let user = JSON.parse(Cookie.get("userInfo"))
-      const res = await userService.getAll(user);
+      setProgress(progress + 30)
+      const res = await userService.getAll();
+      setProgress(100)
       setUsers(res.data)
     }
     fetchData();
@@ -64,13 +66,11 @@ const UserList = () => {
     {path: "", name: "List", lastLink: true}
   ];
 
-
   async function handleDelete(id) {
     if (!window.confirm('Are you sure?')) {
       return;
     }
     const res = await userService.delete(id)
-
     if (res.isSuccess) {
       const res = await userService.getAll();
       setUsers(res.data)
@@ -92,5 +92,4 @@ const UserList = () => {
 }
 
 UserList.layout = 'admin';
-
 export default UserList

@@ -15,7 +15,7 @@ import Checkbox from "../components/Input/Checkbox";
 import {DENOMINATION} from "../utils/constant";
 
 import banner from "../public/images/banners/checkout.jpg";
-import ImgBannerCard from "../components/Card/ImgBannerCard";
+import BannerCard from "../components/Card/BannerCard";
 import Grid from "../components/Grid";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
@@ -124,7 +124,7 @@ const Checkout = ({context}) => {
 
   return (
     <div>
-      <ImgBannerCard srcImg={banner} title='Checkout'/>
+      <BannerCard srcImg={banner} title='Checkout'/>
       <Grid md={2} gapx={12} css='mt-12'>
         <div className='mb-12'>
           <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>

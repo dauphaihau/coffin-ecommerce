@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
-import ImgBannerCard from "../../components/Card/ImgBannerCard";
+import BannerCard from "../../components/Card/BannerCard";
 import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../components";
@@ -29,7 +29,7 @@ const Order = () => {
 
   return (
     <div>
-      <ImgBannerCard srcImg={banner} title='Profile'/>
+      <BannerCard srcImg={banner} title='Profile'/>
       <div className='mt-12 grid ipad:grid-cols-2 laptop:grid-cols-6 gap-x-12 '>
         <ProfileSidebar active='order'/>
         <div className='col-span-3'>

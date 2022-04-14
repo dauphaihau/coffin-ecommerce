@@ -16,7 +16,7 @@ The app is being under maintenance, as more work needs to be done.
 Current functionality includes:
 - Sign In, Register 
 - Add or Remove item/items from cart
-- Admin can CRUD users (use id: admin@email.com, pass: 111111 -> login then <a href="https://coffin-ecommerce.vercel.app/">Test</a> )
+- Admin can CRUD users (re-login with id: admin@email.com, pass: 111111)
 - Responsive design (mobile, ipad, desktop)
 - Payments with Stripe (Testing Mode)
 

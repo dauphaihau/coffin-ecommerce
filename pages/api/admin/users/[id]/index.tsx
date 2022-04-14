@@ -24,7 +24,6 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
         user.email = req.body.email;
         user.phoneNumber = req.body.phoneNumber;
         user.role = req.body.role;
-        // user.isAdmin = Boolean(req.body.isAdmin);
         await user.save();
         await db.disconnect();
         res.send({ message: 'User Updated Successfully' });

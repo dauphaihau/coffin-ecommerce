@@ -41,10 +41,19 @@ export const MENU = {
     },
     {
       title: "Products",
-      href: "/admin/products",
       icon: 'fa-solid fa-diamond',
       // icon: 'fa-solid fa-coffin-cross',
       // icon: 'fa-solid fa-coffin',
+      subLinks: [
+        {
+          title: "List Products",
+          href: "/admin/products",
+        },
+        {
+          title: "New Products",
+          href: "/admin/products/new",
+        },
+      ],
     },
     {
       title: "Users",

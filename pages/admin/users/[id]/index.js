@@ -1,9 +1,9 @@
-import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm, Controller} from "react-hook-form";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
+import * as Yup from "yup";
 
 import Helmet from "@components/Helmet";
 import {Input, Select,} from "@components/Input";
@@ -11,7 +11,7 @@ import Grid from "@components/Grid";
 import {Button} from "@components";
 import {userService} from "@services/users";
 
-const options = [
+const roleOpts = [
   {
     value: 'staff',
     label: 'Staff',
@@ -25,7 +25,6 @@ const options = [
     label: 'Customer',
   },
 ]
-
 
 const UserEdit = () => {
 
@@ -44,18 +43,8 @@ const UserEdit = () => {
   const loadInit = async () => {
     const {id} = router.query;
     const res = await userService.detail(id);
-    // console.log('res', res)
     setUser(res.data)
-
-
-    // const school = await schoolService.detail(id);
-    // if (!school.status || _.isEmpty(school.data)) {
-    //   swal('Truờng này không tồn tại', '', 'error')
-    //     .then(Router.push('/to-chuc/truong'))
-    // }
-    // setSchool(school.data);
   }
-
 
   const dataBreadcrumb = [
     {path: "/admin", name: "Dashboard", firstLink: true},
@@ -85,8 +74,9 @@ const UserEdit = () => {
   }, [user, reset])
 
   const onSubmit = async (values) => {
+    const formatForm = {...values, role: values.role.value}
     setIsBtnLoading(true)
-    const res = await userService.update(values)
+    const res = await userService.update(formatForm)
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
@@ -128,7 +118,7 @@ const UserEdit = () => {
               size='medium'
               name='role'
               title='Select Role'
-              options={options}
+              options={roleOpts}
               value={value}
               onChange={onChange}
               />

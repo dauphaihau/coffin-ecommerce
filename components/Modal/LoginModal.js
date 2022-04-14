@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
+import {useRouter} from "next/router";
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 
@@ -15,6 +16,7 @@ const LoginRegisterModal = () => {
   const {modalOpen, modalToggle,} = useUtil();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
   const {setUser, user, setIsAuthorize} = useAuth();
+  const router = useRouter();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(6, 'Name must be at least 6 characters'),
@@ -23,7 +25,6 @@ const LoginRegisterModal = () => {
       .required('Email is required'),
     password: Yup.string()
       .required('Password is required')
-      // .concat(registerForm ? Yup.string().required('Password is required') : null)
       .min(6, 'Password must be at least 6 characters'),
   });
 
@@ -65,6 +66,9 @@ const LoginRegisterModal = () => {
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
+      if (res.data.role === 'admin') {
+        router.push('/admin')
+      }
       setUser({...user, ...res.data})
       setIsAuthorize(true)
       modalToggle();

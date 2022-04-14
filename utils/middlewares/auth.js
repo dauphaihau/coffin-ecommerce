@@ -3,6 +3,19 @@ import getConfig from "next/config";
 
 const {publicRuntimeConfig} = getConfig();
 
+let arr = [
+  {name: 'John', id: 2},
+  {name: 'John1', id: 4},
+  {name: 'John2', id: 6},
+  {name: 'John3', id: 8}
+];
+
+const filterValue = (obj, key, value) => {
+  return obj.find((v) => v[key] === value)
+}
+
+filterValue(arr, "id", 2); //{a: 5, b: 6}
+
 const signToken = (user) => {
   return jwt.sign(
     {

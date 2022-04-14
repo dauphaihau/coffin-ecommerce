@@ -1,16 +1,17 @@
-import Helmet from "../../../components/Helmet";
-import {Button, Input} from "../../../components";
-import Grid from "../../../components/Grid";
-import Checkbox from "../../../components/Input/Checkbox";
-import Textarea from "../../../components/Input/Textarea";
 import * as Yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useForm} from "react-hook-form";
-import Select from "../../../components/Input/Select";
+import {Controller, useForm} from "react-hook-form";
 import {useState} from "react";
-import {userService} from "../../../services/users";
+import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
+
+import Helmet from "@components/Helmet";
+import {Button, Input} from "@components";
+import Grid from "@components/Grid";
+import Checkbox from "@components/Input/Checkbox";
+import Textarea from "@components/Input/Textarea";
+import Select from "@components/Input/Select";
+import {userService} from "@services/users";
 
 const options = [
   {
@@ -45,12 +46,13 @@ const NewUser = () => {
   });
 
   const formOptions = {resolver: yupResolver(validationSchema)};
-  const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
+  const {register, handleSubmit, control, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
   const onSubmit = async (values) => {
+    const formatForm = {...values, role: values.role.value}
     setIsBtnLoading(true)
-    const res = await userService.create(values)
+    const res = await userService.create(formatForm)
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
@@ -81,11 +83,26 @@ const NewUser = () => {
             {/*<Input label='Repeat Password' name='repeatPassword' register={register} errors={errors}/>*/}
           </Grid>
           {/*<Checkbox label='Save this information for next time'/>*/}
-          <Select
-            size='medium'
-            title='Select Role'
-            options={options}
-            onChange={(e) => console.log(e)}
+          {/*<Select*/}
+          {/*  size='medium'*/}
+          {/*  title='Select Role'*/}
+          {/*  options={options}*/}
+          {/*  onChange={(e) => console.log(e)}*/}
+          {/*/>*/}
+
+          <Controller
+            control={control}
+            name='role'
+            render={({field: {onChange, onBlur, value, ref}}) => (
+              <Select
+                size='medium'
+                name='role'
+                title='Select Role'
+                options={options}
+                value={value}
+                onChange={onChange}
+              />
+            )}
           />
           <div className="flex gap-x-4 mt-6">
             <Button type='submit' isLoading={isBtnLoading}>Create</Button>

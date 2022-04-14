@@ -1,5 +1,5 @@
 import banner from '../../public/images/banners/contemporary-banner.png';
-import ImgBannerCard from "../../components/Card/ImgBannerCard";
+import BannerCard from "../../components/Card/BannerCard";
 import Grid from "../../components/Grid";
 import {Link} from "../../components";
 import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
@@ -8,7 +8,7 @@ const MyAccount = () => {
 
   return (
     <div>
-      <ImgBannerCard srcImg={banner} title='Profile'/>
+      <BannerCard srcImg={banner} title='Profile'/>
       <Grid md={2} lg={6} gapx={12} css='mt-12'>
         <ProfileSidebar active='dashboard'/>
         <div className='laptop:col-span-3'>

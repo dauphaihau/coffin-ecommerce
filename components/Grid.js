@@ -7,7 +7,7 @@ const propTypes = {
   gapx: PropTypes.number,
   gap: PropTypes.number,
   gapy: PropTypes.number,
-  // children: PropTypes.func,
+  children: PropTypes.func,
   css: PropTypes.string
 }
 

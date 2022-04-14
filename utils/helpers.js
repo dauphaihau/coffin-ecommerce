@@ -1,3 +1,5 @@
+import Cookie from "cookie-cutter";
+
 const slugify = (string) => {
   const a = 'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;'
   const b = 'aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------'
@@ -50,6 +52,15 @@ const calculateTotal = (cart) => {
 
 const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.quantity, 0);
 
+const getHeaders = () => {
+  const user = JSON.parse(Cookie.get("userInfo"))
+  return {
+    headers: {
+      authorization: `Bearer ${user.token}`
+    }
+  }
+}
+
 export {
   slugify,
   titleIfy,
@@ -57,4 +68,5 @@ export {
   getUniqueValues,
   sumAllProduct,
   calculateTotal,
+  getHeaders,
 }

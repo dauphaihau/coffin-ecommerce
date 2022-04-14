@@ -3,26 +3,25 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {MENU} from "@utils/menu";
 
-const SubMenu = ({open, suvLinks}) => {
-
+const SubMenu = ({open, subLinks, handleActive}) => {
+  if (!subLinks) return null;
   const router = useRouter();
-  if (!suvLinks) return null;
 
-  const handleActive = (currentPath, linkActive) => {
-    if (currentPath === linkActive) return true
-  }
+  // subLinks.map((item) => {
+  //   if ([item.link].includes(router.pathname)) open = true;
+  //   // if ([item.link, item.link + "/[id]"].includes(router.pathname)) open = true;
+  // })
 
   return (
-    <ul className={`${open ? '' : 'hidden'} `}>
-      {suvLinks?.map((link, idz) => (
+    <ul className={`${open ? '' : 'hidden'}`}>
+      {subLinks?.map((link, idz) => (
         <Link
           href={link.href} key={idz}
           className='block px-3 mt-4'
         >
-          <button className={`suvlink-sidebar ${handleActive(router.pathname, link.href) && 'is-selected'} `}>
-            <span
-              className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
-              ${handleActive(router.pathname, link.href) && '!text-black'} `}>
+          <button className={`suvlink-sidebar ${handleActive(link) && 'is-selected'} `}>
+            <span className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
+              ${handleActive(link) && '!text-black'} `}>
               {link.title}
             </span>
           </button>
@@ -32,19 +31,47 @@ const SubMenu = ({open, suvLinks}) => {
   );
 }
 
-const AdminSidebar = () => {
+const Menu = ({link, handleActive}) => {
 
   const router = useRouter();
   const [active, setActive] = useState(false)
-  const [suvLinks, setSuvLinks] = useState()
 
   useEffect(() => {
-    suvLinks?.map((item) => {
+    link.subLinks?.map((item) => {
       if ([item.href, item.href+ "/[id]"].includes(router.pathname)) setActive(true);
     })
   }, [router.asPath])
 
-  const handleActive = (link) => router.pathname === link.href && '!text-gray-600';
+  return <li className='mx-3 p-[10px]' >
+    <div
+      className='cursor-pointer'
+      onClick={() => setActive(!active)}
+    >
+      <div className='flex justify-between w-full items-center'>
+        <div className='flex items-center'>
+          <div className='drop-shadow rounded-lg'>
+            <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
+          </div>
+          <span
+            className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
+        </div>
+        <i className={` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
+                      text-[10px] 
+                      text-[#7e8a88] transition-all duration-300
+                      ease-in-out hover:text-gray-600 block `}/>
+      </div>
+      {/*<div onClick={() => setSubLinks(link.subLinks)}>*/}
+      <SubMenu open={active} subLinks={link.subLinks} handleActive={handleActive}/>
+      {/*</div>*/}
+    </div>
+  </li>
+}
+
+const AdminSidebar = () => {
+  const router = useRouter();
+  // const [subLinks, setSubLinks] = useState()
+
+  const handleActive = (link) => router.pathname === link.href
 
   return (
     <aside className="w-[15%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
@@ -70,37 +97,13 @@ const AdminSidebar = () => {
                         <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
                       </div>
                       <span
-                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link)} `}>{link.title}</span>
+                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
                     </div>
                   </div>
                 </Link>
               </li>
             }
-            return (
-              <li className='mx-3 p-[10px]' key={id}>
-                <div
-                  className='cursor-pointer'
-                  onClick={() => setActive(!active)}
-                >
-                  <div className='flex justify-between w-full items-center'>
-                    <div className='flex items-center'>
-                      <div className='drop-shadow rounded-lg'>
-                        <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
-                      </div>
-                      <span
-                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link)} `}>{link.title}</span>
-                    </div>
-                    <i className={` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
-                      text-[10px] 
-                      text-[#7e8a88] transition-all duration-300
-                      ease-in-out hover:text-gray-600 block `}/>
-                  </div>
-                  <div onClick={() => setSuvLinks(link.subLinks)}>
-                    <SubMenu open={active} suvLinks={link.subLinks}/>
-                  </div>
-                </div>
-              </li>
-            )
+            return (<Menu link={link} handleActive={handleActive} key={id}/>)
           })}
         </ul>
       </div>

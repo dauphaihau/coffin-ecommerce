@@ -19,7 +19,8 @@ const defaultProps = {
 const Input = (props) => {
 
   const {
-    type, label, name='', register, errors,
+    type, label, name = '',
+    register, errors,
     className, placeholder, ...others
   } = props;
 

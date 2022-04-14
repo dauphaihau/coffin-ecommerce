@@ -11,6 +11,7 @@ const propTypes = {
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+
 }
 
 export default function Select(props) {
@@ -29,11 +30,11 @@ export default function Select(props) {
     }}>
       {({open}) => (
         <>
+          <div className="relative">
           {title !== '' &&
             <Listbox.Label className="block text-base font-medium text-gray-700">
               {title}</Listbox.Label>
           }
-          <div className="relative">
             <Listbox.Button
               className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm
                pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1

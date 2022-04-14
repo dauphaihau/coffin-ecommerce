@@ -32,7 +32,6 @@ const Filters = ({categories, launchSticky}) => {
               onClick={updateFilters}
             >
               {titleIfy(name)}
-              {/*{name}*/}
             </button>
           ))}
         </div>
@@ -40,7 +39,7 @@ const Filters = ({categories, launchSticky}) => {
       <div className='mb-8'>
         <h3 className='mb-4 text-xl'>Brands</h3>
         <div>
-          {['Jason Bourne', 'Manufacturers'].map((name, idz) => (
+          {['Batesville', 'Aurora', 'Astral'].map((name, idz) => (
             <button
               key={idz}
               type='button'

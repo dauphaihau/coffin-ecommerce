@@ -6,9 +6,9 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
 import Helmet from "@components/Helmet";
-import {Button, Input} from "@components";
+import {Button} from "@components";
 import Grid from "@components/Grid";
-import {Select, Checkbox, Textarea} from "@components/Input"
+import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "../../../services/products";
 
 const brandOpts = [
@@ -23,6 +23,25 @@ const brandOpts = [
   {
     value: 'astral',
     label: 'Astral',
+  },
+]
+
+const colorOpts = [
+  {
+    value: 'light-gray',
+    label: 'Light Gray',
+  },
+  {
+    value: 'light-brown',
+    label: 'Light Brown',
+  },
+  {
+    value: 'dark-brown',
+    label: 'Dark Brown',
+  },
+  {
+    value: 'cream',
+    label: 'Cream',
   },
 ]
 
@@ -43,8 +62,8 @@ const categoryOpts = [
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
-  {path: "/admin/users", name: "Users"},
-  {path: "", name: "New User", lastLink: true}
+  {path: "/admin/products", name: "Products"},
+  {path: "", name: "New product", lastLink: true}
 ];
 
 const NewProduct = () => {
@@ -53,23 +72,49 @@ const NewProduct = () => {
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
-    // name: Yup.string().required('Name is required'),
-    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    // email: Yup.string().email('Email is invalid').required('Email is required'),
+    name: Yup.string().required('Name is required')
+      .min(6, 'Name product must be at least 6 characters')
+      .max(40, 'the max length of 40 characters is reached'),
+    price: Yup.number()
+      .typeError('price must be a number')
+      .positive('price must be greater than zero')
+      .required('price is required'),
+    // salePrice: Yup.number()
+    //   .typeError('sale price must be a number')
+    //   .positive('sale price must be greater than zero'),
+    quantity: Yup.number()
+      .required('quantity is required')
+      .typeError('quantity must be a number'),
+      // .positive('quantity must be greater than zero'),
+    sku: Yup.string().required('SKU is required')
+      .min(11, 'description must be at least 11 characters')
+      .max(12, 'the max length of 12 characters is reached'),
+    // category: Yup.number().required('Price is required'),
+    // brand: Yup.string().required('Price is required'),
+    description: Yup.string().required('description is required')
+      .min(20, 'description must be at least 20 characters')
+      .max(300, 'the max length of 300 characters is reached'),
   });
 
-  const formOptions = {resolver: yupResolver(validationSchema)};
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      category: categoryOpts[0],
+      color: colorOpts[0],
+      brand: brandOpts[0],
+    }
+  };
+
   const {register, handleSubmit, control, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
   const onSubmit = async (values) => {
-    console.log('values', values)
     const formatData = {
       ...values,
       brand: values.brand.value,
-      category: values.category.value
+      category: values.category.value,
+      color: values.color.value
     }
-    console.log('format-form', formatData)
 
     setIsBtnLoading(true)
     const res = await productService.create(formatData)
@@ -90,21 +135,20 @@ const NewProduct = () => {
 
   return (
     <div className='w-1/2'>
-      <Helmet title='Create a product' dataBreadcrumb={dataBreadcrumb}>
+      <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white p-6 rounded-lg shadow-lg'>
           <Grid md={1} lg={2} gapx={4}>
             <Input label='Name *' name='name' register={register} errors={errors}/>
-            <Input label='stock' name='stock' register={register} errors={errors}/>
+            <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
           </Grid>
-          <Grid md={1} lg={2} gapx={4} css='mb-4'>
+          <Grid md={1} lg={2} gapx={4}>
             <Controller
               control={control}
               name='category'
               render={({field: {onChange, onBlur, value, ref}}) => (
                 <Select
                   size='medium'
-                  // name='category'
-                  title='Category'
+                  title='Category *'
                   options={categoryOpts}
                   onChange={onChange}
                 />
@@ -116,8 +160,7 @@ const NewProduct = () => {
               render={({field: {onChange, onBlur, value, ref}}) => (
                 <Select
                   size='medium'
-                  title='Brand'
-                  // name='brand'
+                  title='Brand *'
                   options={brandOpts}
                   onChange={onChange}
                 />
@@ -125,11 +168,26 @@ const NewProduct = () => {
             />
           </Grid>
           <Grid md={1} lg={2} gapx={4}>
-            <Input label='Price' name='price' register={register} errors={errors}/>
-            <Input label='Sale Price' name='salePrice' register={register} errors={errors}/>
+            <Controller
+              control={control}
+              name='color'
+              render={({field: {onChange, onBlur, value, ref}}) => (
+                <Select
+                  size='medium'
+                  title='Color *'
+                  options={colorOpts}
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'/>
+          </Grid>
+          <Grid md={1} lg={2} gapx={4}>
+            <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
+            <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
           </Grid>
           {/*<Checkbox label='Save this information for next time'/>*/}
-          <Textarea name='description' label='Description' register={register} errors={errors}/>
+          <Textarea name='description' label='Description *' register={register} errors={errors}/>
           {/*<input*/}
           {/*type='file'*/}
           {/*className='file:bg-gradient-to-b*/}

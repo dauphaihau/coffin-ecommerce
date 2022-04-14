@@ -20,8 +20,8 @@ const BannerHomeCard = ({isDisplay}) => {
                 height: '600px',
             }}
           >
-              <p className='absolute top-[41%]
-             left-[9%] text-[82px] w-[30%]
+              <p className='absolute top-[39%]
+             left-[9%] text-[72px] w-[30%]
              text-white font-bold  z-20 leading-[76px]'>
                   Dignity and compassion guaranteed.
               </p>

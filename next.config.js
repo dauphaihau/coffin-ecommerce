@@ -20,6 +20,7 @@ const nextConfig = {
     config.resolve.alias["@components"] = path.resolve(__dirname, "components");
     config.resolve.alias["@services"] = path.resolve(__dirname, "services");
     config.resolve.alias["@utils"] = path.resolve(__dirname, "utils");
+    config.resolve.alias["@assets"] = path.resolve(__dirname, "assets");
     return config;
   },
 }

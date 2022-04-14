@@ -72,7 +72,6 @@ const Menu = ({link, handleActive}) => {
 const AdminSidebar = () => {
   const router = useRouter();
   // const [subLinks, setSubLinks] = useState()
-
   const handleActive = (link) => router.pathname === link.href
 
   return (

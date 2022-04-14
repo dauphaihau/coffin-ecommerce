@@ -51,7 +51,7 @@
 }
 
 .form-select-input {
-  @apply relative;
+  @apply relative mb-4;
 
   &__btn {
     @apply relative w-full bg-white border border-gray-300 rounded-md shadow-sm

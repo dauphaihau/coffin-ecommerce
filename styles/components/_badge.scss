@@ -1,12 +1,16 @@
 .badge-green {
-  @apply bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded rounded-lg dark:bg-green-200 dark:text-green-900;
+  @apply bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-1 rounded rounded-lg dark:bg-green-200 ;
+}
+
+.badge-danger {
+  @apply bg-red-100 text-red-800 text-sm font-medium px-2.5 py-1 rounded rounded-lg dark:bg-red-200 dark:text-red-900;
 }
 
 .badge-warning {
-  @apply bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded rounded-lg dark:bg-red-200 dark:text-red-900
+  @apply bg-yellow-100 text-yellow-800 text-sm font-medium px-2.5 py-1 rounded rounded-lg dark:bg-yellow-200 dark:text-yellow-900
 }
 
 .badge-gray {
-  @apply bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded rounded-lg dark:bg-gray-700 dark:text-gray-300;
+  @apply bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-1 rounded rounded-lg dark:bg-gray-700 dark:text-gray-300;
 }
 

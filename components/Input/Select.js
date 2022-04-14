@@ -11,7 +11,6 @@ const propTypes = {
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
-
 }
 
 export default function Select(props) {
@@ -27,18 +26,17 @@ export default function Select(props) {
     <Listbox value={selected} onChange={(e) => {
       setSelected(e)
       onChange(e)
-    }}>
+    }}
+    >
       {({open}) => (
         <>
-          <div className="relative">
+          <div className="form-select-input">
           {title !== '' &&
             <Listbox.Label className="block text-base font-medium text-gray-700">
               {title}</Listbox.Label>
           }
             <Listbox.Button
-              className={`relative w-full bg-white border border-gray-300 rounded-md shadow-sm
-               pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1
-                focus:ring-black focus:border-black text-sm ${size === 'medium' && '!py-4'}`}>
+              className={`form-select-input__btn ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
               <span className="flex items-center">
                 <span className="block truncate">{selected.label}</span>
               </span>
@@ -54,7 +52,7 @@ export default function Select(props) {
               leaveTo="opacity-0"
             >
               <Listbox.Options
-                className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm">
+                className="form-select-input__options">
                 {options.map((option) => (
                   <Listbox.Option
                     key={option.value}
@@ -64,7 +62,6 @@ export default function Select(props) {
                         'cursor-default select-none relative py-2 pl-3 pr-9'
                       )
                     }
-                    // value={value}
                     value={option}
                   >
                     {({selected, active}) => (

@@ -10,21 +10,7 @@ import {Input, Select,} from "@components/Input";
 import Grid from "@components/Grid";
 import {Button} from "@components";
 import {userService} from "@services/users";
-
-const roleOpts = [
-  {
-    value: 'staff',
-    label: 'Staff',
-  },
-  {
-    value: 'admin',
-    label: 'Admin',
-  },
-  {
-    value: 'customer',
-    label: 'Customer',
-  },
-]
+import {roleOpts} from "@assets/data/options";
 
 const UserEdit = () => {
 
@@ -32,11 +18,9 @@ const UserEdit = () => {
   const router = useRouter();
   const [user, setUser] = useState()
 
-
   useEffect(() => {
     if (!router.isReady) return;
     loadInit();
-    // return () => {};
   }, [router.isReady])
 
 
@@ -54,7 +38,6 @@ const UserEdit = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
     email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 

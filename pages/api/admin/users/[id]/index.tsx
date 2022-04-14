@@ -22,6 +22,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
         user.password = req.body.password;
         user.address = req.body.address;
         user.email = req.body.email;
+        user.color = req.body.color;
         user.phoneNumber = req.body.phoneNumber;
         user.role = req.body.role;
         await user.save();

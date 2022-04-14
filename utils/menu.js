@@ -46,7 +46,7 @@ export const MENU = {
       // icon: 'fa-solid fa-coffin',
       subLinks: [
         {
-          title: "List Products",
+          title: "Products List ",
           href: "/admin/products",
         },
         {

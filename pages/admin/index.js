@@ -14,7 +14,6 @@ const Dashboard = () => {
     const fetchData = async () => {
       setProgress(progress + 30)
       const res = await userService.getAll();
-      console.log('res', res)
       setProgress(100)
       setUsers(res.data)
     }
@@ -31,19 +30,16 @@ const Dashboard = () => {
       title: "Sales",
       number: '$230,220',
       percentage: '+11%',
-      icon: 'fa-solid fa-circle-dollar'
     },
     {
       title: "customers",
       number: '3.200',
       percentage: '+12%',
-      icon: 'fa-solid fa-circle-dollar'
     },
     {
       title: "today's money",
       number: '$1.200',
       percentage: '+$213',
-      icon: 'fa-solid fa-circle-dollar'
     },
   ]
 
@@ -74,7 +70,7 @@ const Dashboard = () => {
     <div className=''>
       <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
 
-        <Grid lg={3} gap={6}>
+        <Grid lg={3} gap={4}>
           {data.map((e, id) => (
             <div key={id} className="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
               <div className='h-full'>

@@ -1,11 +1,11 @@
 import nc from 'next-connect';
 import Product from '../../../../models/Product';
 import {NextApiRequest, NextApiResponse} from "next";
-import {isAdmin, isAuth} from "../../../../utils/middlewares/auth";
+import {isAuth, rolesCanView} from "../../../../utils/middlewares/auth";
 import db from "../../../../utils/db/db";
 
 const handler = nc();
-handler.use(isAuth, isAdmin);
+handler.use(isAuth, rolesCanView);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();

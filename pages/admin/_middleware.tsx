@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
 
     if (req.cookies.userInfo) {
         const userInfo = JSON.parse(req.cookies.userInfo)
-        if (userInfo.role !== "admin") {
+        if (userInfo.role === "customer" ) {
             return NextResponse.json({message: 'Not authenticated.', status: 401})
         }
         return NextResponse.next();

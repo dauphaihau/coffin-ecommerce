@@ -87,8 +87,11 @@ const ProductEdit = () => {
       router.push('/admin/products')
       toast.success('Update success!')
     } else {
+      if (res.message === 'you are not authorized') {
+        return toast.error(res.message)
+      }
       if (errors) {
-        setError('email', {
+        setError('name', {
           type: "server",
           message: res.message
         });

@@ -1,11 +1,11 @@
 import nc from "next-connect";
 import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../../../utils/db/db";
-import {isAdmin, isAuth} from "../../../../../utils/middlewares/auth";
+import {isAuth, rolesCanDelete, rolesCanUpdate, rolesCanView} from "../../../../../utils/middlewares/auth";
 import Product from "../../../../../models/Product";
 
 const handler = nc();
-handler.use(isAuth, isAdmin);
+handler.use(isAuth, rolesCanView);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
@@ -14,6 +14,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(product);
 });
 
+handler.use(isAuth, rolesCanUpdate);
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
     const product = await Product.findById(req.query.id);
@@ -35,6 +36,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     }
 });
 
+handler.use(isAuth, rolesCanDelete);
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
     const product = await Product.findById(req.query.id);

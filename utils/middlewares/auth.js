@@ -3,19 +3,6 @@ import getConfig from "next/config";
 
 const {publicRuntimeConfig} = getConfig();
 
-let arr = [
-  {name: 'John', id: 2},
-  {name: 'John1', id: 4},
-  {name: 'John2', id: 6},
-  {name: 'John3', id: 8}
-];
-
-const filterValue = (obj, key, value) => {
-  return obj.find((v) => v[key] === value)
-}
-
-filterValue(arr, "id", 2); //{a: 5, b: 6}
-
 const signToken = (user) => {
   return jwt.sign(
     {
@@ -48,7 +35,6 @@ const isAuth = async (req, res, next) => {
         res.status(401).send({message: 'Token is not valid'});
       } else {
         req.user = decode;
-        console.log('req-user', req.user)
         next();
       }
     });
@@ -59,10 +45,42 @@ const isAuth = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   if (req.user.role !== 'admin') {
-    res.status(401).send({message: 'User is not admin'});
+    res.status(401).send({message: 'you are not authorized'});
   } else {
     next();
   }
 };
 
-export {signToken, isAuth, isAdmin};
+const rolesCanView = async (req, res, next) => {
+  if (req.user.role === 'customer') {
+    res.status(401).send({message: 'you are not authorized'});
+  } else {
+    next();
+  }
+};
+
+const rolesCanCreate = async (req, res, next) => {
+  if (req.user.role === 'staff') {
+    res.status(401).send({message: 'you are not authorized'});
+  } else {
+    next();
+  }
+};
+
+const rolesCanUpdate = async (req, res, next) => {
+  if (req.user.role === 'staff') {
+    res.status(401).send({message: 'you are not authorized'});
+  } else {
+    next();
+  }
+};
+
+const rolesCanDelete = async (req, res, next) => {
+  if (req.user.role === 'staff') {
+    res.status(401).send({message: 'you are not authorized'});
+  } else {
+    next();
+  }
+};
+
+export {signToken, isAuth, isAdmin, rolesCanView, rolesCanCreate, rolesCanUpdate, rolesCanDelete};

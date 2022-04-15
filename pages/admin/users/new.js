@@ -10,7 +10,7 @@ import {Input, Select, Checkbox, Textarea} from "@components/Input";
 import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
-
+import {useAuth} from "../../../context/authContext";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -20,6 +20,7 @@ const dataBreadcrumb = [
 
 const NewUser = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
+  const {user} = useAuth();
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
@@ -28,14 +29,19 @@ const NewUser = () => {
     email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 
-  const formOptions = {resolver: yupResolver(validationSchema)};
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      role: roleOpts[0].value
+    }
+  };
   const {register, handleSubmit, control, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
   const onSubmit = async (values) => {
-    const formatForm = {...values, role: values.role.value}
+    const formatData = {...values, role: values.role.value ?? values.role}
     setIsBtnLoading(true)
-    const res = await userService.create(formatForm)
+    const res = await userService.create(formatData)
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
@@ -74,7 +80,7 @@ const NewUser = () => {
                 size='medium'
                 name='role'
                 title='Select Role'
-                options={roleOpts}
+                options={roleOpts.filter(({value}) => user.role !== 'admin' ? value !== 'admin' : value)}
                 value={value}
                 onChange={onChange}
               />

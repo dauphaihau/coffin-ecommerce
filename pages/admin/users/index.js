@@ -17,6 +17,7 @@ const UserList = () => {
     const fetchData = async () => {
       setProgress(progress + 30)
       const res = await userService.getAll();
+      console.log('res', res)
       setProgress(100)
       setUsers(res.data)
     }
@@ -38,11 +39,11 @@ const UserList = () => {
     {id: 'email', title: 'Email',},
     {id: 'role', title: 'Role',},
     // {id: 'verified', title: 'Verified'},
-    {
-      id: 'status', title: 'Status',
-      render: (row) => (<span className="badge-green">{row ? 'Active' : 'Banned'}</span>
-      )
-    },
+    // {
+    //   id: 'status', title: 'Status',
+    //   render: (row) => (<span className="badge-green">{row ? 'Active' : 'Banned'}</span>
+    //   )
+    // },
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('DD/MM/YYYY')}</>},
     {
       id: '', title: '',

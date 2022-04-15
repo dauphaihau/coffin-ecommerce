@@ -66,7 +66,7 @@ const LoginRegisterModal = () => {
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
-      if (res.data.role === 'admin') {
+      if (res.data.role !== 'customer') {
         router.push('/admin')
       }
       setUser({...user, ...res.data})

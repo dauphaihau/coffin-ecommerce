@@ -81,7 +81,7 @@ const Navbar = () => {
             <div className='navbar-admin__info' ref={innerRef} onClick={() => setDropdown(!dropdown)}>
               <img
                 className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src={`https://i.pravatar.cc/150?u=${user._id}`}
                 alt="profile"
               />
               {/*<p>{user?.name}</p>*/}

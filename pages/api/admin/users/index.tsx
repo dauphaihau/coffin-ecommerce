@@ -1,13 +1,12 @@
+import {NextApiRequest, NextApiResponse} from "next";
 import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
 import User from '../../../../models/User';
-import {NextApiRequest, NextApiResponse} from "next";
-import {isAdmin, isAuth} from "../../../../utils/middlewares/auth";
+import {isAuth, rolesCanCreate, rolesCanView} from "../../../../utils/middlewares/auth";
 import db from "../../../../utils/db/db";
 
 const handler = nc();
-handler.use(isAuth, isAdmin);
-
+handler.use(isAuth, rolesCanView);
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
     const users = await User.find({});
@@ -15,6 +14,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(users);
 });
 
+handler.use(rolesCanCreate);
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
 
@@ -28,7 +28,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         address: req.body.address,
         phoneNumber: req.body.phoneNumber,
         password: bcrypt.hashSync(req.body.password),
-        role: 'customer'
+        role: req.body.role,
     });
     await newUser.save();
     await db.disconnect();

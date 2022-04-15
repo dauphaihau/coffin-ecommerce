@@ -47,12 +47,14 @@ const categoryOpts = [
   },
 ]
 
-
-
 const roleOpts = [
   {
     value: 'staff',
     label: 'Staff',
+  },
+  {
+    value: 'manager',
+    label: 'Manager',
   },
   {
     value: 'admin',

@@ -13,6 +13,7 @@ interface TableProps {
   rows: [],
   itemsPerPage?: number,
   align?: string,
+  hidePagination?: boolean,
 }
 
 
@@ -23,10 +24,9 @@ const TableRow = (props) => {
       {rows?.map((row, index) => {
         return (
           <tr key={index}>
-          {/*<tr key={row.id}>*/}
             {columns.map((column) => {
               if (column.render) {
-                return <td className={column.align} key={column.id}>{column.render(row)}</td>
+                return <td className={column.align} key={column.id}>{column.render(row, index + 1)}</td>
               }
               if (column.key) {
                 return <td className={column.align} key={column.id}>{index + 1}</td>
@@ -56,7 +56,7 @@ const TableRow = (props) => {
 
 const Table = (props: TableProps) => {
 
-  const {columns, rows, itemsPerPage = 10, ...res} = props;
+  const {columns, rows, itemsPerPage = 10, hidePagination, ...res} = props;
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -86,12 +86,15 @@ const Table = (props: TableProps) => {
             />
           </tbody>
         </table>
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          currentPage={currentPage}
-          rows={rows}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+        {hidePagination
+          ? ''
+          : <Pagination
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            rows={rows}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        }
       </section>
     </div>
   );

@@ -10,10 +10,12 @@ import {Input, Select,} from "@components/Input";
 import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
+import {useAuth} from "@context/authContext";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
+  const {user: userInfo} = useAuth();
   const [user, setUser] = useState()
 
   useEffect(() => {
@@ -65,6 +67,10 @@ const UserEdit = () => {
       router.push('/admin/users')
       toast.success('Update success!')
     } else {
+      if (res.message === 'you are not authorized') {
+        return toast.error(res.message)
+      }
+      console.log('res-message', res)
       if (errors) {
         setError('email', {
           type: "server",
@@ -100,7 +106,7 @@ const UserEdit = () => {
                 size='medium'
                 name='role'
                 title='Select Role'
-                options={roleOpts}
+                options={roleOpts.filter(({value}) => userInfo.role !== 'admin' ? value !== 'admin' : value)}
                 value={value}
                 onChange={onChange}
               />

@@ -5,60 +5,11 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import Helmet from "@components/Helmet";
-import {Button} from "@components";
-import Grid from "@components/Grid";
+import {Helmet, Grid} from "@components";
+import {Button} from "@components/Button";
 import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "../../../services/products";
-
-const brandOpts = [
-  {
-    value: 'aurora',
-    label: 'Aurora',
-  },
-  {
-    value: 'batesville',
-    label: 'Batesville',
-  },
-  {
-    value: 'astral',
-    label: 'Astral',
-  },
-]
-
-const colorOpts = [
-  {
-    value: 'light-gray',
-    label: 'Light Gray',
-  },
-  {
-    value: 'light-brown',
-    label: 'Light Brown',
-  },
-  {
-    value: 'dark-brown',
-    label: 'Dark Brown',
-  },
-  {
-    value: 'cream',
-    label: 'Cream',
-  },
-]
-
-const categoryOpts = [
-  {
-    value: 'natural material coffin',
-    label: 'Natural material coffin',
-  },
-  {
-    value: 'american caskets',
-    label: 'American caskets',
-  },
-  {
-    value: 'traditional',
-    label: 'Traditional',
-  },
-]
+import {brandOpts, categoryOpts, colorOpts} from "../../../assets/data/options";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -85,7 +36,7 @@ const NewProduct = () => {
     quantity: Yup.number()
       .required('quantity is required')
       .typeError('quantity must be a number'),
-      // .positive('quantity must be greater than zero'),
+    // .positive('quantity must be greater than zero'),
     sku: Yup.string().required('SKU is required')
       .min(11, 'description must be at least 11 characters')
       .max(12, 'the max length of 12 characters is reached'),

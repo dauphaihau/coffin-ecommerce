@@ -5,10 +5,9 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import Helmet from "@components/Helmet";
+import {Helmet, Grid} from "@components";
 import {Input, Select,} from "@components/Input";
-import Grid from "@components/Grid";
-import {Button} from "@components";
+import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 

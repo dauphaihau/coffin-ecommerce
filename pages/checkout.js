@@ -120,6 +120,7 @@ const Checkout = ({context}) => {
     )
   }
 
+
   return (
     <div>
       <BannerCard srcImg={banner} title='Checkout'/>
@@ -142,7 +143,9 @@ const Checkout = ({context}) => {
             </Grid>
             <Checkbox label='Save this information for next time'/>
             <Textarea
+              register={register} errors={errors}
               label='Order Notes (Optional)'
+              name='note'
               rows={5}
               className='mb-6'
               placeholder='Notes about your order, e.g. special notes for delivery'

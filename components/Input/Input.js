@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { ErrorMessage } from '@hookform/error-message';
 
 const propTypes = {
   name: PropTypes.string,

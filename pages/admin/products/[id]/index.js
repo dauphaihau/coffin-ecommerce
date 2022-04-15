@@ -74,9 +74,9 @@ const ProductEdit = () => {
   const onSubmit = async (values) => {
     const formatData = {
       ...values,
-      brand: typeof values.brand === 'object' ? values.brand.value : values.brand,
-      category: typeof values.category === 'object' ? values.category.value : values.category,
-      color: typeof values.color === 'object' ? values.color.value : values.color
+      brand: values.brand.value ?? values.brand,
+      category: values.category.value ?? values.category,
+      color: values.color.value ?? values.color
     }
 
     setIsBtnLoading(true)

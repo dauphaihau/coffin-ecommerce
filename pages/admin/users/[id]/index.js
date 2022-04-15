@@ -33,7 +33,6 @@ const UserEdit = () => {
     {path: "", name: user?.name, lastLink: true}
   ];
 
-
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Email is invalid').required('Email is required'),
@@ -56,7 +55,7 @@ const UserEdit = () => {
   const onSubmit = async (values) => {
     const formatForm = {
       ...values,
-      role: typeof values.role === 'object' ? values.role.value : values.role
+      role: values.role.value ?? values.role
     }
     setIsBtnLoading(true)
     const res = await userService.update(formatForm)
@@ -117,5 +116,4 @@ const UserEdit = () => {
 }
 
 UserEdit.layout = 'admin';
-
 export default UserEdit;

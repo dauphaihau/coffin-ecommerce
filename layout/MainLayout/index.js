@@ -1,13 +1,13 @@
 import {Toaster} from "react-hot-toast";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
 
 import AllModal from "../../components/Modal";
 import AllDrawer, {Backdrop} from "../../components/Drawer";
 import {useUtil} from "../../context/utilContext";
-import {useEffect, useState} from "react";
 import Navbar from "./Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
-import {useRouter} from "next/router";
 import BannerHomeCard from "../../components/Card/BannerHomeCard";
 
 const MainLayout = ({children, categories}) => {

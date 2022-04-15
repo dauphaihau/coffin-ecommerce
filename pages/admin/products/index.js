@@ -28,10 +28,11 @@ const ProductList = () => {
     if (quantity == 0) {
       return <span className='badge-danger'>Out Of Stock</span>
     }
-    if (quantity < 0 && quantity > 100) {
+    if (quantity < 0 || quantity <= 100) {
       return <span className='badge-warning'>Low Stock</span>
+    } else {
+      return <span className='badge-green'>In Stock</span>
     }
-    return <span className='badge-green'>In Stock</span>
   }
 
   const columns = [

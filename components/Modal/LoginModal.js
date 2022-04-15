@@ -7,9 +7,9 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {useUtil} from "../../context/utilContext";
 import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
-import {Button} from "../Button";
 import {Checkbox, Input} from "../Input";
 import {accountService} from "@services/account";
+import {Button} from "../Button";
 
 const LoginRegisterModal = () => {
   const [registerForm, setRegisterForm] = useState(false)

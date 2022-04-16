@@ -1,12 +1,16 @@
 import {Button} from "../components/Button";
-import {Link} from "../components";
+import {Image, Link, Text} from "../components";
 
 export default function Custom404() {
   return (
-    <div className='flex flex-col justify-center items-center mb-4'>
-      <img src="/images/404.png" height={100} width={900} alt=""/>
-      <h1 className='text-4xl mb-3'>Looks like you are lost</h1>
-      <p className='mb-8 font-light'>We can&apos;t find the page you&apos;re looking for</p>
+    <div className='flex-center flex-col mb-4'>
+      <Image
+        src="/images/404.png"
+        classesSize='h-[500px] laptop:h-[640px] w-full'
+        alt='404'
+      />
+      <Text h1 sx='xl' lg='4xl' classes='mb-3'>Looks like you are lost</Text>
+      <Text sx='sm' weight='light' classes='mb-8'>We can&apos;t find the page you&apos;re looking for</Text>
       <Link href='/'>
         <Button>Go home</Button>
       </Link>

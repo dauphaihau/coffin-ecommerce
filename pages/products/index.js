@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {useFilterContext} from "../../context/filterContext";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import {Button} from "../../components/Button";
 import {Product, ProductListView} from "../../components/Card";
 import {Filters, Sorter} from "../../components";
@@ -13,7 +13,7 @@ const ProductsPage = ({categories = []}) => {
 
   const {gridView, filtered_products: products} = useFilterContext()
   const [state, setState] = useState(9)
-  const {drawerFiltersToggle, setCategories} = useUtil();
+  const {drawerFiltersToggle, setCategories} = useUIController();
 
   useEffect(() => {
     setCategories(categories)
@@ -32,6 +32,7 @@ const ProductsPage = ({categories = []}) => {
                 <Product
                   key={index}
                   // link={`${router.asPath}/product/${slugify(item.name)}`}
+
                   link={`/product/${slugify(item.name)}`}
                   title={item.name}
                   price={item.price}
@@ -97,7 +98,7 @@ const ProductsPage = ({categories = []}) => {
       <div className='laptop:hidden'>
         <div className='mb-4 flex justify-between gap-x-8'>
           <Button
-            className='py-[7px] w-fit bg-white text-black border-[1px] border-[#d2d5da] font-bold'
+            classes='py-[7px] w-fit bg-white text-black border-[1px] border-[#d2d5da] font-bold'
             onClick={() => drawerFiltersToggle()}
           >
             <i className="fa-solid fa-sliders mr-2"/>

@@ -4,24 +4,32 @@ import Head from 'next/head'
 
 import inventoryForCategory from "../../utils/inventoryForCategory";
 import {useAuth} from "../../context/authContext";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {CartProvider, CartContext} from "../../context/cartContext";
 import {Button, QuantityPicker, ShowMoreTextToggler} from "../../components/Button";
 import {Product as ProductCard} from "../../components/Card";
+import {Image} from "../../components";
+import Text from "../../components/Text";
 
 const Product = (props) => {
   const [relatedProducts, setRelatedProducts] = useState()
   const [numberOfItems, updateNumberOfItems] = useState(1)
   const {product} = props
-  const {price, image, name, description, salePrice, id} = product
+  const {price, image, name, description, salePrice, id, quantity} = product
   const router = useRouter();
   const {context: {addToCart, numberAllOfItemsInCart}} = props
-  const {closeDrawerModal} = useUtil();
+  const {closeDrawerModal} = useUIController();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
+    const loadInit = async () => {
+      const res = await inventoryForCategory(product.categories[0]);
+      setRelatedProducts(res);
+      updateNumberOfItems(1);
+      closeDrawerModal();
+    }
     loadInit()
   }, [router.asPath])
 
@@ -29,19 +37,13 @@ const Product = (props) => {
     setUser({...user, numberAllOfItemsInCart})
   }, [numberAllOfItemsInCart])
 
-  const loadInit = async () => {
-    const res = await inventoryForCategory(product.categories[0]);
-    setRelatedProducts(res);
-    updateNumberOfItems(1);
-    closeDrawerModal();
-  }
-
   const addItemToCart = (product) => {
     product["quantity"] = numberOfItems
     addToCart(product)
   }
 
   const increment = () => {
+    // if (numberOfItems === quantity) return ;
     updateNumberOfItems(numberOfItems + 1)
   }
 
@@ -59,39 +61,47 @@ const Product = (props) => {
       </Head>
 
       {/*<Breadcrumb/>*/}
-      <div className="py-12 ipad:flex-row py-4 w-full flex flex-1 flex-col my-0 mx-auto">
-        <div className="w-full ipad:w-1/2 h-120 flex flex-1">
-          <div className="py-16 p10 flex flex-1 justify-center items-center">
-            <img src={image} alt="Inventory item"/>
+      <div className="py-12 ipad:flex-row w-full flex  flex-col my-0 mx-auto">
+        <div className="w-full ipad:w-1/2 h-120 flex ">
+          <div className="py-16 p-10 flex-center flex-1">
+            <Image
+              src={image} alt='product'
+              classesSize=' w-[300px] laptop:w-[500px] h-[300px] laptop:h-[500px]'
+            />
           </div>
         </div>
         <div className="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
-          <h1 className="mt-0 mt-2 text-2xl mb-3.5
-          ipad:text-2xl laptop:text-4xl font-light leading-large ">{name}</h1>
+          <Text h1 sx='2xl' md='2xl' lg='4xl' weight='light' classes='mt-2 mb-3.5'>{name}</Text>
           <ShowMoreTextToggler limit={400} classes='block laptop:hidden text-sm' text={description}/>
-          <p className='mt-6 text-gray-600 leading-7 pb-6 hidden laptop:block'>
-            {description}
-          </p>
-          <h2 className="text-xl ipad:text-2xl laptop:text-4xl font-bold tracking-wide relative
-          ">${salePrice ? salePrice : price}
-            {price && salePrice
-              && <span
-                className="absolute top-[-3px] ipad:top-[1px] ml-[10px] line-through text-gray-400 font-light
-                 text-sm ipad:text-lg lg:text-sm xl:text-xl ps-2">
-              ${price}</span>}
-          </h2>
+          <Text color='gray-600' classes='my-6 leading-7 hidden laptop:block'>{description}</Text>
+          <Text sx='2xl' md='3xl' lg='4xl' weight='bold' classes='relative tracking-wide'>
+            ${salePrice ? salePrice : price}
+            {
+              price
+              && salePrice
+              && (
+                <Text
+                  span sx='base' md='base' color='gray-400' weight='light'
+                  classes="absolute top-[-1%] ipad:top-[1px] ml-[10px] line-through">
+                  ${price}
+                </Text>
+              )
+            }
+          </Text>
           <div className="my-6">
             <QuantityPicker
               increment={increment}
               decrement={decrement}
               numberOfItems={numberOfItems}
             />
+            {/*<Text  classes='mt-3'>Available: {quantity}</Text>*/}
           </div>
           <Button onClick={() => addItemToCart(product)}>Add to Cart</Button>
         </div>
       </div>
+
       <div>
-        <h1 className='text-lg ipad:text-2xl font-bold pl-2 mb-4'>Related Products</h1>
+        <Text sx='lg' md='2xl' weight='bold' classes='ml-2 mb-4'>Related Products</Text>
         <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-4'>
           {
             relatedProducts?.filter(p => p.id !== id).map((item, index) => {

@@ -1,14 +1,14 @@
-import {Grid, Helmet} from "../../components";
+import {Grid, Helmet, Image} from "../../components";
 import {Table} from "../../components/Table";
 import {useEffect, useState} from "react";
 import {userService} from "../../services/users";
 import {formatPrice} from "../../utils/helpers";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 
 const Dashboard = () => {
 
   const [users, setUsers] = useState()
-  const {progress, setProgress} = useUtil();
+  const {progress, setProgress} = useUIController();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,11 @@ const Dashboard = () => {
       render: (row) => (
         <div className='flex items-center'>
           <div className='rounded-lg '>
-            <img src={`https://i.pravatar.cc/150?u=${row._id}`} className='h-9 w-9 rounded-md ' alt='avatar'/>
+            <Image
+              src={`https://i.pravatar.cc/150?u=${row._id}`}
+              classesSize='max-w-9 max-h-9 w-9 h-9'
+              classes='rounded-md'
+            />
           </div>
           <div className=''>
             <p className='ml-4 text-sm font-bold'>{row.name}</p>

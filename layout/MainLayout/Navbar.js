@@ -4,11 +4,11 @@ import {slugify} from "../../utils/helpers";
 import NavControl from "../../components/NavControl";
 import {Link} from "../../components";
 import {MenuIcon} from "@heroicons/react/solid";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 
 const Navbar = ({categories}) => {
   const [shadowHeader, setShadowHeader] = useState(false)
-  const {drawerNavToggle} = useUtil();
+  const {drawerNavToggle} = useUIController();
 
   useEffect(() => {
     const scrollListener = () => {

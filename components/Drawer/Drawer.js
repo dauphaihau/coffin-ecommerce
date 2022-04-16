@@ -1,5 +1,6 @@
 import {XIcon} from "@heroicons/react/solid";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
+import {Text} from "../index";
 
 let blackTheme = false;
 
@@ -20,13 +21,12 @@ const Drawer = ({children, classes = '', theme = '', isOpen}) => {
   )
 }
 
-
 const Title = ({title}) => {
-  const {closeDrawerModal} = useUtil();
+  const {closeDrawerModal} = useUIController();
   return (
     <>
       <div className='drawer__title'>
-        <h1 className={blackTheme ? 'text-white' : ''}>{title}</h1>
+        <Text h1 classes={blackTheme ? 'text-white' : ''}>{title}</Text>
         <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
       </div>
       <div className={`border-b border-${blackTheme ? 'white' : ''}`}></div>

@@ -17,7 +17,7 @@ const HomeBannerCard = ({data = '', link}) => {
               {data.name}
             </p>
             <p className="py-6 tracking-wide">FROM <span>${data.price}</span></p>
-            <Button css='w-auto' onClick={() => router.push(`/product/${slugify(link.name)}`)}>Shop Now</Button>
+            <Button classes='w-auto' onClick={() => router.push(`/product/${slugify(link.name)}`)}>Shop Now</Button>
 
           </div>
           <div className="flex flex-1 flex-col justify-end pb-10 mt-4">

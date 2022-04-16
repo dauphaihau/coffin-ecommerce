@@ -32,6 +32,18 @@ export const accountService = {
     }
   },
 
+  updatePassword: async (values) => {
+    try {
+      await axios.put('/api/account/change-pass', values, getHeaders());
+      return {isLoading: false, isSuccess: true};
+    } catch ({response}) {
+      return {
+        isSuccess: false,
+        isLoading: false,
+        message: response?.data.message,
+      };
+    }
+  },
 
   me: async () => {
     try {

@@ -1,5 +1,8 @@
-import {useRouter} from "next/router";
 import {useForm} from "react-hook-form";
+import * as Yup from 'yup';
+import {useState} from "react";
+import {toast} from "react-hot-toast";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 import {useAuth} from "../../context/authContext";
 import banner from "../../public/images/banners/contemporary-banner.png";
@@ -7,47 +10,64 @@ import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {BannerCard} from "../../components/Card";
-import {Grid} from "../../components";
+import {Grid, Text} from "../../components";
+import {accountService} from "../../services/account";
 
 const ChangePass = () => {
 
-  const {user, setIsAuthorize} = useAuth();
-  const router = useRouter();
-
-  const {register, handleSubmit, reset, formState, setError} = useForm({
-    defaultValues: {
-      id: user.id,
-      type: 'updatePassword'
-    }
+  const [isBtnLoading, setIsBtnLoading] = useState(false)
+  const {user} = useAuth();
+  const validationSchema = Yup.object().shape({
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
   });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
+  const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
-  const onSubmit = (values) => {
-    console.log('values', values)
-    const {id, body, type} = values
+  const onSubmit = async (values) => {
+    const formatData = {...values, email: user.email}
+
+    setIsBtnLoading(true)
+    const res = await accountService.updatePassword(formatData)
+    setIsBtnLoading(res.isLoading)
+
+    if (res.isSuccess) {
+      toast.success('Update success!')
+      reset();
+    } else {
+      if (errors) {
+        setError('email', {
+          type: "server",
+          message: res.message
+        });
+      }
+    }
   }
 
   return (
-    <div>
+    <>
       <BannerCard srcImg={banner} title='Profile'/>
       <Grid md={2} lg={6} gapx={12} classes='mt-12'>
         <ProfileSidebar active='change-pass'/>
         <div className='laptop:col-span-3'>
           <div className='p-4 rounded-lg'>
-            <h1 className='text-3xl font-bold mb-6'>Change Password</h1>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              // className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
-              className="xl:pb-8 space-y-6 laptop:w-1/2"
-            >
-              <Input name='password' type='password' label='Old Password' register={register} errors={errors}/>
+            <Text sx='3xl' weight='bold' classes='mb-6'>Change Password</Text>
+            <form onSubmit={handleSubmit(onSubmit)} className="xl:pb-8 space-y-6 laptop:w-1/2">
+              <Input name='password' type='password' label='Current Password' register={register} errors={errors}/>
               <Input name='newPassword' type='password' label='New Password' register={register} errors={errors}/>
-              <Button type="submit"  className='w-full'>Change</Button>
+              <Input name='confirmPassword' type='password' label='Confirm New Password' register={register} errors={errors}/>
+              <Button type="submit" isLoading={isBtnLoading}>Change</Button>
             </form>
           </div>
         </div>
       </Grid>
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import Filters from "../Filters";
 import Drawer from "./Drawer";
 import {useFilterContext} from "../../context/filterContext";
@@ -8,7 +8,7 @@ import {Button} from "../Button";
 const FiltersDrawer = () => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {drawerFiltersOpen, categories} = useUtil();
+  const {drawerFiltersOpen, categories} = useUIController();
 
   const {clearFilters} = useFilterContext()
 
@@ -31,7 +31,7 @@ const FiltersDrawer = () => {
         </Drawer.Content>
         <Drawer.Footer>
           <div className='pt-4'>
-            <Button className='w-fit pt-4' onClick={() => clearFilters()}>clear all</Button>
+            <Button classes='w-fit pt-4' onClick={() => clearFilters()}>clear all</Button>
           </div>
         </Drawer.Footer>
       </Drawer>

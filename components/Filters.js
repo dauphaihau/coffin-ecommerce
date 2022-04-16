@@ -95,7 +95,7 @@ const Filters = ({categories, launchSticky}) => {
           onChange={updateFilters}
         />
       </div>
-      <Button className='w-fit hidden laptop:block' onClick={() => clearFilters()}>clear all</Button>
+      <Button classes='w-fit hidden laptop:block' onClick={() => clearFilters()}>clear all</Button>
     </div>
   );
 }

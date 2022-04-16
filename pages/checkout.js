@@ -121,7 +121,7 @@ const Checkout = ({context}) => {
   }
 
   return (
-    <div>
+    <>
       <BannerCard srcImg={banner} title='Checkout'/>
       <Grid md={2} gapx={12} classes='mt-12'>
         <div className='mb-12'>
@@ -150,13 +150,15 @@ const Checkout = ({context}) => {
               placeholder='Notes about your order, e.g. special notes for delivery'
             />
             <div className="flex gap-x-4">
-              <Button onClick={() => {
+              <Button
+                classes='w-fit'
+                onClick={() => {
                 localStorage.removeItem('COFFIN_ECOMMERCE');
                 setUser({...user, numberAllOfItemsInCart: 0})
               }}
               >
                 Place Order</Button>
-              <form action="/api/index.ts" method="POST">
+              <form action="/api/index.ts" className='w-1/2' method="POST">
                 <section>
                   <Button type="submit" role="link">Pay with card</Button>
                 </section>
@@ -207,7 +209,7 @@ const Checkout = ({context}) => {
           )}
         </div>
       </Grid>
-    </div>
+    </>
   );
 }
 

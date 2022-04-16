@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 
 import AllModal from "../../components/Modal";
 import AllDrawer, {Backdrop} from "../../components/Drawer";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import Navbar from "./Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
@@ -35,7 +35,7 @@ const MainLayout = ({children, categories}) => {
     }
   }, [router.asPath])
 
-  const {} = useUtil();
+  const {} = useUIController();
 
   return (
     <div>

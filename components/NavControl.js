@@ -1,11 +1,11 @@
 import {ShoppingBagIcon, UserIcon, SearchIcon} from "@heroicons/react/outline";
 import {UserIcon as UserIconSolid, UserGroupIcon} from "@heroicons/react/solid";
 import {Link} from "./index";
-import {useUtil} from "../context/utilContext";
+import {useUIController} from "../context/UIControllerContext";
 import {useAuth} from "../context/authContext";
 
 function NavControl() {
-  const {drawerToggle, modalToggle, modalSearchToggle} = useUtil();
+  const {drawerToggle, modalToggle, modalSearchToggle} = useUIController();
   const {user, isAuthorize} = useAuth();
 
   return (

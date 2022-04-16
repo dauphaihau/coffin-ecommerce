@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import {MENU} from "../../utils/menu";
 import {Link} from "../index";
 import {slugify} from "../../utils/helpers";
@@ -43,7 +43,7 @@ const NavDrawer = () => {
 
   const router = useRouter();
   const [categories, setCategories] = useState([])
-  const {closeDrawerModal, drawerNavOpen} = useUtil();
+  const {closeDrawerModal, drawerNavOpen} = useUIController();
 
   useEffect(() => {
     const initLoad = async () => {

@@ -44,7 +44,7 @@ const Info = () => {
                 <Input label='City/Town *' name='city' register={register} errors={errors}/>
                 <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
               </Grid>
-              <Button type="submit" className='ipad:w-1/3'>Update</Button>
+              <Button type="submit" classes='ipad:w-1/3'>Update</Button>
             </form>
           </div>
         </div>

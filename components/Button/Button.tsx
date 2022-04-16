@@ -1,31 +1,21 @@
-import {forwardRef} from "react";
+import {forwardRef, InputHTMLAttributes, ReactNode} from "react";
 import PropTypes from "prop-types";
+import {ampValidation} from "next/dist/build/output";
 
-const propTypes = {
-  classes: PropTypes.string,
-  type: PropTypes.string,
-  children: PropTypes.node,
-  // variant: PropTypes.oneOf(['primary', 'success', 'danger', 'secondary', 'empty']),
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
-};
+interface Props {
+  type?: string,
+  classes?: string,
+  // variant: string,
+  children: ReactNode,
+  disabled?: boolean,
+  onClick?: () => void;
+  isLoading?: boolean,
+}
 
-const defaultProps = {
-  classes: undefined,
-  children: undefined,
-  type: 'button',
-  variant: 'secondary',
-  disabled: false,
-  onClick: () => {},
-};
-
-const Button = forwardRef(
-  ( props, ref) => {
+const Button = forwardRef((props: Props, ref: any) => {
 
   const {
-    type,
-    className,
-    css, classes,
+    type, classes,
     children,
     isLoading = false,
     ...others
@@ -40,20 +30,17 @@ const Button = forwardRef(
 
   return (
     <button
-      className={`
-      btn ${className}
-       ${css} ${classes}
-       ${isLoading && 'opacity-[0.3]'}
+      className={`btn
+         ${classes}
+         ${isLoading && 'opacity-[0.3]'}
       `}
       {...others}
+      ref={ref}
     >
       {isLoading ? loading() : children}
     </button>
   )
 })
-
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
 
 Button.displayName = 'Button';
 export default Button;

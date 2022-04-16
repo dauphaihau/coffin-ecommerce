@@ -41,7 +41,7 @@
 .form-check-input {
   @apply mb-4 flex items-center;
   label {
-    @apply inline-block pt-[4px];
+    @apply inline-block ;
   }
   input {
     @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white

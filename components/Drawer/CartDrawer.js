@@ -1,17 +1,17 @@
 import {useState, useEffect} from 'react'
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import {CartProvider, CartContext} from "../../context/cartContext";
 import {DENOMINATION} from "../../utils/constant";
 import {slugify} from "../../utils/helpers";
 import {useAuth} from "../../context/authContext";
-import {Link} from "../index";
+import {Image, Link, Text} from "../index";
 import {Button, QuantityPicker} from "../Button";
 import Drawer from "./Drawer";
 
 const CartDrawer = ({context}) => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {drawerCartOpen, closeDrawerModal} = useUtil();
+  const {drawerCartOpen, closeDrawerModal} = useUIController();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
@@ -52,8 +52,8 @@ const CartDrawer = ({context}) => {
             cartEmpty
               ? (
                 <div className='h-full text-center flex flex-col items-center justify-center '>
-                  <img src="/images/empty.png" className='h-88 w-[60%]  laptop:h-auto' alt="empty"/>
-                  <p className='mb-8 font-bold text-xl'>Your cart is empty.</p>
+                  <Image src="/images/empty.png" classesSize='h-88 w-88' alt="empty"/>
+                  <Text sx='xl' weight='bold' classes='mb-8'>Your cart is empty.</Text>
                 </div>
               )
               : (
@@ -62,12 +62,12 @@ const CartDrawer = ({context}) => {
                     {
                       cart.map((item) => {
                         return (
-                          <div className="border-t py-10" key={item.id}>
+                          <div className="py-10" key={item.id}>
                             <div className="flex">
                               <div className='relative group bg-light rounded-lg p-1 cursor-pointer '
                                    onClick={() => removeFromCart(item)}
                               >
-                                <img className="h-28 m-0" width={440} src={item.image} alt={item.name}/>
+                                <Image classesSize='h-28 w-28 m-0' src={item.image} alt={item.name}/>
                                 <div className='
                                    transform duration-200 ease-in-out
                                    absolute group-hover:block hidden
@@ -80,15 +80,13 @@ const CartDrawer = ({context}) => {
                                   !opacity-1 absolute z-10 right-[30%] top-[32%]"/>
                                 </div>
                               </div>
-                              <div className='ml-4 w-[65%]'>
+                              <div className='ml-4 w-[64%]'>
                                 <Link href={`/product/${slugify(item.name)}`}>
-                                  <p className="m-0 text-gray-600 w-80 text-smaller">
-                                    {item.name}
-                                  </p>
+                                  <Text sx='sm' color='gray-600' classes="m-0 w-80">{item.name}</Text>
                                 </Link>
-                                <p className='text-gray-500 py-2 text-smaller'>
+                                <Text sx='sm' color='gray-500' classes='my-2'>
                                   Unit price: {DENOMINATION + item.price.toLocaleString()}
-                                </p>
+                                </Text>
                                 <div className='flex justify-between'>
                                   <QuantityPicker
                                     theme='black'
@@ -96,9 +94,9 @@ const CartDrawer = ({context}) => {
                                     increment={() => increment(item)}
                                     decrement={() => decrement(item)}
                                   />
-                                  <p className="m-0 pt-3 text-gray-900 tracking-wider">
+                                  <Text color='gray-900' classes="m-0 pt-3 tracking-wider">
                                     {DENOMINATION + (item.price * item.quantity).toLocaleString()}
-                                  </p>
+                                  </Text>
                                 </div>
                               </div>
                             </div>
@@ -113,10 +111,10 @@ const CartDrawer = ({context}) => {
         </Drawer.Content>
         <Drawer.Footer>
           <Link href="/checkout">
-            <Button className='w-full' onClick={() => closeDrawerModal()}>
+            <Button classes='w-full' onClick={() => closeDrawerModal()}>
               <div className="cursor-pointer flex justify-between text-base ">
-                <p className="text-white text-base mr-2">Proceed to check out</p>
-                <p className="text-white text-base border-l pl-4">{DENOMINATION + total.toLocaleString()}</p>
+                <Text sx='base' color='white' classes="mr-2">Proceed to check out</Text>
+                <Text sx='base' color='white' classes="border-l pl-4">{DENOMINATION + total.toLocaleString()}</Text>
               </div>
             </Button>
           </Link>

@@ -3,10 +3,10 @@ import LoadingBar from "react-top-loading-bar";
 
 import {AdminSidebar} from "../../components/Sidebar";
 import Navbar from "./Navbar";
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 
 const AdminLayout = ({children}) => {
-  const {progress, setProgress} = useUtil();
+  const {progress, setProgress} = useUIController();
   return (
     <div className='flex bg-[#f8f9fa] p-4 h-screen'>
       <LoadingBar color="#000000" progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>

@@ -11,7 +11,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
 
     if (await User.findOne({email: req.body.email})) {
-        res.status(409).send({message: `User with the username "${req.body.email}" already exists`});
+        res.status(409).send({message: `Email "${req.body.email}" already exists`});
     }
 
     const newUser = new User({

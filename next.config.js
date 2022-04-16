@@ -24,6 +24,9 @@ const nextConfig = {
     config.resolve.alias["@assets"] = path.resolve(__dirname, "assets");
     return config;
   },
+  images: {
+    domains: ['i.pravatar.cc'],
+  },
 }
 
 module.exports = nextConfig

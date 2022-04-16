@@ -6,12 +6,12 @@ import {useEffect, useState} from "react";
 import {Link, Tooltip, Helmet} from "@components";
 import {Table} from "@components/Table";
 import {userService} from "@services/users";
-import {useUtil} from "@context/utilContext";
+import {useUIController} from "@context/UIControllerContext";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
-  const {progress, setProgress} = useUtil();
+  const {progress, setProgress} = useUIController();
 
   useEffect(() => {
     const fetchData = async () => {

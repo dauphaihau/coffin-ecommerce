@@ -3,6 +3,7 @@ import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify, titleIfy} from "../../utils/helpers";
 import {CategoryCard} from "../../components/Card";
 import {Grid} from "../../components";
+import Text from "../../components/Text";
 
 const Categories = ({categories = []}) => {
   return (
@@ -14,7 +15,7 @@ const Categories = ({categories = []}) => {
       </Head>
       <div className="w-full">
         <div className="pt-4 pt-0 laptop:pt-10 pb-8">
-          <h1 className="text-3xl laptop:text-5xl font-light">All categories</h1>
+          <Text h1 sx='3xl' lg='5xl' weight='light'>All categories</Text>
         </div>
         <div className="flex-center">
           <Grid sx={1} md={2} lg={3} gap={4}>

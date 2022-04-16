@@ -1,3 +1,5 @@
+import {Image} from "../index";
+
 const Card = ({title, content = '', imgSrc}) => {
   return (
     <div
@@ -5,6 +7,7 @@ const Card = ({title, content = '', imgSrc}) => {
       <div className='mb-6'>
         <a href="#">
           <img className="rounded-lg h-56 w-full" src={imgSrc} alt=""/>
+          {/*<Image src={imgSrc} classesSize='h-[300px] max-w-[400px] h-full w-full' classes='rounded-lg h-full ' alt='card'/>*/}
         </a>
       </div>
       <div>

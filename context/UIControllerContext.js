@@ -7,13 +7,14 @@ const defaultValues = {
   drawerMenuOpen: false,
 };
 
-const UtilContext = createContext(defaultValues);
+const UIControllerContext = createContext(defaultValues);
 
-export function useUtil() {
-  return useContext(UtilContext);
+export function useUIController() {
+  return useContext(UIControllerContext);
 }
 
-export function UtilProvider({children}) {
+export function UIControllerProvider({children}) {
+
   const [launchBackdrop, setLaunchBackdrop] = useState(false)
   const [categories, setCategories] = useState([])
   const [drawerCartOpen, setDrawerCartOpen] = useState(false)
@@ -63,7 +64,7 @@ export function UtilProvider({children}) {
   }
 
   return (
-    <UtilContext.Provider value={{
+    <UIControllerContext.Provider value={{
       launchBackdrop,
       setCategories, categories,
       drawerCartOpen, drawerToggle, closeDrawerModal,
@@ -74,7 +75,7 @@ export function UtilProvider({children}) {
       progress, setProgress,
     }}>
       {children}
-    </UtilContext.Provider>
+    </UIControllerContext.Provider>
   );
 }
 

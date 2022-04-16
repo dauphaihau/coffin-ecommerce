@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {XIcon, SearchIcon} from "@heroicons/react/solid";
 
-import {useUtil} from "../../context/utilContext";
+import {useUIController} from "../../context/UIControllerContext";
 import Input from "../Input/Input";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
@@ -9,7 +9,7 @@ import {DENOMINATION} from "../../utils/constant";
 import {Link} from "../index";
 
 const SearchModal = () => {
-  const {modalSearchOpen} = useUtil();
+  const {modalSearchOpen} = useUIController();
   const inputRef = useRef(null);
   const [inventory, setInventory] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);

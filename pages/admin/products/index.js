@@ -6,13 +6,13 @@ import {useEffect, useState} from "react";
 import {Link, Helmet, Tooltip} from "@components";
 import {Table} from "@components/Table";
 import {productService} from "@services/products";
-import {useUtil} from "@context/utilContext";
 import {formatPrice} from "@utils/helpers";
+import {useUIController} from "@context/UIControllerContext";
 
 const ProductList = () => {
   const router = useRouter();
   const [products, setProducts] = useState()
-  const {progress, setProgress} = useUtil();
+  const {progress, setProgress} = useUIController();
 
   useEffect(() => {
     const fetchData = async () => {

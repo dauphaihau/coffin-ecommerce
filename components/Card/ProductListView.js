@@ -1,5 +1,5 @@
 import {DENOMINATION} from "../../utils/constant";
-import {Link} from "../index";
+import {Image, Link} from "../index";
 
 const ProductListView = ({link, title, imageSrc, price, description}) => {
 
@@ -11,7 +11,7 @@ const ProductListView = ({link, title, imageSrc, price, description}) => {
       <Link href={link}>
         <div className="h-full w-[300px] flex justify-center items-center rounded-lg bg-light hover:bg-light-200">
           <div className="flex flex-column justify-center items-center">
-            <img alt={title} src={imageSrc} className="w-3/5"/>
+            <Image src={imageSrc} alt={title} classesSize='w-3/5 w-[200px] h-[200px]'/>
           </div>
         </div>
       </Link>

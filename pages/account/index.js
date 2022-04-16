@@ -9,7 +9,7 @@ const MyAccount = () => {
   return (
     <div>
       <BannerCard srcImg={banner} title='Profile'/>
-      <Grid md={2} lg={6} gapx={12} css='mt-12'>
+      <Grid md={2} lg={6} gapx={12} classes='mt-12'>
         <ProfileSidebar active='dashboard'/>
         <div className='laptop:col-span-3'>
           <div className="flex flex-col w-full">

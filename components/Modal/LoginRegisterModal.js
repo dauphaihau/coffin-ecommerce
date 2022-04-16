@@ -8,8 +8,8 @@ import {useUtil} from "../../context/utilContext";
 import {useAuth} from "../../context/authContext";
 import {XIcon} from "@heroicons/react/solid";
 import {Checkbox, Input} from "../Input";
-import {accountService} from "@services/account";
 import {Button} from "../Button";
+import {accountService} from "../../services/account";
 
 const LoginRegisterModal = () => {
   const [registerForm, setRegisterForm] = useState(false)
@@ -51,8 +51,11 @@ const LoginRegisterModal = () => {
     }
   };
 
-  const {register, handleSubmit, reset, formState, setError, setValue} = useForm(formOptions);
-  const {errors} = formState;
+  const {
+    register, handleSubmit,
+    reset, setError, setValue,
+    formState: {errors},
+  } = useForm(formOptions);
 
   const onSubmit = (data) => {
     return registerForm
@@ -61,6 +64,7 @@ const LoginRegisterModal = () => {
   };
 
   const handleLogin = async (values) => {
+    console.log('values', values)
     setIsBtnLoading(true)
     const res = await accountService.login(values)
     setIsBtnLoading(res.isLoading)
@@ -125,7 +129,6 @@ const LoginRegisterModal = () => {
           {registerForm && <Input name='name' label='Name' register={register} errors={errors}/>}
           <Input name='email' type='email' label='Your email' register={register} errors={errors}/>
           <Input name='password' type='password' label='Your password' register={register} errors={errors}/>
-
           {!registerForm &&
             <div className="flex justify-between">
               <div className="h-5">

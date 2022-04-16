@@ -1,4 +1,3 @@
-
 .table-container {
   @apply min-w-full w-[5px]
   laptop:py-0
@@ -9,7 +8,7 @@
   section {
     border: 1px solid #f7f7f7;
 
-    @apply p-4 laptop:drop-shadow-xl overflow-x-visible
+    @apply p-4 laptop:drop-shadow-xl overflow-x-auto
     rounded-[19px] bg-white dark:bg-black
     border-gray-200 laptop:border-[#f7f7f7];
 

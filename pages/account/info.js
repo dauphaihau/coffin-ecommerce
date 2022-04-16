@@ -1,12 +1,12 @@
 import {useForm} from "react-hook-form";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
-import Grid from "../../components/Grid";
 import {useAuth} from "../../context/authContext";
-import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {BannerCard} from "../../components/Card";
+import {Grid} from "../../components";
+import {ProfileSidebar} from "../../components/Sidebar";
 
 const Info = () => {
   const {user} = useAuth();
@@ -25,8 +25,7 @@ const Info = () => {
   return (
     <div>
       <BannerCard srcImg={banner} title='Profile'/>
-
-      <Grid md={2} lg={6} gapx={12} css='mt-12'>
+      <Grid md={2} lg={6} gapx={12} classes='mt-12'>
         <ProfileSidebar active='info'/>
         <div className='laptop:col-span-3'>
           <div className='p-4 rounded-lg'>

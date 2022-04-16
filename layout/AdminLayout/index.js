@@ -12,7 +12,7 @@ const AdminLayout = ({children}) => {
       <LoadingBar color="#000000" progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
       <Toaster position="top-right" reverseOrder={false}/>
       <AdminSidebar/>
-      <div className='w-[85%] px-8'>
+      <div className='w-full ipad:w-[85%] px-2 ipad:px-8'>
         <Navbar/>
         <div>
           {children}

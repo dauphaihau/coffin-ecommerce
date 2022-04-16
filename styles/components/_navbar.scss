@@ -51,7 +51,7 @@
     }
   }
   &__info {
-    @apply flex cursor-pointer;
+    @apply flex cursor-pointer border-l pl-6;
     div {
       @apply  flex flex-col;
       p:nth-child(1) {

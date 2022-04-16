@@ -1,10 +1,32 @@
-export default function Button(props) {
+import {forwardRef} from "react";
+import PropTypes from "prop-types";
+
+const propTypes = {
+  classes: PropTypes.string,
+  type: PropTypes.string,
+  children: PropTypes.node,
+  // variant: PropTypes.oneOf(['primary', 'success', 'danger', 'secondary', 'empty']),
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+const defaultProps = {
+  classes: undefined,
+  children: undefined,
+  type: 'button',
+  variant: 'secondary',
+  disabled: false,
+  onClick: () => {},
+};
+
+const Button = forwardRef(
+  ( props, ref) => {
 
   const {
-    type = '',
-    className = '',
-    css = '',
-    children = '',
+    type,
+    className,
+    css, classes,
+    children,
     isLoading = false,
     ...others
   } = props
@@ -18,11 +40,21 @@ export default function Button(props) {
 
   return (
     <button
-      className={`btn ${className} ${css}`}
+      className={`
+      btn ${className}
+       ${css} ${classes}
+       ${isLoading && 'opacity-[0.3]'}
+      `}
       {...others}
     >
       {isLoading ? loading() : children}
     </button>
   )
-}
+})
+
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
+
+Button.displayName = 'Button';
+export default Button;
 

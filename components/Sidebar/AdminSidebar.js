@@ -75,7 +75,7 @@ const AdminSidebar = () => {
   const handleActive = (link) => router.pathname === link.href
 
   return (
-    <aside className="w-[15%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
+    <aside className="hidden laptop:block w-[15%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
       <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-black">
         <div className='flex justify-center'>
           <Link href="/">

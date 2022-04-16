@@ -1,12 +1,13 @@
-import banner from "../../public/images/banners/contemporary-banner.png";
-import Grid from "../../components/Grid";
-import {useForm} from "react-hook-form";
-import {useAuth} from "../../context/authContext";
 import {useRouter} from "next/router";
+import {useForm} from "react-hook-form";
+
+import {useAuth} from "../../context/authContext";
+import banner from "../../public/images/banners/contemporary-banner.png";
 import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
-import {ImgBannerCard} from "../../components/Card";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
+import {BannerCard} from "../../components/Card";
+import {Grid} from "../../components";
 
 const ChangePass = () => {
 
@@ -24,30 +25,12 @@ const ChangePass = () => {
   const onSubmit = (values) => {
     console.log('values', values)
     const {id, body, type} = values
-
-    // return userService.update(id, body, type)
-    //   .then(() => {
-    //     // setUser({...user, ...res})
-    //     // setIsAuthorize(true)
-    //     // modalToggle();
-    //     alert('success')
-    //   })
-    //   .catch((err) => {
-    //     alert('error')
-    //       // if (errors) {
-    //       //   setError('password', {
-    //       //     type: "server",
-    //       //     message: err,
-    //       //   });
-    //       // }
-    //     }
-    //   )
   }
 
   return (
     <div>
-      <ImgBannerCard srcImg={banner} title='Profile'/>
-      <Grid md={2} lg={6} gapx={12} css='mt-12'>
+      <BannerCard srcImg={banner} title='Profile'/>
+      <Grid md={2} lg={6} gapx={12} classes='mt-12'>
         <ProfileSidebar active='change-pass'/>
         <div className='laptop:col-span-3'>
           <div className='p-4 rounded-lg'>
@@ -59,7 +42,7 @@ const ChangePass = () => {
             >
               <Input name='password' type='password' label='Old Password' register={register} errors={errors}/>
               <Input name='newPassword' type='password' label='New Password' register={register} errors={errors}/>
-              <Button type="submit" className='w-full'>Change</Button>
+              <Button type="submit"  className='w-full'>Change</Button>
             </form>
           </div>
         </div>

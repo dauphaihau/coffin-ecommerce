@@ -1,18 +1,13 @@
 import {ChevronRightIcon, ChevronLeftIcon} from "@heroicons/react/outline";
-import PropTypes from "prop-types";
 
-const propTypes = {
-  rows: PropTypes.array,
-  itemsPerPage: PropTypes.number,
-  onPageChange: PropTypes.func,
-  currentPage: PropTypes.number,
+interface Props {
+  rows: [],
+  itemsPerPage: number,
+  onPageChange: (currentPage: number) => void,
+  currentPage: number,
 }
 
-const defaultProps = {
-  onPageChange: () => {},
-};
-
-const Pagination = (props) => {
+const Pagination = (props: Props) => {
 
   const {
     rows = [],
@@ -58,8 +53,5 @@ const Pagination = (props) => {
     </div>
   )
 }
-
-Pagination.defaultProps = defaultProps;
-Pagination.propTypes = propTypes;
 
 export default Pagination;

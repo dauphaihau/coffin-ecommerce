@@ -1,8 +1,9 @@
+import {useRouter} from "next/router";
+import Cookie from "cookie-cutter";
+
 import {Link} from "../index";
 import {CogIcon, HomeIcon, IdentificationIcon, LogoutIcon, ShoppingCartIcon} from "@heroicons/react/outline";
 import {useAuth} from "../../context/authContext";
-import {useRouter} from "next/router";
-import Cookie from "cookie-cutter";
 
 const ProfileSidebar = ({active}) => {
 

@@ -79,12 +79,15 @@ const Navbar = () => {
               <i className="fa-solid fa-bell"/>
             </div>
             <div className='navbar-admin__info' ref={innerRef} onClick={() => setDropdown(!dropdown)}>
+              <div className='text-right mr-3'>
+                <p>{user?.name}</p>
+                <p>{user?.role}</p>
+              </div>
               <img
-                className="h-8 w-8 rounded-full"
+                className="h-10 w-10 rounded-full"
                 src={`https://i.pravatar.cc/150?u=${user._id}`}
                 alt="profile"
               />
-              {/*<p>{user?.name}</p>*/}
             </div>
             {/*Dropdown profile*/}
             <div className={`navbar-admin__profile ${dropdown ? 'block' : 'hidden'} `}>

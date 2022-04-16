@@ -1,7 +1,7 @@
 import Pagination from "./Pagination";
 import {ReactNode, useState} from "react";
 
-interface TableProps {
+interface Props {
   fitContent?: boolean,
   columns: [{
     render: ReactNode,
@@ -15,7 +15,6 @@ interface TableProps {
   align?: string,
   hidePagination?: boolean,
 }
-
 
 const TableRow = (props) => {
   const {rows, columns} = props;
@@ -54,10 +53,8 @@ const TableRow = (props) => {
   )
 };
 
-const Table = (props: TableProps) => {
-
+const Table = (props: Props) => {
   const {columns, rows, itemsPerPage = 10, hidePagination, ...res} = props;
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;

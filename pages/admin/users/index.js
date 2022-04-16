@@ -87,8 +87,8 @@ const UserList = () => {
   return (
     <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}>
       <Table
-        itemsPerPage={6}
         columns={columns}
+        itemsPerPage={6}
         rows={users}
       />
     </Helmet>

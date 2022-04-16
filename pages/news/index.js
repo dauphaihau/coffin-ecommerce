@@ -1,5 +1,5 @@
-import Grid from "../../components/Grid";
 import {Card} from "../../components/Card";
+import {Grid} from "../../components";
 
 const News = () => {
   return (
@@ -7,7 +7,7 @@ const News = () => {
       <div className="pt-4 pt-0 laptop:pt-10 pb-8">
         <h1 className="text-3xl laptop:text-5xl font-light">News</h1>
       </div>
-      <div className='grid ipad:grid-cols-2 laptop:grid-cols-4 gap-8'>
+      <Grid md={2} lg={4} gap={8}>
         <Card
           imgSrc='/images/news/Coffin-Casket.png'
           title='What is the difference between a casket and a coffin?'
@@ -23,9 +23,9 @@ const News = () => {
           title='Every process is important'
           content='We’re passionate about willow, this is reflected in everything we do, from the tiny tender shoots we plant and nurture, to the final piece of willow we craft into a wicker coffin as a finishing touch. Every detail matters and this ensures we deliver nothing less than an exceptional product.'
         />
-      </div>
+      </Grid>
     </div>
-  );
+  )
 }
 
 export default News;

@@ -1,8 +1,8 @@
-import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import Head from "next/head";
+import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify, titleIfy} from "../../utils/helpers";
-import Grid from "../../components/Grid";
 import {CategoryCard} from "../../components/Card";
+import {Grid} from "../../components";
 
 const Categories = ({categories = []}) => {
   return (
@@ -16,8 +16,8 @@ const Categories = ({categories = []}) => {
         <div className="pt-4 pt-0 laptop:pt-10 pb-8">
           <h1 className="text-3xl laptop:text-5xl font-light">All categories</h1>
         </div>
-        <div className="flex flex-col items-center">
-          <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-3'>
+        <div className="flex-center">
+          <Grid sx={1} md={2} lg={3} gap={4}>
             {
               categories.map((category, index) => (
                 <CategoryCard
@@ -29,7 +29,7 @@ const Categories = ({categories = []}) => {
                 />
               ))
             }
-          </div>
+          </Grid>
         </div>
       </div>
     </>

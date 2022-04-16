@@ -120,11 +120,10 @@ const Checkout = ({context}) => {
     )
   }
 
-
   return (
     <div>
       <BannerCard srcImg={banner} title='Checkout'/>
-      <Grid md={2} gapx={12} css='mt-12'>
+      <Grid md={2} gapx={12} classes='mt-12'>
         <div className='mb-12'>
           <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +156,7 @@ const Checkout = ({context}) => {
               }}
               >
                 Place Order</Button>
-              <form action="/api/checkout_sessions" method="POST">
+              <form action="/api/index.ts" method="POST">
                 <section>
                   <Button type="submit" role="link">Pay with card</Button>
                 </section>

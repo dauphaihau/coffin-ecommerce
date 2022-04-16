@@ -32,6 +32,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     });
     await newUser.save();
     await db.disconnect();
+
     res.status(200).send({message: 'created user success'});
 });
 

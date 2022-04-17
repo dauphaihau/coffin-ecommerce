@@ -41,3 +41,19 @@
 .animate {
  @apply transition-all duration-500 ease-in-out;
 }
+
+.tabs {
+  @apply w-full p-4;
+
+  &__tab {
+    @apply w-[60%] grid lg:grid-cols-3 gap-y-4 gap-x-4;
+    div {
+      @apply rounded-[5px] cursor-pointer border border-gray-100;
+      padding: 0.5rem 0.5rem;
+
+      p {
+        @apply my-auto mx-auto text-center;
+      }
+    }
+  }
+}

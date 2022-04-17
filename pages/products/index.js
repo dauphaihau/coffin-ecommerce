@@ -13,7 +13,7 @@ const ProductsPage = ({categories = []}) => {
 
   const {gridView, filtered_products: products} = useFilterContext()
   const [state, setState] = useState(9)
-  const {drawerFiltersToggle, setCategories} = useUIController();
+  const {dispatch, setCategories} = useUIController();
 
   useEffect(() => {
     setCategories(categories)
@@ -99,7 +99,7 @@ const ProductsPage = ({categories = []}) => {
         <div className='mb-4 flex justify-between gap-x-8'>
           <Button
             classes='py-[7px] w-fit bg-white text-black border-[1px] border-[#d2d5da] font-bold'
-            onClick={() => drawerFiltersToggle()}
+            onClick={() => dispatch({type: 'OPEN_FILTER_DRAWER'})}
           >
             <i className="fa-solid fa-sliders mr-2"/>
             Filter</Button>

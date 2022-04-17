@@ -6,7 +6,7 @@ import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {BannerCard} from "../../components/Card";
 import {Grid} from "../../components";
-import {ProfileSidebar} from "../../components/Sidebar";
+import {ProfileSidebar} from "../../components/Navigation";
 
 const Info = () => {
   const {user} = useAuth();

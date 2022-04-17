@@ -1,7 +1,7 @@
 import {Toaster} from "react-hot-toast";
 import LoadingBar from "react-top-loading-bar";
 
-import {AdminSidebar} from "../../components/Sidebar";
+import {AdminSidebar} from "../../components/Navigation";
 import Navbar from "./Navbar";
 import {useUIController} from "../../context/UIControllerContext";
 

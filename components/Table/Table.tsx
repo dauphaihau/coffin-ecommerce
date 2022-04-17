@@ -12,7 +12,7 @@ interface Props {
   }],
   rows: [],
   itemsPerPage?: number,
-  align?: string,
+  align?: 'center' | 'left' | 'right',
   hidePagination?: boolean,
 }
 

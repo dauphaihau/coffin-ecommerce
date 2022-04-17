@@ -6,7 +6,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 
 import {useAuth} from "../../context/authContext";
 import banner from "../../public/images/banners/contemporary-banner.png";
-import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
+import ProfileSidebar from "../../components/Navigation/ProfileSidebar";
 import {Input} from "../../components/Input";
 import {Button} from "../../components/Button";
 import {BannerCard} from "../../components/Card";

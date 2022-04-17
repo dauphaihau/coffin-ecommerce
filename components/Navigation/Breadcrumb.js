@@ -1,4 +1,4 @@
-import {Link} from "./index";
+import {Link} from "../index";
 
 const Breadcrumb = ({links}) => {
   return (

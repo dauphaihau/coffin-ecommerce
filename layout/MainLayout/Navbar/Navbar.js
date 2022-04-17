@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
-import {MENU} from "../../utils/menu";
-import {slugify} from "../../utils/helpers";
-import NavControl from "../../components/NavControl";
-import {Link} from "../../components";
+import {MENU} from "../../../utils/menu";
+import {slugify} from "../../../utils/helpers";
+import NavControl from "./NavControl";
+import {Link} from "../../../components";
 import {MenuIcon} from "@heroicons/react/solid";
-import {useUIController} from "../../context/UIControllerContext";
+import {useUIController} from "../../../context/UIControllerContext";
 
 const Navbar = ({categories}) => {
   const [shadowHeader, setShadowHeader] = useState(false)
-  const {drawerNavToggle} = useUIController();
+  const {dispatch} = useUIController();
 
   useEffect(() => {
     const scrollListener = () => {
@@ -30,9 +30,9 @@ const Navbar = ({categories}) => {
         <div className='navbar-left'>
           <MenuIcon
             className='cursor-pointer w-[30px] h-[30px] laptop:hidden'
-            onClick={() => drawerNavToggle()}
+            onClick={() => dispatch({type: 'OPEN_NAV_DRAWER'})}
           />
-          <Link href="/" className="navbar-left__logo hidden laptop:block">
+          <Link href="/pages" className="navbar-left__logo hidden laptop:block">
             <img
               src="/images/logo.png"
               alt="logo"

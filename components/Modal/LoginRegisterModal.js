@@ -14,7 +14,7 @@ import {Link, Text} from "../index";
 
 const LoginRegisterModal = () => {
   const [registerForm, setRegisterForm] = useState(false)
-  const {modalOpen, modalToggle} = useUIController();
+  const {openLoginRegisterModal, closeDrawerModal} = useUIController();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
   const {setUser, user, setIsAuthorize} = useAuth();
   const router = useRouter();
@@ -65,18 +65,17 @@ const LoginRegisterModal = () => {
   };
 
   const handleLogin = async (values) => {
-    console.log('values', values)
     setIsBtnLoading(true)
     const res = await accountService.login(values)
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {
       if (res.data.role !== 'customer') {
-        router.push('/admin')
+        await router.push('/admin')
       }
       setUser({...user, ...res.data})
       setIsAuthorize(true)
-      modalToggle();
+      closeDrawerModal();
     } else {
       if (errors) {
         setError('email', {
@@ -107,7 +106,7 @@ const LoginRegisterModal = () => {
   }
 
   return (
-    <div className={`${!modalOpen && 'hidden'}
+    <div className={`${!openLoginRegisterModal && 'hidden'}
           fixed z-[200] justify-center items-center
           p-4 w-full h-full 
           inset-0 
@@ -118,8 +117,9 @@ const LoginRegisterModal = () => {
            `}>
       <div className="bg-white rounded-lg shadow">
         <div className="flex justify-end p-2">
-          <XIcon className='btn-icon' onClick={() => modalToggle()}/>
+          <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
         </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="px-6 pb-4 space-y-6 lg:px-8 pb-6 xl:pb-8"
@@ -138,7 +138,7 @@ const LoginRegisterModal = () => {
               <Link href="#" className="text-sm text-black hover:underline">Lost Password?</Link>
             </div>
           }
-          <Button type="submit" classes='w-full' isLoading={isBtnLoading}>
+          <Button type="submit" width='full' size='xl' isLoading={isBtnLoading}>
             {!registerForm ? 'Login to your account' : 'Register'}
           </Button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">

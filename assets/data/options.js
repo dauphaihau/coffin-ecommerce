@@ -89,4 +89,27 @@ const sortOpts = [
   },
 ]
 
-export {colorOpts, categoryOpts, brandOpts, roleOpts, sortOpts}
+
+const deliveryOpts = [
+  {
+    name: 'Standard delivery (Free)',
+    description: 'Delivered on Monday, August 12',
+  },
+  {
+    name: 'Fast delivery ($2,00)',
+    description: 'Delivered on Monday, August 5',
+  },
+]
+
+const paymentOpts = [
+  {
+    name: 'Credit / Debit Card',
+    description: 'We support Mastercard, Visa, Discover and Stripe.',
+  },
+  {
+    name: 'Cash on CheckoutDelivery',
+    description: 'Pay with cash when your order is delivered.',
+  },
+]
+
+export {colorOpts, categoryOpts, brandOpts, roleOpts, sortOpts, deliveryOpts, paymentOpts}

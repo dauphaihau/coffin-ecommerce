@@ -27,7 +27,7 @@ const Filters = ({categories, launchSticky}) => {
             <button
               key={idz}
               type='button'
-              className={`filterBtn ${category === name && 'is-selected'} `}
+              className={`filter-btn ${category === name && 'is-selected'} `}
               name='category'
               onClick={updateFilters}
             >

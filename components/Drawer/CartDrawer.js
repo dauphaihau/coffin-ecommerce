@@ -11,7 +11,7 @@ import Drawer from "./Drawer";
 const CartDrawer = ({context}) => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {drawerCartOpen, closeDrawerModal} = useUIController();
+  const {openCartDrawer, closeDrawerModal, dispatch} = useUIController();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const CartDrawer = ({context}) => {
 
   return (
     <>
-      <Drawer isOpen={drawerCartOpen}>
+      <Drawer isOpen={openCartDrawer}>
         <Drawer.Title title='Your Cart'/>
         <Drawer.Content>
           {
@@ -62,12 +62,12 @@ const CartDrawer = ({context}) => {
                     {
                       cart.map((item) => {
                         return (
-                          <div className="py-10" key={item.id}>
+                          <div className="border-b py-4" key={item.id}>
                             <div className="flex">
                               <div className='relative group bg-light rounded-lg p-1 cursor-pointer '
                                    onClick={() => removeFromCart(item)}
                               >
-                                <Image classesSize='h-28 w-28 m-0' src={item.image} alt={item.name}/>
+                                <Image classesSize='h-24 w-24 ipad:h-28 ipad:w-28 m-0' src={item.image} alt={item.name}/>
                                 <div className='
                                    transform duration-200 ease-in-out
                                    absolute group-hover:block hidden
@@ -89,6 +89,7 @@ const CartDrawer = ({context}) => {
                                 </Text>
                                 <div className='flex justify-between'>
                                   <QuantityPicker
+                                    // size='sx'
                                     theme='black'
                                     numberOfItems={item.quantity}
                                     increment={() => increment(item)}
@@ -111,7 +112,7 @@ const CartDrawer = ({context}) => {
         </Drawer.Content>
         <Drawer.Footer>
           <Link href="/checkout">
-            <Button classes='w-full' onClick={() => closeDrawerModal()}>
+            <Button size='xl' width='full' onClick={() => closeDrawerModal()}>
               <div className="cursor-pointer flex justify-between text-base ">
                 <Text sx='base' color='white' classes="mr-2">Proceed to check out</Text>
                 <Text sx='base' color='white' classes="border-l pl-4">{DENOMINATION + total.toLocaleString()}</Text>

@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import AllModal from "../../components/Modal";
 import AllDrawer, {Backdrop} from "../../components/Drawer";
 import {useUIController} from "../../context/UIControllerContext";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import BannerHomeCard from "../../components/Card/BannerHomeCard";

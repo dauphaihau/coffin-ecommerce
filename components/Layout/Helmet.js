@@ -1,4 +1,4 @@
-import Breadcrumb from "./Breadcrumb";
+import Breadcrumb from "../Navigation/Breadcrumb";
 
 const Helmet = ({title, dataBreadcrumb, children}) => {
   return (

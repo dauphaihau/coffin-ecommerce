@@ -43,7 +43,7 @@ const NavDrawer = () => {
 
   const router = useRouter();
   const [categories, setCategories] = useState([])
-  const {closeDrawerModal, drawerNavOpen} = useUIController();
+  const {closeDrawerModal, openNavDrawer} = useUIController();
 
   useEffect(() => {
     const initLoad = async () => {
@@ -60,7 +60,7 @@ const NavDrawer = () => {
   return (
     <>
       <Drawer
-        theme='black' isOpen={drawerNavOpen}
+        theme='black' isOpen={openNavDrawer}
         classes='
         w-4/5 ipad:w-[300px] left-0 translate-x-[-100%]
         laptop:hidden

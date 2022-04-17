@@ -14,10 +14,14 @@ import banner from "../public/images/banners/checkout.jpg";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
-import {Button} from "../components/Button";
+import {Button, QuantityPicker} from "../components/Button";
 import {Checkbox, Input, Textarea} from "../components/Input";
-import {Grid} from "../components";
+import {Grid, Text, Tooltip} from "../components";
 import {BannerCard} from "../components/Card";
+import moment from "moment/moment";
+import {Table} from "../components/Table";
+import {Tab} from "@headlessui/react";
+import {FirstTabCheckout, SecondTabCheckout, ThirdTabCheckout} from "../components/Navigation/Tabs";
 
 const stripePromise = getStripejs();
 
@@ -42,10 +46,41 @@ const calculateShipping = () => {
 const Checkout = ({context}) => {
   const [isPayOnline, setIsPayOnline] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
+
+  const [activeTab, setActiveTab] = useState(1);
+
   const {user, setUser} = useAuth();
 
   const stripe = useStripe()
   const elements = useElements()
+
+
+  const tabsContent = [
+    {
+      id: 1,
+      heading: 'Cart',
+      line: false,
+      content: () => <FirstTabCheckout handleTabClick={handleTabClick}/>,
+    },
+    {
+      id: 2,
+      heading: 'Billing & address',
+      content: () => <SecondTabCheckout/>
+    },
+    {
+      id: 3,
+      heading: 'Payment',
+      content: () => <ThirdTabCheckout/>
+    },
+  ];
+
+  const [currentTab, setCurrentTab] = useState(tabsContent[0]);
+
+  function handleTabClick(currentTab) {
+    setActiveTab(currentTab);
+    const currentTabContent = tabsContent.filter(item => item.id === currentTab);
+    setCurrentTab(currentTabContent[0]);
+  }
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -109,7 +144,7 @@ const Checkout = ({context}) => {
     clearCart()
   }
 
-  const {numberOfItemsInCart, cart, total} = context
+  const {numberOfItemsInCart, cart, total, removeFromCart, setItemQuantity} = context
   const cartEmpty = numberOfItemsInCart === Number(0)
 
   if (orderCompleted) {
@@ -122,93 +157,91 @@ const Checkout = ({context}) => {
 
   return (
     <>
-      <BannerCard srcImg={banner} title='Checkout'/>
-      <Grid md={2} gapx={12} classes='mt-12'>
-        <div className='mb-12'>
-          <h1 className='font-bold text-2xl mb-8'>Shipping Address</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid md={1} lg={2} gapx={4}>
-              <Input label='First Name *' name='firstName' register={register} errors={errors}/>
-              <Input label='Last Name *' name='lastName' register={register} errors={errors}/>
-            </Grid>
-            <Input label='Address *' name='address' register={register} errors={errors}/>
-            <Grid md={1} lg={2} gapx={4}>
-              <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
-              <Input label='Email ' name='email' register={register} errors={errors}/>
-            </Grid>
-            <Grid md={1} lg={2} gapx={4}>
-              <Input label='City/Town *' name='city' register={register} errors={errors}/>
-              <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
-            </Grid>
-            <Checkbox label='Save this information for next time'/>
-            <Textarea
-              register={register} errors={errors}
-              label='Order Notes (Optional)'
-              name='note'
-              rows={5}
-              className='mb-6'
-              placeholder='Notes about your order, e.g. special notes for delivery'
-            />
-            <div className="flex gap-x-4">
-              <Button
-                classes='w-fit'
-                onClick={() => {
-                localStorage.removeItem('COFFIN_ECOMMERCE');
-                setUser({...user, numberAllOfItemsInCart: 0})
-              }}
-              >
-                Place Order</Button>
-              <form action="/api/index.ts" className='w-1/2' method="POST">
-                <section>
-                  <Button type="submit" role="link">Pay with card</Button>
-                </section>
-              </form>
-            </div>
-          </form>
+      {/*<BannerCard srcImg={banner} title='Checkout'/>*/}
+      <Text h1 sx='3xl' weight='bold' classes='mb-8'>Checkout</Text>
+      <div className='tabs'>
+        <div className='tabs__tab'>
+          {tabsContent.map(item => {
+            if (!item.line) {
+              return (
+                  <div className='border-none text-center' key={item.id}
+                       onClick={() => handleTabClick(item.id)}>
+                    <button className={`tabLink mb-4 ${activeTab === item.id && 'is-selected'}`}/>
+                    <Text sx='sm' color='[#738a88]' classes={`animate hover:text-gray-600 
+                    ${activeTab === item.id ? '!text-black' : ''} `}>
+                      {item.heading}
+                    </Text>
+                  </div>
+              )
+            }
+            return (
+
+                <div className='border-none text-center' key={item.id}
+                     onClick={() => handleTabClick(item.id)}>
+                  <button className={`tabLink ${activeTab === item.id && 'is-selected'}`}/>
+                  <p className={`text-sm text-[#7e8a88] 
+                transition-all duration-300 ease-in-out hover:text-gray-600 
+                    ${activeTab === item.id ? '!text-black' : ''} `}>
+                    {item.heading}
+                  </p>
+                </div>
+            )
+          })}
         </div>
-        <div>
-          <h1 className='font-bold text-2xl mb-8'>Your Order</h1>
-          {cartEmpty ? (
-            <h3>No items in cart.</h3>
-          ) : (
-            <div className="flex flex-col w-full">
-              <div className='flex justify-between bg-light-200 p-4 rounded-lg'>
-                <p>Product</p>
-                <p>Subtotal</p>
-              </div>
-              <div>
-                {cart.map((item, index) => {
-                  return (
-                    <div className="border-b py-6 laptop:px-4" key={index}>
-                      <div className="flex items-center">
-                        <div aria-label={item.name} className='bg-light rounded-lg p-1'>
-                          <img className="h-28 m-0 w-28" src={item.image} alt={item.name}/>
-                        </div>
-                        <p className="m-0 pl-[9px] ipad:pl-10 text-gray-600">
-                          {item.name}
-                        </p>
-                        <div className="flex flex-1 justify-end">
-                          <p className="m-0 pl-0 ipad:pl-10 text-gray-900">
-                            {DENOMINATION + item.price * item.quantity}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className='flex justify-between px-4 py-4 border-b font-bold'>
-                <p>Shipping</p>
-                <p>Free</p>
-              </div>
-              <div className='flex justify-between px-4 py-4 font-bold'>
-                <p>Total</p>
-                <p>${total}</p>
-              </div>
-            </div>
-          )}
+        <div className="p-[20px]">
+          {currentTab.content().type(tabsContent)}
         </div>
-      </Grid>
+      </div>
+
+
+      {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
+      {/*<div className='mb-12'>*/}
+      {/*  <Text h1 sx='2xl' weight='bold' classes='mb-8'>Shipping Address</Text>*/}
+      {/*  <form onSubmit={handleSubmit(onSubmit)}>*/}
+      {/*    <Grid md={1} lg={2} gapx={4}>*/}
+      {/*      <Input label='First Name *' name='firstName' register={register} errors={errors}/>*/}
+      {/*      <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
+      {/*    </Grid>*/}
+      {/*    <Input label='Address *' name='address' register={register} errors={errors}/>*/}
+      {/*    <Grid md={1} lg={2} gapx={4}>*/}
+      {/*      <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>*/}
+      {/*      <Input label='Email ' name='email' register={register} errors={errors}/>*/}
+      {/*    </Grid>*/}
+      {/*    <Grid md={1} lg={2} gapx={4}>*/}
+      {/*      <Input label='City/Town *' name='city' register={register} errors={errors}/>*/}
+      {/*      <Input label='Postcode *' name='postcode' register={register} errors={errors}/>*/}
+      {/*    </Grid>*/}
+      {/*    <Checkbox label='Save this information for next time'/>*/}
+      {/*    <Textarea*/}
+      {/*      register={register} errors={errors}*/}
+      {/*      label='Order Notes (Optional)'*/}
+      {/*      name='note'*/}
+      {/*      rows={5}*/}
+      {/*      className='mb-6'*/}
+      {/*      placeholder='Notes about your order, e.g. special notes for delivery'*/}
+      {/*    />*/}
+
+
+
+      {/*    <div className="flex gap-x-4">*/}
+      {/*      <Button*/}
+      {/*        classes='w-fit'*/}
+      {/*        onClick={() => {*/}
+      {/*        localStorage.removeItem('COFFIN_ECOMMERCE');*/}
+      {/*        setUser({...user, numberAllOfItemsInCart: 0})*/}
+      {/*      }}*/}
+      {/*      >*/}
+      {/*        Place Order</Button>*/}
+      {/*      <form action="/api/checkout_sessions" className='w-1/2' method="POST">*/}
+      {/*        <section>*/}
+      {/*          <Button type="submit" role="link">Pay with card</Button>*/}
+      {/*        </section>*/}
+      {/*      </form>*/}
+      {/*    </div>*/}
+      {/*  </form>*/}
+      {/*</div>*/}
+
+      {/*</Grid>*/}
     </>
   );
 }

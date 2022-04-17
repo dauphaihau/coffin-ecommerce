@@ -17,7 +17,6 @@ const Text = (props: Props) => {
   const {
     children, classes, color,
     sx, md, lg, weight, h1, span,
-    ...res
   } = props
 
   const allClass = `

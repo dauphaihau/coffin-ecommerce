@@ -1,11 +1,12 @@
 import {FC, forwardRef, InputHTMLAttributes} from "react";
+import {FieldErrors} from "react-hook-form";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string,
   label?: string,
   classes?: string,
-  register: (name: string) => void,
-  errors: boolean,
+  register?: (name: string) => void,
+  errors?: FieldErrors,
   ref?: any,
 }
 

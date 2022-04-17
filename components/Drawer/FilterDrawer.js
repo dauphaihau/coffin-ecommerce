@@ -8,7 +8,7 @@ import {Button} from "../Button";
 const FiltersDrawer = () => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {drawerFiltersOpen, categories} = useUIController();
+  const {openFiltersDrawer, categories} = useUIController();
 
   const {clearFilters} = useFilterContext()
 
@@ -20,7 +20,7 @@ const FiltersDrawer = () => {
 
   return (
     <>
-      <Drawer isOpen={drawerFiltersOpen} classes='w-[70%] ipad:w-1/3'>
+      <Drawer isOpen={openFiltersDrawer} classes='w-[70%] ipad:w-1/3'>
         <Drawer.Title title='Filters'/>
         <Drawer.Content>
           <div className="flex flex-col mt-6 h-full overflow-x-hidden">

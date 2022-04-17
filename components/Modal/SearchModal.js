@@ -1,15 +1,14 @@
 import {useEffect, useRef, useState} from "react";
-import {XIcon, SearchIcon} from "@heroicons/react/solid";
 
 import {useUIController} from "../../context/UIControllerContext";
-import Input from "../Input/Input";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {DENOMINATION} from "../../utils/constant";
 import {Link} from "../index";
+import {Input} from "../Input";
 
 const SearchModal = () => {
-  const {modalSearchOpen} = useUIController();
+  const {openSearchModal} = useUIController();
   const inputRef = useRef(null);
   const [inventory, setInventory] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
@@ -26,7 +25,7 @@ const SearchModal = () => {
   useEffect(() => {
     inputRef.current.focus();
     setFilteredResults([])
-  }, [modalSearchOpen])
+  }, [openSearchModal])
 
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
@@ -45,7 +44,7 @@ const SearchModal = () => {
 
   return (
     <div
-      className={`${!modalSearchOpen && 'hidden'}
+      className={`${!openSearchModal && 'hidden'}
           fixed inset-0 z-[200] 
           mx-auto w-[90%] laptop:w-1/2 mt-6 
           `}>
@@ -53,12 +52,12 @@ const SearchModal = () => {
         name='search'
         ref={inputRef}
         onChange={(e) => searchItems(e.target.value)}
-        classes='pl-[3.5rem] h-[60px] '
+        classes='!pl-[3.5rem] h-[60px] '
       />
-      <div className="absolute top-[17px] left-[18px]">
+      <div className="absolute top-[11px] left-[18px]">
         <i className="fa-solid fa-magnifying-glass text-xl"/>
       </div>
-      <div className="absolute top-[19px] right-[14px] text-gray-500 hover:text-black cursor-pointer"
+      <div className="absolute top-[12px] right-[14px] text-gray-500 hover:text-black cursor-pointer"
            onClick={() => setFilteredResults([])}>
         <i className='fa-solid fa-x text-base mr-3 '/>
       </div>

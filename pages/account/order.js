@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
 import BannerCard from "../../components/Card/BannerCard";
-import ProfileSidebar from "../../components/Sidebar/ProfileSidebar";
+import ProfileSidebar from "../../components/Navigation/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../components";
 import {rows} from "../../assets/data/orders";

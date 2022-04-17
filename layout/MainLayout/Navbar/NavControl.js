@@ -1,21 +1,21 @@
 import {ShoppingBagIcon, UserIcon, SearchIcon} from "@heroicons/react/outline";
 import {UserIcon as UserIconSolid, UserGroupIcon} from "@heroicons/react/solid";
-import {Link} from "./index";
-import {useUIController} from "../context/UIControllerContext";
-import {useAuth} from "../context/authContext";
+import {Link} from "../../../components";
+import {useUIController} from "../../../context/UIControllerContext";
+import {useAuth} from "../../../context/authContext";
 
 function NavControl() {
-  const {drawerToggle, modalToggle, modalSearchToggle} = useUIController();
+  const {dispatch} = useUIController();
   const {user, isAuthorize} = useAuth();
 
   return (
     <div className="flex">
-      <button className='mr-4' onClick={() => modalSearchToggle()}>
+      <button className='mr-4' onClick={() => dispatch({type: 'OPEN_SEARCH_MODAL'})}>
         <div className="flex flex-1 justify-end relative">
           <SearchIcon width={35} height={30}/>
         </div>
       </button>
-      <button className='mr-4' onClick={() => drawerToggle()}>
+      <button className='mr-4' onClick={() => dispatch({type: 'OPEN_CART_DRAWER'})}>
         <div className="flex flex-1 justify-end relative">
           <ShoppingBagIcon width={35} height={30}/>
           {
@@ -36,7 +36,7 @@ function NavControl() {
                 : <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>
               }
             </>
-            : <UserIcon width={35} height={30} onClick={() => modalToggle()}/>
+            : <UserIcon width={35} height={30} onClick={() => dispatch({type: 'OPEN_SEARCH_LOGIN_REGISTER'})}/>
         }
       </div>
     </div>

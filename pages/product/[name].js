@@ -90,12 +90,14 @@ const Product = (props) => {
           </Text>
           <div className="my-6">
             <QuantityPicker
+              theme='white'
+              bordered
               increment={increment}
               decrement={decrement}
               numberOfItems={numberOfItems}
             />
             {/*<Text  classes='mt-3'>Available: {quantity}</Text>*/}
-          </div>
+        </div>
           <Button onClick={() => addItemToCart(product)}>Add to Cart</Button>
         </div>
       </div>

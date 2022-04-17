@@ -1,12 +1,14 @@
-import {forwardRef, InputHTMLAttributes, ReactNode} from "react";
-import PropTypes from "prop-types";
-import {ampValidation} from "next/dist/build/output";
+import {forwardRef, ReactNode} from "react";
 
 interface Props {
   type?: string,
   classes?: string,
+  shadow?: boolean,
+  size?: 'sx' | 'sm' | 'md' | 'lg' | 'xl',
+  light?: boolean,
   // variant: string,
   children: ReactNode,
+  width?: 'full' | 'fit',
   disabled?: boolean,
   onClick?: () => void;
   isLoading?: boolean,
@@ -15,8 +17,9 @@ interface Props {
 const Button = forwardRef((props: Props, ref: any) => {
 
   const {
-    type, classes,
-    children,
+    type, classes, width,
+    children, size = 'md', light,
+    shadow,
     isLoading = false,
     ...others
   } = props
@@ -29,10 +32,15 @@ const Button = forwardRef((props: Props, ref: any) => {
   }
 
   return (
+      // ${size ==='sm' ? '!laptop:py-2 !laptop:px-2':''}
     <button
-      className={`btn
-         ${classes}
-         ${isLoading && 'opacity-[0.3]'}
+      className={`btn 
+      ${shadow && 'shadow-xl'}
+      ${width === 'fit' && 'w-fit' || width === 'full' && 'w-full'}
+      ${size === 'xl' ? 'laptop:py-4 laptop:px-4' : ''}
+      ${size ==='sm' ? 'laptop:py-2 laptop:px-2' : ''}
+      ${classes} ${isLoading && 'opacity-[0.3]'}
+      ${light && 'bg-transparent text-black hover:text-black hover:opacity-[0.6]'}
       `}
       {...others}
       ref={ref}

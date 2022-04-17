@@ -1,31 +1,50 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useReducer, useState} from "react";
+import reducer from "../reducers/uiControllerReducer";
+import PropTypes from "prop-types";
 
-const defaultValues = {
-  drawerCartOpen: false,
-  modalSearchOpen: false,
-  modalOpen: false,
-  drawerMenuOpen: false,
+const initialState = {
+  openCartDrawer: false,
+  openAddressModal: false,
+  openSearchModal: false,
+  openLoginRegisterModal: false,
+  openNavDrawer: false,
+  openFiltersDrawer: false,
+
+  launchBackdrop: false,
+  categories: [],
+  progress: 0,
 };
 
-const UIControllerContext = createContext(defaultValues);
+const UIControllerContext = createContext(initialState);
 
-export function useUIController() {
+function useUIController() {
   return useContext(UIControllerContext);
 }
 
-export function UIControllerProvider({children}) {
+function UIControllerProvider({children}) {
+
+  const [controller, dispatch] = useReducer(reducer, initialState);
+  const {
+    openLoginRegisterModal,
+    openFiltersDrawer,
+    openNavDrawer,
+    openAddressModal,
+    openCartDrawer,
+    openSearchModal
+  } = controller
 
   const [launchBackdrop, setLaunchBackdrop] = useState(false)
   const [categories, setCategories] = useState([])
-  const [drawerCartOpen, setDrawerCartOpen] = useState(false)
-  const [drawerNavOpen, setDrawerNavOpen] = useState(false)
-  const [drawerFiltersOpen, setDrawerFiltersOpen] = useState(false)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalSearchOpen, setModalSearchOpen] = useState(false)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    if (modalSearchOpen || modalOpen || drawerCartOpen || drawerNavOpen || drawerFiltersOpen) {
+    if (openLoginRegisterModal
+      || openFiltersDrawer
+      || openAddressModal
+      || openNavDrawer
+      || openCartDrawer
+      || openSearchModal
+    ) {
       document.getElementsByTagName('body')[0].style.overflow = "hidden";
       setLaunchBackdrop(true)
     }
@@ -33,49 +52,28 @@ export function UIControllerProvider({children}) {
       document.getElementsByTagName('body')[0].style.overflow = "auto";
       setLaunchBackdrop(false)
     }
-  }, [drawerCartOpen, modalOpen, modalSearchOpen, drawerNavOpen, drawerFiltersOpen])
-
-  const drawerToggle = () => {
-    setDrawerCartOpen(!drawerCartOpen)
-  }
-
-  const drawerNavToggle = () => {
-    setDrawerNavOpen(!drawerNavOpen)
-  }
-
-  const drawerFiltersToggle = () => {
-    setDrawerFiltersOpen(!drawerFiltersOpen)
-  }
+  }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
 
   const closeDrawerModal = () => {
-    setDrawerCartOpen(false);
-    setDrawerNavOpen(false);
-    setDrawerFiltersOpen(false);
-    setModalSearchOpen(false);
-    setModalOpen(false);
-  }
-
-  const modalToggle = () => {
-    setModalOpen(!modalOpen)
-  }
-
-  const modalSearchToggle = () => {
-    setModalSearchOpen(!modalSearchOpen)
+    dispatch({type: 'CLOSE_DRAWER_MODAL'})
   }
 
   return (
     <UIControllerContext.Provider value={{
+      ...controller, dispatch,
       launchBackdrop,
       setCategories, categories,
-      drawerCartOpen, drawerToggle, closeDrawerModal,
-      drawerNavOpen, drawerNavToggle,
-      modalOpen, modalToggle,
-      modalSearchOpen, modalSearchToggle,
-      drawerFiltersOpen, drawerFiltersToggle,
+      closeDrawerModal,
       progress, setProgress,
     }}>
       {children}
     </UIControllerContext.Provider>
   );
 }
+
+UIControllerProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export {UIControllerProvider, useUIController};
 

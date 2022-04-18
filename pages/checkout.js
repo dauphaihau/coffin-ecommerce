@@ -10,18 +10,11 @@ import {useForm} from "react-hook-form";
 import * as Yup from "yup";
 
 import {DENOMINATION} from "../utils/constant";
-import banner from "../public/images/banners/checkout.jpg";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
-import {Button, QuantityPicker} from "../components/Button";
-import {Checkbox, Input, Textarea} from "../components/Input";
-import {Grid, Text, Tooltip} from "../components";
-import {BannerCard} from "../components/Card";
-import moment from "moment/moment";
-import {Table} from "../components/Table";
-import {Tab} from "@headlessui/react";
-import {FirstTabCheckout, SecondTabCheckout, ThirdTabCheckout} from "../components/Navigation/Tabs";
+import {Text} from "../components";
+import {StepperCheckout} from "../components/Navigation/Stepper";
 
 const stripePromise = getStripejs();
 
@@ -47,40 +40,10 @@ const Checkout = ({context}) => {
   const [isPayOnline, setIsPayOnline] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
 
-  const [activeTab, setActiveTab] = useState(1);
-
   const {user, setUser} = useAuth();
 
   const stripe = useStripe()
   const elements = useElements()
-
-
-  const tabsContent = [
-    {
-      id: 1,
-      heading: 'Cart',
-      line: false,
-      content: () => <FirstTabCheckout handleTabClick={handleTabClick}/>,
-    },
-    {
-      id: 2,
-      heading: 'Billing & address',
-      content: () => <SecondTabCheckout/>
-    },
-    {
-      id: 3,
-      heading: 'Payment',
-      content: () => <ThirdTabCheckout/>
-    },
-  ];
-
-  const [currentTab, setCurrentTab] = useState(tabsContent[0]);
-
-  function handleTabClick(currentTab) {
-    setActiveTab(currentTab);
-    const currentTabContent = tabsContent.filter(item => item.id === currentTab);
-    setCurrentTab(currentTabContent[0]);
-  }
 
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
@@ -157,72 +120,8 @@ const Checkout = ({context}) => {
 
   return (
     <>
-      {/*<BannerCard srcImg={banner} title='Checkout'/>*/}
       <Text h1 sx='3xl' weight='bold' classes='mb-8'>Checkout</Text>
-      <div className='tabs'>
-        <div className='tabs__tab'>
-          {tabsContent.map(item => {
-            if (!item.line) {
-              return (
-                  <div className='border-none text-center' key={item.id}
-                       onClick={() => handleTabClick(item.id)}>
-                    <button className={`tabLink mb-4 ${activeTab === item.id && 'is-selected'}`}/>
-                    <Text sx='sm' color='[#738a88]' classes={`animate hover:text-gray-600 
-                    ${activeTab === item.id ? '!text-black' : ''} `}>
-                      {item.heading}
-                    </Text>
-                  </div>
-              )
-            }
-            return (
-
-                <div className='border-none text-center' key={item.id}
-                     onClick={() => handleTabClick(item.id)}>
-                  <button className={`tabLink ${activeTab === item.id && 'is-selected'}`}/>
-                  <p className={`text-sm text-[#7e8a88] 
-                transition-all duration-300 ease-in-out hover:text-gray-600 
-                    ${activeTab === item.id ? '!text-black' : ''} `}>
-                    {item.heading}
-                  </p>
-                </div>
-            )
-          })}
-        </div>
-        <div className="p-[20px]">
-          {currentTab.content().type(tabsContent)}
-        </div>
-      </div>
-
-
-      {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
-      {/*<div className='mb-12'>*/}
-      {/*  <Text h1 sx='2xl' weight='bold' classes='mb-8'>Shipping Address</Text>*/}
-      {/*  <form onSubmit={handleSubmit(onSubmit)}>*/}
-      {/*    <Grid md={1} lg={2} gapx={4}>*/}
-      {/*      <Input label='First Name *' name='firstName' register={register} errors={errors}/>*/}
-      {/*      <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
-      {/*    </Grid>*/}
-      {/*    <Input label='Address *' name='address' register={register} errors={errors}/>*/}
-      {/*    <Grid md={1} lg={2} gapx={4}>*/}
-      {/*      <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>*/}
-      {/*      <Input label='Email ' name='email' register={register} errors={errors}/>*/}
-      {/*    </Grid>*/}
-      {/*    <Grid md={1} lg={2} gapx={4}>*/}
-      {/*      <Input label='City/Town *' name='city' register={register} errors={errors}/>*/}
-      {/*      <Input label='Postcode *' name='postcode' register={register} errors={errors}/>*/}
-      {/*    </Grid>*/}
-      {/*    <Checkbox label='Save this information for next time'/>*/}
-      {/*    <Textarea*/}
-      {/*      register={register} errors={errors}*/}
-      {/*      label='Order Notes (Optional)'*/}
-      {/*      name='note'*/}
-      {/*      rows={5}*/}
-      {/*      className='mb-6'*/}
-      {/*      placeholder='Notes about your order, e.g. special notes for delivery'*/}
-      {/*    />*/}
-
-
-
+      <StepperCheckout context={context}/>
       {/*    <div className="flex gap-x-4">*/}
       {/*      <Button*/}
       {/*        classes='w-fit'*/}

@@ -9,7 +9,6 @@ const initialState = {
   openLoginRegisterModal: false,
   openNavDrawer: false,
   openFiltersDrawer: false,
-
   launchBackdrop: false,
   categories: [],
   progress: 0,
@@ -31,7 +30,9 @@ function UIControllerProvider({children}) {
     openAddressModal,
     openCartDrawer,
     openSearchModal
+
   } = controller
+  const {categories: c, progress: g, ...res} = controller
 
   const [launchBackdrop, setLaunchBackdrop] = useState(false)
   const [categories, setCategories] = useState([])
@@ -52,7 +53,8 @@ function UIControllerProvider({children}) {
       document.getElementsByTagName('body')[0].style.overflow = "auto";
       setLaunchBackdrop(false)
     }
-  }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
+  }, [res])
+  // }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
 
   const closeDrawerModal = () => {
     dispatch({type: 'CLOSE_DRAWER_MODAL'})

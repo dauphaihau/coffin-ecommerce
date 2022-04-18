@@ -28,7 +28,6 @@ const uiControllerReducer = (state, action) => {
         openCartDrawer: false,
         openFiltersDrawer: false,
         openNavDrawer: false,
-
         launchBackdrop: false,
       }
     }

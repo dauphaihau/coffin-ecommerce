@@ -1,13 +1,22 @@
 import {Grid, Text} from "../../index";
 import {Button} from "../../Button";
 import {formatPrice} from "../../../utils/helpers";
-import {Input} from "../../Input";
 import {Stack} from "../../Layout";
+import {useAuth} from "../../../context/authContext";
 import {useUIController} from "../../../context/UIControllerContext";
 
-const SecondTabCheckout = () => {
+const SecondStepCheckout = (props) => {
 
-  const {openAddressDrawer, addressModalToggle, drawerToggle, ...state} = useUIController();
+  const {dispatch} = useUIController()
+  const {user, setUser} = useAuth();
+  const {setStep, total} = props;
+
+  function setSteps(step) {
+    if (step === 3) {
+      setUser({...user, delivery: 'slowDelivery', payment: 'card'})
+    }
+    setStep(step)
+  }
 
   return (
     <Grid lg={6} gapx={8}>
@@ -23,7 +32,7 @@ const SecondTabCheckout = () => {
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
               <Stack>
                 <Text color='gray-500'>365-374-4961</Text>
-                <Button size='sm'>Deliver to this Address</Button>
+                <Button size='sm' onClick={() => setSteps(3) }>Deliver to this Address</Button>
               </Stack>
             </div>
             <div className='p-6 shadow-xl border rounded-xl mb-6 w-full'>
@@ -34,55 +43,49 @@ const SecondTabCheckout = () => {
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
               <Stack>
                 <Text color='gray-500'>365-374-4961</Text>
-                <Button size='sm'>Deliver to this Address</Button>
+                <Button size='sm' onClick={() => setSteps(3) }>Deliver to this Address</Button>
               </Stack>
             </div>
           </div>
         </div>
-        <Stack classes='mt-6 '>
-          <Button light classes='font-bold px-0'>
+        <Stack classes='mt-6'>
+          <Button light classes='font-bold px-0' onClick={() => setSteps(1)}>
             <i className="fa-solid fa-angle-left mr-4"/>Back
           </Button>
           <Button
             light classes='font-bold px-0'
-            onClick={() => addressModalToggle()}
+            onClick={() => dispatch({type: 'OPEN_ADDRESS_MODAL'})}
           >
             + Add new address
           </Button>
         </Stack>
       </div>
-
       <div className='col-span-2'>
-        <div className=' border shadow-2xl p-6 rounded-xl w-full'>
+        <div className='border shadow-2xl p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
-          <div className='flex justify-between py-4 font-light'>
+          <Stack classes='py-2'>
             <Text>Sub Total</Text>
-            <Text>$1010100</Text>
-            {/*<Text>{formatPrice(total)}</Text>*/}
-          </div>
-          <div className='flex justify-between py-4 font-light'>
+            <Text>{formatPrice(user.priceTotal)}</Text>
+          </Stack>
+          <Stack classes='py-2'>
             <Text>Discount</Text>
-            {/*<Text>{discount ? '-11%' : '-'}</Text>*/}
-            <Text>-11%</Text>
-          </div>
-          <div className='flex justify-between py-4 font-light'>
+            <Text>{user.priceTotal !== total ? '-11%' : '-'}</Text>
+          </Stack>
+          <Stack classes='py-2'>
             <Text>Shipping</Text>
             <Text>Free</Text>
-          </div>
-          <div className='flex justify-between border-t py-4'>
+          </Stack>
+          <Stack classes='py-4 border-t'>
             <Text weight='bold'>Total</Text>
             <div className='text-right font-light'>
-              {/*<Text weight='bold'>{formatPrice(discount)}</Text>*/}
-              <Text>$1010100</Text>
-              <Text lg='xs' classes='italic'>(VAT included if applicable)</Text>
+              <Text weight='bold'>{formatPrice(user.priceTotal)}</Text>
+              <Text sx='sm'>(VAT included if applicable)</Text>
             </div>
-          </div>
+          </Stack>
         </div>
       </div>
-
-
     </Grid>
   );
 };
 
-export default SecondTabCheckout
+export default SecondStepCheckout

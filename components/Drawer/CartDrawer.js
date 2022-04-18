@@ -11,7 +11,7 @@ import Drawer from "./Drawer";
 const CartDrawer = ({context}) => {
 
   const [renderClientSideComponent, setRenderClientSideComponent] = useState(false)
-  const {openCartDrawer, closeDrawerModal, dispatch} = useUIController();
+  const {openCartDrawer, closeDrawerModal} = useUIController();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const CartDrawer = ({context}) => {
                     {
                       cart.map((item) => {
                         return (
-                          <div className="border-b py-4" key={item.id}>
+                          <div className="border-b  py-4" key={item.id}>
                             <div className="flex">
                               <div className='relative group bg-light rounded-lg p-1 cursor-pointer '
                                    onClick={() => removeFromCart(item)}
@@ -112,7 +112,7 @@ const CartDrawer = ({context}) => {
         </Drawer.Content>
         <Drawer.Footer>
           <Link href="/checkout">
-            <Button size='xl' width='full' onClick={() => closeDrawerModal()}>
+            <Button size='lg' width='full' onClick={() => closeDrawerModal()}>
               <div className="cursor-pointer flex justify-between text-base ">
                 <Text sx='base' color='white' classes="mr-2">Proceed to check out</Text>
                 <Text sx='base' color='white' classes="border-l pl-4">{DENOMINATION + total.toLocaleString()}</Text>

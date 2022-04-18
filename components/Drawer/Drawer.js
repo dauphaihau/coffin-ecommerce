@@ -29,13 +29,13 @@ const Title = ({title}) => {
         <Text h1 classes={blackTheme ? 'text-white' : ''}>{title}</Text>
         <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
       </div>
-      <div className={`border-b border-${blackTheme ? 'white' : ''}`}></div>
+      <div className={`border-b border-${blackTheme ? 'gray-200' : ''}`}></div>
     </>
   );
 }
 
-const Content = ({children}) => <>{children}</>;
-const Footer = ({children}) => <>{children}</>;
+const Content = ({children}) => <div className='drawer__content'>{children}</div>;
+const Footer = ({children}) => <div className='drawer__footer'>{children}</div>;
 
 Drawer.Title = Title;
 Drawer.Content = Content;

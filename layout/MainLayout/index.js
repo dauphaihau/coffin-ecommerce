@@ -9,6 +9,7 @@ import Navbar from "./Navbar/Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import BannerHomeCard from "../../components/Card/BannerHomeCard";
+import ChatBox from "./ChatBox";
 
 const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)
@@ -39,9 +40,10 @@ const MainLayout = ({children, categories}) => {
 
   return (
     <div>
-      <Toaster position={`${isMobileScreen ? "top-center" : "bottom-right"}`} reverseOrder={false}/>
+      <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
       <AllModal/>
       <AllDrawer/>
+      <ChatBox/>
       <Backdrop/>
       <Navbar categories={categories}/>
       <BannerHomeCard isDisplay={showBanner}/>

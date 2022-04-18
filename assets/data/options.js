@@ -1,4 +1,5 @@
 const brandOpts = [
+
   {
     value: 'aurora',
     label: 'Aurora',
@@ -92,10 +93,12 @@ const sortOpts = [
 
 const deliveryOpts = [
   {
+    value: 'slowDelivery',
     name: 'Standard delivery (Free)',
     description: 'Delivered on Monday, August 12',
   },
   {
+    value: 'fastDelivery',
     name: 'Fast delivery ($2,00)',
     description: 'Delivered on Monday, August 5',
   },
@@ -103,10 +106,12 @@ const deliveryOpts = [
 
 const paymentOpts = [
   {
+    value: 'card',
     name: 'Credit / Debit Card',
     description: 'We support Mastercard, Visa, Discover and Stripe.',
   },
   {
+    value: 'cash',
     name: 'Cash on CheckoutDelivery',
     description: 'Pay with cash when your order is delivered.',
   },

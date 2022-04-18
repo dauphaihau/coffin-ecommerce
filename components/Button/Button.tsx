@@ -37,10 +37,12 @@ const Button = forwardRef((props: Props, ref: any) => {
       className={`btn 
       ${shadow && 'shadow-xl'}
       ${width === 'fit' && 'w-fit' || width === 'full' && 'w-full'}
-      ${size === 'xl' ? 'laptop:py-4 laptop:px-4' : ''}
+      ${size === 'xl' ? 'laptop:py-6 laptop:px-6' : ''}
+      ${size === 'lg' ? 'laptop:py-4 laptop:px-4' : ''}
       ${size ==='sm' ? 'laptop:py-2 laptop:px-2' : ''}
       ${classes} ${isLoading && 'opacity-[0.3]'}
       ${light && 'bg-transparent text-black hover:text-black hover:opacity-[0.6]'}
+      ${others.disabled && 'opacity-[0.3] hover:opacity-[0.3] '}
       `}
       {...others}
       ref={ref}

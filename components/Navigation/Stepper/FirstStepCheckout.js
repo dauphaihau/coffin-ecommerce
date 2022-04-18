@@ -1,23 +1,30 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {Elements} from "@stripe/react-stripe-js";
 
 import {Grid, Link, Text, Tooltip} from "../../index";
 import {DENOMINATION} from "../../../utils/constant";
 import {Button, QuantityPicker} from "../../Button";
 import {CartContext, CartProvider} from "../../../context/cartContext";
-import {Elements} from "@stripe/react-stripe-js";
 import {useAuth} from "../../../context/authContext";
 import {formatPrice} from "../../../utils/helpers";
 import {Input} from "../../Input";
 import {Table} from "../../Table";
 import {Stack} from "../../Layout";
 
-const FirstTabCheckout = (props) => {
-  const {context} = props
-  // console.log('props', props)
-  const {cart, total, removeFromCart, setItemQuantity} = context
-  const [discount, setDiscount] = useState(total)
-  const {user} = useAuth();
-  // console.log('cart', cart)
+const FirstStepCheckout = (props) => {
+  const {setStep} = props;
+  const {
+    cart, total, removeFromCart,
+    setItemQuantity, numberAllOfItemsInCart,
+  } = props.context
+
+  const [discounted, setDiscounted] = useState(0)
+  const {user, setUser} = useAuth();
+
+  useEffect(() => {
+    setUser({...user, priceTotal: !discounted ? total : discounted, numberAllOfItemsInCart})
+
+  }, [discounted, numberAllOfItemsInCart])
 
   const columns = [
     {
@@ -53,12 +60,12 @@ const FirstTabCheckout = (props) => {
       id: '', title: '', align: 'text-center',
       render: (row) => <>
         <Tooltip title='Delete'>
-          {/*<button onClick={() => {*/}
-          {/*  removeFromCart(row);*/}
-          {/*  // setDiscount(0);*/}
-          {/*}}>*/}
-            <i className="fa-solid fa-trash-can text-xl w-full cursor-pointer"/>
-          {/*</button>*/}
+          <i className="fa-solid fa-trash-can text-xl w-full cursor-pointer"
+             onClick={() => {
+               removeFromCart(row);
+               // setDiscounted(0);
+             }}
+          />
         </Tooltip>
       </>
     },
@@ -67,19 +74,25 @@ const FirstTabCheckout = (props) => {
   function increment(item) {
     item.quantity = item.quantity + 1
     setItemQuantity(item)
+    if (discounted) {
+      setDiscounted(total * 0.89)
+    }
   }
 
   function decrement(item) {
     if (item.quantity === 1) return removeFromCart(item);
     item.quantity = item.quantity - 1
     setItemQuantity(item)
+    if (discounted) {
+      setDiscounted(total * 0.89)
+    }
   }
 
-  const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "/admin/users", name: "Users"},
-    {path: "", name: "List", lastLink: true}
-  ];
+  function setSteps(step) {
+    setStep(step)
+  }
+
+  console.log('render')
 
   return (
     <Grid lg={6} gapx={8}>
@@ -91,7 +104,6 @@ const FirstTabCheckout = (props) => {
           rows={cart}
           hidePagination
         />
-
         <Link href='/products'>
           <Button classes='mt-6 px-0 font-bold' light>
             <i className="fa-solid fa-angle-left mr-3"/>
@@ -108,7 +120,7 @@ const FirstTabCheckout = (props) => {
           </Stack>
           <Stack classes='py-2'>
             <Text>Discount</Text>
-            <Text>{discount ? '-11%' : '-'}</Text>
+            <Text>{discounted ? '-11%' : '-'}</Text>
           </Stack>
           <Stack classes='py-2'>
             <Text>Shipping</Text>
@@ -117,33 +129,47 @@ const FirstTabCheckout = (props) => {
           <Stack classes='py-4 border-t'>
             <Text weight='bold'>Total</Text>
             <div className='text-right font-light'>
-              <Text weight='bold'>{formatPrice(discount)}</Text>
+              {/*<Text weight='bold'>{formatPrice(discounted)}</Text>*/}
+              <Text weight='bold'>{formatPrice(!discounted ? total : discounted)}</Text>
               <Text sx='sm'>(VAT included if applicable)</Text>
             </div>
           </Stack>
           <div className='relative'>
-            <Input name='discount' value='DISCOUNT11' classes='!p-6 font-bold'/>
-            <Button light classes='absolute top-[5px] right-[10px]
-               transition font-bold duration-300 ease-in-out text-sm
-               hover:bg-gray-200 p-2 px-3 rounded-xl'
-                    onClick={() => setDiscount(total * 0.89)}
-            >Apply
-            </Button>
+            <Input name='discounted' value='DISCOUNT11' classes='!p-6 font-bold'/>
+            {
+              !discounted
+                ? <Button light classes='absolute top-[5px] right-[10px]
+                     transition font-bold duration-300 ease-in-out text-sm
+                     hover:bg-gray-200 p-2 px-3 rounded-xl'
+                          onClick={() => setDiscounted(total * 0.89)}
+                >Apply
+                </Button>
+                : <Button light classes='absolute top-[5px] right-[10px]
+                   transition font-bold duration-300 ease-in-out text-sm
+                   hover:bg-gray-200 p-2 px-3 rounded-xl'
+                          onClick={() => setDiscounted(0)}
+                >Cancel
+                </Button>
+            }
           </div>
         </div>
-        <Button classes='mt-4' width='full' shadow size='xl'>Check out</Button>
+        <Button classes='mt-4 font-bold'
+                disabled={!numberAllOfItemsInCart && true}
+                width='full' shadow size='lg'
+        onClick={() => setSteps(2)}
+        >Check out</Button>
       </div>
     </Grid>
   );
 };
 
-function FirstTabCheckoutWithContext(props) {
+function FirstStepCheckoutWithContext(props) {
   return (
     <CartProvider>
       <CartContext.Consumer>
         {context => (
           // <Elements stripe={stripePromise}>
-          <FirstTabCheckout {...props} context={context}/>
+          <FirstStepCheckout {...props} context={context}/>
           // </Elements>
         )}
       </CartContext.Consumer>
@@ -151,4 +177,4 @@ function FirstTabCheckoutWithContext(props) {
   )
 }
 
-export default FirstTabCheckoutWithContext
+export default FirstStepCheckoutWithContext

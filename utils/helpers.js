@@ -40,7 +40,6 @@ const getUniqueValues = (data, type) => {
   return ["all", ...new Set(unique)];
 };
 
-
 const calculateTotal = (cart) => {
   const total = cart.reduce((acc, next) => {
     const quantity = next.quantity

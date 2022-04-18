@@ -138,7 +138,7 @@ const LoginRegisterModal = () => {
               <Link href="#" className="text-sm text-black hover:underline">Lost Password?</Link>
             </div>
           }
-          <Button type="submit" width='full' size='xl' isLoading={isBtnLoading}>
+          <Button type="submit" width='full' size='lg' isLoading={isBtnLoading}>
             {!registerForm ? 'Login to your account' : 'Register'}
           </Button>
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">

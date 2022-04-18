@@ -51,10 +51,9 @@ const AddressModal = () => {
           {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
             <div className='mb-12'>
               <Text h1 sx='2xl' weight='bold' classes='mb-8'>Shipping Address</Text>
-              <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid md={1} lg={2} gapx={4}>
-                  <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
                   <Input label='Full Name *' name='name' register={register} errors={errors}/>
+                  <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
                 </Grid>
                 <Input label='Address *' name='address' register={register} errors={errors}/>
                 <Grid md={1} lg={2} gapx={4}>
@@ -84,8 +83,6 @@ const AddressModal = () => {
                     }}
                   >Deliver to this Address</Button>
                 </div>
-              </form>
-
             </div>
           {/*</Grid>*/}
         </form>

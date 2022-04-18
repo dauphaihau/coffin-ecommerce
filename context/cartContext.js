@@ -1,5 +1,4 @@
 import React, {createContext, Component} from 'react'
-import {toast} from "react-hot-toast";
 import {STORAGE_KEY} from "../utils/constant";
 import {calculateTotal, sumAllProduct} from "../utils/helpers";
 
@@ -13,6 +12,11 @@ const initialState = {
 const CartContext = createContext(initialState)
 
 class CartProvider extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {step: 1};
+  }
 
   componentDidMount() {
     if (typeof window !== 'undefined') {
@@ -56,7 +60,6 @@ class CartProvider extends Component {
       numberAllOfItemsInCart: sumAllProduct(cart),
       total: calculateTotal(cart)
     }))
-    toast.success('Added item to cart')
     this.forceUpdate()
   }
 
@@ -79,6 +82,10 @@ class CartProvider extends Component {
     this.forceUpdate()
   }
 
+  setStep = (step) => {
+    this.setState({step})
+  }
+
   render() {
     let state = initialState
     if (typeof window !== 'undefined') {
@@ -91,10 +98,12 @@ class CartProvider extends Component {
     return (
       <CartContext.Provider value={{
         ...state,
+        step: this.state.step,
         addToCart: this.addToCart,
         clearCart: this.clearCart,
         removeFromCart: this.removeFromCart,
-        setItemQuantity: this.setItemQuantity
+        setItemQuantity: this.setItemQuantity,
+        setStep: this.setStep,
       }}>
         {this.props.children}
       </CartContext.Provider>

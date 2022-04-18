@@ -5,7 +5,12 @@ interface Props {
   // md?: number,
   // lg?: number,
   gap?: number,
-  direction?: 'column' | 'row' | object,
+  direction?: 'column' | 'row',
+  // direction?: {
+  //   sx?: 'col' | 'row',
+  //   md?: 'col' | 'row',
+  //   lg?: 'col' | 'row',
+  // }
   classes?: string,
   children?: ReactNode,
 }
@@ -14,18 +19,21 @@ const Stack = (props: Props) => {
 
   const {direction, children, classes, gap} = props
 
-    return (
-        <div
-          className={`
+  // flex-${direction?.sx ?? 'row'}
+  // ipad:flex-${direction?.md ?? 'row'}
+  // laptop:flex-${direction?.lg ?? 'row'}
+  return (
+    <div
+      className={`
           flex
-          justify-between
+           justify-between
            ${direction === 'column' && 'flex-col'}
            gap-${gap}
            ${classes}
-           `}>
-            {children}
-        </div>
-    );
+        `}>
+      {children}
+    </div>
+  );
 }
 
 export default Stack;

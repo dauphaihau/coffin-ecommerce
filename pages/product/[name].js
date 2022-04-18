@@ -14,13 +14,13 @@ import {Image} from "../../components";
 import Text from "../../components/Text";
 
 const Product = (props) => {
+  const router = useRouter();
   const [relatedProducts, setRelatedProducts] = useState()
   const [numberOfItems, updateNumberOfItems] = useState(1)
   const {product} = props
   const {price, image, name, description, salePrice, id, quantity} = product
-  const router = useRouter();
-  const {context: {addToCart, numberAllOfItemsInCart}} = props
-  const {closeDrawerModal} = useUIController();
+  const {context: {addToCart, numberAllOfItemsInCart, setItemQuantity}} = props
+  const {closeDrawerModal, dispatch} = useUIController();
   const {user, setUser} = useAuth();
 
   useEffect(() => {
@@ -39,7 +39,8 @@ const Product = (props) => {
 
   const addItemToCart = (product) => {
     product["quantity"] = numberOfItems
-    addToCart(product)
+    addToCart(product);
+    dispatch({type: 'OPEN_CART_DRAWER'})
   }
 
   const increment = () => {
@@ -98,7 +99,7 @@ const Product = (props) => {
             />
             {/*<Text  classes='mt-3'>Available: {quantity}</Text>*/}
         </div>
-          <Button onClick={() => addItemToCart(product)}>Add to Cart</Button>
+          <Button size='lg' onClick={() => addItemToCart(product)}>Add to Cart</Button>
         </div>
       </div>
 

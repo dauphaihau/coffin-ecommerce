@@ -29,8 +29,7 @@ function NavControl() {
       <div className='cursor-pointer'>
         {
           isAuthorize
-            ?
-            <>
+            ? <>
               {user.role === 'customer'
                 ? <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
                 : <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>

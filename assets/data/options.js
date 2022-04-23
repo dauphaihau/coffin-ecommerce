@@ -112,7 +112,7 @@ const paymentOpts = [
   },
   {
     value: 'cash',
-    name: 'Cash on CheckoutDelivery',
+    name: 'Cash on Checkout Delivery',
     description: 'Pay with cash when your order is delivered.',
   },
 ]

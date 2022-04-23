@@ -10,10 +10,10 @@ import {toast} from "react-hot-toast";
 const ThirdStepCheckout = (props) => {
   // const [orderCompleted, setOrderCompleted] = useState(false)
 
-  const hanleSubmitDelivery = () => {
+  const handleSubmitDelivery = () => {
   }
 
-  const hanleSubmitPayment = () => {
+  const handleSubmitPayment = () => {
   }
 
   const {setStep, total, clearCart} = props;
@@ -30,7 +30,6 @@ const ThirdStepCheckout = (props) => {
   return (
     <Grid lg={6} gapx={8}>
       <div className='col-span-4'>
-        {console.log(user)}
         <div className='p-6 shadow border rounded-xl mb-6 w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Delivery options</Text>
           <RadioGroupCustom direction='row' options={deliveryOpts} onChange={(e) => updateCart({delivery: e.value})}/>
@@ -50,10 +49,9 @@ const ThirdStepCheckout = (props) => {
           <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
           <Text color='gray-500'>365-374-4961</Text>
         </div>
-        <div className='border shadow-2xl p-6 rounded-xl w-full font-light'>
+        <div className='border border-gray-custom-50 shadow-2xl p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
           <Stack classes='py-2'>
-            <Text>Sub Total</Text>
             <Text>{formatPrice(user.delivery === 'fastDelivery' ? user.priceTotal + 2 : user.priceTotal)}</Text>
           </Stack>
           <Stack classes='py-2'>
@@ -75,14 +73,15 @@ const ThirdStepCheckout = (props) => {
         </div>
         {
           user.payment === 'cash'
-            ? <Button classes='mt-4 font-bold' width='full' shadow size='lg'
-                    onClick={() => {
-                      clearCart();
-                      toast.success('Order success');
-                      setTimeout(() => {
-                        window.location.href = '/'
-                      }, 4000)
-                    }}>Complete Order</Button>
+            ? <Button
+              classes='mt-4 font-bold' width='full' shadow size='lg'
+              onClick={() => {
+                clearCart();
+                toast.success('Order success');
+                setTimeout(() => {
+                  window.location.href = '/'
+                }, 4000)
+              }}>Complete Order</Button>
             : <form action="/api/checkout_sessions" method="POST">
               <section>
                 <Button classes='mt-4 font-bold' width='full' shadow size='lg'>Complete Order</Button>

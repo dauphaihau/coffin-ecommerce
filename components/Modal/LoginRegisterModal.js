@@ -113,7 +113,7 @@ const LoginRegisterModal = () => {
           top-[10%]
           ipad:left-[23%] ipad:top-[15%] 
           laptop:left-[36%]
-          ipad:max-w-md ipad:h-auto
+          ipad:max-w-md ipad:h-fit
            `}>
       <div className="bg-white rounded-lg shadow">
         <div className="flex justify-end p-2">

@@ -26,6 +26,7 @@ const FirstStepCheckout = (props) => {
 
   }, [discounted, numberAllOfItemsInCart])
 
+
   const columns = [
     {
       id: 'name', title: 'Product',
@@ -59,7 +60,7 @@ const FirstStepCheckout = (props) => {
     {
       id: '', title: '', align: 'text-center',
       render: (row) => <>
-        <Tooltip title='Delete'>
+        <Tooltip title='Delete' classes='right-[-13px]'>
           <i className="fa-solid fa-trash-can text-xl w-full cursor-pointer"
              onClick={() => {
                removeFromCart(row);
@@ -92,11 +93,9 @@ const FirstStepCheckout = (props) => {
     setStep(step)
   }
 
-  console.log('render')
-
   return (
     <Grid lg={6} gapx={8}>
-      <div className='col-span-4'>
+      <div className='ipad:col-span-4'>
         {/*<Text weight='bold' lg='xl' classes='mb-1'>Your Order ({user.numberAllOfItemsInCart} item)</Text>*/}
         <Table
           columns={columns}
@@ -111,8 +110,8 @@ const FirstStepCheckout = (props) => {
           </Button>
         </Link>
       </div>
-      <div className='col-span-2'>
-        <div className='border shadow-2xl p-6 rounded-xl w-full font-light'>
+      <div className='ipad:col-span-2 mt-6 ipad:mt-0'>
+        <div className='border border-gray-custom-50 shadow-xl p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
           <Stack classes='py-2'>
             <Text>Sub Total</Text>
@@ -156,7 +155,7 @@ const FirstStepCheckout = (props) => {
         <Button classes='mt-4 font-bold'
                 disabled={!numberAllOfItemsInCart && true}
                 width='full' shadow size='lg'
-        onClick={() => setSteps(2)}
+                onClick={() => setSteps(2)}
         >Check out</Button>
       </div>
     </Grid>

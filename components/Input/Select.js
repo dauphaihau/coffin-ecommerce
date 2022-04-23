@@ -31,10 +31,7 @@ export default function Select(props) {
       {({open}) => (
         <>
           <div className={`form-select-input ${margin}`}>
-            {title !== '' &&
-              <Listbox.Label className="block text-base font-medium text-gray-700">
-                {title}</Listbox.Label>
-            }
+            {title && <Listbox.Label className="form-select-input__title">{title}</Listbox.Label>}
             <Listbox.Button
               className={`form-select-input__btn ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
               <span className="flex items-center">

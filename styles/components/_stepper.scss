@@ -1,13 +1,17 @@
 .stepper {
-  @apply w-full p-4 ;
+  @apply w-full  ;
 
   &__steps {
     //@apply w-[60%] grid lg:grid-cols-3 gap-y-4 gap-x-4;
-    @apply max-w-[60%] flex ml-20 ;
+    @apply ipad:max-w-[60%] flex ipad:ml-36 mb-4;
 
     .step {
-      @apply w-full;
+      @apply w-full flex border-none relative;
       div:first-child {
+        @apply w-2/5 ipad:w-[96%] rounded-lg border-gray-300 border ipad:border-2 absolute left-[3rem] top-[35%];
+      }
+
+      div:nth-child(2) {
         @apply rounded-[5px] cursor-pointer border border-gray-100;
         padding: 0.5rem 0.5rem;
 
@@ -15,20 +19,17 @@
           @apply my-auto mx-auto text-center;
         }
       }
-
-      div:nth-child(2) {
-        @apply w-[96%] rounded-lg border-black border-2 absolute left-[3rem] top-[35%];
-      }
-
     }
+
     .step:nth-child(2) {
-      @apply mr-20;
-      div:nth-child(2) {
-        @apply w-full rounded-lg border-2 absolute left-[6rem] top-[35%];
+      @apply ipad:mr-20;
+      div:first-child {
+        left: 5.5rem;
       }
     }
+
     .step:nth-child(3) {
-      div:nth-child(2) {
+      div:first-child {
         @apply hidden;
       }
     }

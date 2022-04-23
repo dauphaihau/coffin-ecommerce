@@ -85,7 +85,7 @@ const Navbar = () => {
               </div>
               <img
                 className="h-10 w-10 rounded-full"
-                src={`https://i.pravatar.cc/150?u=${user._id}`}
+                src={`https://i.pravatar.cc/150?u=${user?._id}`}
                 alt="profile"
               />
             </div>

@@ -23,7 +23,7 @@ const SecondStepCheckout = (props) => {
       <div className='col-span-4'>
         <div>
           <div className=''>
-            <div className='p-6 shadow-xl border rounded-xl mb-6 w-full '>
+            <div className='p-6 shadow-lg border border-gray-100 rounded-xl mb-6 w-full '>
               <div className='mb-2'>
                 <Text span lg='base' color='gray-800' weight='bold'>Sir Tran</Text>
                 <Text span color='gray-500' classes='ml-1 mr-2 text-sm'>(Home) </Text>
@@ -35,7 +35,7 @@ const SecondStepCheckout = (props) => {
                 <Button size='sm' onClick={() => setSteps(3) }>Deliver to this Address</Button>
               </Stack>
             </div>
-            <div className='p-6 shadow-xl border rounded-xl mb-6 w-full'>
+            <div className='p-6 shadow-lg border border-gray-100 rounded-xl mb-6 w-full'>
               <div className='mb-2'>
                 <Text span lg='base' color='gray-800' weight='bold'>Death man</Text>
                 <Text span color='gray-500' classes='ml-1 mr-2 text-sm'>(Official)</Text>
@@ -61,7 +61,7 @@ const SecondStepCheckout = (props) => {
         </Stack>
       </div>
       <div className='col-span-2'>
-        <div className='border shadow-2xl p-6 rounded-xl w-full font-light'>
+        <div className='border border-gray-100 shadow-lg p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
           <Stack classes='py-2'>
             <Text>Sub Total</Text>

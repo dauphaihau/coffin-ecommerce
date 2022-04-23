@@ -47,6 +47,7 @@ const SearchModal = () => {
       className={`${!openSearchModal && 'hidden'}
           fixed inset-0 z-[200] 
           mx-auto w-[90%] laptop:w-1/2 mt-6 
+          ipad:h-fit
           `}>
       <Input
         name='search'

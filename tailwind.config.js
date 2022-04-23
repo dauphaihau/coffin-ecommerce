@@ -10,7 +10,6 @@ module.exports = {
   // darkMode: false, // or 'media' or 'class'
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-
     extend: {
       spacing: {
         4: '1rem',
@@ -175,13 +174,21 @@ module.exports = {
         'primary': '#000000',
         'light': '#f5f5f5',
         'light-200': '#f0f0f0',
-        'light-300': '#e8e8e8'
+        'light-300': '#e8e8e8',
+      },
+      colors: {
+        gray: {
+          'custom-50': '#f7f7f7',
+          100: '#f3f6f9',
+          200: '#ebedf3',
+          300: '#e4e6ef',
+          400: '#5C607B',
+        },
       },
       lineHeight: {
         'large': '54px'
       }
     },
-
     screens: {
       sm: '640px',
       md: '768px',

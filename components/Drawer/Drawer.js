@@ -27,7 +27,7 @@ const Title = ({title}) => {
     <>
       <div className='drawer__title'>
         <Text h1 classes={blackTheme ? 'text-white' : ''}>{title}</Text>
-        <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
+        <XIcon className={`${blackTheme ? 'text-white' : ''} btn-icon`} onClick={() => closeDrawerModal()}/>
       </div>
       <div className={`border-b border-${blackTheme ? 'gray-200' : ''}`}></div>
     </>

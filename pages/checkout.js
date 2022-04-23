@@ -13,7 +13,7 @@ import {DENOMINATION} from "../utils/constant";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
-import {Text} from "../components";
+import {Helmet, Text} from "../components";
 import {StepperCheckout} from "../components/Navigation/Stepper";
 
 const stripePromise = getStripejs();
@@ -118,29 +118,37 @@ const Checkout = ({context}) => {
     )
   }
 
+  const dataBreadcrumb = [
+    {path: "/", name: "Home", firstLink: true},
+    {path: "/products", name: "Products"},
+    {path: "", name: "Checkout", lastLink: true}
+  ];
+
   return (
     <>
-      <Text h1 sx='3xl' weight='bold' classes='mb-8'>Checkout</Text>
-      <StepperCheckout context={context}/>
-      {/*    <div className="flex gap-x-4">*/}
-      {/*      <Button*/}
-      {/*        classes='w-fit'*/}
-      {/*        onClick={() => {*/}
-      {/*        localStorage.removeItem('COFFIN_ECOMMERCE');*/}
-      {/*        setUser({...user, numberAllOfItemsInCart: 0})*/}
-      {/*      }}*/}
-      {/*      >*/}
-      {/*        Place Order</Button>*/}
-      {/*      <form action="/api/checkout_sessions" className='w-1/2' method="POST">*/}
-      {/*        <section>*/}
-      {/*          <Button type="submit" role="link">Pay with card</Button>*/}
-      {/*        </section>*/}
-      {/*      </form>*/}
-      {/*    </div>*/}
-      {/*  </form>*/}
-      {/*</div>*/}
+      <Helmet title='Checkout' dataBreadcrumb={dataBreadcrumb}>
+        {/*<Text h1 sx='3xl' weight='bold' classes='mb-8'>Checkout</Text>*/}
+        <StepperCheckout context={context}/>
+        {/*    <div className="flex gap-x-4">*/}
+        {/*      <Button*/}
+        {/*        classes='w-fit'*/}
+        {/*        onClick={() => {*/}
+        {/*        localStorage.removeItem('COFFIN_ECOMMERCE');*/}
+        {/*        setUser({...user, numberAllOfItemsInCart: 0})*/}
+        {/*      }}*/}
+        {/*      >*/}
+        {/*        Place Order</Button>*/}
+        {/*      <form action="/api/checkout_sessions" className='w-1/2' method="POST">*/}
+        {/*        <section>*/}
+        {/*          <Button type="submit" role="link">Pay with card</Button>*/}
+        {/*        </section>*/}
+        {/*      </form>*/}
+        {/*    </div>*/}
+        {/*  </form>*/}
+        {/*</div>*/}
 
-      {/*</Grid>*/}
+        {/*</Grid>*/}
+      </Helmet>
     </>
   );
 }

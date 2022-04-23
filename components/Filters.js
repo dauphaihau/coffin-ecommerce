@@ -43,7 +43,7 @@ const Filters = ({categories, launchSticky}) => {
             <button
               key={idz}
               type='button'
-              className={`filterBtn ${brand === name && 'is-selected'} `}
+              className={`filter-btn ${brand === name && 'is-selected'} `}
               name='brand'
               onClick={updateFilters}
             >

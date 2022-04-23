@@ -53,6 +53,10 @@
 .form-select-input {
   @apply relative mb-4;
 
+  &__title {
+    @apply block text-base font-medium text-gray-700;
+  }
+
   &__btn {
     @apply relative w-full bg-white border border-gray-300 rounded-md shadow-sm
     pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default focus:outline-none focus:ring-1

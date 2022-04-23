@@ -48,12 +48,12 @@ const UserList = () => {
       id: '', title: '',
       render: (row) => <>
         <div className='flex gap-x-4 justify-center'>
-          <Tooltip title='Edit' classes='right-[25%]'>
+          <Tooltip title='Edit' classes='!right-[25%]'>
             <Link href={`${router.pathname}/${row._id}`}>
               <i className="fa-solid fa-pen text-xl w-full"/>
             </Link>
           </Tooltip>
-          <Tooltip title='Delete' classes='right-[25%]'>
+          <Tooltip title='Delete' classes='!right-[25%]'>
             <button onClick={() => handleDelete(row._id)}>
               <i className="fa-solid fa-trash-can w-full cursor-pointer text-xl"/>
             </button>

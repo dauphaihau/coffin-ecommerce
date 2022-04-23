@@ -10,7 +10,7 @@
 
     @apply p-4 laptop:drop-shadow-xl overflow-x-auto
     rounded-[19px] bg-white dark:bg-black
-    border-gray-200 laptop:border-[#f7f7f7];
+    border-gray-200 laptop:border-gray-custom-50;
 
     .table {
       @apply min-w-full ;
@@ -46,6 +46,7 @@
 }
 
 .pagination {
+  
   @apply px-4 mt-4 flex justify-between ;
 
   &__num {

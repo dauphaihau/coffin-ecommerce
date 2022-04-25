@@ -25,8 +25,15 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['i.pravatar.cc'],
-  },
+    domains: ['i.pravatar.cc']
+  }
 }
+
+const withTM = require("next-transpile-modules")([
+  'gsap',
+  'hover-effect'
+]);
+module.exports = withTM();
+
 
 module.exports = nextConfig

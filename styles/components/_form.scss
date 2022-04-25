@@ -1,7 +1,7 @@
 .form-control {
   @apply mb-4;
   label {
-    @apply block text-sm font-medium text-gray-900 dark:text-gray-400;
+    @apply block text-base font-medium text-gray-700 dark:text-gray-400;
   }
 }
 
@@ -18,14 +18,14 @@
   }
 
   label {
-    @apply block text-base;
+    @apply block text-base text-gray-700;
   }
 }
 
 .form-textarea-input {
   @apply mb-3;
   label {
-    @apply inline-block mb-2 text-black;
+    @apply inline-block mb-2 text-gray-700;
   }
 
   textarea {
@@ -41,7 +41,7 @@
 .form-check-input {
   @apply mb-4 flex items-center;
   label {
-    @apply inline-block ;
+    @apply inline-block text-gray-700;
   }
   input {
     @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white

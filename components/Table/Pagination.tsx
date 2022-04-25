@@ -32,7 +32,7 @@ const Pagination = (props: Props) => {
             className={currentPage === 1 ? 'disabled' : ''}
             onClick={() => onPageChange(currentPage - 1)}
           >
-            <ChevronLeftIcon height={30} width={30}/>
+            <ChevronLeftIcon height={15} width={15}/>
           </figure>
           {pageNumbers.map(pageNumber => (
             <div key={pageNumber}>
@@ -46,7 +46,7 @@ const Pagination = (props: Props) => {
             className={currentPage === pageNumbers?.length ? 'disabled' : ''}
             onClick={() => onPageChange(currentPage + 1)}
           >
-            <ChevronRightIcon height={30} width={30}/>
+            <ChevronRightIcon height={15} width={15}/>
           </figure>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {Switch} from '@headlessui/react'
 
-export default function CustomSwitch({label}) {
+export default function CustomSwitch({label, onChange}) {
   const [enabled, setEnabled] = useState(false)
 
   return (
@@ -9,7 +9,10 @@ export default function CustomSwitch({label}) {
       <div className="flex items-center">
         <Switch
           checked={enabled}
-          onChange={setEnabled}
+          onChange={(e) => {
+            setEnabled(e)
+            onChange(e)
+          }}
           className={`${enabled ? 'bg-gray-500' : 'bg-[#939eaa]'}
           relative inline-flex flex-shrink-0 h-[17px] w-[45px] border-2 border-transparent
            rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none

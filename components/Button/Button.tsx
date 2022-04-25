@@ -35,7 +35,7 @@ const Button = forwardRef((props: Props, ref: any) => {
       // ${size ==='sm' ? '!laptop:py-2 !laptop:px-2':''}
     <button
       className={`btn 
-      ${shadow && 'shadow-xl'}
+      ${shadow && 'drop-shadow-xl'}
       ${width === 'fit' && 'w-fit' || width === 'full' && 'w-full'}
       ${size === 'xl' ? 'laptop:py-6 laptop:px-6' : ''}
       ${size === 'lg' ? 'laptop:py-4 laptop:px-4' : ''}

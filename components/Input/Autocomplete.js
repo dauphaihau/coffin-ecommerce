@@ -4,7 +4,9 @@ import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 
 export default function CustomAutocomplete({label, onChange, options}) {
   const [selected, setSelected] = useState(options[0])
+
   const [query, setQuery] = useState('')
+  const [arrResult, setArrResult] = useState([options[0]])
 
   const filteredOptions =
     query === ''
@@ -16,11 +18,19 @@ export default function CustomAutocomplete({label, onChange, options}) {
           .includes(query.toLowerCase().replace(/\s+/g, ''))
       )
 
+
+  const handleAutoComplete = (...e) => {
+    const tempArr = [...arrResult, ...e];
+    const uniqElement = [...new Set(tempArr.filter((value, index, self) => self.indexOf(value) === index))];
+    setArrResult(uniqElement);
+    onChange(uniqElement);
+  }
+
   return (
-    <>
+    <div>
       <Combobox value={selected} onChange={(e) => {
         setSelected(e);
-        onChange(e);
+        handleAutoComplete(e);
       }}>
         <div className="relative">
           <Combobox.Label>{label}</Combobox.Label>
@@ -60,7 +70,7 @@ export default function CustomAutocomplete({label, onChange, options}) {
                     key={option.id}
                     className={({active}) =>
                       `cursor-default select-none relative py-2 pl-10 pr-4 ${
-                        active ? 'text-white bg-black' : 'text-gray-900'
+                        active ? 'text-gray-700 bg-light-200' : 'text-black'
                       }`
                     }
                     value={option}
@@ -77,7 +87,7 @@ export default function CustomAutocomplete({label, onChange, options}) {
                         {selected ? (
                           <span
                             className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active ? 'text-white' : 'text-black'
+                              active ? 'text-black' : 'text-black'
                             }`}
                           >
                             <CheckIcon className="w-5 h-5" aria-hidden="true"/>
@@ -92,6 +102,26 @@ export default function CustomAutocomplete({label, onChange, options}) {
           </Transition>
         </div>
       </Combobox>
-    </>
+      {arrResult.length > 0 ? (
+        <div className='mt-3 border rounded-lg p-2 flex flex-wrap gap-2'>
+          {
+            arrResult?.map((tag, id) => (
+              <div className='py-1 px-2 bg-[#edeff1] rounded-2xl w-fit' key={id}>
+                {tag.name}
+                <i
+                  className="fa-solid fa-circle-xmark text-base text-[#b9bcc0] animate
+                                              hover:text-gray-500 cursor-pointer !opacity-1 ml-2 "
+                  onClick={() => {
+                    const filtered = arrResult.filter(e => e.id !== tag.id);
+                    setArrResult(filtered);
+                  }}
+                />
+              </div>
+            ))
+          }
+        </div>
+      ) : null
+      }
+    </div>
   )
 }

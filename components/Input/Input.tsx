@@ -5,6 +5,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string,
   label?: string,
   classes?: string,
+  classesSpace?: string,
   register?: (name: string) => void,
   errors?: FieldErrors,
   ref?: any,
@@ -17,11 +18,12 @@ const Input: FC<InputProps> = forwardRef(
     type, label, name = '',
     register, errors,
     className, classes, placeholder,
+    classesSpace,
     ...others
   } = props;
 
   return (
-    <div className="form-input group">
+    <div className={`form-input group ${classesSpace}`}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         ref={ref}

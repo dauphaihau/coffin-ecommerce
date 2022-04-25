@@ -11,15 +11,15 @@ function Ecommerce({Component, pageProps, categories}) {
   const Layout = Component.layout === 'admin' ? AdminLayout : MainLayout;
 
   return (
-    <AuthProvider>
-      <UIControllerProvider>
-        <FilterProvider>
-          <Layout categories={categories}>
-            <Component {...pageProps} />
-          </Layout>
-        </FilterProvider>
-      </UIControllerProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <UIControllerProvider>
+          <FilterProvider>
+            <Layout categories={categories}>
+              <Component {...pageProps} />
+            </Layout>
+          </FilterProvider>
+        </UIControllerProvider>
+      </AuthProvider>
   )
 }
 

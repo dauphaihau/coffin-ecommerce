@@ -105,15 +105,15 @@ const UserEdit = () => {
               <Select
                 size='medium'
                 name='role'
-                title='Select Role'
-                options={roleOpts.filter(({value}) => userInfo.role !== 'admin' ? value !== 'admin' : value)}
+                title='Role'
+                options={roleOpts.filter(({value}) => userInfo?.role !== 'admin' ? value !== 'admin' : value)}
                 value={value}
                 onChange={onChange}
               />
             )}
           />
           <div className="flex gap-x-4 mt-6">
-            <Button type='submit' isLoading={isBtnLoading}>Save Changes</Button>
+            <Button shadow type='submit' isLoading={isBtnLoading}>Save Changes</Button>
           </div>
         </form>
       </Helmet>

@@ -154,6 +154,7 @@ let inventory = [
     colors: ['#f3eed7'],
     price: '160',
     image: '/images/products/coffin-child3.png',
+    image2: '/images/products/coffin-child13a.png',
     description: 'Our tiny Baby Crib casket features a gently raised lid with carefully plaited edging and a set of small braided loops with wooden toggles. We make our willow Baby Crib casket with sensitivity in mind, each one made in our workshops in Somerset using natural willow and using completely natural processes. Every wicker casket is made with the same care and dedication that has driven our family business for over four generations.',
     brand: 'Aurora',
     quantity: 10

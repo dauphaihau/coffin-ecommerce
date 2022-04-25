@@ -46,7 +46,7 @@
 }
 
 .pagination {
-  
+
   @apply px-4 mt-4 flex justify-between ;
 
   &__num {
@@ -56,25 +56,24 @@
       @apply block mb-[6px] flex flex-row items-center;
 
       figure {
-        @apply h-[1.8rem] w-4 cursor-pointer dark:text-white;
-      }
-
-      figure:first-child {
-        @apply mr-4
+        @apply flex items-center  rounded-xl justify-center bg-[#f4f4f4]
+        cursor-pointer dark:text-white mx-[2px];
+        padding: 9px 9px;
       }
 
       figure.disabled {
-        @apply text-gray-300;
+        @apply text-[#a6a6a6];
       }
 
       p {
-        @apply text-black cursor-pointer hover:bg-black  hover:text-white duration-300 transition ease-in-out rounded;
-        padding: 7px 14px;
+        @apply text-black cursor-pointer hover:bg-black
+        hover:text-white duration-300 transition ease-in-out rounded;
+        padding: 7px 13px;
       }
 
       a {
-        @apply cursor-pointer mx-1 text-center rounded-xl text-black dark:text-white;
-        padding: 7px 14px;
+        @apply cursor-pointer bg-[#f4f4f4] mx-[2px] text-center rounded-xl text-black dark:text-white;
+        padding: 7px 13px;
       }
 
       a.selected {
@@ -82,7 +81,8 @@
       }
 
       a:hover {
-        @apply bg-black text-white dark:hover:bg-white dark:hover:text-black transition duration-300 ease-in-out;
+        @apply bg-black text-white dark:hover:bg-white dark:hover:text-black
+        transition duration-300 ease-in-out;
       }
     }
   }

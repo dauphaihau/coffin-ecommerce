@@ -1,17 +1,18 @@
 import * as Yup from "yup";
 import {Controller, useForm} from "react-hook-form";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
 import {Helmet, Grid} from "@components";
 import {Button} from "@components/Button";
-import {Select, Checkbox, Textarea, Input, Switch} from "@components/Input"
+import {
+  Select, Checkbox, Textarea, Input, Switch, Autocomplete, ImageInput,
+  TextEditor
+} from "@components/Input"
 import {productService} from "../../../services/products";
 import {brandOpts, categoryOpts, colorOpts} from "../../../assets/data/options";
-import {Autocomplete, ImageInput} from "../../../components/Input";
-import {Image} from "../../../components";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -19,8 +20,7 @@ const dataBreadcrumb = [
   {path: "", name: "New product", lastLink: true}
 ];
 
-
-const people = [
+const TagOpts = [
   {id: 1, name: 'Coffin'},
   {id: 2, name: 'Casket'},
   {id: 3, name: 'Death'},
@@ -33,24 +33,6 @@ const NewProduct = () => {
 
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
-  const [arrTags, setArrTags] = useState([people[0]])
-  const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState()
-
-  // create a preview as a side effect, whenever selected file is changed
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview(undefined)
-      return
-    }
-
-    const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
-
-    // free memory when ever this component is unmounted
-    return () => URL.revokeObjectURL(objectUrl)
-  }, [selectedFile])
-
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required')
@@ -96,61 +78,49 @@ const NewProduct = () => {
       category: values.category.value,
       color: values.color.value
     }
-
-    setIsBtnLoading(true)
-    const res = await productService.create(formatData)
-    setIsBtnLoading(res.isLoading)
-
-    if (res.isSuccess) {
-      router.push('/admin/products')
-      toast.success('Create success!')
-    } else {
-      if (errors) {
-        setError('name', {
-          type: "server",
-          message: res.message
-        });
-      }
-    }
+    console.log('format-data', formatData)
+    //
+    // setIsBtnLoading(true)
+    // const res = await productService.create(formatData)
+    // setIsBtnLoading(res.isLoading)
+    //
+    // if (res.isSuccess) {
+    //   router.push('/admin/products')
+    //   toast.success('Create success!')
+    // } else {
+    //   if (errors) {
+    //     setError('name', {
+    //       type: "server",
+    //       message: res.message
+    //     });
+    //   }
+    // }
   }
 
-  const handleAutoComplete = (...e) => {
-    const tempArr = [...arrTags, ...e]
-    const uniqElement = [...new Set(tempArr.filter((value, index, self) => self.indexOf(value) === index))]
-    setArrTags(uniqElement)
-  }
-
-  const onSelectFile = e => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined)
-      return
-    }
-
-    // I've kept this example simple by using the first image instead of multiple
-    setSelectedFile(e.target.files[0])
+  const onFileChange = (files) => {
+    console.log(files);
   }
 
   return (
     <div className='w-full'>
       <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
-
           <Grid md={1} lg={2} gapx={4}>
-            <div className='bg-white p-6 rounded-lg shadow-lg'>
+            <div className='bg-white p-6 rounded-lg drop-shadow-md'>
               <Grid md={1} lg={1} gapx={4}>
-                <Input label='Name *' name='name' register={register} errors={errors}/>
+                <Input label='Product Name *' name='name' register={register} errors={errors}/>
                 <Textarea name='description' label='Description *' register={register} errors={errors}/>
-                <ImageInput onSelectFile={(e) => onSelectFile(e)}/>
-                <div className='my-2'>
-                  {/*{selectedFile && <Image src={preview} classesSize='w-20 h-20 rounded-2xl' classes='w-20 h-20 rounded-2xl'/>}*/}
-                  {console.log(preview)}
-                  {selectedFile && <img src={preview} className='w-20 h-20 rounded-xl'/>}
-                </div>
+                {/*<TextEditor*/}
+                {/*  name="description"*/}
+                {/*  label="Description"*/}
+                {/*  tip="Describe the issue in as much detail as you'd like."*/}
+                {/*/>*/}
+                <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
               </Grid>
             </div>
 
             <div>
-              <div className='bg-white p-6 rounded-lg shadow-lg'>
+              <div className='bg-white p-6 rounded-lg drop-shadow-md'>
                 <Grid md={1} lg={2} gapx={4}>
                   <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                   <Controller
@@ -189,45 +159,38 @@ const NewProduct = () => {
                       />
                     )}
                   />
-                  <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'/>
-                  <div>
-                    <Autocomplete label='Tags' onChange={(e) => handleAutoComplete(e)} options={people}/>
-                    <div className='mt-3 border rounded-lg p-2 flex flex-wrap gap-2'>
-                      {
-                        arrTags?.map((tag, id) => (
-                          <div className='py-1 px-2 bg-[#edeff1] rounded-2xl w-fit' key={id}>
-                            {tag.name}
-                            <i
-                              className="fa-solid fa-circle-xmark text-base text-[#b9bcc0] animate
-                              hover:text-gray-500 cursor-pointer !opacity-1 ml-2 "
-                              onClick={() => {
-                                const filtered = arrTags.filter(e => e.id !== tag.id);
-                                setArrTags(filtered);
-                              }}
-                            />
-                          </div>
-                        ))
-                      }
-                    </div>
-                  </div>
+                  <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
+                         classesSpace='mb-0'/>
+
+                  <Controller
+                    control={control}
+                    name='tag'
+                    render={({field: {onChange, onBlur, value, ref}}) => (
+                      <Autocomplete
+                        label='Tags'
+                        // onChange={(e) => console.log('autocomp', e)}
+                        onChange={onChange}
+                        options={TagOpts}/>
+                    )}
+                  />
                 </Grid>
                 <Grid md={1} lg={2} gapx={4}>
                 </Grid>
                 {/*<Checkbox label='Save this information for next time'/>*/}
               </div>
-
-              <div className='bg-white p-6 rounded-lg shadow-lg mt-6'>
+              <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
                 <Grid md={1} lg={2} gapx={4}>
                   <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
                   <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
                 </Grid>
-                <Switch label='Price includes taxes'/>
+                <Controller
+                  control={control}
+                  name='tax'
+                  render={({field: {onChange}}) => (<Switch label='Price includes taxes' onChange={onChange}/>)}
+                />
               </div>
             </div>
-            <div className="flex gap-x-4 mt-6">
-              <Button type='submit' isLoading={isBtnLoading}>Create</Button>
-            </div>
-
+            <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Create</Button>
           </Grid>
         </form>
       </Helmet>

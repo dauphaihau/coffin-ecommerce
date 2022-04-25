@@ -32,11 +32,11 @@ const ProductsPage = ({categories = []}) => {
                 <Product
                   key={index}
                   // link={`${router.asPath}/product/${slugify(item.name)}`}
-
                   link={`/product/${slugify(item.name)}`}
                   title={item.name}
                   price={item.price}
                   imageSrc={item.image}
+                  imageHover={item?.image2}
                 />
               )
             ).slice(0, state)

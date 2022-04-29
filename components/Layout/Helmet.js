@@ -5,11 +5,9 @@ const Helmet = ({title, dataBreadcrumb, children}) => {
     <>
       <div className="mb-6">
         <Breadcrumb links={dataBreadcrumb}/>
-        <h1 className='text-3xl mt-2 font-bold'>{title}</h1>
+        <h1 className='text-xl laptop:text-3xl mt-2 font-bold'>{title}</h1>
       </div>
-      <div>
-        {children}
-      </div>
+      {children}
     </>
   );
 }

@@ -12,7 +12,7 @@ import {
   TextEditor
 } from "@components/Input"
 import {productService} from "../../../services/products";
-import {brandOpts, categoryOpts, colorOpts} from "../../../assets/data/options";
+import {brandOpts, categoryOpts, colorOpts, TagOpts} from "../../../assets/data/options";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -20,14 +20,6 @@ const dataBreadcrumb = [
   {path: "", name: "New product", lastLink: true}
 ];
 
-const TagOpts = [
-  {id: 1, name: 'Coffin'},
-  {id: 2, name: 'Casket'},
-  {id: 3, name: 'Death'},
-  {id: 4, name: 'Die'},
-  {id: 5, name: 'Willow'},
-  {id: 6, name: 'Curved'},
-]
 
 const NewProduct = () => {
 
@@ -76,25 +68,26 @@ const NewProduct = () => {
       ...values,
       brand: values.brand.value,
       category: values.category.value,
-      color: values.color.value
+      color: values.color.value,
+      // tag: values.tag.map(tag => tag.id)
     }
     console.log('format-data', formatData)
-    //
-    // setIsBtnLoading(true)
-    // const res = await productService.create(formatData)
-    // setIsBtnLoading(res.isLoading)
-    //
-    // if (res.isSuccess) {
-    //   router.push('/admin/products')
-    //   toast.success('Create success!')
-    // } else {
-    //   if (errors) {
-    //     setError('name', {
-    //       type: "server",
-    //       message: res.message
-    //     });
-    //   }
-    // }
+
+    setIsBtnLoading(true)
+    const res = await productService.create(formatData)
+    setIsBtnLoading(res.isLoading)
+
+    if (res.isSuccess) {
+      router.push('/admin/products')
+      toast.success('Create success!')
+    } else {
+      if (errors) {
+        setError('name', {
+          type: "server",
+          message: res.message
+        });
+      }
+    }
   }
 
   const onFileChange = (files) => {
@@ -102,102 +95,99 @@ const NewProduct = () => {
   }
 
   return (
-    <div className='w-full'>
-      <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid md={1} lg={2} gapx={4}>
+    <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid md={1} lg={2} gapx={4} classes='pb-4'>
+          <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
+            <Grid md={1} lg={1} gapx={4}>
+              <Input label='Product Name *' name='name' register={register} errors={errors}/>
+              <Textarea name='description' label='Description *' register={register} errors={errors}/>
+              {/*<TextEditor*/}
+              {/*  name="description"*/}
+              {/*  label="Description"*/}
+              {/*  tip="Describe the issue in as much detail as you'd like."*/}
+              {/*/>*/}
+              <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
+            </Grid>
+          </div>
+          <div>
             <div className='bg-white p-6 rounded-lg drop-shadow-md'>
-              <Grid md={1} lg={1} gapx={4}>
-                <Input label='Product Name *' name='name' register={register} errors={errors}/>
-                <Textarea name='description' label='Description *' register={register} errors={errors}/>
-                {/*<TextEditor*/}
-                {/*  name="description"*/}
-                {/*  label="Description"*/}
-                {/*  tip="Describe the issue in as much detail as you'd like."*/}
-                {/*/>*/}
-                <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
-              </Grid>
-            </div>
-
-            <div>
-              <div className='bg-white p-6 rounded-lg drop-shadow-md'>
-                <Grid md={1} lg={2} gapx={4}>
-                  <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
-                  <Controller
-                    control={control}
-                    name='category'
-                    render={({field: {onChange, onBlur, value, ref}}) => (
-                      <Select
-                        size='medium'
-                        title='Category *'
-                        options={categoryOpts}
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='brand'
-                    render={({field: {onChange, onBlur, value, ref}}) => (
-                      <Select
-                        size='medium'
-                        title='Brand *'
-                        options={brandOpts}
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name='color'
-                    render={({field: {onChange, onBlur, value, ref}}) => (
-                      <Select
-                        size='medium'
-                        title='Color *'
-                        options={colorOpts}
-                        onChange={onChange}
-                      />
-                    )}
-                  />
-                  <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
-                         classesSpace='mb-0'/>
-
-                  <Controller
-                    control={control}
-                    name='tag'
-                    render={({field: {onChange, onBlur, value, ref}}) => (
-                      <Autocomplete
-                        label='Tags'
-                        // onChange={(e) => console.log('autocomp', e)}
-                        onChange={onChange}
-                        options={TagOpts}/>
-                    )}
-                  />
-                </Grid>
-                <Grid md={1} lg={2} gapx={4}>
-                </Grid>
-                {/*<Checkbox label='Save this information for next time'/>*/}
-              </div>
-              <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
-                <Grid md={1} lg={2} gapx={4}>
-                  <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
-                  <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
-                </Grid>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                 <Controller
                   control={control}
-                  name='tax'
-                  render={({field: {onChange}}) => (<Switch label='Price includes taxes' onChange={onChange}/>)}
+                  name='category'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Category *'
+                      options={categoryOpts}
+                      onChange={onChange}
+                    />
+                  )}
                 />
-              </div>
+                <Controller
+                  control={control}
+                  name='brand'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Brand *'
+                      options={brandOpts}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='color'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Color *'
+                      options={colorOpts}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
+                       classesSpace='mb-0'/>
+
+                <Controller
+                  control={control}
+                  name='tag'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Autocomplete
+                      label='Tags'
+                      onChange={onChange}
+                      options={TagOpts}/>
+                  )}
+                />
+              </Grid>
+
+              {/*<Grid md={1} lg={2} gapx={4}>*/}
+              {/*</Grid>*/}
+              {/*<Checkbox label='Save this information for next time'/>*/}
             </div>
-            <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Create</Button>
-          </Grid>
-        </form>
-      </Helmet>
-    </div>
+            <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
+                <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
+              </Grid>
+              <Controller
+                control={control}
+                name='tax'
+                render={({field: {onChange}}) => (<Switch label='Price includes taxes' onChange={onChange}/>)}
+              />
+            </div>
+          </div>
+          <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Create</Button>
+        </Grid>
+      </form>
+    </Helmet>
   );
 }
 
-NewProduct.layout = 'admin';
 
+NewProduct.layout = 'admin';
 export default NewProduct;

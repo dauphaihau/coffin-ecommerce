@@ -26,6 +26,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         name: req.body.name,
         email: req.body.email,
         address: req.body.address,
+        isVerified: req.body.isVerified,
+        isBanned: req.body.isBanned,
         phoneNumber: req.body.phoneNumber,
         password: bcrypt.hashSync(req.body.password),
         role: req.body.role,

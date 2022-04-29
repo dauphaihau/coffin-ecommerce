@@ -1,12 +1,19 @@
-import {Fragment, useState} from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
+import {uniqElement} from "../../utils/helpers";
 
-export default function CustomAutocomplete({label, onChange, options}) {
+export default function CustomAutocomplete({label, onChange, options, value}) {
   const [selected, setSelected] = useState(options[0])
-
   const [query, setQuery] = useState('')
   const [arrResult, setArrResult] = useState([options[0]])
+  console.log('value', value)
+
+  useEffect(() => {
+    if (value?.length > 0) {
+      setArrResult(value)
+    }
+  }, [value])
 
   const filteredOptions =
     query === ''
@@ -20,10 +27,10 @@ export default function CustomAutocomplete({label, onChange, options}) {
 
 
   const handleAutoComplete = (...e) => {
-    const tempArr = [...arrResult, ...e];
-    const uniqElement = [...new Set(tempArr.filter((value, index, self) => self.indexOf(value) === index))];
-    setArrResult(uniqElement);
-    onChange(uniqElement);
+    let tempArr = [...arrResult, ...e];
+    tempArr = uniqElement(tempArr)
+    setArrResult(tempArr);
+    onChange(tempArr);
   }
 
   return (
@@ -59,7 +66,7 @@ export default function CustomAutocomplete({label, onChange, options}) {
             afterLeave={() => setQuery('')}
           >
             <Combobox.Options
-              className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              className="absolute z-[9999] w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {filteredOptions.length === 0 && query !== '' ? (
                 <div className="cursor-default select-none relative py-2 px-4 text-gray-700">
                   Nothing found.
@@ -114,6 +121,7 @@ export default function CustomAutocomplete({label, onChange, options}) {
                   onClick={() => {
                     const filtered = arrResult.filter(e => e.id !== tag.id);
                     setArrResult(filtered);
+                    onChange(filtered)
                   }}
                 />
               </div>

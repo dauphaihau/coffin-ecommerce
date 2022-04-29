@@ -1,8 +1,12 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Switch} from '@headlessui/react'
 
-export default function CustomSwitch({label, onChange}) {
+export default function CustomSwitch({label, onChange, value}) {
   const [enabled, setEnabled] = useState(false)
+
+  useEffect(() => {
+    setEnabled(value)
+  }, [value])
 
   return (
     <div className="pb-4">

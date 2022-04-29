@@ -85,7 +85,7 @@ const ProductsPage = ({categories = []}) => {
                 {products.length > 9 &&
                   <div className='flex justify-center mt-8'>
                     {products.length > state &&
-                      <Button onClick={() => setState(state + 6)}>Load more</Button>}
+                      <Button variant='gray' onClick={() => setState(state + 6)}>Load more</Button>}
                   </div>
                 }
               </>

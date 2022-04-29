@@ -7,6 +7,8 @@ import {Link, Tooltip, Helmet} from "@components";
 import {Table} from "@components/Table";
 import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
+import {Button} from "../../../components/Button";
+import {MenuDropdown} from "../../../components/Navigation";
 
 const UserList = () => {
   const router = useRouter();
@@ -37,28 +39,29 @@ const UserList = () => {
     },
     {id: 'email', title: 'Email',},
     {id: 'role', title: 'Role',},
-    // {id: 'verified', title: 'Verified'},
-    // {
-    //   id: 'status', title: 'Status',
-    //   render: (row) => (<span className="badge-green">{row ? 'Active' : 'Banned'}</span>
-    //   )
-    // },
+    {id: 'verified', title: 'Verified'},
+    {
+      id: 'status', title: 'Status',
+      render: (row) => (<span className="badge-green">{row ? 'Active' : 'Banned'}</span>
+      )
+    },
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('DD/MM/YYYY')}</>},
     {
       id: '', title: '',
       render: (row) => <>
-        <div className='flex gap-x-4 justify-center'>
-          <Tooltip title='Edit' classes='!right-[25%]'>
-            <Link href={`${router.pathname}/${row._id}`}>
-              <i className="fa-solid fa-pen text-xl w-full"/>
-            </Link>
-          </Tooltip>
-          <Tooltip title='Delete' classes='!right-[25%]'>
-            <button onClick={() => handleDelete(row._id)}>
-              <i className="fa-solid fa-trash-can w-full cursor-pointer text-xl"/>
-            </button>
-          </Tooltip>
-        </div>
+        <MenuDropdown/>
+        {/*<div className='flex gap-x-4 justify-center'>*/}
+        {/*  <Tooltip title='Edit' classes='!right-[25%]'>*/}
+        {/*    <Link href={`${router.pathname}/${row._id}`}>*/}
+        {/*      <i className="fa-solid fa-pen text-xl w-full"/>*/}
+        {/*    </Link>*/}
+        {/*  </Tooltip>*/}
+        {/*  <Tooltip title='Delete' classes='!right-[25%]'>*/}
+        {/*    <button onClick={() => handleDelete(row._id)}>*/}
+        {/*      <i className="fa-solid fa-trash-can w-full cursor-pointer text-xl"/>*/}
+        {/*    </button>*/}
+        {/*  </Tooltip>*/}
+        {/*</div>*/}
       </>
     },
   ];
@@ -84,13 +87,19 @@ const UserList = () => {
   }
 
   return (
-    <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}>
+    <>
+      <div className='flex items-center justify-between'>
+        <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
+        <Link href='users/new'>
+          <Button classes='ml-auto block mb-4'>New User</Button>
+        </Link>
+      </div>
       <Table
         columns={columns}
         itemsPerPage={6}
         rows={users}
       />
-    </Helmet>
+    </>
   )
 }
 

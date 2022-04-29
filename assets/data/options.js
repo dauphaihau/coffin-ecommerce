@@ -117,4 +117,18 @@ const paymentOpts = [
   },
 ]
 
-export {colorOpts, categoryOpts, brandOpts, roleOpts, sortOpts, deliveryOpts, paymentOpts}
+
+const TagOpts = [
+  {id: 1, name: 'Coffin'},
+  {id: 2, name: 'Casket'},
+  {id: 3, name: 'Death'},
+  {id: 4, name: 'Die'},
+  {id: 5, name: 'Willow'},
+  {id: 6, name: 'Curved'},
+]
+
+export {
+  colorOpts, categoryOpts,
+  brandOpts, roleOpts, sortOpts, deliveryOpts,
+  paymentOpts, TagOpts
+}

@@ -98,13 +98,3 @@ const Table = (props: Props) => {
 };
 
 export default Table;
-
-
-(new Array(10)
-  .fill(1)
-  .map((v,i) => ({
-    id: new Date().getTime() + i,
-    title: `Item ${i}`
-    })
-
-  ))

@@ -36,7 +36,7 @@ const Navbar = ({categories}) => {
             <img
               src="/images/logo.png"
               alt="logo"
-              className='w-[60px] ipad:h-[60px]'
+              className='w-full ipad:h-[50px]'
             />
           </Link>
           <div className="navbar-left__links">

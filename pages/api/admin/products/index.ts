@@ -31,6 +31,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
         price: req.body.price,
         salePrice: req.body.salePrice,
         category: req.body.category,
+        tag: req.body.tag,
+        tax: req.body.tax,
         sku: req.body.sku,
         quantity: req.body.quantity,
         description: req.body.description,

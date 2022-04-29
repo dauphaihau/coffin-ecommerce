@@ -4,9 +4,11 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String },
     address: { type: String },
     phoneNumber: { type: String },
+    isVerified: {type: Boolean},
+    isBanned: {type: Boolean},
     role: { type: String, required: true },
   },
   {

@@ -8,6 +8,7 @@ import {Table} from "@components/Table";
 import {productService} from "@services/products";
 import {formatPrice} from "@utils/helpers";
 import {useUIController} from "@context/UIControllerContext";
+import {Button} from "../../../components/Button";
 
 const ProductList = () => {
   const router = useRouter();
@@ -48,7 +49,7 @@ const ProductList = () => {
         return <p className='text-sm font-bold'>{row.name}</p>
       }
     },
-    {id: 'category', title: 'Category',},
+    {id: 'category', title: 'Category'},
     {id: 'price', title: 'Price', render: (row) => <>{formatPrice(row.price)}</>},
     {id: 'sku', title: 'SKU'},
     {id: 'quantity', title: 'quantity'},
@@ -99,13 +100,20 @@ const ProductList = () => {
   }
 
   return (
-    <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}>
+    <>
+
+      <div className='flex-center !justify-between'>
+        <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
+        <Link href='products/new'>
+          <Button classes='ml-auto block mb-4'>New Product</Button>
+        </Link>
+      </div>
       <Table
         itemsPerPage={6}
         columns={columns}
         rows={products}
       />
-    </Helmet>
+    </>
   )
 }
 

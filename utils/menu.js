@@ -49,10 +49,10 @@ export const MENU = {
           title: "Products List ",
           href: "/admin/products",
         },
-        {
-          title: "New Products",
-          href: "/admin/products/new",
-        },
+        // {
+        //   title: "New Products",
+        //   href: "/admin/products/new",
+        // },
       ],
     },
     {
@@ -63,10 +63,10 @@ export const MENU = {
           title: "List Users",
           href: "/admin/users",
         },
-        {
-          title: "New Users",
-          href: "/admin/users/new",
-        },
+        // {
+        //   title: "New Users",
+        //   href: "/admin/users/new",
+        // },
       ],
     },
     {

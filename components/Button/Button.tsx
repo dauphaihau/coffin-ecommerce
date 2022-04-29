@@ -6,7 +6,7 @@ interface Props {
   shadow?: boolean,
   size?: 'sx' | 'sm' | 'md' | 'lg' | 'xl',
   light?: boolean,
-  // variant: string,
+  variant?: 'gray',
   children: ReactNode,
   width?: 'full' | 'fit',
   disabled?: boolean,
@@ -19,7 +19,7 @@ const Button = forwardRef((props: Props, ref: any) => {
   const {
     type, classes, width,
     children, size = 'md', light,
-    shadow,
+    shadow, variant,
     isLoading = false,
     ...others
   } = props
@@ -42,6 +42,7 @@ const Button = forwardRef((props: Props, ref: any) => {
       ${size ==='sm' ? 'laptop:py-2 laptop:px-2' : ''}
       ${classes} ${isLoading && 'opacity-[0.3]'}
       ${light && 'bg-transparent text-black hover:text-black hover:opacity-[0.6]'}
+      ${variant === 'gray' && 'bg-[#f3f3f4] text-black hover:bg-gray-300 hover:text-black'}
       ${others.disabled && 'opacity-[0.3] hover:opacity-[0.3] '}
       `}
       {...others}

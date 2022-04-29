@@ -60,6 +60,11 @@ const getHeaders = () => {
   }
 }
 
+const uniqElement  = (arr) => {
+  return [...new Set(arr.filter((value, index, self) => self.indexOf(value) === index))];
+}
+
+
 export {
   slugify,
   titleIfy,
@@ -68,4 +73,5 @@ export {
   sumAllProduct,
   calculateTotal,
   getHeaders,
+  uniqElement,
 }

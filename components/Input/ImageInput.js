@@ -32,7 +32,7 @@ const ImageInput = ({onFileChange, classesSpace}) => {
     <div className={`form-control ${classesSpace}`}>
       <label>Images *</label>
       <div className="flex justify-center ">
-        <div className="rounded-lg drop-shadow-md bg-gray-50 w-1/2 lg:w-full">
+        <div className="rounded-lg drop-shadow-md bg-gray-50 w-full  ">
           <div className="m-4"
                ref={wrapperRef}
                onDragEnter={onDragEnter}
@@ -41,9 +41,8 @@ const ImageInput = ({onFileChange, classesSpace}) => {
           >
             <div className="flex items-center justify-center w-full cursor-pointer"
             >
-              <label
-                className="flex flex-col w-full h-52 relative border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">
-
+              <label className="flex flex-col w-full h-52 relative border-4
+                border-dashed hover:bg-gray-100 hover:border-gray-300">
                 <div className="flex-center content-center flex-col pt-12 ">
                   <i className="fa-solid fa-image text-4xl text-gray-400 group-hover:text-gray-600"/>
                   <p className="pt-1 text-xl font-bold tracking-wider text-black group-hover:text-gray-600">

@@ -11,6 +11,10 @@ import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
+import {Paper} from "../../../../components";
+import AvatarInput from "../../../../components/Input/AvatarInput";
+import {Stack} from "../../../../components/Layout";
+import {Switch} from "../../../../components/Input";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -81,37 +85,70 @@ const UserEdit = () => {
   }
 
   return (
-    <div className='w-[40%]'>
+    <div className='w-2/3'>
       <Helmet title='Edit user' dataBreadcrumb={dataBreadcrumb}>
-        <form onSubmit={handleSubmit(onSubmit)} className='bg-white p-6 rounded-lg shadow-lg'>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/*<Grid md={1} lg={2} gapx={4}>*/}
           {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
           {/*</Grid>*/}
+
           <Grid md={1} lg={2} gapx={4}>
-            <Input label='Full Name *' name='name' register={register} errors={errors}/>
-            <Input label='Email *' name='email' register={register} errors={errors}/>
-            {/*<Input label='Password' type='password' name='password' register={register} errors={errors}/>*/}
-            {/*<Input label='Repeat Password' name='repeatPassword' register={register} errors={errors}/>*/}
-          </Grid>
-          <Grid md={1} lg={2} gapx={4}>
-            <Input label='Address' name='address' register={register} errors={errors}/>
-            <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
-          </Grid>
-          {/*<Checkbox label='Save this information for next time'/>*/}
-          <Controller
-            control={control}
-            name='role'
-            render={({field: {onChange, onBlur, value, ref}}) => (
-              <Select
-                size='medium'
+            <Paper>
+              <div className='text-right mb-6'>
+                <span className='badge-danger'>BANNED</span>
+              </div>
+              <div className='flex justify-center flex-col mb-4'>
+                <div className='mb-4 bg-transparent rounded-full'>
+                  {/*<div className='mb-4 bg-gray-500 rounded-full py-14 px-16 w-fit'>*/}
+                  <AvatarInput/>
+                </div>
+              </div>
+              <Stack classes='mb-4 items-center'>
+                <div>
+                  <p className='font-bold text-[0.875rem]'>Banned</p>
+                  <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
+                </div>
+                <Switch/>
+              </Stack>
+              <Stack classes='mb-4 items-center'>
+                <div>
+                  <p className='font-bold text-[0.875rem]'>Email Verified</p>
+                  <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a
+                    verification email</p>
+                </div>
+                <Controller
+                  control={control}
+                  name='isVerified'
+                  render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
+                />
+              </Stack>
+            </Paper>
+            <Paper>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Full Name *' name='name' register={register} errors={errors}/>
+                <Input label='Email *' name='email' register={register} errors={errors}/>
+              </Grid>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Address' name='address' register={register} errors={errors}/>
+                <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
+              </Grid>
+              {/*<Checkbox label=''/>*/}
+              <Controller
+                control={control}
                 name='role'
-                title='Role'
-                options={roleOpts.filter(({value}) => userInfo?.role !== 'admin' ? value !== 'admin' : value)}
-                value={value}
-                onChange={onChange}
+                render={({field: {onChange, onBlur, value, ref}}) => (
+                  <Select
+                    size='medium'
+                    name='role'
+                    title='Role'
+                    options={roleOpts.filter(({value}) => userInfo?.role !== 'admin' ? value !== 'admin' : value)}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               />
-            )}
-          />
+            </Paper>
+          </Grid>
           <div className="flex gap-x-4 mt-6">
             <Button shadow type='submit' isLoading={isBtnLoading}>Save Changes</Button>
           </div>

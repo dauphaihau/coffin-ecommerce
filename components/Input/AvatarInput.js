@@ -55,16 +55,16 @@ const AvatarInput = ({onFileChange, classesSpace}) => {
   }
 
   return (
-    <div className={`form-control ${classesSpace}`}>
-      <div className="flex justify-center  border-2 border-sky-500">
-        <div className="rounded-lg drop-shadow-md bg-gray-50 w-1/2 lg:w-full">
-          <div className="m-4"
+    <div className={`form-control ${classesSpace} flex-center flex-col`}>
+      <div className="flex justify-center border-2 border-dotted rounded-full text-gray-300 w-1/2 h-48">
+        <div className="rounded-full drop-shadow-md  bg-transparent w-fit lg:w-[94%]">
+          <div
                ref={wrapperRef}
                onDragEnter={onDragEnter}
                onDragLeave={onDragLeave}
                onDrop={onDrop}
           >
-            <div className="flex items-center justify-center w-full  cursor-pointer "
+            <div className="flex items-center justify-center w-full cursor-pointer "
             >
               {/*<label className="flex flex-col w-full h-52 relative border-4 border-dashed hover:bg-gray-100 hover:border-gray-300">*/}
 
@@ -75,17 +75,25 @@ const AvatarInput = ({onFileChange, classesSpace}) => {
                 {/*  </p>*/}
                 {/*</div>*/}
               {/*</label>*/}
-                <input type="file" className="opacity-0 h-full w-full absolute inset-0 z-30" onChange={onFileDrop}
+                <input type="file" className="opacity-0 w-full absolute inset-0 z-30" onChange={onFileDrop}
                   // onChange={onSelectFile}
                 />
+
+              {selectedFile ? <img src={preview} className='w-full rounded-full h-[11.4rem] pt-[5px]' />
+                :
+                <div className="flex-center bg-gray-100 content-center flex-col absolute rounded-full top-[8px] right-[9px] h-[91%] w-[91%] ">
+                  <i className="fa-solid fa-image text-2xl text-gray-400 group-hover:text-gray-600"/>
+                  <p className="text-gray-500 text-base">Upload file</p>
+                </div>
+                // <div className='bg-gray-500'></div>
+              }
             </div>
           </div>
         </div>
       </div>
 
-
-      {selectedFile &&  <img src={preview} /> }
-
+      <p className='mt-4 text-xs text-gray-500 w-1/2 text-center leading-4'>Allowed *.jpeg, *.jpg, *.png, *.gif
+        max size of 3.1 MB</p>
       {/*<div className='mt-3 flex gap-2'>*/}
       {/*  {*/}
       {/*    fileList.map((file, id) => {*/}

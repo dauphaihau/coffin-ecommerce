@@ -5,11 +5,13 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import { Helmet, Grid } from "@components";
+import {Helmet, Grid} from "@components";
 import {Button} from "@components/Button";
 import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
+import {Autocomplete, ImageInput, Switch} from "../../../../components/Input";
+import {TagOpts} from "../../../../assets/data/options";
 
 const ProductEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -99,84 +101,103 @@ const ProductEdit = () => {
     }
   }
 
+  const onFileChange = (files) => {
+    console.log(files);
+  }
+
   return (
-    <div className='w-1/2'>
-      <Helmet title='Make the changes below' dataBreadcrumb={dataBreadcrumb}>
-        <form onSubmit={handleSubmit(onSubmit)} className='bg-white p-6 rounded-lg shadow-lg'>
-          <Grid md={1} lg={2} gapx={4}>
-            <Input label='Name *' name='name' register={register} errors={errors}/>
-            <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
-          </Grid>
-          <Grid md={1} lg={2} gapx={4} css='mb-4'>
-            <Controller
-              control={control}
-              name='category'
-              render={({field: {onChange, value}}) => (
-                <Select
-                  size='medium'
-                  value={value}
-                  title='Category *'
-                  options={categoryOpts}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name='brand'
-              render={({field: {onChange, value}}) => (
-                <Select
-                  size='medium'
-                  value={value}
-                  title='Brand *'
-                  // name='brand'
-                  options={brandOpts}
-                  onChange={onChange}
-                />
-              )}
-            />
-          </Grid>
-          <Grid md={1} lg={2} gapx={4}>
-            <Controller
-              control={control}
-              name='color'
-              render={({field: {onChange, value}}) => (
-                <Select
-                  size='medium'
-                  value={value}
-                  title='Color *'
-                  options={colorOpts}
-                  onChange={onChange}
-                />
-              )}
-            />
-            <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'/>
-          </Grid>
-          <Grid md={1} lg={2} gapx={4}>
-            <Input label='Price *' name='price' register={register} errors={errors}/>
-            <Input label='Sale Price' name='salePrice' register={register} errors={errors}/>
-          </Grid>
-          {/*<Checkbox label='Save this information for next time'/>*/}
-          <Textarea name='description' label='Description *' register={register} errors={errors}/>
-          {/*<input*/}
-          {/*type='file'*/}
-          {/*className='file:bg-gradient-to-b*/}
-          {/*file:from-gray-500 file:to-gray-600*/}
-          {/*file:px-6 file:py-3 file:m-5*/}
-          {/*file:border-none file:rounded-full*/}
-          {/*file:text-white file:cursor-pointer*/}
-          {/*file:shadow-lg file:shadow-gray-600/50*/}
-          {/*bg-gradient-to-br from-gray-200 to-gray-500*/}
-          {/*text-white/80 rounded-full cursor-pointer*/}
-          {/*shadow-xl shadow-gray-700/50*/}
-          {/*'*/}
-          {/*/>*/}
-          <div className="flex gap-x-4 mt-6">
-            <Button type='submit' isLoading={isBtnLoading}>Save Changes</Button>
+    <Helmet title='Make the changes below' dataBreadcrumb={dataBreadcrumb}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid md={1} lg={2} gapx={4} classes='pb-4'>
+          <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
+            <Grid md={1} lg={1} gapx={4}>
+              <Input label='Product Name *' name='name' register={register} errors={errors}/>
+              <Textarea name='description' label='Description *' register={register} errors={errors}/>
+              {/*<TextEditor*/}
+              {/*  name="description"*/}
+              {/*  label="Description"*/}
+              {/*  tip="Describe the issue in as much detail as you'd like."*/}
+              {/*/>*/}
+              <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
+            </Grid>
           </div>
-        </form>
-      </Helmet>
-    </div>
+          <div>
+            <div className='bg-white p-6 rounded-lg drop-shadow-md'>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
+                <Controller
+                  control={control}
+                  name='category'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Category *'
+                      value={value}
+                      options={categoryOpts}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='brand'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Brand *'
+                      value={value}
+                      options={brandOpts}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name='color'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Select
+                      size='medium'
+                      title='Color *'
+                      value={value}
+                      options={colorOpts}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
+                       classesSpace='mb-0'/>
+
+                <Controller
+                  control={control}
+                  name='tag'
+                  render={({field: {onChange, onBlur, value, ref}}) => (
+                    <Autocomplete
+                      value={value}
+                      name='tag'
+                      label='Tags'
+                      onChange={onChange}
+                      options={TagOpts}/>
+                  )}
+                />
+              </Grid>
+            </div>
+            <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
+              <Grid md={1} lg={2} gapx={4}>
+                <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
+                <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
+              </Grid>
+              <Controller
+                control={control}
+                name='tax'
+                render={({field: {onChange, value}}) => (
+                  <Switch value={value} label='Price includes taxes' onChange={onChange}/>)}
+              />
+            </div>
+          </div>
+          <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Save Changes</Button>
+        </Grid>
+      </form>
+    </Helmet>
   );
 }
 

@@ -14,6 +14,7 @@ import {useAuth} from "../../../context/authContext";
 import {Switch} from "../../../components/Input";
 import {Stack} from "../../../components/Layout";
 import AvatarInput from "../../../components/Input/AvatarInput";
+import {Paper} from "../../../components";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -65,35 +66,34 @@ const NewUser = () => {
       <Helmet title='Create a new user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid md={1} lg={2} gapx={4}>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <div className='text-right'>
-                <span className='badge-danger '>BANNED</span>
-              </div>
+            <Paper>
               <div className='flex justify-center flex-col mb-4'>
-                <div className='mb-4 bg-gray-500 rounded-full py-14 px-16 w-fit'>
+                <div className='mb-4 bg-transparent rounded-full'>
+                {/*<div className='mb-4 bg-gray-500 rounded-full py-14 px-16 w-fit'>*/}
                   <AvatarInput/>
                 </div>
-                <p>Allowed *.jpeg, *.jpg, *.png, *.gif
-                  max size of 3.1 MB</p>
               </div>
 
-              <Stack classes='mb-4'>
+              {/*<Stack classes='mb-4 items-center'>*/}
+              {/*  <div>*/}
+              {/*    <p className='font-bold text-[0.875rem]'>Banned</p>*/}
+              {/*    <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>*/}
+              {/*  </div>*/}
+              {/*  <Switch/>*/}
+              {/*</Stack>*/}
+              <Stack classes='mb-4 items-center'>
                 <div>
-                  <p className='font-bold'>Banned</p>
-                  <p className='text-gray-500'>Apply disable account</p>
+                  <p className='font-bold text-[0.875rem]'>Email Verified</p>
+                  <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a verification email</p>
                 </div>
-                <Switch/>
+                <Controller
+                  control={control}
+                  name='isVerified'
+                  render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
+                />
               </Stack>
-              <Stack classes='mb-4'>
-                <div>
-                  <p className='font-bold'>Email Verified</p>
-                  <p className='text-gray-500'>Disabling this will automatically send the user a verification email</p>
-                </div>
-                <Switch/>
-              </Stack>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            </Paper>
+            <Paper>
               <Input label='Full Name *' name='name' register={register} errors={errors}/>
               <Grid md={1} lg={2} gapx={4}>
                 <Input label='Address' name='address' register={register} errors={errors}/>
@@ -102,9 +102,8 @@ const NewUser = () => {
               <Grid md={1} lg={2} gapx={4}>
                 <Input label='Email *' name='email' register={register} errors={errors}/>
                 <Input label='Password' type='password' name='password' register={register} errors={errors}/>
-                {/*<Input label='Repeat Password' name='repeatPassword' register={register} errors={errors}/>*/}
               </Grid>
-              {/*<Checkbox label='Save this information for next time'/>*/}
+              {/*<Checkbox label=''/>*/}
               <Controller
                 control={control}
                 name='role'
@@ -119,7 +118,7 @@ const NewUser = () => {
                   />
                 )}
               />
-            </div>
+            </Paper>
           </Grid>
           <div className="flex gap-x-4 mt-6">
             <Button type='submit' isLoading={isBtnLoading}>Create</Button>

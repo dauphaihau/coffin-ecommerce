@@ -45,7 +45,7 @@ const ChatBox = () => {
            drop-shadow-2xl '
             onClick={() => setOpenChatBox(true)}
           >
-            <i className="fa-solid text-white  text-3xl  fa-comment-dots  drop-shadow-2xl "/>
+            <i className="fa-solid text-white text-3xl fa-comment-dots drop-shadow-2xl "/>
           </div>
           :
           <div

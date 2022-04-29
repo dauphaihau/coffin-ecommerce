@@ -18,6 +18,8 @@ const productSchema = new mongoose.Schema(
     // reviews: [reviewSchema],
     // featuredImage: { type: String },
     sku: { type: String, required: true },
+    tag: { type: Array, required: true },
+    tax: { type: Boolean, required: true },
     // isFeatured: { type: Boolean, required: true, default: false },
   },
   {

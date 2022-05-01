@@ -9,3 +9,4 @@ export { default as NavControl} from '../layout/MainLayout/Navbar/NavControl'
 export { default as Filters} from './Filters'
 export { default as Sorter} from './Sorter'
 export { default as Paper} from './Paper'
+

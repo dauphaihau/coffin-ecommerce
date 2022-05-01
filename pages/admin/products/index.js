@@ -9,6 +9,8 @@ import {productService} from "@services/products";
 import {formatPrice} from "@utils/helpers";
 import {useUIController} from "@context/UIControllerContext";
 import {Button} from "../../../components/Button";
+import {MenuDropdown} from "../../../components/Navigation";
+import MyModal from "../../../components/Modal/Modal";
 
 const ProductList = () => {
   const router = useRouter();
@@ -60,20 +62,22 @@ const ProductList = () => {
     },
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('LL')}</>},
     {
-      id: '', title: '',
+      id: 'actions', title: '', align: 'center',
       render: (row) => <>
-        <div className='flex gap-x-4 justify-center'>
-          <Tooltip title='Edit'>
-            <Link href={`${router.pathname}/${row._id}`}>
-              <i className=" fa-solid fa-pen text-xl "/>
-            </Link>
-          </Tooltip>
-          <Tooltip title='Delete'>
-            <button onClick={() => handleDelete(row._id)}>
-              <i className="fa-solid fa-trash-can text-xl"/>
-            </button>
-          </Tooltip>
-        </div>
+        <MenuDropdown
+          options={[
+            {
+              label: 'Edit',
+              element: <i className="fa-solid fa-pen"/>,
+              href: `${router.pathname}/${row._id}`
+            },
+            {
+              label: 'Delete',
+              element: <i className="fa-solid fa-trash-can"/>,
+              feature: () => handleDelete(row._id)
+            },
+          ]}
+        />
       </>
     },
   ];
@@ -99,9 +103,23 @@ const ProductList = () => {
     }
   }
 
+
+  async function handleDeleteMultiItems(idsArray) {
+    if (!window.confirm('Are you sure?')) {
+      return;
+    }
+    const res = await productService.multiDelete(idsArray)
+    if (res.isSuccess) {
+      const res = await productService.getAll();
+      setProducts(res.data)
+      toast.success('Delete success!')
+    } else {
+      toast.error(res.message)
+    }
+  }
+
   return (
     <>
-
       <div className='flex-center !justify-between'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='products/new'>
@@ -109,6 +127,8 @@ const ProductList = () => {
         </Link>
       </div>
       <Table
+        checkboxSelection
+        onChangeSelected={handleDeleteMultiItems}
         itemsPerPage={6}
         columns={columns}
         rows={products}

@@ -1,6 +1,6 @@
 import {XIcon} from "@heroicons/react/solid";
-import {useUIController} from "../../context/UIControllerContext";
-import {Text} from "../index";
+import {useUIController} from "../../../context/UIControllerContext";
+import {Text} from "../../index";
 
 let blackTheme = false;
 

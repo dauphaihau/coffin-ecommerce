@@ -9,6 +9,7 @@ import {useUIController} from "../../context/UIControllerContext";
 import {XIcon} from "@heroicons/react/solid";
 import countryOpts from "../../assets/data/country.json";
 import {useAuth} from "../../context/authContext";
+import {Modal} from "./Modal";
 
 const AddressModal = () => {
 
@@ -32,65 +33,50 @@ const AddressModal = () => {
   }
 
   return (
-
-    <div className={`${!openAddressModal && 'hidden'}
-          fixed z-[200] justify-center items-center
-          p-4 w-full h-full 
-          inset-0 
-          top-[10%]
-          ipad:left-[23%] ipad:top-[15%] 
-          laptop:left-[29%]
-          ipad:max-w-[40rem] ipad:h-auto
-           `}>
-
-      <div className="bg-white rounded-lg shadow">
-        <div className="flex justify-end p-2">
-          <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
+    <Modal isOpen={openAddressModal} width='ipad:max-w-[40rem]'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="px-6 pb-4 space-y-6 lg:px-8 pb-6 xl:pb-8"
+      >
+        {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
+        <div className=''>
+          <Text h1 sx='2xl' weight='bold' classes='mb-8'>Shipping Address</Text>
+          <Grid md={1} lg={2} gapx={4}>
+            <Input label='Full Name *' name='name' register={register} errors={errors}/>
+            <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
+          </Grid>
+          <Input label='Address *' name='address' register={register} errors={errors}/>
+          <Grid md={1} lg={2} gapx={4}>
+            {/*<Input label='Email ' name='email' register={register} errors={errors}/>*/}
+          </Grid>
+          <Grid md={1} lg={3} gapx={4}>
+            <Input label='City/Town *' name='city' register={register} errors={errors}/>
+            <Input label='Zip/Postcode *' name='postcode' register={register} errors={errors}/>
+            <Input label='State *' name='postcode' register={register} errors={errors}/>
+          </Grid>
+          <Checkbox label='Use this address as default.' classesForm='mb-4'/>
+          <Select size='medium' options={countryOpts} onChange={(e) => console.log(e)}/>
+          {/*<Textarea*/}
+          {/*  register={register} errors={errors}*/}
+          {/*  label='Order Notes (Optional)'*/}
+          {/*  name='note'*/}
+          {/*  rows={5}*/}
+          {/*  className='mb-6'*/}
+          {/*  placeholder='Notes about your order, e.g. special notes for delivery'*/}
+          {/*/>*/}
+          <div className="flex gap-x-4">
+            <Button
+              classes='w-fit'
+              onClick={() => {
+                // localStorage.removeItem('COFFIN_ECOMMERCE');
+                // setUser({...user, numberAllOfItemsInCart: 0})
+              }}
+            >Deliver to this Address</Button>
+          </div>
         </div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="px-6 pb-4 space-y-6 lg:px-8 pb-6 xl:pb-8"
-        >
-          {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
-            <div className=''>
-              <Text h1 sx='2xl' weight='bold' classes='mb-8'>Shipping Address</Text>
-                <Grid md={1} lg={2} gapx={4}>
-                  <Input label='Full Name *' name='name' register={register} errors={errors}/>
-                  <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
-                </Grid>
-                <Input label='Address *' name='address' register={register} errors={errors}/>
-                <Grid md={1} lg={2} gapx={4}>
-                  {/*<Input label='Email ' name='email' register={register} errors={errors}/>*/}
-                </Grid>
-                <Grid md={1} lg={3} gapx={4}>
-                  <Input label='City/Town *' name='city' register={register} errors={errors}/>
-                  <Input label='Zip/Postcode *' name='postcode' register={register} errors={errors}/>
-                  <Input label='State *' name='postcode' register={register} errors={errors}/>
-                </Grid>
-                <Checkbox label='Use this address as default.'/>
-                <Select size='medium' options={countryOpts} onChange={(e) => console.log(e)}/>
-                {/*<Textarea*/}
-                {/*  register={register} errors={errors}*/}
-                {/*  label='Order Notes (Optional)'*/}
-                {/*  name='note'*/}
-                {/*  rows={5}*/}
-                {/*  className='mb-6'*/}
-                {/*  placeholder='Notes about your order, e.g. special notes for delivery'*/}
-                {/*/>*/}
-                <div className="flex gap-x-4">
-                  <Button
-                    classes='w-fit'
-                    onClick={() => {
-                      // localStorage.removeItem('COFFIN_ECOMMERCE');
-                      // setUser({...user, numberAllOfItemsInCart: 0})
-                    }}
-                  >Deliver to this Address</Button>
-                </div>
-            </div>
-          {/*</Grid>*/}
-        </form>
-      </div>
-    </div>
+        {/*</Grid>*/}
+      </form>
+    </Modal>
   );
 }
 

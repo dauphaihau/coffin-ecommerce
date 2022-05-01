@@ -69,4 +69,18 @@ export const productService = {
       };
     }
   },
+
+  multiDelete: async (idsArray) => {
+    console.log('ids-array', idsArray)
+    try {
+      await axios.post(`/api/admin/products/mutilDelete`, idsArray, getHeaders())
+      return {isLoading: false, isSuccess: true};
+    } catch ({response}) {
+      return {
+        isSuccess: false,
+        isLoading: false,
+        message: response?.data.message,
+      };
+    }
+  },
 }

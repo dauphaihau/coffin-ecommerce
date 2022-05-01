@@ -17,17 +17,16 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 handler.use(rolesCanCreate);
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
-
     if (await User.findOne({email: req.body.email})) {
         res.status(409).send({message: `"${req.body.email}" already exists`});
     }
-
     const newUser = new User({
         name: req.body.name,
         email: req.body.email,
         address: req.body.address,
-        isVerified: req.body.isVerified,
-        isBanned: req.body.isBanned,
+        isVerified: false,
+        // isBanned: req.body.isBanned,
+        isBanned: false,
         phoneNumber: req.body.phoneNumber,
         password: bcrypt.hashSync(req.body.password),
         role: req.body.role,

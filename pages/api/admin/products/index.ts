@@ -1,7 +1,7 @@
 import nc from 'next-connect';
 import Product from '../../../../models/Product';
 import {NextApiRequest, NextApiResponse} from "next";
-import {isAuth, rolesCanView} from "../../../../utils/middlewares/auth";
+import {isAuth, rolesCanDelete, rolesCanView} from "../../../../utils/middlewares/auth";
 import db from "../../../../utils/db/db";
 
 const handler = nc();
@@ -9,9 +9,9 @@ handler.use(isAuth, rolesCanView);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
-    const users = await Product.find({});
+    const products = await Product.find({});
     await db.disconnect();
-    res.send(users);
+    res.send(products);
 });
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -41,5 +41,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.disconnect();
     res.status(200).send({message: 'created product success'});
 });
+
+
 
 export default handler;

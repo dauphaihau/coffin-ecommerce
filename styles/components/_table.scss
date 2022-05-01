@@ -20,6 +20,7 @@
           @apply
           bg-gray-100 dark:bg-[#111111]
           py-3 px-6 text-xs font-medium tracking-wider
+            hover:bg-gray-200 animate cursor-pointer
           text-gray-700 uppercase dark:text-gray-400;
         }
 

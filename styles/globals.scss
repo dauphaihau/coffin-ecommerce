@@ -42,31 +42,3 @@
 .animate {
   @apply transition-all duration-500 ease-in-out;
 }
-
-
-.ql-toolbar.ql-snow {
-  border-radius: 4px 4px 0 0;
-  //border: 1px solid ${color.borderLightest};
-  border: 1px solid gray;
-  border-bottom: none;
-}
-.ql-container.ql-snow {
-  border-radius: 0 0 4px 4px;
-  //border: 1px solid ${color.borderLightest};
-  border: 1px solid gray;
-  border-top: none;
-  //color: ${color.textDarkest};
-  color: #111111;
-  font-size: 15px;
-  //${font.size(15)}
-  //${font.regular}
-}
-
-.ql-editor {
-  min-height: 110px;
-}
-
-#editor-container {
-  height: 375px;
-}
-

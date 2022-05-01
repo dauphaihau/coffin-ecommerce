@@ -1,5 +1,5 @@
-import {useEffect, useRef, useState} from "react";
 import filePng from "../../public/images/file-png-solid-240.png";
+import {useEffect, useRef, useState} from "react";
 
 const AvatarInput = ({onFileChange, classesSpace}) => {
 

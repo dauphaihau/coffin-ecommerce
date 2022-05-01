@@ -1,8 +1,10 @@
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import {Menu, Transition} from '@headlessui/react'
+import {Fragment, useEffect, useRef, useState} from 'react'
+import {ChevronDownIcon} from '@heroicons/react/solid'
+import {Link} from "../index";
 
-export default function Example() {
+export default function CustomMenuDropdown(props) {
+  const {options} = props;
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -26,58 +28,28 @@ export default function Example() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="focus:outline-none absolute z-30 right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <Menu.Items
+          className="focus:outline-none absolute z-30 right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div className="px-1 py-1 ">
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? 'text-gray-700 bg-light-200' : 'text-black'
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                >
-                  {active ? (
-
-                            <i className="fa-solid block fa-pen text-base ml-2 mr-4"/>
-                    // <EditActiveIcon
-                    //   className="mr-4 h-5 w-5"
-                    //   aria-hidden="true"
-                    // />
-                  ) : (
-
-                    <i className="fa-solid block fa-pen text-base ml-2 mr-4"/>
-                    // <EditInactiveIcon
-                    //   className="mr-2 h-5 w-5"
-                    //   aria-hidden="true"
-                    // />
-                  )}
-                  Edit
-                </button>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <button
-                  className={`${
-                    active ? 'text-gray-700 bg-light-200' : 'text-black'
-                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                >
-                  {active ? (
-                          <i className="fa-solid fa-trash-can cursor-pointer text-base ml-2 mr-4"/>
-                    // <EditActiveIcon
-                    //   className="mr-4 h-5 w-5"
-                    //   aria-hidden="true"
-                    // />
-                  ) : (
-                    <i className="fa-solid fa-trash-can cursor-pointer text-base ml-2 mr-4"/>
-                    // <EditInactiveIcon
-                    //   className="mr-2 h-5 w-5"
-                    //   aria-hidden="true"
-                    // />
-                  )}
-                  Edit
-                </button>
-              )}
-            </Menu.Item>
+            {options.map((item, idx) => (
+              <Menu.Item key={idx}>
+                {({active}) => (
+                  <Link href={item.href ?? ''}>
+                    <button
+                      onClick={item.feature ? () => item.feature() : () => {}}
+                      className={`${
+                        active ? 'text-gray-700 bg-light-200' : 'text-black'
+                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                    >
+                      <div className='text-base ml-2 mr-4'>
+                        {item.element}
+                      </div>
+                      {item.label}
+                    </button>
+                  </Link>
+                )}
+              </Menu.Item>
+            ))}
           </div>
         </Menu.Items>
       </Transition>

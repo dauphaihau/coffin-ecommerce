@@ -82,7 +82,7 @@ const AdminSidebar = () => {
             <img
               src="/images/logo.png"
               alt="logo"
-              className='w-[60px] ipad:h-[60px]'
+              className='ipad:h-[55px]'
             />
           </Link>
         </div>

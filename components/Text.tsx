@@ -1,4 +1,5 @@
 import {ReactNode} from "react";
+import button from "./Button/Button";
 
 interface Props {
   children: ReactNode,
@@ -10,13 +11,14 @@ interface Props {
   weight?: string
   h1?: boolean,
   span?: boolean,
+  as?: 'button',
 }
 
 const Text = (props: Props) => {
 
   const {
-    children, classes, color,
-    sx, md, lg, weight, h1, span,
+    children, classes, color, as,
+    sx, md, lg, weight, h1, span, ...others
   } = props
 
   const allClass = `
@@ -25,19 +27,18 @@ const Text = (props: Props) => {
         laptop:text-${lg}
         text-${color}
         font-${weight}
-      ${classes}`
-
+        ${as === 'button' && 'cursor-pointer'}
+      ${classes}
+  `
 
   if (h1) {
-    return <h1 className={allClass}>{children}</h1>
+    return <h1 className={allClass} {...others}>{children}</h1>
   }
-
   if (span) {
-    return <span className={allClass}>{children}</span>
+    return <span className={allClass} {...others}>{children}</span>
   }
-
   return (
-    <p className={allClass}>{children}</p>
+    <p className={allClass} {...others}>{children}</p>
   );
 }
 

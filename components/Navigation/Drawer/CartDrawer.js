@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
-import {useUIController} from "../../context/UIControllerContext";
-import {CartProvider, CartContext} from "../../context/cartContext";
-import {DENOMINATION} from "../../utils/constant";
-import {slugify} from "../../utils/helpers";
-import {useAuth} from "../../context/authContext";
-import {Image, Link, Text} from "../index";
-import {Button, QuantityPicker} from "../Button";
+import {useUIController} from "../../../context/UIControllerContext";
+import {CartProvider, CartContext} from "../../../context/cartContext";
+import {DENOMINATION} from "../../../utils/constant";
+import {slugify} from "../../../utils/helpers";
+import {useAuth} from "../../../context/authContext";
+import {Image, Link, Text} from "../../index";
+import {Button, QuantityPicker} from "../../Button";
 import Drawer from "./Drawer";
 
 const CartDrawer = ({context}) => {

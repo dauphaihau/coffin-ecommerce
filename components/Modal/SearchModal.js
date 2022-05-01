@@ -47,7 +47,7 @@ const SearchModal = () => {
       className={`${!openSearchModal && 'hidden'}
           fixed inset-0 z-[200] 
           mx-auto w-[90%] laptop:w-1/2 mt-6 
-          ipad:h-fit
+          h-fit
           `}>
       <Input
         name='search'
@@ -70,7 +70,6 @@ const SearchModal = () => {
          rounded-lg bg-white  px-4 overflow-x-hidden">
           <div>
             {
-
               filteredResults.map((item) => {
                 return (
                   <div className="border-t py-4" key={item.id}>

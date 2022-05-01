@@ -1,9 +1,9 @@
 import {useState, useEffect} from 'react'
-import {useUIController} from "../../context/UIControllerContext";
-import Filters from "../Filters";
+import {useUIController} from "../../../context/UIControllerContext";
+import Filters from "../../Filters";
 import Drawer from "./Drawer";
-import {useFilterContext} from "../../context/filterContext";
-import {Button} from "../Button";
+import {useFilterContext} from "../../../context/filterContext";
+import {Button} from "../../Button";
 
 const FiltersDrawer = () => {
 

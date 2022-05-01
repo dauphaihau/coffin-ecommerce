@@ -5,21 +5,19 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import {Helmet, Grid} from "@components";
-import {Input, Select,} from "@components/Input";
+import {Helmet, Grid, Stack} from "@components/Layout";
+import {Input, Select, Switch, AvatarInput} from "@components/Input";
 import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
-import {Paper} from "../../../../components";
-import AvatarInput from "../../../../components/Input/AvatarInput";
-import {Stack} from "../../../../components/Layout";
-import {Switch} from "../../../../components/Input";
+import {Paper} from "@components";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
   const {user: userInfo} = useAuth();
+  const [isBanned, setIsBanned] = useState(false)
   const [user, setUser] = useState()
 
   useEffect(() => {
@@ -31,6 +29,7 @@ const UserEdit = () => {
     const {id} = router.query;
     const res = await userService.detail(id);
     setUser(res.data)
+    setIsBanned(res.data.isBanned)
   }
 
   const dataBreadcrumb = [
@@ -95,7 +94,10 @@ const UserEdit = () => {
           <Grid md={1} lg={2} gapx={4}>
             <Paper>
               <div className='text-right mb-6'>
-                <span className='badge-danger'>BANNED</span>
+                {isBanned ?
+                  <span className="badge-danger">Banned</span>
+                  :<span className="badge-green">Active</span>
+                }
               </div>
               <div className='flex justify-center flex-col mb-4'>
                 <div className='mb-4 bg-transparent rounded-full'>
@@ -108,7 +110,15 @@ const UserEdit = () => {
                   <p className='font-bold text-[0.875rem]'>Banned</p>
                   <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
                 </div>
-                <Switch/>
+                <Controller
+                  control={control}
+                  name='isBanned'
+                  render={({field: {onChange, value}}) => (
+                    <Switch value={value} onChange={(e) => {
+                      onChange(e);
+                      setIsBanned(e);
+                    }}/>)}
+                />
               </Stack>
               <Stack classes='mb-4 items-center'>
                 <div>
@@ -119,7 +129,8 @@ const UserEdit = () => {
                 <Controller
                   control={control}
                   name='isVerified'
-                  render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
+                  render={({field: {onChange, value}}) => (
+                    <Switch value={value} onChange={onChange}/>)}
                 />
               </Stack>
             </Paper>

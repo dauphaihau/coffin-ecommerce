@@ -40,6 +40,7 @@ const Checkout = ({context}) => {
   const [isPayOnline, setIsPayOnline] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
 
+
   const {user, setUser} = useAuth();
 
   const stripe = useStripe()
@@ -123,6 +124,7 @@ const Checkout = ({context}) => {
     {path: "/products", name: "Products"},
     {path: "", name: "Checkout", lastLink: true}
   ];
+
 
   return (
     <>

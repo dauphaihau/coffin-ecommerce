@@ -60,7 +60,7 @@ const FirstStepCheckout = (props) => {
     {
       id: '', title: '', align: 'text-center',
       render: (row) => <>
-        <Tooltip title='Delete' classes='right-[-13px]'>
+        <Tooltip title='Delete' classes='right-[-8px]'>
           <i className="fa-solid fa-trash-can text-xl w-full cursor-pointer"
              onClick={() => {
                removeFromCart(row);
@@ -152,10 +152,11 @@ const FirstStepCheckout = (props) => {
             }
           </div>
         </div>
-        <Button classes='mt-4 font-bold'
-                disabled={!numberAllOfItemsInCart && true}
-                width='full' shadow size='lg'
-                onClick={() => setSteps(2)}
+        <Button
+          classes='mt-4 font-bold'
+          disabled={!numberAllOfItemsInCart && true}
+          width='full' shadow size='lg'
+          onClick={() => setSteps(2)}
         >Check out</Button>
       </div>
     </Grid>

@@ -45,6 +45,19 @@ export const accountService = {
     }
   },
 
+  forgotPassword: async (values) => {
+    try {
+      await axios.post('/api/account/forgot-password', values);
+      return {isLoading: false, isSuccess: true};
+    } catch ({response}) {
+      return {
+        isSuccess: false,
+        isLoading: false,
+        message: response?.data.message,
+      };
+    }
+  },
+
   me: async () => {
     try {
       const res = await axios.get("/api/account/me", getHeaders())

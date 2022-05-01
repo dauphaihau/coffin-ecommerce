@@ -10,7 +10,7 @@ import {Button} from "@components/Button";
 import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
-import {Autocomplete, ImageInput, Switch} from "../../../../components/Input";
+import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../components/Input";
 import {TagOpts} from "../../../../assets/data/options";
 
 const ProductEdit = () => {
@@ -53,9 +53,9 @@ const ProductEdit = () => {
       .max(12, 'the max length of 12 characters is reached'),
     // category: Yup.number().required('Price is required'),
     // brand: Yup.string().required('Price is required'),
-    description: Yup.string().required('description is required')
-      .min(20, 'description must be at least 20 characters')
-      .max(300, 'the max length of 300 characters is reached'),
+    // description: Yup.string().required('description is required')
+    //   .min(20, 'description must be at least 20 characters')
+    //   .max(300, 'the max length of 300 characters is reached'),
   });
 
   const formOptions = {resolver: yupResolver(validationSchema)};
@@ -112,12 +112,20 @@ const ProductEdit = () => {
           <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
-              <Textarea name='description' label='Description *' register={register} errors={errors}/>
-              {/*<TextEditor*/}
-              {/*  name="description"*/}
-              {/*  label="Description"*/}
-              {/*  tip="Describe the issue in as much detail as you'd like."*/}
-              {/*/>*/}
+              {/*<Textarea name='description' label='Description *' register={register} errors={errors}/>*/}
+              <Controller
+                control={control}
+                name='description'
+                render={({field: {onChange, onBlur, value, ref}}) => {
+                  console.log('value', value)
+                 return <TextEditor
+                    onChange={onChange}
+                    // name="description"
+                    label="Description"
+                    value={value}
+                  />
+                }}
+              />
               <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
             </Grid>
           </div>
@@ -183,8 +191,12 @@ const ProductEdit = () => {
             </div>
             <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
               <Grid md={1} lg={2} gapx={4}>
-                <Input label='Price *' name='price' register={register} errors={errors} placeholder='99.00'/>
-                <Input label='Sale Price' type='number' name='salePrice' register={register} errors={errors}/>
+                <Input label='Price *' name='price' register={register} errors={errors} placeholder='00.00'
+                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                />
+                <Input label='Sale Price' name='salePrice' register={register} errors={errors} placeholder='00.00'
+                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                />
               </Grid>
               <Controller
                 control={control}

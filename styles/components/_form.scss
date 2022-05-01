@@ -38,15 +38,18 @@
   }
 }
 
-.form-check-input {
-  @apply mb-4 flex items-center;
+.form-checkbox-input {
+  @apply flex items-center ;
   label {
-    @apply inline-block text-gray-700;
+    @apply inline-block text-gray-700 cursor-pointer;
   }
+
   input {
     @apply appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white
     checked:bg-black checked:border-black focus:outline-none transition duration-200
+    focus:ring-2 focus:ring-black
     align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer;
+
   }
 }
 
@@ -70,7 +73,6 @@
   }
 }
 
-
 .slider {
   @apply h-4 w-[60%] rounded-[5px] bg-[#d3d3d3] appearance-none outline-none opacity-[0.7];
   -webkit-transition: .2s;
@@ -89,3 +91,30 @@
     @apply w-[25px] h-[25px] rounded-[50%] bg-black cursor-pointer;
   }
 }
+
+// Text Editor Input
+#our-ql {
+  border: none;
+  min-width: 100%;
+  padding: 0 !important;
+  //border: gray!important;
+}
+
+.ql-toolbar {
+  border-radius: 4px 4px 0 0;
+  //border: 1px solid ${color.borderLightest};
+  border-bottom: none !important;
+}
+
+.ql-container.ql-snow {
+  border-radius: 0 0 4px 4px;
+  border: none;
+  font-size: 15px;
+}
+
+.ql-editor {
+  min-width: 100%;
+  padding: 7px 8px !important;
+  min-height: 110px;
+}
+// end Text Editor

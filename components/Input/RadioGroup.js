@@ -4,7 +4,6 @@ import {RadioGroup} from '@headlessui/react'
 export default function RadioGroupCustom(props) {
   const {options, direction, onChange} = props;
   const [selected, setSelected] = useState(options[0])
-  // console.log('selected', selected)
 
   return (
     <div className="w-full ">

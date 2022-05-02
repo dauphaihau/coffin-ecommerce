@@ -127,8 +127,24 @@ const TagOpts = [
   {id: 6, name: 'Curved'},
 ]
 
+const rowsPerPageOpts = [
+  {
+    value: '5',
+    label: '5',
+  },
+  {
+    value: '10',
+    label: '10',
+  },
+  {
+    value: '25',
+    label: '25',
+  },
+]
+
+
 export {
   colorOpts, categoryOpts,
   brandOpts, roleOpts, sortOpts, deliveryOpts,
-  paymentOpts, TagOpts
+  paymentOpts, TagOpts, rowsPerPageOpts,
 }

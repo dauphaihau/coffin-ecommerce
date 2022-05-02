@@ -26,7 +26,6 @@ const UserList = () => {
   }, [])
 
   const columns = [
-    // {id: 'email', title: 'Email',},
     {
       id: 'name', title: 'Name',
       render: (row) => (
@@ -78,7 +77,7 @@ const UserList = () => {
       }
     },
     {
-      id: 'actions', title: '',
+      id: 'actions', align: 'center',
       render: (row) => <>
         <MenuDropdown
           options={[
@@ -118,17 +117,34 @@ const UserList = () => {
     }
   }
 
+  async function handleDeleteMultiItems(idsArray) {
+    if (!window.confirm('Are you sure?')) {
+      return;
+    }
+    const res = await userService.multiDelete(idsArray.map(e => e.id))
+    if (res.isSuccess) {
+      const res = await userService.getAll();
+      setUsers(res.data)
+      toast.success('Delete success!')
+    } else {
+      toast.error(res.message)
+    }
+  }
+
   return (
     <>
       <div className='flex items-center justify-between'>
         <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
-        <Link href='users/new'>
+        <Link href='/admin/users/new'>
           <Button classes='ml-auto block mb-4'>New User</Button>
         </Link>
       </div>
       <Table
+        // onChangeSelected={handleDeleteMultiItems}
+        // checkboxSelection
         columns={columns}
-        itemsPerPage={6}
+        // itemsPerPage={3}
+        itemsPerPageOptions={[3, 4, 5]}
         rows={users}
       />
     </>

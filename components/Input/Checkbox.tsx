@@ -1,4 +1,4 @@
-import {InputHTMLAttributes, ReactNode, useState} from "react";
+import {InputHTMLAttributes, ReactNode, useEffect, useState} from "react";
 import {FieldErrors} from "react-hook-form";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,22 +9,27 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   register?: (name: string) => void,
   errors?: FieldErrors,
   checked?: boolean,
+  value?: string | number,
 }
 
 const Checkbox = (props: InputProps) => {
 
-  const [isChecked, setIsChecked] = useState(false)
-
   const {
-    value,
+    value = '',
     checked,
     classes = '',
     classesForm = '',
-    defaultChecked = null,
+    defaultChecked,
     label = '',
     onChange,
     ...others
   } = props;
+
+  const [isChecked, setIsChecked] = useState(defaultChecked)
+
+  useEffect(() => {
+     setIsChecked(defaultChecked)
+  },[defaultChecked])
 
   return (
     <div onClick={() => setIsChecked(!isChecked)} className={`form-checkbox-input ${classesForm}`}>

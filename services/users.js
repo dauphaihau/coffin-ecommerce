@@ -69,4 +69,17 @@ export const userService = {
       };
     }
   },
+
+  multiDelete: async (idsArray) => {
+    try {
+      await axios.post(`/api/admin/users/multiDelete`, idsArray, getHeaders())
+      return {isLoading: false, isSuccess: true};
+    } catch ({response}) {
+      return {
+        isSuccess: false,
+        isLoading: false,
+        message: response?.data.message,
+      };
+    }
+  },
 }

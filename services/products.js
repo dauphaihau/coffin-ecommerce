@@ -71,9 +71,8 @@ export const productService = {
   },
 
   multiDelete: async (idsArray) => {
-    console.log('ids-array', idsArray)
     try {
-      await axios.post(`/api/admin/products/mutilDelete`, idsArray, getHeaders())
+      await axios.post(`/api/admin/products/multiDelete`, idsArray, getHeaders())
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

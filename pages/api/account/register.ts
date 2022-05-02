@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import nc from 'next-connect';
-// import bcrypt from "bcrypt";
 import bcrypt from "bcryptjs";
+
 import User from '../../../models/User';
 import {signToken} from '../../../utils/middlewares/auth';
 import db from "../../../utils/db/db";

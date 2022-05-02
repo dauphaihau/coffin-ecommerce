@@ -1,20 +1,40 @@
-import {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
-import PropTypes from "prop-types";
 
-const propTypes = {
-  options: PropTypes.array.isRequired,
-  title: PropTypes.string,
-  onChange: PropTypes.func,
+interface Props {
+  options: {
+    label: string,
+    value: string | number,
+  }[],
+  label?: string,
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => {},
+  size: string,
+  borderLight?: boolean,
+  hideIconOptions?: boolean,
+  value: string,
+  classesSpace: string,
+  classesBtn: string,
 }
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Select(props) {
-  const {options, title = '', onChange, size = '', value, margin = ''} = props
+export default function Select(props: Props) {
+  const {
+    options,
+    onChange,
+    value,
+    label = '',
+    size = '',
+    hideIconOptions,
+    classesSpace = '',
+    classesBtn = '',
+    borderLight,
+  } = props
+
   const [selected, setSelected] = useState(options[0])
 
   const opt = options.find(opt => opt.value === value)
@@ -30,10 +50,13 @@ export default function Select(props) {
     >
       {({open}) => (
         <>
-          <div className={`form-select-input ${margin}`}>
-            {title && <Listbox.Label className="form-select-input__title">{title}</Listbox.Label>}
+          <div className={`form-select-input ${classesSpace}`}>
+            {label && <Listbox.Label className="form-select-input__title">{label}</Listbox.Label>}
             <Listbox.Button
-              className={`form-select-input__btn ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
+              className={`form-select-input__btn
+               ${classesBtn}
+               ${borderLight && 'border-none shadow-none focus:ring-0 focus:border-gray-200'}
+               ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
               <span className="flex items-center">
                 <span className="block truncate">{selected.label}</span>
               </span>
@@ -49,14 +72,14 @@ export default function Select(props) {
               leaveTo="opacity-0"
             >
               <Listbox.Options
-                className="form-select-input__options">
+                className='form-select-input__options'>
                 {options.map((option) => (
                   <Listbox.Option
                     key={option.value}
                     className={({active}) =>
                       classNames(
                         active ? 'text-gray-700 bg-light-200' : 'text-black',
-                        'cursor-default select-none relative py-2 pl-3 pr-9'
+                        'cursor-default select-none relative py-2 pl-3 pr-0'
                       )
                     }
                     value={option}
@@ -70,16 +93,20 @@ export default function Select(props) {
                             {option.label}
                           </span>
                         </div>
-                        {selected ? (
-                          <span
-                            className={classNames(
-                              active ? 'text-black' : 'text-black',
-                              'absolute inset-y-0 right-0 flex items-center pr-4'
-                            )}
-                          >
+                        {!hideIconOptions &&
+                          <>
+                            {selected ? (
+                              <span
+                                className={classNames(
+                                  active ? 'text-black' : 'text-black',
+                                  'absolute inset-y-0 right-0 flex items-center pr-4'
+                                )}
+                              >
                             <CheckIcon className="h-5 w-5" aria-hidden="true"/>
                           </span>
-                        ) : null}
+                            ) : null}
+                          </>
+                        }
                       </>
                     )}
                   </Listbox.Option>
@@ -92,5 +119,3 @@ export default function Select(props) {
     </Listbox>
   )
 }
-
-Select.propTypes = propTypes;

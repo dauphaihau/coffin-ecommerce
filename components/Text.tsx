@@ -1,15 +1,22 @@
 import {ReactNode} from "react";
 import button from "./Button/Button";
 
+enum Transforms {
+  UPPERCASE = 'uppercase',
+  LOWERCASE = 'lowercase',
+}
+
 interface Props {
   children: ReactNode,
   classes?: string
   sx?: string,
   md?: string,
   lg?: string,
+  transforms?: 'uppercase' | 'lowercase',
   color?: string,
   weight?: string
   h1?: boolean,
+  b?: boolean,
   span?: boolean,
   as?: 'button',
 }
@@ -17,11 +24,12 @@ interface Props {
 const Text = (props: Props) => {
 
   const {
-    children, classes, color, as,
+    children, classes, color, as, transforms = '', b,
     sx, md, lg, weight, h1, span, ...others
   } = props
 
   const allClass = `
+        ${Transforms[transforms.toUpperCase()]}
         text-${sx}
         ipad:text-${md}
         laptop:text-${lg}
@@ -36,6 +44,9 @@ const Text = (props: Props) => {
   }
   if (span) {
     return <span className={allClass} {...others}>{children}</span>
+  }
+  if (b) {
+    return <b className={allClass} {...others}>{children}</b>
   }
   return (
     <p className={allClass} {...others}>{children}</p>

@@ -10,7 +10,6 @@ import {formatPrice} from "@utils/helpers";
 import {useUIController} from "@context/UIControllerContext";
 import {Button} from "../../../components/Button";
 import {MenuDropdown} from "../../../components/Navigation";
-import MyModal from "../../../components/Modal/Modal";
 
 const ProductList = () => {
   const router = useRouter();
@@ -22,7 +21,7 @@ const ProductList = () => {
       setProgress(progress + 30)
       const res = await productService.getAll();
       setProgress(100)
-      setProducts(res.data)
+      setProducts(res?.data)
     }
     fetchData();
   }, [])
@@ -41,15 +40,7 @@ const ProductList = () => {
   const columns = [
     {
       id: 'name', title: 'Product',
-      render: (row) => {
-        // return <div className='flex items-center'>
-        //   <div className='rounded-lg '>
-        //     <img src={`https://i.pravatar.cc/150?u=${row._id}`} className='h-9 w-9 rounded-md ' alt='avatar'/>
-        //   </div>
-        //   <p className='ml-4 text-sm font-bold'>{row.name}</p>
-        // </div>
-        return <p className='text-sm font-bold'>{row.name}</p>
-      }
+      render: (row) => <p className='text-sm font-bold'>{row.name}</p>
     },
     {id: 'category', title: 'Category'},
     {id: 'price', title: 'Price', render: (row) => <>{formatPrice(row.price)}</>},
@@ -82,7 +73,6 @@ const ProductList = () => {
     },
   ];
 
-
   const dataBreadcrumb = [
     {path: "/admin", name: "Dashboard", firstLink: true},
     {path: "/admin/products", name: "Products"},
@@ -103,12 +93,11 @@ const ProductList = () => {
     }
   }
 
-
   async function handleDeleteMultiItems(idsArray) {
     if (!window.confirm('Are you sure?')) {
       return;
     }
-    const res = await productService.multiDelete(idsArray)
+    const res = await productService.multiDelete(idsArray.map(e => e.id))
     if (res.isSuccess) {
       const res = await productService.getAll();
       setProducts(res.data)
@@ -122,14 +111,16 @@ const ProductList = () => {
     <>
       <div className='flex-center !justify-between'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
-        <Link href='products/new'>
+        <Link href='/admin/products/new'>
           <Button classes='ml-auto block mb-4'>New Product</Button>
         </Link>
       </div>
       <Table
+        searchInputSelection
         checkboxSelection
         onChangeSelected={handleDeleteMultiItems}
         itemsPerPage={6}
+        // itemsPerPageOptions={[3, 4, 5]}
         columns={columns}
         rows={products}
       />

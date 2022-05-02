@@ -18,14 +18,14 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
-  }
-  const hash = await bcrypt.hash(this.password, Number(bcryptSalt));
-  this.password = hash;
-  next();
-});
+// userSchema.pre("save", async function (next) {
+//   if (!this.isModified("password")) {
+//     return next();
+//   }
+//   const hash = await bcrypt.hash(this.password, Number(bcryptSalt));
+//   this.password = hash;
+//   next();
+// });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 export default User;

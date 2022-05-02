@@ -75,6 +75,10 @@ const isEmpty = (obj = {}) => {
   return Object.keys(obj).length === 0
 }
 
+const isNil = (value) => {
+  return typeof value === 'undefined' || value === null
+}
+
 const isString = (value) => {
   return typeof value === 'string' || value instanceof String
 }
@@ -85,10 +89,6 @@ const isNumber = (value) => {
 
 const isBoolean = (value) => {
   return value === true || value === false
-}
-
-const isNil = (value) => {
-  return typeof value === 'undefined' || value === null
 }
 
 const isDateString = (value) => {
@@ -160,8 +160,8 @@ const sortRows = (rows, sort) => {
   })
 }
 
-const paginateRows = (sortedRows, activePage, rowsPerPage) => {
-  return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)
+const paginateRows = (sortedRows, currentPage, rowsPerPage) => {
+  return [...sortedRows].slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
 }
 
 
@@ -177,4 +177,6 @@ export {
   sortRows,
   paginateRows,
   filterRows,
+  isNil,
+  isEmpty,
 }

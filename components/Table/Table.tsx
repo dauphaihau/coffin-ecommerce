@@ -1,12 +1,16 @@
 import Pagination from "./Pagination";
 import {ReactNode, useMemo, useState} from "react";
-import {sortRows, filterRows, paginateRows} from "../../utils/helpers";
-import {Checkbox} from "../Input";
+import {sortRows, filterRows, paginateRows, isEmpty} from "../../utils/helpers";
+import {Checkbox, Input} from "../Input";
+import {toast} from "react-hot-toast";
+import {productService} from "@services/products";
 
 interface Props {
   fitContent?: boolean,
   checkboxSelection?: boolean,
   onChangeSelected?: () => object[],
+  itemsPerPageOptions?: [],
+  searchInputSelection?: boolean,
   columns: [{
     render: ReactNode,
     align: string,
@@ -21,16 +25,27 @@ interface Props {
 }
 
 const TableRow = (props) => {
-  const {rows, columns, itemsSelected, setItemsSelected, checkboxSelection} = props;
-  // console.log('rows', rows)
+  const {
+    rows, columns, itemsSelected, setItemsSelected, checkboxSelection,
+  } = props;
 
-  const handleChange = (e) => {
-    // console.log('e', e.target.value)
+  const handleChange = (select) => {
+    const temp = [...itemsSelected]
+    const status = select.target.checked
+    const idSelect = select.target.value
 
-
-    console.log('e-target-checked', e.target.checked)
-    console.log(e.target.name, e.target.checked)
-    setItemsSelected([...itemsSelected, e.target.value])
+    console.log('status', status)
+    if (!status) {
+      const result = temp.filter(e => e.id !== idSelect)
+      setItemsSelected(result)
+    } else {
+      setItemsSelected([...temp,
+        {
+          id: idSelect,
+          checked: status
+        }
+      ])
+    }
   }
 
 
@@ -42,7 +57,10 @@ const TableRow = (props) => {
             {
               checkboxSelection &&
               <td>
-                <Checkbox name={row._id} onChange={handleChange} value={row._id}/>
+                <Checkbox
+                  name=''
+                  // defaultChecked={itemsSelected.length === 0 ? false : true}
+                  onChange={handleChange} value={row._id}/>
               </td>
             }
             {columns.map((column) => {
@@ -77,26 +95,44 @@ const TableRow = (props) => {
 
 const Table = (props: Props) => {
   const {
-    columns = [], rows = [], itemsPerPage = 10, hidePagination,
+    columns = [], rows = [],
+    itemsPerPage: itemsPerPageFromProps = 10,
+    hidePagination,
+    itemsPerPageOptions = [],
     onChangeSelected,
+    searchInputSelection,
     checkboxSelection, ...res
   } = props;
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageFromProps)
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({order: 'asc', orderBy: 'id'})
   const [itemsSelected, setItemsSelected] = useState([])
+  const [searchInput, setSearchInput] = useState("");
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = rows?.slice(indexOfFirstItem, indexOfLastItem);
 
   const filteredRows = useMemo(() => filterRows(rows ?? [], filters), [rows, filters])
-  // console.log('filtered-rows', filteredRows)
   const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
-  // console.log('sorted-rows', sortedRows)
-  // const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
   // const calculatedRows = paginateRows(sortedRows, currentPage, itemsPerPage)
-  // const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage)
+
+  const handleSearch = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = sortedRows.filter((item) => {
+        return Object.values(item.name)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilters(filteredData);
+    } else {
+      setFilters(currentItems);
+    }
+  }
 
   const handleSort = (id) => {
     setCurrentPage(1)
@@ -106,27 +142,53 @@ const Table = (props: Props) => {
     }))
   }
 
-  const handleCheckbox = (e) => {
-    console.log('e-target-value', e.target.value)
-    console.log('e-target-checked', e.target.checked)
+  const handleCheckAllBox = () => {
+    if (itemsSelected.length > 0) {
+      const result = itemsSelected.findIndex(e => e.checked === true) !== -1
+      console.log('result', result)
+      if (result) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 
-  // console.log('checkbox-selection', checkboxSelection)
-  console.log('items-selected', itemsSelected)
+  // const handleCheckbox = (select) => {
+  //   const status = select.target.checked;
+  //   if (status) {
+  //     const result = rows.map(row => row._id)
+  //     setItemsSelected(result)
+  //   } else {
+  //     setItemsSelected([])
+  //   }
+  // }
 
   return (
     <div className="table-container">
       <section className={res.fitContent && 'w-fit'}>
+        {searchInputSelection &&
+          <div className='w-1/4'>
+            <Input
+              name='' placeholder='Search item...'
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+          </div>
+        }
         <table className="table">
           <thead>
             <tr>
               {checkboxSelection &&
                 <th>
-                  <Checkbox name='idsRow' value='1' onChange={handleCheckbox}/>
+                  <Checkbox
+                    name='idsRow'
+                    defaultChecked={handleCheckAllBox()}
+                    // defaultChecked={}
+                    // onChange={handleCheckbox}
+                  />
                 </th>
               }
               {columns.map((column) => {
-                console.log('column', column)
                 const sortIcon = () => {
                   if (column.id === sort.orderBy) {
                     if (sort.order === 'asc') {
@@ -139,10 +201,15 @@ const Table = (props: Props) => {
                   <th key={column.id}
                       onClick={() => handleSort(column.id)}
                       className={`text-left text-${column.align}`}>
-                    {column.id === 'actions' ?
-                      <i className="fa-solid fa-trash-can" onClick={() => onChangeSelected(itemsSelected)}/>
-                      :
-                      <span className='mr-2'>{column.title}</span>
+                    {
+                      column.id === 'actions' ?
+                        itemsSelected.length > 0 ?
+                          <i className="fa-solid fa-trash-can text-base"
+                             onClick={() => onChangeSelected(itemsSelected)}
+                          />
+                          : ''
+                        :
+                        <span className='mr-2'>{column.title}</span>
                     }
                     {column.id !== 'actions' && <span>{sortIcon()}</span>}
                   </th>
@@ -156,13 +223,17 @@ const Table = (props: Props) => {
               setItemsSelected={setItemsSelected}
               itemsSelected={itemsSelected}
               columns={columns}
-              rows={currentItems}
+              // rows={currentItems}
+              rows={!isEmpty(filters) ? filters : currentItems}
             />
           </tbody>
         </table>
         {hidePagination || currentItems.length === 0
           ? ''
           : <Pagination
+            itemsPerPageOptions={itemsPerPageOptions}
+            setItemsPerPage={setItemsPerPage}
+            itemsPerPageFromProps={itemsPerPageFromProps}
             itemsPerPage={itemsPerPage}
             currentPage={currentPage}
             rows={rows}

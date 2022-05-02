@@ -21,7 +21,7 @@ const Sorter = () => {
       <div className='flex gap-x-4 items-center'>
         <p className='hidden laptop:block'>Short by:</p>
         <Select
-          margin='m-0'
+          classesSpace='m-0'
           options={sortOpts}
           onChange={updateSort}
         />

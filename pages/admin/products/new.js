@@ -126,7 +126,7 @@ const NewProduct = () => {
                   render={({field: {onChange, onBlur, value, ref}}) => (
                     <Select
                       size='medium'
-                      title='Category *'
+                      label='Category *'
                       options={categoryOpts}
                       onChange={onChange}
                     />
@@ -138,7 +138,7 @@ const NewProduct = () => {
                   render={({field: {onChange, onBlur, value, ref}}) => (
                     <Select
                       size='medium'
-                      title='Brand *'
+                      label='Brand *'
                       options={brandOpts}
                       onChange={onChange}
                     />
@@ -150,7 +150,7 @@ const NewProduct = () => {
                   render={({field: {onChange, onBlur, value, ref}}) => (
                     <Select
                       size='medium'
-                      title='Color *'
+                      label='Color *'
                       options={colorOpts}
                       onChange={onChange}
                     />

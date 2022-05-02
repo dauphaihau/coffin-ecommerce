@@ -7,7 +7,6 @@ export default function CustomAutocomplete({label, onChange, options, value}) {
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
   const [arrResult, setArrResult] = useState([options[0]])
-  console.log('value', value)
 
   useEffect(() => {
     if (value?.length > 0) {

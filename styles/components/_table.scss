@@ -2,25 +2,34 @@
   @apply min-w-full w-[5px]
   laptop:py-0
   rounded-lg
-  overflow-x-auto
-  lg:overflow-x-visible;
+  ;
+  //@apply min-w-full w-[5px]
+  //laptop:py-0
+  //rounded-lg
+  //overflow-x-auto
+  //lg:overflow-x-visible
+  //;
 
   section {
     border: 1px solid #f7f7f7;
 
-    @apply p-4 laptop:drop-shadow-xl overflow-x-auto
+    @apply p-4 laptop:drop-shadow-xl
     rounded-[19px] bg-white dark:bg-black
     border-gray-200 laptop:border-gray-custom-50;
+    //@apply p-4 laptop:drop-shadow-xl overflow-x-auto
+    //rounded-[19px] bg-white dark:bg-black
+    //border-gray-200 laptop:border-gray-custom-50;
 
     .table {
       @apply min-w-full ;
 
       thead {
+        @apply sticky top-0;
         th {
           @apply
           bg-gray-100 dark:bg-[#111111]
           py-3 px-6 text-xs font-medium tracking-wider
-            hover:bg-gray-200 animate cursor-pointer
+          hover:bg-gray-200 animate cursor-pointer
           text-gray-700 uppercase dark:text-gray-400;
         }
 
@@ -34,10 +43,14 @@
       }
 
       tbody {
+        @apply  min-h-[400px] overflow-y-auto
+        lg:overflow-x-visible;
+
         tr {
           @apply bg-white dark:bg-black;
           td {
             @apply py-4 px-6 text-sm  text-gray-900
+
             whitespace-nowrap dark:text-white;
           }
         }
@@ -48,7 +61,10 @@
 
 .pagination {
 
-  @apply px-4 mt-4 flex justify-between ;
+  @apply px-4 mt-4 flex  items-center justify-end gap-x-10;
+  &__entries {
+    @apply flex items-center;
+  }
 
   &__num {
     @apply flex items-center justify-end;
@@ -56,7 +72,7 @@
     &__item {
       @apply block mb-[6px] flex flex-row items-center;
 
-      figure {
+      button {
         @apply flex items-center  rounded-xl justify-center bg-[#f4f4f4]
         cursor-pointer dark:text-white mx-[2px];
         padding: 9px 9px;

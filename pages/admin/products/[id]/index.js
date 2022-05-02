@@ -117,7 +117,7 @@ const ProductEdit = () => {
                 control={control}
                 name='description'
                 render={({field: {onChange, onBlur, value, ref}}) => {
-                  console.log('value', value)
+                  console.log('value textEditor', value)
                  return <TextEditor
                     onChange={onChange}
                     // name="description"
@@ -139,7 +139,7 @@ const ProductEdit = () => {
                   render={({field: {onChange, onBlur, value, ref}}) => (
                     <Select
                       size='medium'
-                      title='Category *'
+                      label='Category *'
                       value={value}
                       options={categoryOpts}
                       onChange={onChange}

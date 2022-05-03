@@ -4,9 +4,9 @@ import banner from "../../public/images/banners/contemporary-banner.png";
 import {useAuth} from "../../context/authContext";
 import {Input} from "../../core/Input";
 import {Button} from "../../core/Button";
-import {BannerCard} from "../../core/Card";
 import {Grid} from "../../core";
 import {ProfileSidebar} from "../../core/Navigation";
+import BannerCard from "../../layouts/main/pages/account/BannerCard";
 
 const Info = () => {
   const {user} = useAuth();

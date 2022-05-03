@@ -9,12 +9,12 @@ interface Props {
   }[],
   label?: string,
   onChange?: (e: string) => {},
-  size: string,
+  size?: string,
   borderLight?: boolean,
   hideIconOptions?: boolean,
-  value: string,
-  classesSpace: string,
-  classesBtn: string,
+  value?: string,
+  classesSpace?: string,
+  classesBtn?: string,
 }
 
 

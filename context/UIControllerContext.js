@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useReducer, useState} from "react";
-import reducer from "../reducers/uiControllerReducer";
+import reducer from "../store/reducers/uiControllerReducer";
 import PropTypes from "prop-types";
 
 const initialState = {

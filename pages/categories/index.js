@@ -1,9 +1,9 @@
 import Head from "next/head";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify, titleIfy} from "../../utils/helpers";
-import {CategoryCard} from "../../core/Card";
 import {Grid} from "../../core";
 import Text from "../../core/Text";
+import CategoryCard from "../../layouts/main/pages/categories/CategoryCard";
 
 const Categories = ({categories = []}) => {
   return (

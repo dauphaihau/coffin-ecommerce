@@ -3,15 +3,13 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-// import {Table} from "@core/Table";
-// import {Button} from "@core/Button";
-// import {MenuDropdown} from "@core/Navigation";
 import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
-import {Helmet, Link} from "../../../core";
+import {Link} from "../../../core";
 import {Button} from "../../../core/Button";
 import {Table} from "../../../core/Table";
 import {MenuDropdown} from "../../../core/Navigation";
+import Helmet from "../../../layouts/admin/common/Helmet";
 
 const UserList = () => {
   const router = useRouter();

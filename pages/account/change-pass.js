@@ -6,12 +6,12 @@ import {yupResolver} from "@hookform/resolvers/yup";
 
 import {useAuth} from "../../context/authContext";
 import banner from "../../public/images/banners/contemporary-banner.png";
-import ProfileSidebar from "../../core/Navigation/ProfileSidebar";
+import ProfileSidebar from "../../layouts/main/pages/account/ProfileSidebar";
 import {Input} from "../../core/Input";
 import {Button} from "../../core/Button";
-import {BannerCard} from "../../core/Card";
 import {Grid, Text} from "../../core";
 import {accountService} from "../../services/account";
+import BannerCard from "../../layouts/main/pages/account/BannerCard";
 
 const ChangePass = () => {
 

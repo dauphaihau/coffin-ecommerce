@@ -72,7 +72,11 @@ const TableRow = (props) => {
             {columns.map((column) => {
               // console.log('column', column)
               if (column.render) {
-                return <td className={`text-${column.align}`} key={column.id}>{column.render(row, index + 1)}</td>
+                return <td className={`text-${column.align}`} key={column.id}>
+                  <div className={`${column.align === 'center' && 'flex-center'}`}>
+                    {column.render(row, index + 1)}
+                  </div>
+                </td>
               }
               if (column.key) {
                 return <td className={`text-${column.align}`} key={column.id}>{index + 1}</td>

@@ -1,9 +1,9 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
-import User from '../../../../models/User';
-import {isAuth, rolesCanCreate, rolesCanView} from "../../../../utils/middlewares/auth";
-import db from "../../../../utils/db/db";
+import User from '../../../../server/models/User';
+import {isAuth, rolesCanCreate, rolesCanView} from "../../../../server/middlewares/auth";
+import db from "../../../../server/db/db";
 
 const handler = nc();
 handler.use(isAuth, rolesCanView);

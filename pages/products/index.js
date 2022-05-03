@@ -6,8 +6,9 @@ import {slugify} from "../../utils/helpers";
 import {useFilterContext} from "../../context/filterContext";
 import {useUIController} from "../../context/UIControllerContext";
 import {Button} from "../../core/Button";
-import {Product, ProductListView} from "../../core/Card";
 import {Filters, Sorter} from "../../core";
+import ProductListView from "../../layouts/main/pages/products/ProductListView";
+import {Product} from "../../layouts/main/pages/product/Product";
 
 const ProductsPage = ({categories = []}) => {
 

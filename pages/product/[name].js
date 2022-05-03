@@ -9,9 +9,9 @@ import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {CartProvider, CartContext} from "../../context/cartContext";
 import {Button, QuantityPicker, ShowMoreTextToggler} from "../../core/Button";
-import {Product as ProductCard} from "../../core/Card";
 import {Image} from "../../core";
 import Text from "../../core/Text";
+import { Product as ProductCard } from "../../layouts/main/pages/product/Product";
 
 const Product = (props) => {
   const router = useRouter();

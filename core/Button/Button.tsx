@@ -42,7 +42,7 @@ const Button = forwardRef((props: Props, ref: any) => {
       ${size ==='sm' ? 'laptop:py-2 laptop:px-2' : ''}
       ${classes} ${isLoading && 'opacity-[0.3]'}
       ${light && 'bg-transparent text-black hover:text-black hover:opacity-[0.6]'}
-      ${variant === 'gray' && 'bg-[#f3f3f4] text-black hover:bg-gray-300 hover:text-black'}
+      ${variant === 'gray' && 'bg-gray-custom-50 text-black hover:bg-gray-custom-hover animate hover:text-black'}
       ${others.disabled && 'opacity-[0.3] hover:opacity-[0.3] '}
       `}
       {...others}

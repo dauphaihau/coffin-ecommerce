@@ -1,8 +1,8 @@
 import nc from "next-connect";
 import {NextApiRequest, NextApiResponse} from "next";
-import User from "../../../../../models/User";
-import db from "../../../../../utils/db/db";
-import {isAuth, rolesCanView, rolesCanDelete, rolesCanUpdate,} from "../../../../../utils/middlewares/auth";
+import User from "../../../../../server/models/User";
+import db from "../../../../../server/db/db";
+import {isAuth, rolesCanView, rolesCanDelete, rolesCanUpdate,} from "../../../../../server/middlewares/auth";
 
 const handler = nc();
 handler.use(isAuth, rolesCanView);

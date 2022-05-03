@@ -5,9 +5,9 @@ import {NextApiRequest, NextApiResponse} from "next";
 let nodemailer = require('nodemailer')
 
 const bcryptSalt = process.env.BCRYPT_SALT;
-import User from '../../../models/User';
-import Token from '../../../models/Token';
-import db from "../../../utils/db/db";
+import User from '../../../server/models/User';
+import Token from '../../../server/models/Token';
+import db from "../../../server/db/db";
 import fs from "fs";
 import path from "path";
 

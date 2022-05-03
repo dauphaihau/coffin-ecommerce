@@ -1,9 +1,10 @@
-import {Grid, Helmet, Image} from "../../core";
+import {Grid, Image} from "../../core";
 import {Table} from "../../core/Table";
 import {useEffect, useState} from "react";
 import {userService} from "../../services/users";
 import {formatPrice} from "../../utils/helpers";
 import {useUIController} from "../../context/UIControllerContext";
+import Helmet from "../../layouts/admin/common/Helmet";
 
 const Dashboard = () => {
 

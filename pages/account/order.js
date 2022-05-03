@@ -1,8 +1,8 @@
 import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
-import BannerCard from "../../core/Card/BannerCard";
-import ProfileSidebar from "../../core/Navigation/ProfileSidebar";
+import BannerCard from "../../layouts/main/pages/account/BannerCard";
+import ProfileSidebar from "../../layouts/main/pages/account/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../core";
 import {rows} from "../../assets/data/orders";

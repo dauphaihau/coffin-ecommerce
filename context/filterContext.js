@@ -6,8 +6,8 @@ import {
   SORT_PRODUCTS,
   UPDATE_FILTERS,
   UPDATE_SORT
-} from "../utils/actions";
-import reducer from '../reducers/filterReducer';
+} from "../store/actions";
+import reducer from '../store/reducers/filterReducer';
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 
 const initialState = {

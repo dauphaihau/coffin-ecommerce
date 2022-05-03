@@ -14,7 +14,8 @@ import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
 import {Helmet, Text} from "../core";
-import {StepperCheckout} from "../core/Navigation/Stepper";
+import StepperCheckout from "../layouts/main/pages/checkout/StepperCheckout";
+// import {StepperCheckout} from "../core/Navigation/Stepper";
 
 const stripePromise = getStripejs();
 

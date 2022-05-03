@@ -5,7 +5,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import {Helmet, Grid} from "@components";
+import {Helmet, Grid} from "@core";
 import {Button} from "@components/Button";
 import {
   Select, Checkbox, Textarea, Input, Switch, Autocomplete, ImageInput,

@@ -3,8 +3,8 @@ module.exports = {
   presets: [],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
-    "./layout/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./layouts/**/*.{js,ts,jsx,tsx}",
+    "./core/**/*.{js,ts,jsx,tsx}",
   ],
 
   // darkMode: false, // or 'media' or 'class'
@@ -178,7 +178,8 @@ module.exports = {
       },
       colors: {
         gray: {
-          'custom-50': '#f7f7f7',
+          'custom-50': '#f4f4f4',
+          'custom-hover': '#eaeaea',
           100: '#f3f6f9',
           200: '#ebedf3',
           300: '#e4e6ef',

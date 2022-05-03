@@ -3,13 +3,14 @@ import moment from "moment";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-import {Link, Helmet, Tooltip} from "@components";
+import {Link, Helmet, Tooltip} from "@core";
 import {Table} from "@components/Table";
 import {productService} from "@services/products";
 import {formatPrice} from "@utils/helpers";
 import {useUIController} from "@context/UIControllerContext";
-import {Button} from "../../../components/Button";
-import {MenuDropdown} from "../../../components/Navigation";
+import {Button} from "../../../core/Button";
+import {MenuDropdown} from "../../../core/Navigation";
+import {Checkbox} from "../../../core/Input";
 
 const ProductList = () => {
   const router = useRouter();
@@ -93,11 +94,11 @@ const ProductList = () => {
     }
   }
 
-  async function handleDeleteMultiItems(idsArray) {
+  async function handleDeleteMultiItems(optionsChecked) {
     if (!window.confirm('Are you sure?')) {
       return;
     }
-    const res = await productService.multiDelete(idsArray.map(e => e.id))
+    const res = await productService.multiDelete(optionsChecked.map(e => e.id))
     if (res.isSuccess) {
       const res = await productService.getAll();
       setProducts(res.data)
@@ -119,7 +120,7 @@ const ProductList = () => {
         searchInputSelection
         checkboxSelection
         onChangeSelected={handleDeleteMultiItems}
-        itemsPerPage={6}
+        rowsPerPage={3}
         // itemsPerPageOptions={[3, 4, 5]}
         columns={columns}
         rows={products}

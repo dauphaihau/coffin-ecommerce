@@ -11,7 +11,7 @@ import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
-import {Paper} from "@components";
+import {Paper} from "@core";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);

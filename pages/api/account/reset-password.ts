@@ -31,7 +31,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     {
       name: user.name,
     },
-    "./template/resetPassword.handlebars"
+    "./layouts/resetPassword.handlebars"
   );
   await passwordResetToken.deleteOne();
   return true;

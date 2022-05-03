@@ -1,12 +1,12 @@
 import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
-import BannerCard from "../../components/Card/BannerCard";
-import ProfileSidebar from "../../components/Navigation/ProfileSidebar";
+import BannerCard from "../../core/Card/BannerCard";
+import ProfileSidebar from "../../core/Navigation/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
-import {Link} from "../../components";
+import {Link} from "../../core";
 import {rows} from "../../assets/data/orders";
-import {Table} from "../../components/Table";
+import {Table} from "../../core/Table";
 
 const Order = () => {
   const router = useRouter();

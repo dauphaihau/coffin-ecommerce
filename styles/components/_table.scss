@@ -9,50 +9,49 @@
   //overflow-x-auto
   //lg:overflow-x-visible
   //;
+}
 
-  section {
-    border: 1px solid #f7f7f7;
+.table-wrapper {
+  @apply p-4 laptop:drop-shadow-xl
+  rounded-[19px] bg-white dark:bg-black
+  border-gray-200 laptop:border-gray-custom-50;
+  //@apply p-4 laptop:drop-shadow-xl overflow-x-auto
+  //rounded-[19px] bg-white dark:bg-black
+  //border-gray-200 laptop:border-gray-custom-50;
+  border: 1px solid #f7f7f7;
 
-    @apply p-4 laptop:drop-shadow-xl
-    rounded-[19px] bg-white dark:bg-black
-    border-gray-200 laptop:border-gray-custom-50;
-    //@apply p-4 laptop:drop-shadow-xl overflow-x-auto
-    //rounded-[19px] bg-white dark:bg-black
-    //border-gray-200 laptop:border-gray-custom-50;
+  .table {
+    @apply min-w-full ;
 
-    .table {
-      @apply min-w-full ;
-
-      thead {
-        @apply sticky top-0;
-        th {
-          @apply
-          bg-gray-100 dark:bg-[#111111]
-          py-3 px-6 text-xs font-medium tracking-wider
-          hover:bg-gray-200 animate cursor-pointer
-          text-gray-700 uppercase dark:text-gray-400;
-        }
-
-        th:first-child {
-          border-radius: 12px 0 0 12px;
-        }
-
-        th:last-child {
-          border-radius: 0 12px 12px 0;
-        }
+    thead {
+      @apply sticky top-0;
+      th {
+        @apply
+        bg-gray-custom-50 dark:bg-[#111111]
+        py-3 px-6 text-xs font-medium tracking-wider
+        hover:bg-gray-custom-hover animate cursor-pointer
+        text-gray-700 uppercase dark:text-gray-400;
       }
 
-      tbody {
-        @apply  min-h-[400px] overflow-y-auto
-        lg:overflow-x-visible;
+      th:first-child {
+        border-radius: 12px 0 0 12px;
+      }
 
-        tr {
-          @apply bg-white dark:bg-black;
-          td {
-            @apply py-4 px-6 text-sm  text-gray-900
+      th:last-child {
+        border-radius: 0 12px 12px 0;
+      }
+    }
 
-            whitespace-nowrap dark:text-white;
-          }
+    tbody {
+      @apply min-h-[400px] overflow-y-auto
+      lg:overflow-x-visible;
+
+      tr {
+        @apply bg-white dark:bg-black;
+        td {
+          @apply py-4 px-6 text-sm  text-gray-900
+
+          whitespace-nowrap dark:text-white;
         }
       }
     }
@@ -61,9 +60,19 @@
 
 .pagination {
 
-  @apply px-4 mt-4 flex  items-center justify-end gap-x-10;
+  @apply px-4 mt-4 flex items-center justify-between ;
+
+  &__left {
+    @apply flex gap-x-8;
+  }
+
+  &__right {
+    @apply flex items-center gap-x-10;
+  }
+
   &__entries {
-    @apply flex items-center;
+    @apply flex items-center ;
+
   }
 
   &__num {
@@ -73,34 +82,20 @@
       @apply block mb-[6px] flex flex-row items-center;
 
       button {
-        @apply flex items-center  rounded-xl justify-center bg-[#f4f4f4]
+        @apply flex-center rounded-xl bg-gray-custom-50
+        h-[36px] w-[36px] hover:bg-gray-custom-hover animate
         cursor-pointer dark:text-white mx-[2px];
         padding: 9px 9px;
       }
 
-      figure.disabled {
+      button.disabled {
         @apply text-[#a6a6a6];
       }
 
-      p {
-        @apply text-black cursor-pointer hover:bg-black
-        hover:text-white duration-300 transition ease-in-out rounded;
-        padding: 7px 13px;
-      }
-
-      a {
-        @apply cursor-pointer bg-[#f4f4f4] mx-[2px] text-center rounded-xl text-black dark:text-white;
-        padding: 7px 13px;
-      }
-
-      a.selected {
+      button.selected {
         @apply bg-black text-white dark:bg-white dark:text-black
-      }
-
-      a:hover {
-        @apply bg-black text-white dark:hover:bg-white dark:hover:text-black
-        transition duration-300 ease-in-out;
       }
     }
   }
+
 }

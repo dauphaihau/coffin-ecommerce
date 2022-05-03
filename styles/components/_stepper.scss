@@ -2,17 +2,17 @@
   @apply w-full  ;
 
   &__steps {
-    //@apply w-[60%] grid lg:grid-cols-3 gap-y-4 gap-x-4;
     @apply ipad:max-w-[60%] flex ipad:ml-36 mb-4;
 
     .step {
       @apply w-full flex border-none relative;
       div:first-child {
-        @apply w-2/5 ipad:w-[96%] rounded-lg border-gray-300 border ipad:border-2 absolute left-[3rem] top-[35%];
+        @apply w-2/5 ipad:w-[96%] rounded-lg border border-[#e5e8eb] ipad:border-[1.5px]
+        absolute left-[3rem] top-[35%];
       }
 
       div:nth-child(2) {
-        @apply rounded-[5px] cursor-pointer border border-gray-100;
+        @apply rounded-[5px] cursor-pointer border border-[#e5e8eb];
         padding: 0.5rem 0.5rem;
 
         p {
@@ -35,38 +35,4 @@
     }
   }
 }
-
-.dot-step {
-  @apply inline relative text-[#6a6a6a] leading-6 text-left
-  transition-all duration-200 ease-in-out;
-
-  &::after {
-    @apply absolute inline-block w-[6px] h-[6px] rounded-full
-    bg-[#7e8a88] left-0 transition duration-100 ease-in-out ;
-    content: "";
-    top: calc(50% - 3px);
-  }
-
-  &.is-selected::after {
-    @apply opacity-[1] bg-black;
-    transition-delay: .1s;
-  }
-
-  &.is-selected {
-    @apply text-black;
-  }
-
-  &.is-selected::before {
-    @apply opacity-[1] ;
-    transition-delay: .1s;
-  }
-
-  &::before {
-    @apply absolute inline-block w-[6px] h-[6px] rounded-full opacity-0
-    bg-[#1c1b1b] left-0 transition duration-100 ease-in-out ;
-    content: "";
-    top: calc(50% - 3px);
-  }
-}
-
 

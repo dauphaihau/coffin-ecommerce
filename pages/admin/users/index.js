@@ -3,12 +3,15 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import {useEffect, useState} from "react";
 
-import {Link, Tooltip, Helmet} from "@components";
-import {Table} from "@components/Table";
+// import {Table} from "@core/Table";
+// import {Button} from "@core/Button";
+// import {MenuDropdown} from "@core/Navigation";
 import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
-import {Button} from "../../../components/Button";
-import {MenuDropdown} from "../../../components/Navigation";
+import {Helmet, Link} from "../../../core";
+import {Button} from "../../../core/Button";
+import {Table} from "../../../core/Table";
+import {MenuDropdown} from "../../../core/Navigation";
 
 const UserList = () => {
   const router = useRouter();
@@ -117,11 +120,11 @@ const UserList = () => {
     }
   }
 
-  async function handleDeleteMultiItems(idsArray) {
+  async function handleDeleteMultiItems(optionsChecked) {
     if (!window.confirm('Are you sure?')) {
       return;
     }
-    const res = await userService.multiDelete(idsArray.map(e => e.id))
+    const res = await userService.multiDelete(optionsChecked.map(e => e.id))
     if (res.isSuccess) {
       const res = await userService.getAll();
       setUsers(res.data)
@@ -140,11 +143,11 @@ const UserList = () => {
         </Link>
       </div>
       <Table
-        // onChangeSelected={handleDeleteMultiItems}
+        onChangeCheckbox={handleDeleteMultiItems}
         // checkboxSelection
         columns={columns}
-        // itemsPerPage={3}
-        itemsPerPageOptions={[3, 4, 5]}
+        // rowsPerPage={5}
+        rowsPerPageOptions={[3, 4, 5]}
         rows={users}
       />
     </>

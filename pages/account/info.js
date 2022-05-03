@@ -2,11 +2,11 @@ import {useForm} from "react-hook-form";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
 import {useAuth} from "../../context/authContext";
-import {Input} from "../../components/Input";
-import {Button} from "../../components/Button";
-import {BannerCard} from "../../components/Card";
-import {Grid} from "../../components";
-import {ProfileSidebar} from "../../components/Navigation";
+import {Input} from "../../core/Input";
+import {Button} from "../../core/Button";
+import {BannerCard} from "../../core/Card";
+import {Grid} from "../../core";
+import {ProfileSidebar} from "../../core/Navigation";
 
 const Info = () => {
   const {user} = useAuth();

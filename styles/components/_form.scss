@@ -7,6 +7,7 @@
 
 .form-input {
   @apply mb-4 w-full;
+
   input {
     @apply border border-gray-300 text-gray-900 text-sm rounded-lg
     focus:ring-black focus:border-black w-full p-2.5
@@ -119,4 +120,5 @@
   padding: 7px 8px !important;
   min-height: 110px;
 }
+
 // end Text Editor

@@ -1,5 +1,5 @@
-import {Button} from "../components/Button";
-import {Image, Link, Text} from "../components";
+import {Button} from "../core/Button";
+import {Image, Link, Text} from "../core";
 
 export default function Custom404() {
   return (

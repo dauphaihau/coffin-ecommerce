@@ -39,7 +39,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   // await sendEmail(user.email, "Password Reset Request", {
   //   name: user.name,
   //   link: link,
-  // }, "./template/requestResetPassword.handlebars");
+  // }, "./layouts/requestResetPassword.handlebars");
   // return link;
 
   const transporter = nodemailer.createTransport({

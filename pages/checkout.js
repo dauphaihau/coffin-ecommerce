@@ -13,8 +13,8 @@ import {DENOMINATION} from "../utils/constant";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
-import {Helmet, Text} from "../components";
-import {StepperCheckout} from "../components/Navigation/Stepper";
+import {Helmet, Text} from "../core";
+import {StepperCheckout} from "../core/Navigation/Stepper";
 
 const stripePromise = getStripejs();
 
@@ -39,7 +39,6 @@ const calculateShipping = () => {
 const Checkout = ({context}) => {
   const [isPayOnline, setIsPayOnline] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
-
 
   const {user, setUser} = useAuth();
 

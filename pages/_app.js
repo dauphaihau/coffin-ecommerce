@@ -2,8 +2,8 @@ import '../styles/globals.scss'
 import fetchCategories from "../utils/provider/categoryProvider";
 import {AuthProvider} from "../context/authContext";
 import FilterProvider from "../context/filterContext";
-import AdminLayout from "../layout/AdminLayout";
-import MainLayout from "../layout/MainLayout";
+import AdminLayout from "../layouts/AdminTemplate";
+import MainLayout from "../layouts/MainLayout";
 import {UIControllerProvider} from "../context/UIControllerContext";
 
 function Ecommerce({Component, pageProps, categories}) {

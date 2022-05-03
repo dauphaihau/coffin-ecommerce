@@ -18,6 +18,7 @@ const nextConfig = {
       })
     );
     config.resolve.alias["@components"] = path.resolve(__dirname, "components");
+    config.resolve.alias["@core"] = path.resolve(__dirname, "core");
     config.resolve.alias["@services"] = path.resolve(__dirname, "services");
     config.resolve.alias["@utils"] = path.resolve(__dirname, "utils");
     config.resolve.alias["@context"] = path.resolve(__dirname, "context");

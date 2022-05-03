@@ -5,16 +5,16 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import {Helmet, Grid} from "@components";
+import {Helmet, Grid} from "@core";
 import {Input, Select, Checkbox, Textarea} from "@components/Input";
 import {Button} from "@components/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 import {useAuth} from "../../../context/authContext";
-import {Switch} from "../../../components/Input";
-import {Stack} from "../../../components/Layout";
-import AvatarInput from "../../../components/Input/AvatarInput";
-import {Paper} from "../../../components";
+import {Switch} from "../../../core/Input";
+import {Stack} from "../../../core/Layout";
+import AvatarInput from "../../../core/Input/AvatarInput";
+import {Paper} from "../../../core";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},

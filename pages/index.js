@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import {slugify} from '../utils/helpers'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
-import {HomeBannerCard, ProductCard} from "../components/Card";
-import {Button} from "../components/Button";
+import {HomeBannerCard} from "../core/Card";
+import {Button} from "../core/Button";
+import {Grid, Text} from "../core";
+import {Stack} from "../core/Layout";
+import {ProductCard} from "../layout/main/home";
 
 const Home = ({inventoryData = []}) => {
 
@@ -10,13 +13,14 @@ const Home = ({inventoryData = []}) => {
     <>
       <Head>
         <title>Coffin ECommerce</title>
-        <meta name="description" content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
+        <meta name="description"
+              content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
         <meta property="og:title" content="Coffin ECommerce" key="title"/>
       </Head>
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <div className='my-12'>
-        <h1 className='text-3xl mb-4'> Featured Products</h1>
-        <div className='grid laptop:grid-cols-2 gap-x-4'>
+        <Text h1 classes='text-3xl mb-4'> Featured Products</Text>
+        <Grid md='2' gapx='4'>
           <div className='hidden laptop:block'>
             <ProductCard
               full
@@ -30,7 +34,7 @@ const Home = ({inventoryData = []}) => {
             />
           </div>
           <div>
-            <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4'>
+            <Grid md='2' gap='4'>
               <ProductCard
                 imageSrc={inventoryData[7].image}
                 title={inventoryData[7].name}
@@ -49,8 +53,8 @@ const Home = ({inventoryData = []}) => {
                 price={inventoryData[3].price}
                 salePrice={inventoryData[3].salePrice}
               />
-            </div>
-            <div className='grid ipad:grid-cols-2 gap-x-4 gap-y-4 mt-4'>
+            </Grid>
+            <Grid md='2' gap='4' classes='mt-4'>
               <ProductCard
                 imageSrc={inventoryData[9].image}
                 title={inventoryData[9].name}
@@ -69,9 +73,17 @@ const Home = ({inventoryData = []}) => {
                 price={inventoryData[10].price}
                 salePrice={inventoryData[10].salePrice}
               />
-            </div>
+            </Grid>
           </div>
-        </div>
+        </Grid>
+      </div>
+      <div>
+        <Stack>
+          <Text>
+            Flash sale
+          </Text>
+
+        </Stack>
       </div>
       <div
         className="my-8 ipad:my-12 laptop:my-16 desktop:my-20 3xl:my-24 pb-5 laptop:pb-3.5 2xl:pb-5 pt-3 laptop:pt-1.5 2xl:pt-2 3xl:pt-3 text-center">
@@ -125,7 +137,5 @@ export async function getStaticProps() {
     }
   }
 }
-
-// Home.layout = 'main';
 
 export default Home

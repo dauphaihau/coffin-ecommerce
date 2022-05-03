@@ -5,12 +5,12 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import {Helmet, Grid} from "@components";
+import {Helmet, Grid} from "@core";
 import {Button} from "@components/Button";
 import {Select, Checkbox, Textarea, Input} from "@components/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
-import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../components/Input";
+import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../core/Input";
 import {TagOpts} from "../../../../assets/data/options";
 
 const ProductEdit = () => {

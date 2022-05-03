@@ -1,5 +1,5 @@
-import {Grid, Helmet, Image} from "../../components";
-import {Table} from "../../components/Table";
+import {Grid, Helmet, Image} from "../../core";
+import {Table} from "../../core/Table";
 import {useEffect, useState} from "react";
 import {userService} from "../../services/users";
 import {formatPrice} from "../../utils/helpers";
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
       <Table
         hidePagination
-        itemsPerPage={6}
+        rowsPerPage={6}
         columns={columns}
         rows={users}
       />

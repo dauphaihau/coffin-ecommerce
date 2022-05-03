@@ -8,10 +8,10 @@ import {useUIController} from "../../context/UIControllerContext";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify} from "../../utils/helpers";
 import {CartProvider, CartContext} from "../../context/cartContext";
-import {Button, QuantityPicker, ShowMoreTextToggler} from "../../components/Button";
-import {Product as ProductCard} from "../../components/Card";
-import {Image} from "../../components";
-import Text from "../../components/Text";
+import {Button, QuantityPicker, ShowMoreTextToggler} from "../../core/Button";
+import {Product as ProductCard} from "../../core/Card";
+import {Image} from "../../core";
+import Text from "../../core/Text";
 
 const Product = (props) => {
   const router = useRouter();

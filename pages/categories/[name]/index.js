@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {titleIfy, slugify} from '../../../utils/helpers'
 import fetchCategories from '../../../utils/provider/categoryProvider'
 import inventoryForCategory from '../../../utils/inventoryForCategory'
-import {Product} from "../../../components/Card";
+import {Product} from "../../../core/Card";
 
 const Category = (props) => {
   const {inventory, title} = props

@@ -25,7 +25,7 @@
     @apply mr-4 relative cursor-pointer;
 
     .item-title {
-      @apply p-[10px] hover:bg-gray-200 transition duration-200 ease-in-out rounded-xl
+      @apply p-[10px] hover:bg-gray-custom-50 transition duration-200 ease-in-out rounded-xl
        mb-0 text-left text-smaller;
     }
     .item-content {
@@ -69,7 +69,9 @@
       div {
         @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg rounded-md bg-white shadow-2xl;
         a {
-          @apply block px-4 py-2 text-sm leading-5 text-[#8a8a8a] hover:bg-gray-100 hover:text-black focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out;
+          @apply block px-4 py-2 text-sm leading-5 text-black
+          hover:bg-gray-custom-50  focus:outline-none focus:bg-gray-100
+          transition duration-150 ease-in-out;
       }
     }
   }

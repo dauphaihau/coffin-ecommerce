@@ -1,7 +1,7 @@
 import banner from '../../public/images/banners/contemporary-banner.png';
-import {Grid, Link} from "../../components";
-import {BannerCard} from "../../components/Card";
-import {ProfileSidebar} from "../../components/Navigation";
+import {Grid, Link} from "../../core";
+import {BannerCard} from "../../core/Card";
+import {ProfileSidebar} from "../../core/Navigation";
 
 const MyAccount = () => {
 

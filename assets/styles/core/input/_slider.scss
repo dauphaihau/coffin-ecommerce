@@ -1,0 +1,18 @@
+.slider {
+  @apply h-4 w-[60%] rounded-[5px] bg-[#d3d3d3] appearance-none outline-none opacity-[0.7];
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::-webkit-slider-thumb {
+    @apply appearance-none w-[25px] h-[25px] rounded-[50%] bg-black cursor-pointer;
+    -webkit-appearance: none;
+  }
+
+  &::-moz-range-thumb {
+    @apply w-[25px] h-[25px] rounded-[50%] bg-black cursor-pointer;
+  }
+}

@@ -5,14 +5,15 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import {Helmet, Grid} from "@core";
-import {Button} from "@components/Button";
+import {Button} from "@core/Button";
 import {
   Select, Checkbox, Textarea, Input, Switch, Autocomplete, ImageInput,
   TextEditor
-} from "@components/Input"
+} from "../../../core/Input"
 import {productService} from "../../../services/products";
 import {brandOpts, categoryOpts, colorOpts, TagOpts} from "../../../assets/data/options";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
+import {Grid} from "../../../core/Layout";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -96,7 +97,7 @@ const NewProduct = () => {
   return (
     <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={1} lg={2} gapx={4} classes='pb-4'>
+        <Grid md={2} lg={2} gapx={4} classes='pb-4'>
           <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
@@ -118,7 +119,7 @@ const NewProduct = () => {
           </div>
           <div>
             <div className='bg-white p-6 rounded-lg drop-shadow-md'>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                 <Controller
                   control={control}
@@ -156,7 +157,8 @@ const NewProduct = () => {
                     />
                   )}
                 />
-                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911' classesSpace='mb-0'/>
+                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
+                       classesSpace='mb-0'/>
                 <Controller
                   control={control}
                   name='tag'
@@ -175,7 +177,7 @@ const NewProduct = () => {
             <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
               <Grid md={1} lg={2} gapx={4}>
                 <Input label='Price *' name='price' register={register} errors={errors} placeholder='11.00'
-                contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
                 <Input label='Sale Price' name='salePrice' register={register} errors={errors} placeholder='10.00'
                        contentLeft={<i className="fa-solid fa-dollar-sign"/>}

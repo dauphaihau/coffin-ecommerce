@@ -9,7 +9,7 @@ import {Link} from "../../../core";
 import {Button} from "../../../core/Button";
 import {Table} from "../../../core/Table";
 import {MenuDropdown} from "../../../core/Navigation";
-import Helmet from "../../../layouts/admin/common/Helmet";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
 
 const UserList = () => {
   const router = useRouter();

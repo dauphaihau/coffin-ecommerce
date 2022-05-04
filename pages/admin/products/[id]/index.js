@@ -5,13 +5,14 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import {Helmet, Grid} from "@core";
-import {Button} from "@components/Button";
-import {Select, Checkbox, Textarea, Input} from "@components/Input"
+import {Grid} from "@core/Layout";
+import {Button} from "@core/Button";
+import {Select, Checkbox, Textarea, Input} from "@core/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
 import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../core/Input";
 import {TagOpts} from "../../../../assets/data/options";
+import {Helmet} from "../../../../layouts/admin/common/Helmet";
 
 const ProductEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -108,7 +109,7 @@ const ProductEdit = () => {
   return (
     <Helmet title='Make the changes below' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={1} lg={2} gapx={4} classes='pb-4'>
+        <Grid md={2} lg={2} gapx={4} classes='pb-4'>
           <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
@@ -131,7 +132,7 @@ const ProductEdit = () => {
           </div>
           <div>
             <div className='bg-white p-6 rounded-lg drop-shadow-md'>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                 <Controller
                   control={control}

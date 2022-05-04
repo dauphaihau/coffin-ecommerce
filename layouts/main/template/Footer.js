@@ -10,26 +10,26 @@ const Footer = () => {
             <h5 className="text-xl font-bold mb-6">Social</h5>
             <ul className="list-none ">
               <li className="mb-3">
-                <Link href="layouts/main/template/Footer#"
+                <Link href="#"
                       className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                   {/*<i className="fa text-2xl">&#xf099;</i> Twitter*/}
                   <i className="fa-brands fa-twitter text-2xl mr-2"></i>Twitter
                 </Link>
               </li>
               <li className="mb-3">
-                <Link href="layouts/main/template/Footer#"
+                <Link href="#"
                       className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                   <i className="fa-brands fa-instagram text-2xl mr-2"/> Instagram
                 </Link>
               </li>
               <li className="mb-3">
-                <Link href="layouts/main/template/Footer#"
+                <Link href="#"
                       className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                   <i className="fa-brands fa-facebook-square text-2xl mr-3"/>Facebook
                 </Link>
               </li>
               <li className="mb-3">
-                <Link href="layouts/main/template/Footer#"
+                <Link href="#"
                       className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                   <i className="fa-brands fa-youtube text-2xl mr-[2px]"/> Youtube
                 </Link>
@@ -41,7 +41,7 @@ const Footer = () => {
             <ul className="list-none footer-links">
               {['Contact Us', 'Deck 5, ISS, LEO 51.603.', 'dauphaihau@outlook.com', 'Call us: 84901111921'].map((nameLink, id) => (
                 <li className="mb-3" key={id}>
-                  <Link href='layouts/main/template/Footer#'
+                  <Link href='#'
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                     {nameLink}
                   </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
             <ul className="list-none footer-links">
               {['Support center', 'Customer Support', 'About Us', 'Copyright'].map((nameLink, id) => (
                 <li className="mb-3" key={id}>
-                  <Link href='layouts/main/template/Footer#'
+                  <Link href='#'
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                     {nameLink}
                   </Link>
@@ -67,7 +67,7 @@ const Footer = () => {
             <ul className="list-none footer-links">
               {['FAQ & Helps', 'Shipping & Delivery', 'Return & Exchanges'].map((nameLink, id) => (
                 <li className="mb-3" key={id}>
-                  <Link href='layouts/main/template/Footer#'
+                  <Link href='#'
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                     {nameLink}
                   </Link>
@@ -80,7 +80,7 @@ const Footer = () => {
             <ul className="list-none footer-links">
               {['Privacy policy', 'Terms & conditions', 'Return Policy', 'Site Map'].map((nameLink, id) => (
                 <li className="mb-3" key={id}>
-                  <Link href='layouts/main/template/Footer#'
+                  <Link href='#'
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                     {nameLink}
                   </Link>
@@ -93,7 +93,7 @@ const Footer = () => {
             <ul className="list-none footer-links">
               {['Natural material coffin', 'Traditional coffin', 'American caskets'].map((nameLink, id) => (
                 <li className="mb-3" key={id}>
-                  <Link href='layouts/main/template/Footer#'
+                  <Link href='#'
                         className="border-b border-solid border-transparent hover:text-black text-smaller text-gray-500">
                     {nameLink}
                   </Link>
@@ -121,27 +121,27 @@ const Footer = () => {
           mb-1 md:mb-0 mx-auto md:mx-0
           ">
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
-              <Link href="/pages" target="_blank">
+              <Link href="/" target="_blank">
                 <Image src="/images/payment/visa.png" alt="Visa" width="65" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
-              <Link href="/pages" target="_blank">
+              <Link href="/" target="_blank">
                 <Image src="/images/payment/paypal.png" alt="Paypal" width="76" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
-              <Link href="/pages" target="_blank">
+              <Link href="/" target="_blank">
                 <img src="/images/payment/amazon.png" alt='Amazon' width="86" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
-              <Link href="/pages" target="_blank">
+              <Link href="/" target="_blank">
                 <img src="/images/payment/apple-pay.png" alt="Apple Pay" width="66" height="20"/>
               </Link>
             </li>
             <li className="mb-2 md:mb-0 transition hover:opacity-80 ml-8">
-              <Link href="/pages" target="_blank">
+              <Link href="/" target="_blank">
                 <Image src="/images/payment/skrill.png" alt="Skrill" width="69" height="20"/>
               </Link>
             </li>

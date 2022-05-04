@@ -20,7 +20,8 @@ const Input: FC<InputProps> = forwardRef(
     const {
       type = 'text',
       label, name = '',
-      register, errors,
+      register = () => {},
+      errors,
       className, classes, placeholder,
       classesSpace, contentLeft,
       ...others

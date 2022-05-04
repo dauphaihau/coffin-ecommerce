@@ -14,4 +14,3 @@ const AllDrawer = () => {
 
 
 export default AllDrawer;
-export { default as Backdrop} from '../../../../core/Navigation/Drawer/Backdrop'

@@ -1,12 +1,6 @@
 export { default as Link} from './Next/Link'
 export { default as Tooltip} from './Tooltip'
-export { default as Helmet} from '../layouts/admin/common/Helmet'
-export { default as Grid} from './Layout/Grid'
-export { default as Breadcrumb} from './Navigation/Breadcrumb'
 export { default as Image} from './Next/Image'
 export { default as Text} from './Text'
-// export { default as NavControl} from '../layout/main/template/Navbar/NavControl'
-export { default as Filters} from '../layouts/main/pages/products/Filters'
-export { default as Sorter} from '../layouts/main/pages/products/Sorter'
 export { default as Paper} from './Paper'
 

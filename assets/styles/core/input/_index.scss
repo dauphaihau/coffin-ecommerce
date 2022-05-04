@@ -1,0 +1,15 @@
+@import 'avatar';
+@import 'select';
+@import 'text-editor';
+@import 'slider';
+@import 'checkbox';
+@import 'text-area';
+@import 'input';
+
+.form-control {
+  @apply mb-4;
+  label {
+    @apply block text-base font-medium text-gray-700 dark:text-gray-400;
+  }
+}
+

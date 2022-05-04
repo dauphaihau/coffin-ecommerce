@@ -2,14 +2,15 @@ import {Toaster} from "react-hot-toast";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import AllModal from "./Modal";
-import AllDrawer, {Backdrop} from "./Drawer";
 import {useUIController} from "../../../context/UIControllerContext";
 import Navbar from "./Navbar/Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import ChatBox from "./ChatBox";
 import BannerHomeCard from "./BannerHomeCard";
+import AllDrawer from "./Drawer";
+import Backdrop from "../../../core/Navigation/Drawer/Backdrop";
+import AllModal from "./Modal";
 
 export const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)

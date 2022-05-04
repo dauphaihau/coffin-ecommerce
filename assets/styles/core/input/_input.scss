@@ -1,0 +1,22 @@
+.form-input {
+  @apply mb-4 w-full;
+
+  &__contentLeft {
+    @apply absolute inset-y-0 left-[12px] flex items-center text-gray-600;
+  }
+
+  input {
+    @apply border border-gray-300 text-gray-900 text-sm rounded-lg
+    focus:ring-black focus:border-black w-full p-2.5
+    focus:outline-none
+    py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out
+    text-xs lg:text-sm  rounded-md
+    transition duration-200 ease-in-out
+    bg-white border-gray-300 h-11 md:h-12 placeholder-gray-500
+  }
+
+  label {
+    @apply block text-base text-gray-700;
+  }
+}
+

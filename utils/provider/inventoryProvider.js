@@ -22,6 +22,7 @@ async function fetchInventory() {
 }
 
 export {
-  fetchInventory, inventory as staticInventory
+  fetchInventory,
+  // inventory as staticInventory
 }
 

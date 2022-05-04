@@ -1,20 +1,18 @@
 import * as Yup from "yup";
-import {Controller, useForm} from "react-hook-form";
 import {useState} from "react";
+import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
-import {Helmet, Grid} from "@core";
-import {Input, Select, Checkbox, Textarea} from "@components/Input";
-import {Button} from "@components/Button";
-import {userService} from "@services/users";
-import {roleOpts} from "@assets/data/options";
 import {useAuth} from "../../../context/authContext";
-import {Switch} from "../../../core/Input";
-import {Stack} from "../../../core/Layout";
-import AvatarInput from "../../../core/Input/AvatarInput";
+import {AvatarInput, Input, Select, Switch} from "../../../core/Input";
+import {Grid, Stack} from "../../../core/Layout";
 import {Paper} from "../../../core";
+import {Button} from "../../../core/Button";
+import {roleOpts} from "../../../assets/data/options";
+import {userService} from "../../../services/users";
+import { Helmet } from "../../../layouts/admin/common/Helmet";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -65,7 +63,7 @@ const NewUser = () => {
     <div className='w-2/3'>
       <Helmet title='Create a new user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid md={1} lg={2} gapx={4}>
+          <Grid md={2} lg={2} gapx={4}>
             <Paper>
               <div className='flex justify-center flex-col mb-4'>
                 <div className='mb-4 bg-transparent rounded-full'>
@@ -73,14 +71,13 @@ const NewUser = () => {
                   <AvatarInput/>
                 </div>
               </div>
-
-              {/*<Stack classes='mb-4 items-center'>*/}
-              {/*  <div>*/}
-              {/*    <p className='font-bold text-[0.875rem]'>Banned</p>*/}
-              {/*    <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>*/}
-              {/*  </div>*/}
-              {/*  <Switch/>*/}
-              {/*</Stack>*/}
+              <Stack classes='mb-4 items-center'>
+                <div>
+                  <p className='font-bold text-[0.875rem]'>Banned</p>
+                  <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
+                </div>
+                <Switch/>
+              </Stack>
               <Stack classes='mb-4 items-center'>
                 <div>
                   <p className='font-bold text-[0.875rem]'>Email Verified</p>
@@ -103,7 +100,6 @@ const NewUser = () => {
                 <Input label='Email *' name='email' register={register} errors={errors}/>
                 <Input label='Password' type='password' name='password' register={register} errors={errors}/>
               </Grid>
-              {/*<Checkbox label=''/>*/}
               <Controller
                 control={control}
                 name='role'
@@ -119,7 +115,7 @@ const NewUser = () => {
                 )}
               />
             </Paper>
-          </Grid>
+           </Grid>
           <div className="flex gap-x-4 mt-6">
             <Button type='submit' isLoading={isBtnLoading}>Create</Button>
           </div>

@@ -9,9 +9,10 @@ import {useUIController} from "@context/UIControllerContext";
 import {Button} from "../../../core/Button";
 import {MenuDropdown} from "../../../core/Navigation";
 import {Checkbox} from "../../../core/Input";
-import Helmet from "../../../layouts/admin/common/Helmet";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Link} from "../../../core/Next";
 import {Table} from "../../../core/Table";
+import {Row} from "../../../core/Layout";
 
 const ProductList = () => {
   const router = useRouter();
@@ -111,18 +112,18 @@ const ProductList = () => {
 
   return (
     <>
-      <div className='flex-center !justify-between'>
+      <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='/admin/products/new'>
           <Button classes='ml-auto block mb-4'>New Product</Button>
         </Link>
-      </div>
+      </Row>
       <Table
         searchInputSelection
         checkboxSelection
         onChangeSelected={handleDeleteMultiItems}
         rowsPerPage={3}
-        // itemsPerPageOptions={[3, 4, 5]}
+        // rowsPerPageOptions={[3, 4, 5]}
         columns={columns}
         rows={products}
       />

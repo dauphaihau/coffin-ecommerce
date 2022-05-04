@@ -2,14 +2,15 @@ import * as Yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 
-import {Grid, Text} from "../../../../core";
+import {Text} from "../../../../core";
 import {Checkbox, Input, Select} from "../../../../core/Input";
 import {Button} from "../../../../core/Button";
 import {useUIController} from "../../../../context/UIControllerContext";
 import {XIcon} from "@heroicons/react/solid";
 import countryOpts from "../../../../assets/data/country.json";
 import {useAuth} from "../../../../context/authContext";
-import {Modal} from "../../../../core/Modal/Modal";
+import {Modal} from "../../../../core/Modal";
+import {Grid} from "../../../../core/Layout";
 
 const AddressModal = () => {
 

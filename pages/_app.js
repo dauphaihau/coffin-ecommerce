@@ -15,9 +15,7 @@ function Ecommerce({Component, pageProps, categories}) {
       <UIControllerProvider>
         <FilterProvider>
           <Layout categories={categories}>
-          {/*<MainLayout categories={categories}>*/}
             <Component {...pageProps} />
-          {/*</MainLayout>*/}
           </Layout>
         </FilterProvider>
       </UIControllerProvider>

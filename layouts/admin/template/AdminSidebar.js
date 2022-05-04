@@ -1,7 +1,8 @@
 import {Link} from "../../../core";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
-import {MENU} from "@utils/menu";
+import {MENU} from "../../../utils/menu";
+import {Row} from "../../../core/Layout";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
   // const router = useRouter();
@@ -49,21 +50,21 @@ const Menu = ({link, handleActive}) => {
       className='cursor-pointer'
       onClick={() => setActive(!active)}
     >
-      <div className='flex justify-between w-full items-center'>
-        <div className='flex items-center'>
+      <Row justify='between' align='center' classes='w-full'>
+        <Row align='center'>
           <div className='drop-shadow rounded-lg'>
             <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
           </div>
           <span
             className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
-        </div>
+        </Row>
         <i className={
           ` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
             text-[10px] 
             text-[#7e8a88] transition-all duration-300
             ease-in-out hover:text-gray-600 block 
          `}/>
-      </div>
+      </Row>
       <SubMenu open={active} subLinks={link.subLinks} handleActive={handleActive}/>
     </div>
   </li>
@@ -75,32 +76,34 @@ const AdminSidebar = () => {
   const handleActive = (link) => router.pathname === link.href
 
   return (
-    <aside className="hidden laptop:block w-[18%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
+    // <aside className="hidden laptop:block w-[18%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
+    <aside className="hidden fixed overflow-y-auto laptop:block w-[15%] h-[97%] m-4
+     shadow-2xl rounded-2xl" aria-label="Sidebar">
       <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-black">
-        <div className='flex justify-center'>
-          <Link href="/pages">
+        <Row justify='center'>
+          <Link href="/">
             <img
               src="/images/logo.png"
               alt="logo"
               className='ipad:h-[55px]'
             />
           </Link>
-        </div>
+        </Row>
         <div className={`border-b border-gray-100 my-4 w-4/5 mx-auto`}/>
         <ul className="space-y-2">
           {MENU.admin.map((link, id) => {
             if (!Array.isArray(link.subLinks)) {
               return <li className='mx-3 p-[10px]' key={id}>
                 <Link scroll={false} href={link.href}>
-                  <div className='flex justify-between w-full items-center'>
-                    <div className='flex items-center'>
-                      <div className='drop-shadow rounded-lg'>
-                        <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
+                  <Row justify='between' align='center' classes='w-full'>
+                    <Row align='center'>
+                      <div className='drop-shadow rounded-lg text-center '>
+                        <i className={`${link.icon} !w-8 p-2 bg-[#e9ecef] block rounded-lg`}/>
                       </div>
                       <span
                         className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
-                    </div>
-                  </div>
+                    </Row>
+                  </Row>
                 </Link>
               </li>
             }

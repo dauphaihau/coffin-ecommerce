@@ -1,6 +1,7 @@
-import {Grid, Text} from "../../../../core";
+import {Text} from "../../../../core";
 import {ProductCard} from "./index";
 import {slugify} from "../../../../utils/helpers";
+import {Grid} from "../../../../core/Layout";
 
 const FeaturedProducts = ({inventoryData}) => {
     return (

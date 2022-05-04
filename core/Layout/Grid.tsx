@@ -4,6 +4,7 @@ interface Props {
   sx?: number,
   md?: number,
   lg?: number,
+  xl?: number,
   gap?: number,
   gapx?: number,
   gapy?: number,
@@ -15,15 +16,18 @@ const Grid = (props: Props) => {
 
   const {
     children, gap, classes,
-    sx, md, lg, gapx, gapy
+    sx = '', md = '', lg = '', xl = '',
+    gapx, gapy
   } = props;
 
   return (
     <div
-      className={`grid gap-${gap} gap-x-${gapx} gap-y-${gapy}
-        grid-cols-${sx}
-        ipad:grid-cols-${md}
-        laptop:grid-cols-${lg}
+      className={`
+         grid gap-${gap} gap-x-${gapx} gap-y-${gapy}
+        ${sx && `grid-cols-${sx}`}
+        ${md && `ipad:grid-cols-${md}`}
+        ${lg && `laptop:grid-cols-${lg}`}
+        ${xl && `desktop:grid-cols-${xl}`}
         ${classes}
       `}>
       {children}

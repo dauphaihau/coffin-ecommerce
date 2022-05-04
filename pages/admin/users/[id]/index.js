@@ -5,13 +5,14 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import {Helmet, Grid, Stack} from "@components/Layout";
-import {Input, Select, Switch, AvatarInput} from "@components/Input";
-import {Button} from "@components/Button";
+import {Grid, Stack} from "@core/Layout";
+import {Input, Select, Switch, AvatarInput} from "@core/Input";
+import {Button} from "@core/Button";
 import {userService} from "@services/users";
 import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
 import {Paper} from "@core";
+import {Helmet} from "../../../../layouts/admin/common/Helmet";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);

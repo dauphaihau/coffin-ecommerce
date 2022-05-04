@@ -1,22 +1,27 @@
 import {Toaster} from "react-hot-toast";
 import LoadingBar from "react-top-loading-bar";
 
-import {AdminSidebar} from "../../../core/Navigation";
-import Navbar from "./Navbar";
 import {useUIController} from "../../../context/UIControllerContext";
+import {Col, Container} from "../../../core/Layout";
+import Sidenav from "./Sidenav";
+import Sidebar from "./AdminSidebar";
 
 const AdminLayout = ({children}) => {
   const {progress, setProgress} = useUIController();
   return (
-    <div className='flex bg-[#f8f9fa] p-4 h-screen'>
+    <>
       <LoadingBar color="#000000" progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
       <Toaster position="top-right" reverseOrder={false}/>
-      <AdminSidebar/>
-      <div className='w-full px-2 ipad:px-8 !pb-4'>
-        <Navbar/>
-        {children}
-      </div>
-    </div>
+      <Container display='flex' classes='bg-[#f8f9fa] h-screen '>
+        <Sidebar/>
+        <Col classes=' p-[24px] ml-[18rem] w-[calc(100%-280px)]'>
+          <Sidenav/>
+          <main className='laptop:pt-[70px]'>
+            {children}
+          </main>
+        </Col>
+      </Container>
+    </>
   );
 }
 

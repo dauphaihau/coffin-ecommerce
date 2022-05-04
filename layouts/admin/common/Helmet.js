@@ -1,6 +1,6 @@
 import Breadcrumb from "../../../core/Navigation/Breadcrumb";
 
-const Helmet = ({title, dataBreadcrumb, children}) => {
+export const Helmet = ({title, dataBreadcrumb, children}) => {
   return (
     <>
       <div className="mb-6">
@@ -11,5 +11,3 @@ const Helmet = ({title, dataBreadcrumb, children}) => {
     </>
   );
 }
-
-export default Helmet;

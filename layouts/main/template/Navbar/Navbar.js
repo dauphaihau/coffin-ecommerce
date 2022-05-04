@@ -32,7 +32,7 @@ const Navbar = ({categories}) => {
             className='cursor-pointer w-[30px] h-[30px] laptop:hidden'
             onClick={() => dispatch({type: 'OPEN_NAV_DRAWER'})}
           />
-          <Link href="/layouts/main/pages" className="navbar-left__logo hidden laptop:block">
+          <Link href='/' className="navbar-left__logo hidden laptop:block">
             <img
               src="/images/logo.png"
               alt="logo"

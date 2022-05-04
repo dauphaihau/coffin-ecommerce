@@ -13,8 +13,8 @@ import {DENOMINATION} from "../utils/constant";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";
-import {Helmet, Text} from "../core";
 import StepperCheckout from "../layouts/main/pages/checkout/StepperCheckout";
+import {Helmet} from "../layouts/admin/common/Helmet";
 // import {StepperCheckout} from "../core/Navigation/Stepper";
 
 const stripePromise = getStripejs();

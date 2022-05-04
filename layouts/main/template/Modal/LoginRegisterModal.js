@@ -10,7 +10,7 @@ import {Checkbox, Input} from "../../../../core/Input";
 import {Button} from "../../../../core/Button";
 import {accountService} from "../../../../services/account";
 import {Text} from "../../../../core";
-import {Modal} from "../../../../core/Modal/Modal";
+import {Modal} from "../../../../core/Modal";
 
 const LoginRegisterModal = () => {
   const [currentForm, setCurrentForm] = useState('login')

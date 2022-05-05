@@ -28,8 +28,8 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/pages/account'
-            className={`${css} ${active === 'dashboard' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
+            href='/account'
+            className={`${css} ${active === 'dashboard' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <HomeIcon
               className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
@@ -39,8 +39,8 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/pages/account/order'
-            className={`${css} ${active === 'order' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
+            href='/account/order'
+            className={`${css} ${active === 'order' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <ShoppingCartIcon
               className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
@@ -50,8 +50,8 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/pages/account/info'
-            className={`${css} ${active === 'info' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
+            href='/account/info'
+            className={`${css} ${active === 'info' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <IdentificationIcon
               className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
@@ -61,8 +61,8 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/pages/account/change-pass'
-            className={`${css} ${active === 'change-pass' ? 'bg-gray-100' : 'hover:bg-gray-100'}`}
+            href='/account/change-pass'
+            className={`${css} ${active === 'change-pass' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <CogIcon
               className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>
@@ -74,7 +74,7 @@ const ProfileSidebar = ({active}) => {
             onClick={() => logout()}
             className="flex items-center p-2 text-base font-normal text-gray-900
                   cursor-pointer
-                   rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                   rounded-lg dark:text-white hover:bg-gray-custom-hover"
           >
             <LogoutIcon
               className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'/>

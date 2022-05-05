@@ -5,15 +5,17 @@ interface Props {
   // md?: number,
   // lg?: number,
   gap?: number,
+  justify?: 'center' | 'between' | 'around',
+  align?: 'center' | 'between' | 'around',
+  content?: 'center' | 'between' | 'around',
+  wrap?: 'wrap' | 'reverse' | 'around',
   classes?: string,
   children?: ReactNode,
 }
 
 const Col = (props: Props) => {
 
-  const {
-    children, classes, gap,
-  } = props
+  const {children, classes, gap, justify} = props
 
   // flex-${direction?.sx ?? 'row'}
   // ipad:flex-${direction?.md ?? 'row'}
@@ -22,6 +24,8 @@ const Col = (props: Props) => {
     <div
       className={`
       flex flex-col
+      
+          ${justify ? `justify-${justify}` : `justify-start`}
            gap-${gap}
            ${classes}
         `}>

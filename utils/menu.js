@@ -75,5 +75,35 @@ export const MENU = {
       id: 'posts',
       icon: "fa-solid fa-clipboard"
     },
+    {
+      title: "Orders",
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
+    {
+      title: "Transactions",
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
+    {
+      title: 'Statistics',
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
+    {
+      title: 'Customers',
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
+    {
+      title: 'Chats',
+      href: "/admin/posts",
+      id: 'posts',
+      icon: "fa-solid fa-clipboard"
+    },
   ],
 };

@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {MENU} from "../../../utils/menu";
 import {Row} from "../../../core/Layout";
+import {isDarkMode, isNil} from "../../../utils/helpers";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
   // const router = useRouter();
@@ -70,6 +71,7 @@ const Menu = ({link, handleActive}) => {
   </li>
 }
 
+
 const AdminSidebar = () => {
   const router = useRouter();
   // const [subLinks, setSubLinks] = useState()
@@ -79,11 +81,11 @@ const AdminSidebar = () => {
     // <aside className="hidden laptop:block w-[18%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
     <aside className="hidden fixed overflow-y-auto laptop:block w-[15%] h-[97%] m-4
      shadow-2xl rounded-2xl" aria-label="Sidebar">
-      <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-black">
+      <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-gray-custom-901">
         <Row justify='center'>
           <Link href="/">
             <img
-              src="/images/logo.png"
+              src={`/images/logo${isDarkMode() ? '-dark' : ''}.png`}
               alt="logo"
               className='ipad:h-[55px]'
             />

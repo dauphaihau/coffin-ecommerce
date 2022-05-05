@@ -6,7 +6,7 @@ import ProfileSidebar from "../../layouts/main/pages/account/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../core";
 import {rows} from "../../assets/data/orders";
-import {Table} from "../../core/Table";
+import Table from "../../core/Table";
 
 const Order = () => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const Order = () => {
             <div className='p-4 rounded-lg'>
               <h1 className='text-3xl font-bold mb-6'>Order</h1>
               <Table
-                itemsPerPage={4}
+                rowsPerPage={4}
                 columns={columns}
                 rows={rows}
               />

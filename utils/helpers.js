@@ -164,6 +164,12 @@ const paginateRows = (sortedRows, currentPage, rowsPerPage) => {
   return [...sortedRows].slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage)
 }
 
+const isDarkMode = () => {
+  if (typeof window !== 'undefined') {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  }
+}
+
 
 export {
   slugify,
@@ -179,4 +185,5 @@ export {
   filterRows,
   isNil,
   isEmpty,
+  isDarkMode
 }

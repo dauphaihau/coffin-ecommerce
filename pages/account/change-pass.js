@@ -9,9 +9,10 @@ import banner from "../../public/images/banners/contemporary-banner.png";
 import ProfileSidebar from "../../layouts/main/pages/account/ProfileSidebar";
 import {Input} from "../../core/Input";
 import {Button} from "../../core/Button";
-import {Grid, Text} from "../../core";
+import {Text} from "../../core";
 import {accountService} from "../../services/account";
 import BannerCard from "../../layouts/main/pages/account/BannerCard";
+import {Grid} from "../../core/Layout";
 
 const ChangePass = () => {
 
@@ -62,7 +63,7 @@ const ChangePass = () => {
               <Input name='password' type='password' label='Current Password' register={register} errors={errors}/>
               <Input name='newPassword' type='password' label='New Password' register={register} errors={errors}/>
               <Input name='confirmPassword' type='password' label='Confirm New Password' register={register} errors={errors}/>
-              <Button type="submit" isLoading={isBtnLoading}>Change</Button>
+              <Button size='lg' type="submit" isLoading={isBtnLoading}>Change</Button>
             </form>
           </div>
         </div>

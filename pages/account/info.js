@@ -4,16 +4,16 @@ import banner from "../../public/images/banners/contemporary-banner.png";
 import {useAuth} from "../../context/authContext";
 import {Input} from "../../core/Input";
 import {Button} from "../../core/Button";
-import {Grid} from "../../core";
 import {ProfileSidebar} from "../../core/Navigation";
 import BannerCard from "../../layouts/main/pages/account/BannerCard";
+import {Grid} from "../../core/Layout";
 
 const Info = () => {
   const {user} = useAuth();
 
   const {register, handleSubmit, reset, formState, setError} = useForm({
     defaultValues: {
-      id: user.id,
+      id: user?.id,
     }
   });
   const {errors} = formState;
@@ -31,20 +31,20 @@ const Info = () => {
           <div className='p-4 rounded-lg'>
             <h1 className='text-3xl font-bold mb-6'>Account Details</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='First Name *' name='firstName' register={register} errors={errors}/>
                 <Input label='Last Name *' name='lastName' register={register} errors={errors}/>
               </Grid>
               <Input label='Address *' name='address' register={register} errors={errors}/>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>
                 <Input label='Email *' name='email' register={register} errors={errors}/>
               </Grid>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='City/Town *' name='city' register={register} errors={errors}/>
                 <Input label='Postcode *' name='postcode' register={register} errors={errors}/>
               </Grid>
-              <Button type="submit" classes='ipad:w-1/3'>Update</Button>
+              <Button size='lg'  type="submit" classes='ipad:w-1/3'>Update</Button>
             </form>
           </div>
         </div>

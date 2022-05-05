@@ -11,8 +11,8 @@ import {MenuDropdown} from "../../../core/Navigation";
 import {Checkbox} from "../../../core/Input";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Link} from "../../../core/Next";
-import {Table} from "../../../core/Table";
 import {Row} from "../../../core/Layout";
+import Table from "../../../core/Table";
 
 const ProductList = () => {
   const router = useRouter();

@@ -6,7 +6,7 @@ import Text from "../Text";
 import {usePagination, DOTS} from '../../utils/hooks/usePagination';
 
 interface Props {
-  totalNumberOfRows: number,
+  quantityRows: number,
   rowsPerPage: number,
   onPageChange: (page: number) => void,
   setRowsPerPage: (value: number) => void | {},
@@ -20,7 +20,7 @@ interface Props {
 const Pagination = (props: Props) => {
 
   const {
-    totalNumberOfRows,
+    quantityRows,
     rowsPerPage,
     rowsPerPageOptions,
     onPageChange,
@@ -39,12 +39,12 @@ const Pagination = (props: Props) => {
       label: options,
       value: options
     }))
-    setRowsPerPage(rowsPerPageOptions[0])
+    // setRowsPerPage(rowsPerPageOptions[0])
   }
 
   const pageNumbers = usePagination({
     currentPage,
-    totalNumberOfRows,
+    quantityRows,
     siblingCount,
     rowsPerPage
   });
@@ -56,7 +56,7 @@ const Pagination = (props: Props) => {
         <Text>
           {currentPage === 1 ? 1 : (currentPage - 1) * rowsPerPage}
           –
-          {rowsPerPage * currentPage > totalNumberOfRows ? totalNumberOfRows : rowsPerPage * currentPage} of {totalNumberOfRows}
+          {rowsPerPage * currentPage > quantityRows ? quantityRows : rowsPerPage * currentPage} of {quantityRows}
         </Text>
       </div>
       <div className='pagination__right'>
@@ -78,7 +78,7 @@ const Pagination = (props: Props) => {
           }
         </div>
         {/*<p className='pagination__entries'>*/}
-        {/*  Rows per page: <span className='ml-3'>{totalNumberOfRows}</span></p>*/}
+        {/*  Rows per page: <span className='ml-3'>{quantityRows}</span></p>*/}
         <div className="pagination__num">
           <div className="pagination__num__item">
             <button

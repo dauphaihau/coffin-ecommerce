@@ -7,9 +7,9 @@ import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
 import {Link} from "../../../core";
 import {Button} from "../../../core/Button";
-import {Table} from "../../../core/Table";
 import {MenuDropdown} from "../../../core/Navigation";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
+import Table from "../../../core/Table";
 
 const UserList = () => {
   const router = useRouter();
@@ -145,7 +145,7 @@ const UserList = () => {
         // checkboxSelection
         columns={columns}
         // rowsPerPage={5}
-        rowsPerPageOptions={[3, 4, 5]}
+        rowsPerPageOptions={[5, 10, 25]}
         rows={users}
       />
     </>

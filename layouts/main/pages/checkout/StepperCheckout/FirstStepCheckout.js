@@ -5,10 +5,10 @@ import {Button, QuantityPicker} from "../../../../../core/Button";
 import {Grid, Stack} from "../../../../../core/Layout";
 import {Link, Text, Tooltip} from "../../../../../core";
 import {Input} from "../../../../../core/Input";
-import {Table} from "../../../../../core/Table";
 import {useAuth} from "../../../../../context/authContext";
 import {DENOMINATION} from "../../../../../utils/constant";
 import {formatPrice} from "../../../../../utils/helpers";
+import Table from "../../../../../core/Table";
 
 const FirstStepCheckout = (props) => {
   const {setStep} = props;

@@ -4,8 +4,9 @@ import {useUIController} from "../../../../context/UIControllerContext";
 import {fetchInventory} from "../../../../utils/provider/inventoryProvider";
 import {slugify} from "../../../../utils/helpers";
 import {DENOMINATION} from "../../../../utils/constant";
-import {Link} from "../../../../core";
+import {Link, Text} from "../../../../core";
 import {Input} from "../../../../core/Input";
+import {Col, Row} from "../../../../core/Layout";
 
 const SearchModal = () => {
   const {openSearchModal} = useUIController();
@@ -64,7 +65,7 @@ const SearchModal = () => {
       </div>
       {
         filteredResults.length !== 0 &&
-        <div className="flex flex-col h-auto
+        <Col classes="h-auto
           max-h-[500px]
          overflow-y-auto overflow-x-hidden
          rounded-lg bg-white  px-4 overflow-x-hidden">
@@ -73,33 +74,41 @@ const SearchModal = () => {
               filteredResults.map((item) => {
                 return (
                   <div className="border-t py-4" key={item.id}>
-                    <div className="flex">
+                    <Row>
                       <div className='cursor-pointer w-[43%] ipad:w-auto  relative bg-light rounded-lg p-1'>
-                        <img className="h-28 m-0 " src={item.image} alt={item.name}/>
+                        <img className="h-28 m-0 w-[10rem]" src={item.image} alt={item.name}/>
                       </div>
-                      <div className='ml-4 w-[65%] flex flex-col justify-center'>
+                      <Col justify='center' classes='ml-4 w-[65%]'>
                         <Link href={`/product/${slugify(item.name)}`}>
-                          <p className="m-0 text-gray-600 text-[12px]">
+                          <Text h1 sx='[17px]' classes="m-0 text-gray-600">
                             {item.name}
-                          </p>
+                          </Text>
                         </Link>
-                        <div className="flex">
-                          <h2
-                            className="text-[12px] laptop:text-2xl font-bold tracking-wide">{DENOMINATION + item.price}</h2>
-                          {item.salePrice
-                            && <p className="ml-[10px]
-                            line-through text-gray-400 font-light text-[12px]
-                            ipad:text-base laptop:text-base ps-2">
-                              {DENOMINATION + item.salePrice}</p>}
-                        </div>
-                      </div>
-                    </div>
+                        <Row>
+                          {item.salePrice ?
+                            <>
+                              <Text sx='[12px]' lg='2xl' weight='bold'
+                                    classes="tracking-wide">{DENOMINATION + item.salePrice}</Text>
+                              {
+                                item.price
+                                &&
+                                <Text sx='[12px]' md='base' classes='ml-[10px] line-through text-gray-400'
+                                      weight='light'>
+                                  {DENOMINATION + item.price}</Text>
+                              }
+                            </>
+                            : <Text sx='[12px]' lg='2xl' weight='bold'
+                                    classes="tracking-wide">{DENOMINATION + item.price}</Text>
+                          }
+                        </Row>
+                      </Col>
+                    </Row>
                   </div>
                 )
               })
             }
           </div>
-        </div>
+        </Col>
       }
     </div>
   );

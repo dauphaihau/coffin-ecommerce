@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 
 interface Props {
-  totalNumberOfRows: number,
+  quantityRows: number,
   rowsPerPage: number,
   siblingCount: number,
   currentPage: number,
@@ -17,7 +17,7 @@ const range = (start, end) => {
 export const usePagination = (props: Props) => {
 
   const {
-    totalNumberOfRows,
+    quantityRows,
     rowsPerPage,
     siblingCount = 1,
     currentPage
@@ -25,7 +25,7 @@ export const usePagination = (props: Props) => {
 
 
   return useMemo(() => {
-    const totalPageCount = Math.ceil(totalNumberOfRows / rowsPerPage);
+    const totalPageCount = Math.ceil(quantityRows / rowsPerPage);
 
     // Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS
     const totalPageNumbers = siblingCount + 5;
@@ -75,5 +75,5 @@ export const usePagination = (props: Props) => {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
     }
-  }, [totalNumberOfRows, rowsPerPage, siblingCount, currentPage]);
+  }, [quantityRows, rowsPerPage, siblingCount, currentPage]);
 };

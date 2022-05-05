@@ -6,7 +6,7 @@ interface Props {
   shadow?: boolean,
   size?: 'sx' | 'sm' | 'md' | 'lg' | 'xl',
   light?: boolean,
-  variant?: 'gray',
+  variant?: 'gray' | 'warning',
   children: ReactNode,
   width?: 'full' | 'fit',
   disabled?: boolean,
@@ -37,13 +37,15 @@ const Button = forwardRef((props: Props, ref: any) => {
       className={`btn 
       ${shadow && 'drop-shadow-xl'}
       ${width === 'fit' && 'w-fit' || width === 'full' && 'w-full'}
-      ${size === 'xl' ? 'laptop:py-6 laptop:px-6' : ''}
-      ${size === 'lg' ? 'laptop:py-4 laptop:px-4' : ''}
       ${size ==='sm' ? 'laptop:py-2 laptop:px-2' : ''}
+      ${size === 'lg' ? 'laptop:py-4 laptop:px-4' : ''}
+      ${size === 'xl' ? 'laptop:py-6 laptop:px-6' : ''}
       ${classes} ${isLoading && 'opacity-[0.3]'}
       ${light && 'bg-transparent text-black hover:text-black hover:opacity-[0.6]'}
       ${variant === 'gray' && 'bg-gray-custom-50 text-black hover:bg-gray-custom-hover animate hover:text-black'}
+      ${variant === 'warning' && 'bg-red-custom-500 text-white hover:opacity-[0.8] animate '}
       ${others.disabled && 'opacity-[0.3] hover:opacity-[0.3] '}
+      dark:text-white dark:hover:text-white
       `}
       {...others}
       ref={ref}

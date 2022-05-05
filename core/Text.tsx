@@ -29,6 +29,7 @@ const Text = (props: Props) => {
   } = props
 
   const allClass = `
+        dark:text-white
         ${Transforms[transforms.toUpperCase()]}
         text-${sx}
         ipad:text-${md}

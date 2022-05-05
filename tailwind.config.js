@@ -7,8 +7,8 @@ module.exports = {
     "./core/**/*.{js,ts,jsx,tsx}",
   ],
 
-  // darkMode: false, // or 'media' or 'class'
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: false, // or 'media' or 'class'
+  // darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       spacing: {
@@ -177,9 +177,17 @@ module.exports = {
         'light-300': '#e8e8e8',
       },
       colors: {
+        red: {
+          'custom-400': '#f74c77',
+          // 'custom-500': '#dc5f4d',
+          'custom-500': '#f21361',
+        },
         gray: {
           'custom-50': '#f4f4f4',
           'custom-hover': '#eaeaea',
+          'custom-900': '#1f2023',
+          'custom-901': '#111111',
+          'custom-902': '#151515',
           100: '#f3f6f9',
           200: '#ebedf3',
           300: '#e4e6ef',

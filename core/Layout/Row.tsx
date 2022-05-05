@@ -5,7 +5,7 @@ interface Props {
   // md?: number,
   // lg?: number,
   gap?: number,
-  justify?: 'center' | 'between' | 'around',
+  justify?: 'center' | 'between' | 'around' | 'start' | 'end',
   align?: 'center' | 'between' | 'around',
   content?: 'center' | 'between' | 'around',
   wrap?: 'wrap' | 'reverse' | 'around',

@@ -13,6 +13,8 @@ import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
 import {Paper} from "@core";
 import {Helmet} from "../../../../layouts/admin/common/Helmet";
+import {Col, Row} from "../../../../core/Layout";
+import {Link} from "../../../../core/Next";
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -88,16 +90,16 @@ const UserEdit = () => {
     <div className='w-2/3'>
       <Helmet title='Edit user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/*<Grid md={1} lg={2} gapx={4}>*/}
+          {/*<Grid md={2} lg={2} gapx={4}>*/}
           {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
           {/*</Grid>*/}
 
-          <Grid md={1} lg={2} gapx={4}>
+          <Grid md={2} lg={2} gapx={4}>
             <Paper>
               <div className='text-right mb-6'>
                 {isBanned ?
                   <span className="badge-danger">Banned</span>
-                  :<span className="badge-green">Active</span>
+                  : <span className="badge-green">Active</span>
                 }
               </div>
               <div className='flex justify-center flex-col mb-4'>
@@ -106,7 +108,7 @@ const UserEdit = () => {
                   <AvatarInput/>
                 </div>
               </div>
-              <Stack classes='mb-4 items-center'>
+              <Row align='center' justify='between' classes='mb-4'>
                 <div>
                   <p className='font-bold text-[0.875rem]'>Banned</p>
                   <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
@@ -120,8 +122,8 @@ const UserEdit = () => {
                       setIsBanned(e);
                     }}/>)}
                 />
-              </Stack>
-              <Stack classes='mb-4 items-center'>
+              </Row>
+              <Row align='center' justify='between' classes='mb-4'>
                 <div>
                   <p className='font-bold text-[0.875rem]'>Email Verified</p>
                   <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a
@@ -133,14 +135,14 @@ const UserEdit = () => {
                   render={({field: {onChange, value}}) => (
                     <Switch value={value} onChange={onChange}/>)}
                 />
-              </Stack>
+              </Row>
             </Paper>
-            <Paper>
+            <Paper classes='h-fit'>
               <Grid md={1} lg={2} gapx={4}>
                 <Input label='Full Name *' name='name' register={register} errors={errors}/>
                 <Input label='Email *' name='email' register={register} errors={errors}/>
               </Grid>
-              <Grid md={1} lg={2} gapx={4}>
+              <Grid md={2} lg={2} gapx={4}>
                 <Input label='Address' name='address' register={register} errors={errors}/>
                 <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
               </Grid>
@@ -159,11 +161,14 @@ const UserEdit = () => {
                   />
                 )}
               />
+              <Row justify='end' classes='mt-2'>
+                <Link href='/admin/users'>
+                  <Button light shadow type='button'>Back</Button>
+                </Link>
+                <Button shadow type='submit' isLoading={isBtnLoading}>Save Changes</Button>
+              </Row>
             </Paper>
           </Grid>
-          <div className="flex gap-x-4 mt-6">
-            <Button shadow type='submit' isLoading={isBtnLoading}>Save Changes</Button>
-          </div>
         </form>
       </Helmet>
     </div>

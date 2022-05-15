@@ -13,6 +13,8 @@ import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
 import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../core/Input";
 import {TagOpts} from "../../../../assets/data/options";
 import {Helmet} from "../../../../layouts/admin/common/Helmet";
+import {Link, Paper} from "../../../../core";
+import {Col, Row} from "../../../../core/Layout";
 
 const ProductEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -110,7 +112,7 @@ const ProductEdit = () => {
     <Helmet title='Make the changes below' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid md={2} lg={2} gapx={4} classes='pb-4'>
-          <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
+          <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
               {/*<Textarea name='description' label='Description *' register={register} errors={errors}/>*/}
@@ -119,7 +121,7 @@ const ProductEdit = () => {
                 name='description'
                 render={({field: {onChange, onBlur, value, ref}}) => {
                   console.log('value textEditor', value)
-                 return <TextEditor
+                  return <TextEditor
                     onChange={onChange}
                     // name="description"
                     label="Description"
@@ -129,9 +131,9 @@ const ProductEdit = () => {
               />
               <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
             </Grid>
-          </div>
-          <div>
-            <div className='bg-white p-6 rounded-lg drop-shadow-md'>
+          </Paper>
+          <Col>
+            <Paper classes='mb-4'>
               <Grid md={2} lg={2} gapx={4}>
                 <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                 <Controller
@@ -173,9 +175,12 @@ const ProductEdit = () => {
                     />
                   )}
                 />
-                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
-                       classesSpace='mb-0'/>
-
+                <Input
+                  label='SKU *' name='sku'
+                  register={register} errors={errors}
+                  placeholder='712834657911'
+                  classesSpace='mb-0'
+                />
                 <Controller
                   control={control}
                   name='tag'
@@ -189,14 +194,20 @@ const ProductEdit = () => {
                   )}
                 />
               </Grid>
-            </div>
-            <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
+            </Paper>
+            <Paper>
               <Grid md={1} lg={2} gapx={4}>
-                <Input label='Price *' name='price' register={register} errors={errors} placeholder='00.00'
-                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                <Input
+                  label='Price *' name='price'
+                  register={register} errors={errors}
+                  placeholder='00.00'
+                  contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
-                <Input label='Sale Price' name='salePrice' register={register} errors={errors} placeholder='00.00'
-                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                <Input
+                  label='Sale Price' name='salePrice'
+                  register={register} errors={errors}
+                  placeholder='00.00'
+                  contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
               </Grid>
               <Controller
@@ -205,9 +216,14 @@ const ProductEdit = () => {
                 render={({field: {onChange, value}}) => (
                   <Switch value={value} label='Price includes taxes' onChange={onChange}/>)}
               />
-            </div>
-          </div>
-          <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Save Changes</Button>
+            </Paper>
+          </Col>
+          <Row classes='mt-4'>
+            <Link href='/admin/users'>
+              <Button light shadow type='button'>Back</Button>
+            </Link>
+            <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Save Changes</Button>
+          </Row>
         </Grid>
       </form>
     </Helmet>

@@ -1,8 +1,8 @@
 import {ShoppingBagIcon, UserIcon, SearchIcon} from "@heroicons/react/outline";
 import {UserIcon as UserIconSolid, UserGroupIcon} from "@heroicons/react/solid";
-import {Link} from "../../../../core";
 import {useUIController} from "../../../../context/UIControllerContext";
 import {useAuth} from "../../../../context/authContext";
+import {Link} from "../../../../core/Next";
 
 function NavControl() {
   const {dispatch} = useUIController();
@@ -35,7 +35,7 @@ function NavControl() {
                 : <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>
               }
             </>
-            : <UserIcon width={35} height={30} onClick={() => dispatch({type: 'OPEN_SEARCH_LOGIN_REGISTER'})}/>
+            : <UserIcon width={35} height={30} onClick={() => dispatch({type: 'OPEN_LOGIN_REGISTER'})}/>
         }
       </div>
     </div>

@@ -3,7 +3,7 @@ import getConfig from "next/config";
 
 const {publicRuntimeConfig} = getConfig();
 
-const signToken = (user) => {
+const signToken = (user, options) => {
   return jwt.sign(
     {
       _id: user._id,
@@ -16,7 +16,7 @@ const signToken = (user) => {
     process.env.NEXT_PUBLIC_JWT_SECRET,
     // publicRuntimeConfig.JWT_SECRET,
     {
-      expiresIn: '30d',
+      expiresIn: '30d', ...options
     }
   );
 };
@@ -28,7 +28,6 @@ const isAuth = async (req, res, next) => {
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);
-    // console.log('token', token)
     jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET, (err, decode) => {
       // jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {

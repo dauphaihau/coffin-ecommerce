@@ -13,7 +13,9 @@ import {
 import {productService} from "../../../services/products";
 import {brandOpts, categoryOpts, colorOpts, TagOpts} from "../../../assets/data/options";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
-import {Grid} from "../../../core/Layout";
+import {Col, Grid, Row} from "../../../core/Layout";
+import {Paper} from "../../../core";
+import {Link} from "../../../core/Next";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -98,7 +100,7 @@ const NewProduct = () => {
     <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid md={2} lg={2} gapx={4} classes='pb-4'>
-          <div className='bg-white p-6 rounded-lg drop-shadow-md mb-6 laptop:mb-0'>
+          <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
               {/*<Textarea name='description' label='Description *' register={register} errors={errors}/>*/}
@@ -116,9 +118,9 @@ const NewProduct = () => {
               />
               <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
             </Grid>
-          </div>
-          <div>
-            <div className='bg-white p-6 rounded-lg drop-shadow-md'>
+          </Paper>
+          <Col>
+            <Paper classes='mb-4'>
               <Grid md={2} lg={2} gapx={4}>
                 <Input label='Quantity *' name='quantity' register={register} errors={errors}/>
                 <Controller
@@ -173,14 +175,20 @@ const NewProduct = () => {
               {/*<Grid md={1} lg={2} gapx={4}>*/}
               {/*</Grid>*/}
               {/*<Checkbox label='Save this information for next time'/>*/}
-            </div>
-            <div className='bg-white p-6 rounded-lg drop-shadow-md mt-6'>
+            </Paper>
+            <Paper>
               <Grid md={1} lg={2} gapx={4}>
-                <Input label='Price *' name='price' register={register} errors={errors} placeholder='11.00'
-                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                <Input
+                  label='Price *' name='price'
+                  register={register} errors={errors}
+                  placeholder='11.00'
+                  contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
-                <Input label='Sale Price' name='salePrice' register={register} errors={errors} placeholder='10.00'
-                       contentLeft={<i className="fa-solid fa-dollar-sign"/>}
+                <Input
+                  label='Sale Price' name='salePrice'
+                  register={register} errors={errors}
+                  placeholder='10.00'
+                  contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
               </Grid>
               <Controller
@@ -188,9 +196,14 @@ const NewProduct = () => {
                 name='tax'
                 render={({field: {onChange}}) => (<Switch label='Price includes taxes' onChange={onChange}/>)}
               />
-            </div>
-          </div>
-          <Button shadow type='submit' width='fit' classes='mt-4' isLoading={isBtnLoading}>Create</Button>
+            </Paper>
+          </Col>
+          <Row classes='mt-4'>
+            <Link href='/admin/users'>
+              <Button light shadow type='button'>Back</Button>
+            </Link>
+            <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Create</Button>
+          </Row>
         </Grid>
       </form>
     </Helmet>

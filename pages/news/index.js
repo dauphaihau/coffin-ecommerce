@@ -1,5 +1,5 @@
-import {Grid} from "../../core";
 import Card from "../../layouts/main/pages/news/Card";
+import {Grid} from "../../core/Layout";
 
 const News = () => {
   return (

@@ -18,7 +18,8 @@
   //@apply p-4 laptop:drop-shadow-xl overflow-x-auto
   //rounded-[19px] bg-white dark:bg-black
   //border-gray-200 laptop:border-gray-custom-50;
-  border: 1px solid #f7f7f7;
+
+  //border: 1px solid #f7f7f7;
 
   .table {
     @apply min-w-full ;
@@ -82,8 +83,10 @@
       @apply block mb-[6px] flex flex-row items-center;
 
       button {
-        @apply flex-center rounded-xl bg-gray-custom-50
-        h-[36px] w-[36px] hover:bg-gray-custom-hover animate
+        @apply flex-center rounded-xl
+        bg-gray-custom-50 hover:bg-gray-custom-hover
+        dark:bg-gray-custom-901 dark:hover:bg-gray-custom-502
+        h-[36px] w-[36px]  animate
         cursor-pointer dark:text-white mx-[2px];
         padding: 9px 9px;
       }

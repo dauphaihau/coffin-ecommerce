@@ -1,7 +1,6 @@
 import {Menu, Transition} from '@headlessui/react'
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {ChevronDownIcon} from '@heroicons/react/solid'
-import {Link} from "../index";
+import {Fragment} from 'react'
+import {Link} from "../Next";
 
 export default function CustomMenuDropdown(props) {
   const {options} = props;
@@ -29,7 +28,8 @@ export default function CustomMenuDropdown(props) {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className="focus:outline-none absolute z-30 right-0 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+          className="focus:outline-none absolute z-30 right-0 mt-2 w-36 origin-top-right divide-y
+          divide-gray-100 rounded-md bg-white dark:bg-gray-custom-900 shadow-lg ring-1 ring-black ring-opacity-5">
           <div className="px-1 py-1 ">
             {options.map((item, idx) => (
               <Menu.Item key={idx}>

@@ -6,14 +6,16 @@
   }
 
   &__btn {
-    @apply relative w-full bg-white border border-gray-300 rounded-md shadow-sm
+    @apply relative w-full
+    bg-white
+    dark:bg-black dark:text-white border border-gray-300 rounded-md shadow-sm
     pl-3 pr-16 ipad:pr-12 laptop:pr-[4.5rem] py-2 text-left cursor-default
     focus:outline-none focus:ring-1
     focus:ring-black focus:border-black text-sm
   }
 
   &__options {
-    @apply absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56
+    @apply absolute z-30 mt-1 w-full bg-white dark:bg-black dark:text-white shadow-lg max-h-56
     rounded-md py-1 text-base ring-1 ring-black pr-0
     ring-opacity-5 overflow-auto focus:outline-none text-sm;
   }

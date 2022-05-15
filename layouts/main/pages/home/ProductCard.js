@@ -1,4 +1,4 @@
-import {Link} from "../../../../core";
+import {Link} from "../../../../core/Next";
 
 const ProductCard = (props) => {
 

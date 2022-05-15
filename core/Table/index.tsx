@@ -35,7 +35,7 @@ const Table = (props: Props) => {
   } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageFromProps)
+  const [rowsPerPage, setRowsPerPage] = useState(!isEmpty(rowsPerPageOptions) ? rowsPerPageOptions[0] : rowsPerPageFromProps)
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({order: 'asc', orderBy: 'id'})
   const [rowsChecked, setRowsChecked] = useState([])

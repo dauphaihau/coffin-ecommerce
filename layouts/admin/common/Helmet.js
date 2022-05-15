@@ -1,13 +1,15 @@
 import Breadcrumb from "../../../core/Navigation/Breadcrumb";
+import {Text} from "../../../core";
+import {Col} from "../../../core/Layout";
 
-export const Helmet = ({title, dataBreadcrumb, children}) => {
+export const Helmet = ({title, classes = '', dataBreadcrumb, children}) => {
   return (
-    <>
-      <div className="mb-6">
+    <section className={`${classes}`}>
+      <Col classes='mb-6 '>
         <Breadcrumb links={dataBreadcrumb}/>
-        <h1 className='text-xl laptop:text-3xl mt-2 font-bold'>{title}</h1>
-      </div>
+        <Text className='dark:text-white text-xl laptop:text-3xl mt-2 font-bold'>{title}</Text>
+      </Col>
       {children}
-    </>
+    </section>
   );
 }

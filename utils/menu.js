@@ -44,9 +44,10 @@ export const MENU = {
       icon: 'fa-solid fa-diamond',
       // icon: 'fa-solid fa-coffin-cross',
       // icon: 'fa-solid fa-coffin',
+
       subLinks: [
         {
-          title: "Products List ",
+          title: "List ",
           href: "/admin/products",
         },
         // {
@@ -60,20 +61,24 @@ export const MENU = {
       icon: 'fa-solid fa-user',
       subLinks: [
         {
-          title: "List Users",
+          title: "List",
           href: "/admin/users",
         },
-        // {
-        //   title: "New Users",
-        //   href: "/admin/users/new",
-        // },
+        {
+          title: "Management",
+          href: '/admin/users/management',
+        },
+        {
+          title: 'Customers',
+          href: '/admin/users/customers',
+        },
       ],
     },
     {
       title: "Posts",
       href: "/admin/posts",
       id: 'posts',
-      icon: "fa-solid fa-clipboard"
+      icon: "fa-solid fa-layer-group"
     },
     {
       title: "Orders",
@@ -85,13 +90,13 @@ export const MENU = {
       title: "Transactions",
       href: "/admin/posts",
       id: 'posts',
-      icon: "fa-solid fa-clipboard"
+      icon: "fa-solid fa-id-card"
     },
     {
       title: 'Statistics',
       href: "/admin/posts",
       id: 'posts',
-      icon: "fa-solid fa-clipboard"
+      icon: "fa-solid fa-signal"
     },
     {
       title: 'Customers',
@@ -100,10 +105,10 @@ export const MENU = {
       icon: "fa-solid fa-clipboard"
     },
     {
-      title: 'Chats',
+      title: 'Chat',
       href: "/admin/posts",
       id: 'posts',
-      icon: "fa-solid fa-clipboard"
+      icon: "fa-solid fa-comment-dots"
     },
   ],
 };

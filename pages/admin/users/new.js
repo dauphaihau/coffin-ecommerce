@@ -7,12 +7,12 @@ import {toast} from "react-hot-toast";
 
 import {useAuth} from "../../../context/authContext";
 import {AvatarInput, Input, Select, Switch} from "../../../core/Input";
-import {Grid, Stack} from "../../../core/Layout";
-import {Paper} from "../../../core";
+import {Col, Grid, Row, Stack} from "../../../core/Layout";
+import {Link, Paper, Text} from "../../../core";
 import {Button} from "../../../core/Button";
 import {roleOpts} from "../../../assets/data/options";
 import {userService} from "../../../services/users";
-import { Helmet } from "../../../layouts/admin/common/Helmet";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -37,6 +37,7 @@ const NewUser = () => {
       role: roleOpts[0].value
     }
   };
+
   const {register, handleSubmit, control, formState, setError} = useForm(formOptions);
   const {errors} = formState;
 
@@ -60,68 +61,59 @@ const NewUser = () => {
   }
 
   return (
-    <div className='w-2/3'>
-      <Helmet title='Create a new user' dataBreadcrumb={dataBreadcrumb}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid md={2} lg={2} gapx={4}>
-            <Paper>
-              <div className='flex justify-center flex-col mb-4'>
-                <div className='mb-4 bg-transparent rounded-full'>
-                {/*<div className='mb-4 bg-gray-500 rounded-full py-14 px-16 w-fit'>*/}
-                  <AvatarInput/>
-                </div>
+    <Helmet title='Create a new user' classes='w-2/3' dataBreadcrumb={dataBreadcrumb}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid md={2} lg={2} gapx={4}>
+          <Paper classes='h-fit'>
+            <AvatarInput/>
+            <Row align='center' justify='between' classes='mt-8'>
+              <div>
+                <Text sx='[0.875rem]' weight='bold'>Email Verified</Text>
+                <Text sx='[0.875rem]' classes='text-gray-500 w-4/5'>
+                  Disabling this will automatically send the user a
+                  verification email</Text>
               </div>
-              <Stack classes='mb-4 items-center'>
-                <div>
-                  <p className='font-bold text-[0.875rem]'>Banned</p>
-                  <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
-                </div>
-                <Switch/>
-              </Stack>
-              <Stack classes='mb-4 items-center'>
-                <div>
-                  <p className='font-bold text-[0.875rem]'>Email Verified</p>
-                  <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a verification email</p>
-                </div>
-                <Controller
-                  control={control}
-                  name='isVerified'
-                  render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
-                />
-              </Stack>
-            </Paper>
-            <Paper>
-              <Input label='Full Name *' name='name' register={register} errors={errors}/>
-              <Grid md={1} lg={2} gapx={4}>
-                <Input label='Address' name='address' register={register} errors={errors}/>
-                <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
-              </Grid>
-              <Grid md={1} lg={2} gapx={4}>
-                <Input label='Email *' name='email' register={register} errors={errors}/>
-                <Input label='Password' type='password' name='password' register={register} errors={errors}/>
-              </Grid>
               <Controller
                 control={control}
-                name='role'
-                render={({field: {onChange, onBlur, value, ref}}) => (
-                  <Select
-                    size='medium'
-                    name='role'
-                    title='Role'
-                    options={roleOpts.filter(({value}) => user?.role !== 'admin' ? value !== 'admin' : value)}
-                    value={value}
-                    onChange={onChange}
-                  />
-                )}
+                name='isVerified'
+                render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
               />
-            </Paper>
-           </Grid>
-          <div className="flex gap-x-4 mt-6">
-            <Button type='submit' isLoading={isBtnLoading}>Create</Button>
-          </div>
-        </form>
-      </Helmet>
-    </div>
+            </Row>
+          </Paper>
+          <Paper classes='h-fit'>
+            <Input label='Full Name *' name='name' register={register} errors={errors}/>
+            <Grid md={2} lg={2} gapx={4}>
+              <Input label='Address' name='address' register={register} errors={errors}/>
+              <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
+            </Grid>
+            <Grid md={1} lg={2} gapx={4}>
+              <Input label='Email *' name='email' register={register} errors={errors}/>
+              {/*<Input label='Password' type='password' name='password' register={register} errors={errors}/>*/}
+            </Grid>
+            <Controller
+              control={control}
+              name='role'
+              render={({field: {onChange, onBlur, value, ref}}) => (
+                <Select
+                  size='medium'
+                  name='role'
+                  title='Role'
+                  options={roleOpts.filter(({value}) => user?.role !== 'admin' ? value !== 'admin' : value)}
+                  value={value}
+                  onChange={onChange}
+                />
+              )}
+            />
+            <Row justify='end' classes='mt-2'>
+              <Link href='/admin/users'>
+                <Button light shadow type='button'>Back</Button>
+              </Link>
+              <Button type='submit' width='fit' isLoading={isBtnLoading}>Create</Button>
+            </Row>
+          </Paper>
+        </Grid>
+      </form>
+    </Helmet>
   );
 }
 

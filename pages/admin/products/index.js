@@ -115,7 +115,7 @@ const ProductList = () => {
       <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='/admin/products/new'>
-          <Button classes='ml-auto block mb-4'>New Product</Button>
+          <Button classes='ml-auto mb-4' icon={<i className="fa-solid fa-plus"/>}> New Product</Button>
         </Link>
       </Row>
       <Table

@@ -5,16 +5,19 @@ import {useEffect, useState} from "react";
 
 import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
-import {Link} from "../../../core";
+import {Text} from "../../../core";
 import {Button} from "../../../core/Button";
 import {MenuDropdown} from "../../../core/Navigation";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import Table from "../../../core/Table";
+import {Row} from "../../../core/Layout";
+import {Link} from "../../../core/Next";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
-  const {progress, setProgress} = useUIController();
+  const {progress, dispatch, setProgress, ...res} = useUIController();
+  // console.log('res', res)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,12 +33,12 @@ const UserList = () => {
     {
       id: 'name', title: 'Name',
       render: (row) => (
-        <div className='flex items-center'>
+        <Row align='center'>
           <div className='rounded-lg '>
             <img src={`https://i.pravatar.cc/150?u=${row._id}`} className='h-9 w-9 rounded-md ' alt='avatar'/>
           </div>
-          <p className='ml-4 text-sm font-bold'>{row.name}</p>
-        </div>
+          <Text weight='bold' sx='sm' classes='ml-4'>{row.name}</Text>
+        </Row>
       )
     },
     {id: 'email', title: 'Email',},
@@ -66,8 +69,8 @@ const UserList = () => {
       render: (row) => (
         <>
           {row.isBanned ?
-            <span className="badge-danger">Banned</span>
-            : <span className="badge-green">Active</span>
+            <Text span classes="badge-danger">Banned</Text>
+            : <Text span classes="badge-green">Active</Text>
           }
         </>
       )
@@ -105,23 +108,22 @@ const UserList = () => {
   ];
 
   async function handleDelete(id) {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
-    const res = await userService.delete(id)
-    if (res.isSuccess) {
-      const res = await userService.getAll();
-      setUsers(res.data)
-      toast.success('Delete success!')
-    } else {
-      toast.error(res.message)
-    }
+    dispatch({type: 'OPEN_CONFIRM_DELETE', payload: id})
+    // const res = await userService.delete(id)
+    // if (res.isSuccess) {
+    //   const res = await userService.getAll();
+    //   setUsers(res.data)
+    //   toast.success('Delete success!')
+    // } else {
+    //   toast.error(res.message)
+    // }
   }
 
   async function handleDeleteMultiItems(optionsChecked) {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
+    // if (!window.confirm('Are you sure?')) {
+    //   return;
+    // }
+    dispatch({type: 'OPEN_CONFIRM_DELETE'})
     const res = await userService.multiDelete(optionsChecked.map(e => e.id))
     if (res.isSuccess) {
       const res = await userService.getAll();
@@ -137,7 +139,7 @@ const UserList = () => {
       <div className='flex items-center justify-between'>
         <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='/admin/users/new'>
-          <Button classes='ml-auto block mb-4'>New User</Button>
+          <Button classes='ml-auto mb-4' icon={<i className="fa-solid fa-plus"/>}> New User</Button>
         </Link>
       </div>
       <Table
@@ -145,7 +147,8 @@ const UserList = () => {
         // checkboxSelection
         columns={columns}
         // rowsPerPage={5}
-        rowsPerPageOptions={[5, 10, 25]}
+        // rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[3, 5, 25]}
         rows={users}
       />
     </>

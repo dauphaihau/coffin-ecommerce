@@ -10,17 +10,13 @@ import ChatBox from "./ChatBox";
 import BannerHomeCard from "./BannerHomeCard";
 import AllDrawer from "./Drawer";
 import Backdrop from "../../../core/Navigation/Drawer/Backdrop";
-import AllModal from "./Modal";
+import AllDialog from "./Dialog";
+import {Container} from "../../../core/Layout";
 
 export const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)
   const [isMobileScreen, setIsMobileScreen] = useState(false)
   const router = useRouter();
-
-  let navItemLength = 5;
-  if (categories.length > navItemLength) {
-    categories = categories.slice(0, navItemLength)
-  }
 
   useEffect(() => {
     if (window.matchMedia('(max-width: 414px)').matches) {
@@ -37,22 +33,27 @@ export const MainLayout = ({children, categories}) => {
     }
   }, [router.asPath])
 
+  let navItemLength = 5;
+  if (categories.length > navItemLength) {
+    categories = categories.slice(0, navItemLength)
+  }
+
   const {} = useUIController();
 
   return (
     <div>
       <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
-      <AllModal/>
+      <AllDialog/>
       <AllDrawer/>
       <ChatBox/>
       <Backdrop/>
       <Navbar categories={categories}/>
       <BannerHomeCard isDisplay={showBanner}/>
-      <div className='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
+      <Container classes='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
         <main className="pt-28">{children}</main>
         <Contact/>
         <Footer/>
-      </div>
+      </Container>
     </div>
   );
 }

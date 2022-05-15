@@ -79,7 +79,7 @@ const Checkout = ({context}) => {
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
-      // Modal submission until Stripe.js has loaded.
+      // Dialog submission until Stripe.js has loaded.
       return
     }
 

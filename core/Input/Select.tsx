@@ -78,7 +78,7 @@ export default function Select(props: Props) {
                     key={option.value}
                     className={({active}) =>
                       classNames(
-                        active ? 'text-gray-700 bg-light-200' : 'text-black',
+                        active ? 'text-gray-700 bg-light-200 dark:hover:bg-gray-custom-502 dark:text-white' : 'text-black dark:text-white',
                         'cursor-default select-none relative py-2 pl-3 pr-0'
                       )
                     }
@@ -98,7 +98,7 @@ export default function Select(props: Props) {
                             {selected ? (
                               <span
                                 className={classNames(
-                                  active ? 'text-black' : 'text-black',
+                                  active ? 'text-black dark:text-white' : 'text-black dark:text-white',
                                   'absolute inset-y-0 right-0 flex items-center pr-4'
                                 )}
                               >

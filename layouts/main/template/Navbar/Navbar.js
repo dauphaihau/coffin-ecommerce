@@ -2,9 +2,10 @@ import {useEffect, useState} from "react";
 import {MENU} from "../../../../utils/menu";
 import {slugify} from "../../../../utils/helpers";
 import NavControl from "./NavControl";
-import {Link, Text} from "../../../../core";
+import {Text} from "../../../../core";
 import {MenuIcon} from "@heroicons/react/solid";
 import {useUIController} from "../../../../context/UIControllerContext";
+import {Link} from "../../../../core/Next";
 
 const Navbar = ({categories}) => {
   const [shadowHeader, setShadowHeader] = useState(false)
@@ -32,7 +33,7 @@ const Navbar = ({categories}) => {
             className='cursor-pointer w-[30px] h-[30px] laptop:hidden'
             onClick={() => dispatch({type: 'OPEN_NAV_DRAWER'})}
           />
-          <Link href='/' className="navbar-left__logo hidden laptop:block">
+          <Link href='/' classes="navbar-left__logo hidden laptop:block">
             <img
               src="/images/logo.png"
               alt="logo"
@@ -46,7 +47,7 @@ const Navbar = ({categories}) => {
                   return (
                     <div className='navbar-links__item group' key={item.id}>
                       <Link href={item.link}>
-                        <Text classes="item-title">{item.title}</Text>
+                        <Text noDarkMode classes="item-title">{item.title}</Text>
                       </Link>
                       <div className='item-content group-hover:block '>
                         <ul>
@@ -54,7 +55,7 @@ const Navbar = ({categories}) => {
                             categories.map((category, index) => (
                               <li key={index}>
                                 <Link href={`/categories/${slugify(category)}`}>
-                                  <Text classes="item-content__title
+                                  <Text noDarkMode classes="item-content__title
                                         hover:text-gray-500 py-4 px-4
                                         ">
                                     {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -70,7 +71,7 @@ const Navbar = ({categories}) => {
                 }
                 return (
                   <Link href={item.link} key={item.id} className='mr-4'>
-                    <Text classes="animate p-[10px] hover:bg-gray-custom-50 rounded-lg ">
+                    <Text noDarkMode classes="animate p-[10px] hover:bg-gray-custom-50 rounded-lg ">
                       {item.title}
                     </Text>
                   </Link>

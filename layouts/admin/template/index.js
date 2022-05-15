@@ -3,26 +3,26 @@ import LoadingBar from "react-top-loading-bar";
 
 import {useUIController} from "../../../context/UIControllerContext";
 import {Col, Container} from "../../../core/Layout";
-import Sidenav from "./Sidenav";
+import Navbar from "./Navbar";
 import Sidebar from "./AdminSidebar";
-import {useState} from "react";
-import CustomModal from "../../../core/Modal/MyModal";
-import ConfirmDeleteModal from "./Modal/ConfirmDelete";
+import AllDialog from "./Dialog";
+import Footer from "./Footer";
 
 const AdminLayout = ({children}) => {
   const {progress, setProgress} = useUIController();
   return (
     <>
-      <ConfirmDeleteModal/>
+      <AllDialog/>
       <LoadingBar color="#000000" progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
       <Toaster position="top-right" reverseOrder={false}/>
-
-      <Container display='flex' classes='bg-[#f8f9fa] dark:bg-gray-custom-900 h-screen'>
+      <Container display='flex' classes='bg-[#f8f9fa] dark:bg-gray-custom-903 h-screen'>
         <Sidebar/>
-        <Col classes=' p-[24px] ml-[18rem] w-[calc(100%-280px)]'>
-          <Sidenav/>
-          <main className='laptop:pt-[70px]'>
+        {/*<div className=''></div>*/}
+        <Col classes='p-[24px] ml-[18rem] desktop:ml-[16%] w-[calc(100%-280px)] relative'>
+          <Navbar/>
+          <main className='laptop:pt-[70px] w-full'>
             {children}
+            {/*<Footer/>*/}
           </main>
         </Col>
       </Container>

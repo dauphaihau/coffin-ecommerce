@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
-import {FeaturedProducts, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
+import {CarouselBanner, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
 
 const Home = ({inventoryData = []}) => {
-
   return (
     <>
       <Head>
@@ -12,8 +11,8 @@ const Home = ({inventoryData = []}) => {
         <meta property="og:title" content="Coffin ECommerce" key="title"/>
       </Head>
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
-      <FeaturedProducts inventoryData={inventoryData}/>
-      <FlashSale/>
+      <FlashSale inventoryData={inventoryData}/>
+      <CarouselBanner/>
       <MemberServices/>
     </>
   )
@@ -47,6 +46,7 @@ export async function getStaticProps() {
       inventoryData: inventory,
       categories: inventoryCategorized
     }
+
   }
 }
 

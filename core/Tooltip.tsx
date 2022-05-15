@@ -1,4 +1,13 @@
-const Tooltip = ({title = '', children, classes}) => {
+import {ReactNode} from "react";
+
+interface Tooltip {
+  title: string,
+  classes?: string,
+  children: ReactNode,
+}
+
+const Tooltip = (props: Tooltip) => {
+  const {title = '', children, classes} = props;
   return (
     <div className="relative flex flex-row group w-full">
       <div

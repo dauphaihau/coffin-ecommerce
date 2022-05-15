@@ -15,7 +15,7 @@ interface Props {
 
 const Col = (props: Props) => {
 
-  const {children, classes, gap, justify} = props
+  const {children, classes, gap, justify, align = ''} = props
 
   // flex-${direction?.sx ?? 'row'}
   // ipad:flex-${direction?.md ?? 'row'}
@@ -24,8 +24,8 @@ const Col = (props: Props) => {
     <div
       className={`
       flex flex-col
-      
           ${justify ? `justify-${justify}` : `justify-start`}
+          ${align ? `items-${align}` : `items-start`}
            gap-${gap}
            ${classes}
         `}>

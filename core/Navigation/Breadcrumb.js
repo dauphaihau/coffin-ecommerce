@@ -1,4 +1,5 @@
-import {Link} from "../index";
+import {Text} from "../index";
+import {Link} from "../Next";
 
 const Breadcrumb = ({links}) => {
   return (
@@ -10,7 +11,7 @@ const Breadcrumb = ({links}) => {
               <li className="inline-flex items-center" key={id}>
                 <Link
                   href={link.path}
-                  className="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                  className="dark:text-white inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900"
                 >
                   {link.name}
                 </Link>
@@ -21,9 +22,9 @@ const Breadcrumb = ({links}) => {
             return (
               <li key={id}>
                 <div className="flex items-center">
-                  <p className='pt-1'>/</p>
+                  <Text classes='pt-1'>/</Text>
                   <div
-                    className='text-gray-400 ml-1 text-sm font-medium md:ml-2'>
+                    className='dark:text-gray-custom-501 text-gray-400 ml-1 text-sm font-medium md:ml-2'>
                     {link.name}
                   </div>
                 </div>
@@ -34,9 +35,8 @@ const Breadcrumb = ({links}) => {
           return (
             <li key={id}>
               <div className="flex items-center">
-                <p className='pt-1'>/</p>
-                <Link href={link.path}
-                      className='text-gray-700 ml-1 text-sm font-medium hover:text-gray-900 md:ml-2'>
+                <Text classes='pt-1'>/</Text>
+                <Link href={link.path} className='dark:text-gray-custom-52 text-gray-700 ml-1 text-sm font-medium hover:text-gray-900 md:ml-2'>
                   {link.name}
                 </Link>
               </div>

@@ -42,6 +42,7 @@ const Input: FC<InputProps> = forwardRef(
           }
 
           <input
+            autoFocus={false}
             ref={ref}
             type={type}
             name={name}

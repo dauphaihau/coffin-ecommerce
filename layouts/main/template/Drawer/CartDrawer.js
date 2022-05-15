@@ -4,9 +4,10 @@ import {CartProvider, CartContext} from "../../../../context/cartContext";
 import {DENOMINATION} from "../../../../utils/constant";
 import {slugify} from "../../../../utils/helpers";
 import {useAuth} from "../../../../context/authContext";
-import {Image, Link, Text} from "../../../../core";
+import {Image, Text} from "../../../../core";
 import {Button, QuantityPicker} from "../../../../core/Button";
 import Drawer from "../../../../core/Navigation/Drawer";
+import {Link} from "../../../../core/Next";
 
 const CartDrawer = ({context}) => {
 

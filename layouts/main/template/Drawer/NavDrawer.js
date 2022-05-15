@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 import {useUIController} from "../../../../context/UIControllerContext";
 import {MENU} from "../../../../utils/menu";
-import {Link} from "../../../../core";
 import {slugify} from "../../../../utils/helpers";
 import {useRouter} from "next/router";
 import fetchCategories from "../../../../utils/provider/categoryProvider";
 import Drawer from "../../../../core/Navigation/Drawer";
+import {Link} from "../../../../core/Next";
 
 const SubNav = ({links, title}) => {
 

@@ -55,22 +55,26 @@
     div {
       @apply  flex flex-col;
       p:nth-child(1) {
-        @apply font-black text-black
+        @apply font-black text-black dark:text-white
       }
 
       p:nth-child(2) {
-        @apply text-[#808080] text-[0.7rem];
+        @apply text-[#808080] text-[0.7rem] ;
       }
     }
   }
 
   &__profile {
-    @apply  mt-8  relative z-10 transition-all duration-300 ease-in-out ;
+    @apply mt-8 relative z-10 transition-all duration-300 ease-in-out ;
       div {
-        @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg rounded-md bg-white shadow-2xl;
+        @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg
+          dark:bg-gray-custom-904
+        rounded-md bg-white shadow-2xl;
         a {
-          @apply block px-4 py-2 text-sm leading-5 text-black
-          hover:bg-gray-custom-50  focus:outline-none focus:bg-gray-100
+          @apply block px-4 py-2 text-sm leading-5
+          text-black hover:bg-gray-custom-50
+          dark:text-white dark:hover:bg-gray-custom-503
+          focus:outline-none focus:bg-gray-100
           transition duration-150 ease-in-out;
       }
     }

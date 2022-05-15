@@ -1,5 +1,5 @@
-import {Link} from "../../../core";
 import Image from "next/image";
+import {Link} from "../../../core/Next";
 
 const Footer = () => {
   return (

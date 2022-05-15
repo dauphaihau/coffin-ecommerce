@@ -5,14 +5,19 @@
   justify-center border-0 border-transparent rounded-lg
   placeholder-white focus-visible:outline-none
   focus:outline-none
-
+  w-auto
   bg-black text-white
   hover:text-white
 
   hover:opacity-[0.8]
 
   px-5 md:px-6  py-4 md:py-3.5
-  laptop:py-[10px] laptop:px-6
+  laptop:py-[10px] laptop:px-6 ;
+
+  &__icon {
+    @apply mr-2;
+    //@apply absolute right-auto top-1/2 flex-center;
+  }
 }
 
 .btn-group {
@@ -89,38 +94,3 @@
     transition: all 0.25s;
   }
 }
-
-.suvlink-sidebar {
-  @apply block relative text-[#6a6a6a] w-full leading-6 text-left
-  transition-all duration-200 pl-[28px] ease-in-out;
-
-  &::after {
-    @apply absolute inline-block w-[6px] h-[6px] rounded-full
-    bg-[#7e8a88] left-0 transition duration-100 ease-in-out ;
-    content: "";
-    top: calc(50% - 3px);
-  }
-
-
-  &.is-selected::after {
-    @apply opacity-[1] bg-black;
-    transition-delay: .1s;
-  }
-
-  &.is-selected {
-    @apply pl-[28px] text-black;
-  }
-
-  &.is-selected::before {
-    @apply opacity-[1] ;
-    transition-delay: .1s;
-  }
-
-  &::before {
-    @apply absolute inline-block w-[6px] h-[6px] rounded-full opacity-0
-    bg-[#1c1b1b] left-0 transition duration-100 ease-in-out ;
-    content: "";
-    top: calc(50% - 3px);
-  }
-}
-

@@ -6,6 +6,11 @@ const initialState = {
   openCartDrawer: false,
   openAddressModal: false,
   openSearchModal: false,
+  openConfirmLogout: false,
+  confirmDelete: {
+    openDialog: false,
+    id: '',
+  },
   openLoginRegisterModal: false,
   openNavDrawer: false,
   openFiltersDrawer: false,
@@ -39,9 +44,7 @@ function UIControllerProvider({children}) {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    if (openLoginRegisterModal
-      || openFiltersDrawer
-      || openAddressModal
+    if (openFiltersDrawer
       || openNavDrawer
       || openCartDrawer
       || openSearchModal

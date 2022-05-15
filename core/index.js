@@ -3,4 +3,5 @@ export { default as Tooltip} from './Tooltip'
 export { default as Image} from './Next/Image'
 export { default as Text} from './Text'
 export { default as Paper} from './Paper'
+export { default as Divider} from './Divider'
 

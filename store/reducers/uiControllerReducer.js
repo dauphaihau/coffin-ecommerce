@@ -6,8 +6,18 @@ const uiControllerReducer = (state, action) => {
     case 'OPEN_SEARCH_MODAL': {
       return {...state, openSearchModal: true};
     }
-    case 'OPEN_SEARCH_LOGIN_REGISTER': {
+    case 'OPEN_LOGOUT_DIALOG': {
+      return {...state, openConfirmLogout: true};
+    }
+    case 'OPEN_LOGIN_REGISTER': {
       return {...state, openLoginRegisterModal: true};
+    }
+    case 'OPEN_CONFIRM_DELETE': {
+      return {
+        ...state, confirmDelete: {
+          openDialog: true, id: action.payload, status: action.payload
+        }
+      };
     }
     case 'OPEN_CART_DRAWER': {
       return {...state, openCartDrawer: true};
@@ -24,7 +34,9 @@ const uiControllerReducer = (state, action) => {
         ...state,
         openAddressModal: false,
         openSearchModal: false,
+        openConfirmLogout: false,
         openLoginRegisterModal: false,
+        confirmDelete: {openDialog: false, id: 0, status: false},
         openCartDrawer: false,
         openFiltersDrawer: false,
         openNavDrawer: false,

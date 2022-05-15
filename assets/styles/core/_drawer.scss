@@ -21,18 +21,18 @@
   &__title {
     @apply flex justify-between items-center py-8 ipad:py-10 laptop:py-12
     px-5
-    h-[4%] ipad:h-[6.6%] laptop:h-[8.4%] ;
+    h-[4%] ipad:h-[6.6%] laptop:h-[8.4%] desktop:h-[6%] ;
     h1 {
       @apply text-xl ipad:text-2xl font-black ;
     }
   }
 
   &__content {
-    @apply flex flex-col w-full pb-2 h-[82%]  px-5 ;
+    @apply flex flex-col w-full pb-2 h-[82%] ipad:h-[85%] desktop:h-[89%]  px-5 ;
   }
 
   &__footer {
-    @apply flex flex-col w-full py-2 px-5 laptop:py-0;
+    @apply flex flex-col w-full py-2 px-5 laptop:py-0 max-h-[12%];
   }
 
   &__links {

@@ -1,9 +1,10 @@
-import {Link} from "../../../core";
+import {Divider, Paper, Text} from "../../../core";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {MENU} from "../../../utils/menu";
 import {Row} from "../../../core/Layout";
 import {isDarkMode, isNil} from "../../../utils/helpers";
+import {Link} from "../../../core/Next";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
   // const router = useRouter();
@@ -15,17 +16,28 @@ const SubMenu = ({open, subLinks, handleActive}) => {
 
   return (
     <ul className={`${open ? '' : 'hidden'}`}>
+
       {subLinks?.map((link, idz) => (
         <Link
           href={link.href} key={idz}
-          className='block px-3 mt-4'
+          classes='sidebar-suvLink'
         >
-          <button className={`suvlink-sidebar ${handleActive(link) && 'is-selected'} `}>
-            <span className={`text-sm text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 
-              ${handleActive(link) && '!text-black'} `}>
+          {/*<Link*/}
+          {/*  href={link.href} key={idz}*/}
+          {/*  className='block px-3 mt-4'*/}
+          {/*>*/}
+          <Row align='center'>
+            <i className={`fa-solid fa-circle   
+              ${handleActive(link) 
+              ? 'sidebar-suvLink__icon--active'
+              : 'sidebar-suvLink__icon' }
+              `} />
+            <Text span classes={`sidebar-suvLink__title
+              ${handleActive(link) ? 'text-black dark:text-white' : 'text-gray-custom-501'} `}
+            >
               {link.title}
-            </span>
-          </button>
+            </Text>
+          </Row>
         </Link>
       ))}
     </ul>
@@ -54,15 +66,15 @@ const Menu = ({link, handleActive}) => {
       <Row justify='between' align='center' classes='w-full'>
         <Row align='center'>
           <div className='drop-shadow rounded-lg'>
-            <i className={`${link.icon}  p-2 bg-[#e9ecef] rounded-lg`}/>
+            <i className={`${link.icon}  p-2 bg-gray-custom-52 rounded-lg`}/>
           </div>
-          <span
-            className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
+          <Text span
+                classes={`text-sm ml-3 text-gray-custom-501 transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</Text>
         </Row>
         <i className={
           ` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
             text-[10px] 
-            text-[#7e8a88] transition-all duration-300
+            text-gray-custom-501 transition-all duration-300
             ease-in-out hover:text-gray-600 block 
          `}/>
       </Row>
@@ -71,7 +83,6 @@ const Menu = ({link, handleActive}) => {
   </li>
 }
 
-
 const AdminSidebar = () => {
   const router = useRouter();
   // const [subLinks, setSubLinks] = useState()
@@ -79,9 +90,8 @@ const AdminSidebar = () => {
 
   return (
     // <aside className="hidden laptop:block w-[18%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
-    <aside className="hidden fixed overflow-y-auto laptop:block w-[15%] h-[97%] m-4
-     shadow-2xl rounded-2xl" aria-label="Sidebar">
-      <div className="overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-gray-custom-901">
+    <aside className='sidebar' aria-label="Sidebar">
+      <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901'>
         <Row justify='center'>
           <Link href="/">
             <img
@@ -91,19 +101,20 @@ const AdminSidebar = () => {
             />
           </Link>
         </Row>
-        <div className={`border-b border-gray-100 my-4 w-4/5 mx-auto`}/>
+        <Divider classes='my-4 w-4/5 mx-auto'/>
         <ul className="space-y-2">
           {MENU.admin.map((link, id) => {
             if (!Array.isArray(link.subLinks)) {
               return <li className='mx-3 p-[10px]' key={id}>
                 <Link scroll={false} href={link.href}>
                   <Row justify='between' align='center' classes='w-full'>
-                    <Row align='center'>
-                      <div className='drop-shadow rounded-lg text-center '>
-                        <i className={`${link.icon} !w-8 p-2 bg-[#e9ecef] block rounded-lg`}/>
+                    <Row align='center' classes='sidebar-link'>
+                      <div className='sidebar-link__icon'>
+                        <i className={`${link.icon} !w-8 `}/>
                       </div>
-                      <span
-                        className={`text-sm ml-3 text-[#7e8a88] transition-all duration-300 ease-in-out hover:text-gray-600 ${handleActive(link) && '!text-gray-600'} `}>{link.title}</span>
+                      <Text span classes={`sidebar-link__title ${handleActive(link) && '!text-gray-600'} `}>
+                        {link.title}
+                      </Text>
                     </Row>
                   </Row>
                 </Link>
@@ -112,7 +123,7 @@ const AdminSidebar = () => {
             return (<Menu link={link} handleActive={handleActive} key={id}/>)
           })}
         </ul>
-      </div>
+      </Paper>
     </aside>
   );
 }

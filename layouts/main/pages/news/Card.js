@@ -1,4 +1,4 @@
-import {Image} from "../../../../core";
+import {Image, Text} from "../../../../core";
 
 const Card = ({title, content = '', imgSrc}) => {
   return (
@@ -12,13 +12,13 @@ const Card = ({title, content = '', imgSrc}) => {
       </div>
       <div>
         <a href="layouts/main/pages/news/Card#">
-          <h5 className="mb-2 text-[18px] ipad:text-2xl font-bold  text-gray-900 dark:text-white">
+          <Text h1 weight='bold' classes="mb-2 text-[18px] ipad:text-2xl font-bold  text-gray-900 dark:text-white">
             {title}
-          </h5>
+          </Text>
         </a>
-        <p className="mb-3 font-normal text-[15px] laptop:text-lg text-gray-700 dark:text-gray-400">
+        <Text classes="mb-3 font-normal text-[10px] laptop:text-lg text-gray-700 dark:text-gray-400">
           {content.length !== 100 ? <span>{content.slice(0, 100)}...</span> : <span>{content}</span>}
-        </p>
+        </Text>
         <a href="layouts/main/pages/news/Card#" className="inline-flex items-center py-2
           text-sm font-medium text-center
           text-black hover:underline

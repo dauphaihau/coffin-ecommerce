@@ -15,6 +15,7 @@ interface Props {
   transforms?: 'uppercase' | 'lowercase',
   color?: string,
   weight?: string
+  noDarkMode?: boolean,
   h1?: boolean,
   b?: boolean,
   span?: boolean,
@@ -24,12 +25,12 @@ interface Props {
 const Text = (props: Props) => {
 
   const {
-    children, classes, color, as, transforms = '', b,
+    children, classes, color, as, transforms = '', b, noDarkMode,
     sx, md, lg, weight, h1, span, ...others
   } = props
 
   const allClass = `
-        dark:text-white
+        ${noDarkMode ? 'dark:text-black' : 'dark:text-white'}
         ${Transforms[transforms.toUpperCase()]}
         text-${sx}
         ipad:text-${md}

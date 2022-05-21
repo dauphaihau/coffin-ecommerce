@@ -9,8 +9,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   classes?: string,
   classesSpace?: string,
   register?: (name: string) => void,
+  clearable?: boolean,
+  defaultValue?: string | number,
   errors?: FieldErrors,
   contentLeft?: ReactNode,
+  contentRight?: ReactNode,
   ref?: any,
 }
 
@@ -21,30 +24,42 @@ const Input: FC<InputProps> = forwardRef(
       type = 'text',
       label, name = '',
       register = () => {},
-      errors,
+      errors, clearable,
+      defaultValue,
       className, classes, placeholder,
-      classesSpace, contentLeft,
+      classesSpace, contentLeft, contentRight,
       ...others
     } = props;
 
+    // const [value, setValue] = useState()
+
     return (
       <>
-        <div className={`form-input group relative ${classesSpace}`}>
+        <div className={`form-input group ${classesSpace}`}>
           {label && <label htmlFor={name}>{label}</label>}
           {
-            <Text span classes={`absolute 
-            ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'}
-             inset-y-0 left-[12px] 
-             flex items-center text-gray-600`}
-            >
+            <Text span classes={`form-input__contentLeft ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
               {contentLeft}
             </Text> ?? ''
           }
-
+          { clearable ?
+            <button type='button' onClick={() => {}}
+              className={`form-input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="clear-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button> : ''
+          }
+          {
+            <Text span classes={`form-input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+              {contentRight}
+            </Text> ?? ''
+          }
           <input
             autoFocus={false}
             ref={ref}
             type={type}
+            // value={value}
             name={name}
             {...register(name)}
             className={`peer p-4 ${className} ${classes}

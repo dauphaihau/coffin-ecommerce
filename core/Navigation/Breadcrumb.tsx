@@ -1,7 +1,16 @@
 import {Text} from "../index";
 import {Link} from "../Next";
 
-const Breadcrumb = ({links}) => {
+interface PropsBreadcrumb {
+  links: [{
+    firstLink?: boolean,
+    lastLink?: boolean,
+    path: string,
+    name: string,
+  }]
+}
+
+const Breadcrumb = ({links}: PropsBreadcrumb) => {
   return (
     <nav className="flex" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -36,7 +45,8 @@ const Breadcrumb = ({links}) => {
             <li key={id}>
               <div className="flex items-center">
                 <Text classes='pt-1'>/</Text>
-                <Link href={link.path} className='dark:text-gray-custom-52 text-gray-700 ml-1 text-sm font-medium hover:text-gray-900 md:ml-2'>
+                <Link href={link.path}
+                      className='dark:text-gray-custom-52 text-gray-700 ml-1 text-sm font-medium hover:text-gray-900 md:ml-2'>
                   {link.name}
                 </Link>
               </div>

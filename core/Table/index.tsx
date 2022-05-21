@@ -4,7 +4,7 @@ import {sortRows, filterRows, paginateRows, isEmpty} from "../../utils/helpers";
 import {Checkbox, Input} from "../Input";
 import TableRow from './TableRow';
 
-interface Props {
+interface PropsTable {
   fitContent?: boolean,
   checkboxSelection?: boolean,
   onChangeCheckbox?: () => object[],
@@ -23,7 +23,7 @@ interface Props {
   hidePagination?: boolean,
 }
 
-const Table = (props: Props) => {
+const Table = (props: PropsTable) => {
   const {
     columns = [], rows = [],
     rowsPerPageOptions = [],
@@ -168,22 +168,22 @@ const Table = (props: Props) => {
             />
           </tbody>
         </table>
-        {hidePagination || currentItems.length === 0
-          ? ''
-          : <Pagination
-            checkboxSelection={checkboxSelection}
-            rowsPerPageOptions={rowsPerPageOptions}
-            setRowsPerPage={setRowsPerPage}
-            rowsPerPageFromProps={rowsPerPageFromProps}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            rowsChecked={rowsChecked.length}
-            // totalNumberOfRows={rows.length}
-            quantityRows={rows.length}
-            onPageChange={page => setCurrentPage(page)}
-          />
-        }
       </div>
+      {hidePagination || currentItems.length === 0
+        ? ''
+        : <Pagination
+          checkboxSelection={checkboxSelection}
+          rowsPerPageOptions={rowsPerPageOptions}
+          setRowsPerPage={setRowsPerPage}
+          rowsPerPageFromProps={rowsPerPageFromProps}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          rowsChecked={rowsChecked.length}
+          // totalNumberOfRows={rows.length}
+          quantityRows={rows.length}
+          onPageChange={page => setCurrentPage(page)}
+        />
+      }
     </section>
   );
 };

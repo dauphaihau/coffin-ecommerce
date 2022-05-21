@@ -6,14 +6,28 @@
 
     .step {
       @apply w-full flex border-none relative;
-      div:first-child {
+      &-border {
         @apply w-2/5 ipad:w-[96%] rounded-lg border border-[#e5e8eb] ipad:border-[1.5px]
-        absolute left-[3rem] top-[35%];
+
+        absolute left-16 top-[28%]
+        ipad:left-[3rem] ipad:top-[35%];
       }
 
-      div:nth-child(2) {
-        @apply rounded-[5px] cursor-pointer border border-[#e5e8eb];
+      &-content {
+        @apply border-none text-center rounded-[5px] w-[57%] ipad:w-auto cursor-pointer border border-[#e5e8eb];
         padding: 0.5rem 0.5rem;
+
+        &__icon {
+          @apply text-[10px] text-black pt-3 mb-3;
+        }
+
+        &__icon--gray {
+          @apply text-[10px] text-gray-300 pt-3 mb-3;
+        }
+
+        &__text {
+          @apply animate hover:text-gray-600 text-gray-custom-503;
+        }
 
         p {
           @apply my-auto mx-auto text-center;

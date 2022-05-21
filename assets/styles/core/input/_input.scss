@@ -1,9 +1,23 @@
 .form-input {
+  @apply relative;
+
   @apply mb-4 w-full;
 
   &__contentLeft {
     @apply absolute inset-y-0 left-[12px] flex items-center text-gray-600;
   }
+
+  &__contentRight {
+    @apply absolute inset-y-0 right-[12px] flex items-center text-gray-600;
+
+    .clear-icon {
+      @apply h-6 w-6 animate text-gray-custom-500
+      hover:text-gray-custom-900 dark:text-gray-custom-900
+      dark:hover:text-white;
+    }
+  }
+
+
 
   input {
     @apply border border-gray-300 text-gray-900 text-sm rounded-lg

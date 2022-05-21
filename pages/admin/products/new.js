@@ -73,7 +73,6 @@ const NewProduct = () => {
       color: values.color.value,
       // tag: values.tag.map(tag => tag.id)
     }
-    console.log('format-data', formatData)
 
     setIsBtnLoading(true)
     const res = await productService.create(formatData)
@@ -102,7 +101,7 @@ const NewProduct = () => {
         <Grid md={2} lg={2} gapx={4} classes='pb-4'>
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
-              <Input label='Product Name *' name='name' register={register} errors={errors}/>
+              <Input label='Product Name *' name='name' register={register} errors={errors} clearable/>
               {/*<Textarea name='description' label='Description *' register={register} errors={errors}/>*/}
               <Controller
                 control={control}
@@ -176,7 +175,7 @@ const NewProduct = () => {
               {/*</Grid>*/}
               {/*<Checkbox label='Save this information for next time'/>*/}
             </Paper>
-            <Paper>
+            <Paper classes='w-1/2'>
               <Grid md={1} lg={2} gapx={4}>
                 <Input
                   label='Price *' name='price'

@@ -95,7 +95,7 @@ const Pagination = (props: Props) => {
               return (
                 <button
                   key={pageNumber} onClick={() => onPageChange(pageNumber)}
-                  className={currentPage === pageNumber ? 'selected' : ''}>
+                  className={` ${currentPage === pageNumber ? 'selected' : ''}`}>
                   {pageNumber}
                 </button>
               )

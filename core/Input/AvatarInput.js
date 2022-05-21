@@ -1,4 +1,3 @@
-import filePng from "../../public/images/file-png-solid-240.png";
 import {useEffect, useRef, useState} from "react";
 import {Text} from "../index";
 

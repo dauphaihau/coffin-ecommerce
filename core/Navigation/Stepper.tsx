@@ -1,4 +1,14 @@
 import {Text} from "../index";
+import {ReactNode} from "react";
+
+interface PropsStepLabel {
+  labels: [{
+    id: number,
+    heading: string,
+    content: ReactNode,
+  }],
+  step: number,
+}
 
 const Stepper = ({children}) => {
   return (
@@ -10,20 +20,20 @@ const Stepper = ({children}) => {
   );
 }
 
-const StepLabels = ({labels, step}) => {
+const StepLabels = ({labels, step}: PropsStepLabel) => {
   return (
     <>
       {labels?.map(item => {
         if (item.id === 1) {
           return <div className='step' key={item.id}>
-            <div className={step !== 1 && '!border-black'}></div>
-            <div className='border-none text-center'>
+            <div className={`step-border ${step !== 1 ? '!border-black' : ''}`}></div>
+            <div className='step-content'>
               <>
                 {step !== 1
-                  ? <i className="fa-solid fa-check text-[10px] text-black pt-3 mb-3"/>
-                  : <i className="fa-solid fa-circle text-[10px] text-black pt-3 mb-3"/>
+                  ? <i className="fa-solid fa-check step-content__icon"/>
+                  : <i className="fa-solid fa-circle step-content__icon"/>
                 }
-                <Text sx='sm' color='[#738a88]' classes={`animate hover:text-gray-600 
+                <Text sx='sm' classes={`step-content__text 
                     ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>
@@ -33,16 +43,17 @@ const StepLabels = ({labels, step}) => {
         }
         if (item.id === 2) {
           return <div className='step' key={item.id}>
-            <div className={step === 3 && '!border-black'}></div>
-            <div className='border-none text-center'>
+            <div className={`step-border ${step === 3 ? '!border-black' : ''}`}></div>
+            <div className='step-content'>
               <>
                 {step === 1 ?
-                  <i className="fa-solid fa-circle text-[10px] text-gray-300 pt-3 mb-3"/>
+                  <i className="fa-solid fa-circle step-content__icon--gray"/>
                   : step === 3
-                    ? <i className="fa-solid fa-check text-[10px] text-black pt-3 mb-3"/>
-                    : <i className="fa-solid fa-circle text-[10px] text-black pt-3 mb-3"/>
+                    ? <i className="fa-solid fa-check step-content__icon"/>
+                    : <i className="fa-solid fa-circle step-content__icon"/>
                 }
-                <Text sx='sm' color='[#738a88]' classes={`animate hover:text-gray-600 ${step === item.id ? '!text-black' : ''} `}>
+                <Text sx='sm'
+                      classes={`step-content__text ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>
               </>
@@ -50,14 +61,14 @@ const StepLabels = ({labels, step}) => {
           </div>
         } else {
           return <div className='step' key={item.id}>
-            <div></div>
-            <div className='border-none text-center'>
+            <div className='step-border'></div>
+            <div className='step-content'>
               <>
                 {step === item.id
-                  ? <i className="fa-solid fa-circle text-[10px] text-black pt-3 mb-3"/>
-                  : <i className="fa-solid fa-circle text-[10px] text-gray-300 pt-3 mb-3"/>
+                  ? <i className="fa-solid fa-circle step-content__icon"/>
+                  : <i className="fa-solid fa-circle step-content__icon--gray"/>
                 }
-                <Text sx='sm' color='[#738a88]' classes={`animate hover:text-gray-600 
+                <Text sx='sm' classes={`step-content__text
                     ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>
@@ -74,6 +85,5 @@ const StepContent = ({children}) => <>{children}</>;
 
 Stepper.StepLabels = StepLabels;
 Stepper.StepContent = StepContent;
-
 
 export default Stepper;

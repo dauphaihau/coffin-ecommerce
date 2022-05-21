@@ -1,7 +1,12 @@
-import {useEffect, useRef, useState} from "react";
-import filePng from "../../public/images/file-png-solid-240.png";
+import {ChangeEvent, useEffect, useRef, useState} from "react";
 
-const ImageInput = ({onFileChange, classesSpace}) => {
+interface propsImageInput {
+  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  classSpace: string,
+}
+
+
+const ImageInput = ({onFileChange, classesSpace}: propsImageInput) => {
 
   const wrapperRef = useRef(null);
   const [fileList, setFileList] = useState([]);

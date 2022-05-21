@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {ChangeEvent, Fragment, useEffect, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 
@@ -8,7 +8,7 @@ interface Props {
     value: string | number,
   }[],
   label?: string,
-  onChange?: (e: string) => {},
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   size?: string,
   borderLight?: boolean,
   hideIconOptions?: boolean,

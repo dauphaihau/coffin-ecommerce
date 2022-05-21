@@ -1,8 +1,24 @@
-import {useState} from 'react'
+import {ChangeEvent, useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 
-export default function RadioGroupCustom(props) {
-  const {options, direction, onChange} = props;
+interface PropsRadioGroup {
+  options: [{
+    name: string,
+    description: string,
+  }]
+  sx?: string,
+  md?: string,
+  lg?: string,
+  xl?: string,
+  directionClasses?: string,
+  direction?: string,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function RadioGroupCustom(props: PropsRadioGroup) {
+  const {options, direction, onChange, directionClasses,
+     sx = '', md = '', lg = '', xl = '',
+  } = props;
   const [selected, setSelected] = useState(options[0])
 
   return (
@@ -10,13 +26,20 @@ export default function RadioGroupCustom(props) {
       {/*<div className="w-full py-16">*/}
       <div className="w-full">
         {/*<div className="w-full max-w-md mx-auto">*/}
-        <RadioGroup value={selected} onChange={(e) => {
+        <RadioGroup value={selected} onChange={(e: any) => {
           onChange(e)
           setSelected(e)
         }
         }>
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
-          <div className={`${direction === 'row' ? 'flex gap-4' : 'space-y-2'} `}>
+          {/*${sx ? `grid-cols-${sx}` : ''}*/}
+          <div className={`
+          ${direction === 'row' ? 'flex gap-4' : direction === 'column' ? 'flex flex-col' : 'space-y-2'} 
+          ${md === 'row' ? 'flex gap-4' : md === 'column' ? 'flex flex-col' : 'space-y-2'}
+          ${lg === 'row' ? 'flex gap-4' : lg === 'column' ? 'flex flex-col' : 'space-y-2'}
+          ${xl === 'row' ? 'flex gap-4' : xl === 'column' ? 'flex flex-col' : 'space-y-2'}
+          ${directionClasses}
+          `}>
             {options.map((option) => (
               <RadioGroup.Option
                 key={option.name}

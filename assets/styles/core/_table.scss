@@ -1,25 +1,13 @@
 .table-container {
   @apply min-w-full w-[5px]
-  laptop:py-0
-  rounded-lg
-  ;
-  //@apply min-w-full w-[5px]
-  //laptop:py-0
-  //rounded-lg
-  //overflow-x-auto
-  //lg:overflow-x-visible
-  //;
+  rounded-lg p-4 laptop:drop-shadow-xl
+  rounded-[19px] bg-white dark:bg-black
+
+  border-gray-custom-500 border-[0.4px] laptop:border-gray-custom-50;
 }
 
 .table-wrapper {
-  @apply p-4 laptop:drop-shadow-xl
-  rounded-[19px] bg-white dark:bg-black
-  border-gray-200 laptop:border-gray-custom-50;
-  //@apply p-4 laptop:drop-shadow-xl overflow-x-auto
-  //rounded-[19px] bg-white dark:bg-black
-  //border-gray-200 laptop:border-gray-custom-50;
-
-  //border: 1px solid #f7f7f7;
+  @apply overflow-x-auto laptop:overflow-visible ;
 
   .table {
     @apply min-w-full ;
@@ -28,7 +16,7 @@
       @apply sticky top-0;
       th {
         @apply
-        bg-gray-custom-50 dark:bg-[#111111]
+        bg-gray-custom-50 dark:border-gray-custom-901
         py-3 px-6 text-xs font-medium tracking-wider
         hover:bg-gray-custom-hover animate cursor-pointer
         text-gray-700 uppercase dark:text-gray-400;
@@ -61,7 +49,7 @@
 
 .pagination {
 
-  @apply px-4 mt-4 flex items-center justify-between ;
+  @apply ipad:px-4 mt-4 flex items-center justify-between ;
 
   &__left {
     @apply flex gap-x-8;
@@ -96,7 +84,7 @@
       }
 
       button.selected {
-        @apply bg-black text-white dark:bg-white dark:text-black
+        @apply bg-black text-white dark:bg-white dark:text-black hidden ipad:inline-flex
       }
     }
   }

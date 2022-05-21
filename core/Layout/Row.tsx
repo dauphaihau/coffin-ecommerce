@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactChildren} from "react";
 
 interface Props {
   // sx?: number,
@@ -10,7 +10,7 @@ interface Props {
   content?: 'center' | 'between' | 'around',
   wrap?: 'wrap' | 'reverse' | 'around',
   classes?: string,
-  children?: ReactNode,
+  children?: ReactChildren,
 }
 
 const Row = (props: Props) => {

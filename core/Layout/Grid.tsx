@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactChildren} from "react";
 
 interface Props {
   sx?: number,
@@ -9,7 +9,7 @@ interface Props {
   gapx?: number,
   gapy?: number,
   classes?: string
-  children: ReactNode
+  children: ReactChildren
 }
 
 const Grid = (props: Props) => {
@@ -24,10 +24,10 @@ const Grid = (props: Props) => {
     <div
       className={`
          grid gap-${gap} gap-x-${gapx} gap-y-${gapy}
-        ${sx && `grid-cols-${sx}`}
-        ${md && `ipad:grid-cols-${md}`}
-        ${lg && `laptop:grid-cols-${lg}`}
-        ${xl && `desktop:grid-cols-${xl}`}
+        ${sx ? `grid-cols-${sx}` : ''}
+        ${md ? `ipad:grid-cols-${md}` : ''}
+        ${lg ? `laptop:grid-cols-${lg}` : ''}
+        ${xl ? `desktop:grid-cols-${xl}` : ''}
         ${classes}
       `}>
       {children}

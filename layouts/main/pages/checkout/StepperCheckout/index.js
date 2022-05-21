@@ -33,8 +33,7 @@ const Index = ({context}) => {
       setCurrentStep(currentStepContent[0]);
     };
     handleStepClick(step)
-    return () => {
-    }
+    return () => {}
   }, [step])
 
   return (

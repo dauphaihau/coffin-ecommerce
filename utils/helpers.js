@@ -55,7 +55,7 @@ const getHeaders = () => {
   const user = JSON.parse(Cookie.get("userInfo"))
   return {
     headers: {
-      authorization: `Bearer ${user.token}`
+      authorization: `Bearer ${user.token}`,
     }
   }
 }

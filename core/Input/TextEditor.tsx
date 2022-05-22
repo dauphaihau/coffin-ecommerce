@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import {useEffect, useLayoutEffect, useRef} from "react";
+import {ChangeEvent, useEffect, useLayoutEffect, useRef} from "react";
 import 'quill/dist/quill.snow.css';
 import PropTypes from "prop-types";
 // const Quill = dynamic(() => import('quill'), { ssr: false });
@@ -7,27 +7,17 @@ import PropTypes from "prop-types";
 // import * as Quill from "quill";
 
 
-const propTypes = {
-  className: PropTypes.string,
-  placeholder: PropTypes.string,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
-  getEditor: PropTypes.func,
-};
+interface TextEditorProps {
+  className: string,
+  placeholder: string,
+  defaultValue: string,
+  value: string,
+  label: string,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  getEditor: () => void,
+}
 
-const defaultProps = {
-  className: undefined,
-  placeholder: undefined,
-  defaultValue: undefined,
-  value: undefined,
-  onChange: () => {
-  },
-  getEditor: () => {
-  },
-};
-
-const TextEditor = (props) => {
+const TextEditor = (props: TextEditorProps) => {
 
   const {
     className,
@@ -38,8 +28,8 @@ const TextEditor = (props) => {
     // expensive, but we're still accepting 'value' prop as alias for defaultValue because
     // other core like <Form.Field> feed their children with data via the 'value' prop
     value: alsoDefaultValue,
-    onChange,
-    getEditor,
+    onChange = () => {},
+    getEditor=  () => {},
   } = props;
 
   console.log('also-default-value', alsoDefaultValue)
@@ -99,8 +89,5 @@ const quillConfig = {
     ],
   },
 };
-
-TextEditor.propTypes = propTypes;
-TextEditor.defaultProps = defaultProps;
 
 export default TextEditor;

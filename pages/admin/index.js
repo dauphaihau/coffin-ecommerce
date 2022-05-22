@@ -102,7 +102,7 @@ const Dashboard = () => {
         hidePagination
         rowsPerPage={6}
         columns={columns}
-        rows={users}
+        rows={users?.list}
       />
     </Helmet>
   );

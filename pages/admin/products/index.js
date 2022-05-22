@@ -17,17 +17,21 @@ import Table from "../../../core/Table";
 const ProductList = () => {
   const router = useRouter();
   const [products, setProducts] = useState()
+  const [params, setParams] = useState({
+    skip: 0, limit: 3
+  })
   const {progress, setProgress} = useUIController();
 
   useEffect(() => {
     const fetchData = async () => {
       setProgress(progress + 30)
+      // const res = await productService.getAll(params);
       const res = await productService.getAll();
       setProgress(100)
       setProducts(res?.data)
     }
     fetchData();
-  }, [])
+  }, [params])
 
   const handleQuantity = (quantity) => {
     if (quantity == 0) {
@@ -110,6 +114,14 @@ const ProductList = () => {
     }
   }
 
+  const handleOnChangeTable = (values) => {
+    console.log('values', values)
+    setParams({ ...params, ...values  })
+  }
+
+  // console.log('products', products)
+  console.log('params', params)
+
   return (
     <>
       <Row justify='between' align='center'>
@@ -121,11 +133,16 @@ const ProductList = () => {
       <Table
         searchInputSelection
         checkboxSelection
+        // onChange={(values) => setParams((preParams) => {...preParams, ...values})}
+        onChange={handleOnChangeTable}
+        // onChange={setParams}
         onChangeSelected={handleDeleteMultiItems}
-        rowsPerPage={3}
+        // rowsPerPage={3}
+        rowsPerPageOptions={[3, 5, 25]}
         // rowsPerPageOptions={[3, 4, 5]}
+        totalRows={products?.total}
         columns={columns}
-        rows={products}
+        rows={products?.list}
       />
     </>
   )

@@ -1,27 +1,23 @@
-import Input from "./Input";
-import PropTypes from "prop-types";
+import {FieldErrors} from "react-hook-form";
 
-const propTypes = {
-  name: PropTypes.string,
-  classes: PropTypes.string,
-  label: PropTypes.string,
-  register: PropTypes.func,
-  placeholder: PropTypes.string,
+interface TextareaProps {
+  name: string,
+  classes: string,
+  label: string,
+  register?: (name: string) => void,
+  placeholder: string,
+  classNameLabel: string,
+  errors?: FieldErrors,
+  type: string,
+  rows: number,
 }
 
-const defaultProps = {
-  type: 'text',
-  classes: undefined,
-  placeholder: undefined,
-  onChange: () => {},
-  register: () => {},
-};
-
-const Textarea = (props) => {
+const Textarea = (props: TextareaProps) => {
 
   const {
     label, name,
     classes = '',
+    type = 'text',
     classNameLabel = '',
     placeholder = '',
     register, errors,
@@ -40,8 +36,5 @@ const Textarea = (props) => {
     </div>
   );
 }
-
-Input.propTypes = propTypes;
-Input.defaultProps = defaultProps;
 
 export default Textarea;

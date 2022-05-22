@@ -149,7 +149,6 @@ const LoginRegisterModal = () => {
   }
 
   return (
-    // <Dialog isOpen={openLoginRegisterModal}>
     <Dialog
       nonDarkMode
       isOpen={openLoginRegisterModal}
@@ -165,23 +164,34 @@ const LoginRegisterModal = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8"
         >
-          {/*<form*/}
-          {/*  onSubmit={handleSubmit(onSubmit)}*/}
-          {/*  className="px-6 pb-4 space-y-6 lg:px-8 pb-6 xl:pb-8"*/}
-          {/*>*/}
           <Text noDarkMode h1 sx='xl' weight='medium' color='gray-900'>
             {formType[currentForm].title}
           </Text>
           <Text>{formType[currentForm].message}</Text>
           {currentForm === 'register' && <Input name='name' label='Name' register={register} errors={errors}/>}
-          <Input name='email' type='email' label='Email' register={register} errors={errors}/>
-          {currentForm !== 'forgotPassword' &&
-            <Input name='password' type='password' label='Password' register={register} errors={errors}/>}
-          {currentForm === 'login' &&
+          <Input
+            name='email'
+            type='email'
+            label='Email'
+            register={register}
+            errors={errors}/>
+          {
+            currentForm !== 'forgotPassword' &&
+            <Input
+              name='password'
+              type='password'
+              label='Password'
+              register={register}
+              errors={errors}
+            />
+          }
+          {
+            currentForm === 'login' &&
             <Row justify='between' align='center'>
-              <Checkbox label='Remember me'/>
-              <Text as='button' classes="text-sm text-black hover:underline pt-[2px]"
-                    onClick={() => setCurrentForm('forgotPassword')}
+              <Checkbox name='rememberMe' label='Remember me'/>
+              <Text
+                as='button' classes="text-sm text-black hover:underline pt-[2px]"
+                onClick={() => setCurrentForm('forgotPassword')}
               >Forgot Password?</Text>
             </Row>
           }
@@ -195,12 +205,14 @@ const LoginRegisterModal = () => {
             formType[currentForm].textFooter &&
             <Row classes="text-sm font-medium text-gray-500 dark:text-gray-300">
               <Text noDarkMode span classes='mr-2'>{formType[currentForm].labelTextFooter}</Text>
-              <Text noDarkMode as='button' span color='black' weight='medium'
-                    classes="hover:underline"
-                    onClick={() => {
-                      setCurrentForm(currentForm === 'register' ? 'login' : 'register');
-                      reset();
-                    }}
+              <Text
+                noDarkMode as='button' span
+                color='black' weight='medium'
+                classes="hover:underline"
+                onClick={() => {
+                  setCurrentForm(currentForm === 'register' ? 'login' : 'register');
+                  reset();
+                }}
               >
                 {formType[currentForm].textFooter}
               </Text>
@@ -209,7 +221,6 @@ const LoginRegisterModal = () => {
         </form>
       </Dialog.Content>
     </Dialog>
-    // {/* </Dialog>*/}
   );
 }
 

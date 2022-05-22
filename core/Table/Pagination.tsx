@@ -14,7 +14,7 @@ interface Props {
   rowsChecked: number,
   checkboxSelection: boolean,
   rowsPerPageFromProps: number,
-  rowsPerPageOptions?: [],
+  rowsPerPageOptions?: number[],
 }
 
 const Pagination = (props: Props) => {
@@ -88,7 +88,7 @@ const Pagination = (props: Props) => {
             >
               <ChevronLeftIcon height={15} width={15}/>
             </button>
-            {pageNumbers.map(pageNumber => {
+            {pageNumbers?.map(pageNumber => {
               {
                 pageNumber === DOTS && <button key={pageNumber}>{pageNumber}</button>
               }
@@ -101,7 +101,7 @@ const Pagination = (props: Props) => {
               )
             })}
             <button
-              disabled={currentPage === pageNumbers.length}
+              disabled={currentPage === pageNumbers?.length}
               className={currentPage === pageNumbers?.length ? 'disabled' : ''}
               onClick={() => onPageChange(currentPage + 1)}
             >

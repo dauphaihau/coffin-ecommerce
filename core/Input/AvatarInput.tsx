@@ -1,7 +1,12 @@
-import {useEffect, useRef, useState} from "react";
+import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {Text} from "../index";
 
-const AvatarInput = ({onFileChange, classesSpace}) => {
+interface AvatarInputProps {
+  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  classesSpace: string,
+}
+
+const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
 
   const wrapperRef = useRef(null);
   const [fileList, setFileList] = useState([]);

@@ -1,6 +1,9 @@
-import {createContext, useContext, useEffect, useReducer, useState} from "react";
-import reducer from "../store/reducers/uiControllerReducer";
-import PropTypes from "prop-types";
+import {createContext, FC, Reducer, useContext, useEffect, useReducer, useState} from "react";
+import reducer, {
+  uiControllerActions,
+  uiControllerActionsKind,
+  uiControllerState
+} from "../store/reducers/uiControllerReducer";
 
 const initialState = {
   openCartDrawer: false,
@@ -19,20 +22,24 @@ const initialState = {
   progress: 0,
 };
 
-const UIControllerContext = createContext(initialState);
+
+const UIControllerContext = createContext<Partial<uiControllerState>>({});
+
+// const UIControllerContext = createContext(initialState);
 
 function useUIController() {
   return useContext(UIControllerContext);
 }
 
-function UIControllerProvider({children}) {
+// function UIControllerProvider ({children}) {
+const UIControllerProvider: FC = ({children}) => {
 
-  const [controller, dispatch] = useReducer(reducer, initialState);
+  const [controller, dispatch] = useReducer<Reducer<uiControllerState, uiControllerActions>>(reducer, initialState);
   const {
-    openLoginRegisterModal,
+    // openLoginRegisterModal,
     openFiltersDrawer,
     openNavDrawer,
-    openAddressModal,
+    // openAddressModal,
     openCartDrawer,
     openSearchModal
 
@@ -60,7 +67,7 @@ function UIControllerProvider({children}) {
   // }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
 
   const closeDrawerModal = () => {
-    dispatch({type: 'CLOSE_DRAWER_MODAL'})
+    dispatch({type: uiControllerActionsKind.CLOSE_DRAWER_MODAL})
   }
 
   return (
@@ -75,10 +82,6 @@ function UIControllerProvider({children}) {
     </UIControllerContext.Provider>
   );
 }
-
-UIControllerProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 export {UIControllerProvider, useUIController};
 

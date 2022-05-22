@@ -7,18 +7,20 @@ import TableRow from './TableRow';
 interface PropsTable {
   fitContent?: boolean,
   checkboxSelection?: boolean,
-  onChangeCheckbox?: () => object[],
-  rowsPerPageOptions?: [],
+  onChangeCheckbox?: (selected) => object[],
+  rowsPerPageOptions?: number[],
   searchInputSelection?: boolean,
-  columns: [{
-    render: ReactNode,
-    align: string,
-    key: string | number
-    id: number,
+  columns: Array<{
+    render?: ReactNode,
+    align?: string,
+    key?: string | number
+    id: string,
     title: string,
-  }],
+  }>,
   rows: [],
+  onChange?: (params) => {},
   rowsPerPage?: number,
+  totalRows?: number,
   align?: 'center' | 'left' | 'right',
   hidePagination?: boolean,
 }
@@ -27,8 +29,10 @@ const Table = (props: PropsTable) => {
   const {
     columns = [], rows = [],
     rowsPerPageOptions = [],
+    totalRows,
     rowsPerPage: rowsPerPageFromProps = 10,
     hidePagination,
+    onChange = () => {},
     onChangeCheckbox,
     searchInputSelection,
     checkboxSelection, ...res
@@ -41,13 +45,30 @@ const Table = (props: PropsTable) => {
   const [rowsChecked, setRowsChecked] = useState([])
   const [searchInput, setSearchInput] = useState("");
 
-  const indexOfLastItem = currentPage * rowsPerPage;
-  const indexOfFirstItem = indexOfLastItem - rowsPerPage;
-  const currentItems = rows?.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = rows?.slice(indexOfFirstRow, indexOfLastRow);
 
   const filteredRows = useMemo(() => filterRows(rows ?? [], filters), [rows, filters])
   const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
   // const calculatedRows = paginateRows(sortedRows, currentPage, rowsPerPage)
+
+  const handleChangePage = (newPage) => {
+    let fromTemp = Math.ceil((newPage - 1) * rowsPerPage)
+    setCurrentPage(newPage);
+    // query.setFrom(fromTemp)
+    onChange({skip: fromTemp})
+  };
+
+  const handleRowsPerPageChange = (value) => {
+    console.log('value', value)
+    const limit = value
+    setRowsPerPage(limit);
+    // query.setFrom(0)
+    // query.setLimit(limit)
+    onChange({skip: 0, limit})
+    setCurrentPage(1);
+  };
 
   const handleSearch = (searchValue) => {
     setSearchInput(searchValue);
@@ -60,7 +81,7 @@ const Table = (props: PropsTable) => {
       });
       setFilters(filteredData);
     } else {
-      setFilters(currentItems);
+      setFilters(currentRows);
     }
   }
 
@@ -75,7 +96,7 @@ const Table = (props: PropsTable) => {
   const handleCheckAllBox = () => {
     if (rowsChecked.length > 0) {
       const result = rowsChecked.findIndex(e => e.checked === true) !== -1
-      console.log('result', result)
+      // console.log('result', result)
       if (result) {
         return true
       } else {
@@ -164,24 +185,28 @@ const Table = (props: PropsTable) => {
               rowsChecked={rowsChecked}
               columns={columns}
               // rows={currentRows}
-              rows={!isEmpty(filters) ? filters : currentItems}
+              rows={!isEmpty(filters) ? filters : currentRows}
             />
           </tbody>
         </table>
       </div>
-      {hidePagination || currentItems.length === 0
+      {hidePagination || currentRows.length === 0
         ? ''
         : <Pagination
           checkboxSelection={checkboxSelection}
           rowsPerPageOptions={rowsPerPageOptions}
-          setRowsPerPage={setRowsPerPage}
+          setRowsPerPage={handleRowsPerPageChange}
+          // setRowsPerPage={setRowsPerPage}
           rowsPerPageFromProps={rowsPerPageFromProps}
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           rowsChecked={rowsChecked.length}
+
           // totalNumberOfRows={rows.length}
-          quantityRows={rows.length}
-          onPageChange={page => setCurrentPage(page)}
+          quantityRows={totalRows}
+          // quantityRows={rows.length}
+          // onPageChange={page => setCurrentPage(page)}
+          onPageChange={handleChangePage}
         />
       }
     </section>

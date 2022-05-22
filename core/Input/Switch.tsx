@@ -1,7 +1,13 @@
-import {useEffect, useState} from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 import {Switch} from '@headlessui/react'
 
-export default function CustomSwitch({label, onChange, value}) {
+interface SwitchProps {
+  label: string,
+  value: boolean,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function CustomSwitch({label, onChange, value}: SwitchProps) {
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {

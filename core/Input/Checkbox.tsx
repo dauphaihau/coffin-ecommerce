@@ -1,7 +1,7 @@
 import {forwardRef, InputHTMLAttributes, ReactNode, useEffect, useState} from "react";
 import {FieldErrors} from "react-hook-form";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string,
   label?: string,
   classes?: string,
@@ -13,7 +13,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Checkbox = forwardRef(
-  (props: InputProps, ref) => {
+  (props: CheckboxProps, ref) => {
 
     const {
       value = '',

@@ -149,7 +149,8 @@ const UserList = () => {
         // rowsPerPage={5}
         // rowsPerPageOptions={[5, 10, 25]}
         rowsPerPageOptions={[3, 5, 25]}
-        rows={users}
+        totalRows={users?.total}
+        rows={users?.list}
       />
     </>
   )

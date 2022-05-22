@@ -1,9 +1,22 @@
-import {Fragment, useEffect, useState} from 'react'
+import {ChangeEvent, Fragment, useEffect, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {uniqElement} from "../../utils/helpers";
 
-export default function CustomAutocomplete({label, onChange, options, value}) {
+
+interface AutocompleteProps {
+  className: string,
+  placeholder: string,
+  defaultValue: string,
+  value: string,
+  label: string,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  options: Array<{
+    name: string,
+  }>
+}
+
+export default function CustomAutocomplete({label, onChange, options, value}: AutocompleteProps ) {
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
   const [arrResult, setArrResult] = useState([options[0]])

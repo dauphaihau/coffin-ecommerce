@@ -2,9 +2,18 @@ import axios from "axios";
 import {getHeaders} from "../utils/helpers";
 
 export const productService = {
-  getAll: async () => {
+  getAll: async (params) => {
+    // const params = {
+    //   skip: 0,
+    //   limit: 3,
+    // }
+    console.log('req params', params)
     try {
-      const res = await axios.get("/api/admin/products", getHeaders())
+      // const res = await axios.get("/api/admin/products", getHeaders())
+      const res = await axios.get("/api/admin/products",  {
+        ...getHeaders(),
+        params,
+      })
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -31,7 +40,6 @@ export const productService = {
   create: async (data) => {
     try {
       const res = await axios.post("/api/admin/products", data, getHeaders())
-      console.log('res', res)
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

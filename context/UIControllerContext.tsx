@@ -1,7 +1,7 @@
 import {createContext, FC, Reducer, useContext, useEffect, useReducer, useState} from "react";
 import reducer, {
   uiControllerActions,
-  uiControllerActionsKind,
+  uiControllerActionsType,
   uiControllerState
 } from "../store/reducers/uiControllerReducer";
 
@@ -10,9 +10,11 @@ const initialState = {
   openAddressModal: false,
   openSearchModal: false,
   openConfirmLogout: false,
-  confirmDelete: {
+  handleConfirm: () => {},
+  confirmDeleteUser: {
     openDialog: false,
     id: '',
+    status: false,
   },
   openLoginRegisterModal: false,
   openNavDrawer: false,
@@ -22,18 +24,13 @@ const initialState = {
   progress: 0,
 };
 
-
 const UIControllerContext = createContext<Partial<uiControllerState>>({});
-
-// const UIControllerContext = createContext(initialState);
 
 function useUIController() {
   return useContext(UIControllerContext);
 }
 
-// function UIControllerProvider ({children}) {
 const UIControllerProvider: FC = ({children}) => {
-
   const [controller, dispatch] = useReducer<Reducer<uiControllerState, uiControllerActions>>(reducer, initialState);
   const {
     // openLoginRegisterModal,
@@ -67,7 +64,7 @@ const UIControllerProvider: FC = ({children}) => {
   // }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
 
   const closeDrawerModal = () => {
-    dispatch({type: uiControllerActionsKind.CLOSE_DRAWER_MODAL})
+    dispatch({type: uiControllerActionsType.CLOSE_DRAWER_MODAL})
   }
 
   return (

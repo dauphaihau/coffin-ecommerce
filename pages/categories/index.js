@@ -1,9 +1,9 @@
 import Head from "next/head";
 import {fetchInventory} from "../../utils/provider/inventoryProvider";
 import {slugify, titleIfy} from "../../utils/helpers";
-import {Grid} from "../../core";
 import Text from "../../core/Text";
 import CategoryCard from "../../layouts/main/pages/categories/CategoryCard";
+import {Col, Grid} from "../../core/Layout";
 
 const Categories = ({categories = []}) => {
   return (
@@ -13,26 +13,22 @@ const Categories = ({categories = []}) => {
         <meta name="description" content='Coffin ECommerce - All categories'/>
         <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
       </Head>
-      <div className="w-full">
-        <div className="pt-4 pt-0 laptop:pt-10 pb-8">
-          <Text h1 sx='3xl' lg='5xl' weight='light'>All categories</Text>
-        </div>
-        <div className="flex-center">
-          <Grid sx={1} md={2} lg={3} gap={4}>
-            {
-              categories.map((category, index) => (
-                <CategoryCard
-                  key={index}
-                  imageSrc={category.image}
-                  subtitle={`${category.itemCount} items`}
-                  title={titleIfy(category.name)}
-                  link={`/categories/${slugify(category.name)}`}
-                />
-              ))
-            }
-          </Grid>
-        </div>
-      </div>
+      <Col classes="w-full">
+        <Text h1 sx='3xl' lg='5xl' classes='pt-4 pt-0 laptop:pt-10 pb-8' weight='light'>All categories</Text>
+        <Grid sx={1} md={2} lg={3} gap={4}>
+          {
+            categories.map((category, index) => (
+              <CategoryCard
+                key={index}
+                imageSrc={category.image}
+                subtitle={`${category.itemCount} items`}
+                title={titleIfy(category.name)}
+                link={`/categories/${slugify(category.name)}`}
+              />
+            ))
+          }
+        </Grid>
+      </Col>
     </>
   );
 }

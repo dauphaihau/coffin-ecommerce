@@ -3,6 +3,8 @@ import {fetchInventory} from "../utils/provider/inventoryProvider";
 import {CarouselBanner, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
 
 const Home = ({inventoryData = []}) => {
+
+  console.log('inventory-data', inventoryData)
   return (
     <>
       <Head>

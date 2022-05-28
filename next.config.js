@@ -23,6 +23,7 @@ const nextConfig = {
     config.resolve.alias["@utils"] = path.resolve(__dirname, "utils");
     config.resolve.alias["@context"] = path.resolve(__dirname, "context");
     config.resolve.alias["@assets"] = path.resolve(__dirname, "assets");
+    config.resolve.alias["@store"] = path.resolve(__dirname, "store");
     return config;
   },
   images: {

@@ -1,10 +1,11 @@
 import {Button} from "../core/Button";
 import {Image, Link} from "../core/Next";
 import {Text} from "../core";
+import {Col} from "../core/Layout";
 
 export default function Custom404() {
   return (
-    <div className='flex-center flex-col mb-4'>
+    <Col classes='flex-center mb-4'>
       <Image
         src="/images/404.png"
         classesSize='h-[500px] laptop:h-[640px] w-full'
@@ -15,6 +16,6 @@ export default function Custom404() {
       <Link href='/'>
         <Button>Go home</Button>
       </Link>
-    </div>
+    </Col>
   )
 }

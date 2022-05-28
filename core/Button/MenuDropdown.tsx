@@ -1,8 +1,18 @@
 import {Menu, Transition} from '@headlessui/react'
-import {Fragment} from 'react'
+import React, {Fragment} from 'react'
 import {Link} from "../Next";
 
-export default function CustomMenuDropdown(props) {
+interface MenuDropdownProps {
+  options: {
+    label: string,
+    value: string | number,
+    href: string,
+    feature: () => {},
+    element: React.ReactNode
+  }[],
+}
+
+export default function CustomMenuDropdown(props: MenuDropdownProps) {
   const {options} = props;
   return (
     <Menu as="div" className="relative inline-block text-left">

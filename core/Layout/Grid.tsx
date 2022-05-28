@@ -15,15 +15,18 @@ interface Props {
 const Grid = (props: Props) => {
 
   const {
-    children, gap, classes,
+    children, gap, classes = '',
     sx = '', md = '', lg = '', xl = '',
-    gapx, gapy
+    gapx = '', gapy = ''
   } = props;
 
   return (
     <div
       className={`
-         grid gap-${gap} gap-x-${gapx} gap-y-${gapy}
+        grid 
+        ${gap ? `gap-${gap}` : ''}
+        ${gapx ? `gap-x-${gapx}` : ''}
+        ${gapy ? `grid-cols-${gapy}` : ''}
         ${sx ? `grid-cols-${sx}` : ''}
         ${md ? `ipad:grid-cols-${md}` : ''}
         ${lg ? `laptop:grid-cols-${lg}` : ''}

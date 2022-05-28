@@ -17,7 +17,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const limit = Number(query.limit)
   const skip = Number(query.skip)
   console.log('limit', limit)
-  
+
   const total = await Product.countDocuments();
   const products = await Product.find({})
     .limit(limit)

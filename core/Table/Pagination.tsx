@@ -64,7 +64,7 @@ const Pagination = (props: Props) => {
           <Text>Rows per page:</Text>
           {options.length !== 0 ?
             <Select
-              classesOptions='laptop:pr-0'
+              // classesOptions='laptop:pr-0'
               hideIconOptions
               classesSpace='mb-0'
               classesBtn='pr-8'
@@ -101,8 +101,8 @@ const Pagination = (props: Props) => {
               )
             })}
             <button
-              disabled={currentPage === pageNumbers?.length}
-              className={currentPage === pageNumbers?.length ? 'disabled' : ''}
+              disabled={currentPage === pageNumbers?.length || pageNumbers === undefined}
+              className={currentPage === pageNumbers?.length || pageNumbers === undefined ? 'disabled' : ''}
               onClick={() => onPageChange(currentPage + 1)}
             >
               <ChevronRightIcon height={15} width={15}/>

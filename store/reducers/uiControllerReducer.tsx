@@ -1,17 +1,17 @@
-export enum uiControllerActionsKind {
+export enum uiControllerActionsType {
   OPEN_ADDRESS_MODAL = 'OPEN_ADDRESS_MODAL',
   OPEN_LOGIN_REGISTER = 'OPEN_LOGIN_REGISTER',
   OPEN_SEARCH_MODAL = 'OPEN_SEARCH_MODAL',
   OPEN_LOGOUT_DIALOG = 'OPEN_LOGOUT_DIALOG',
   OPEN_FILTER_DRAWER = 'OPEN_FILTER_DRAWER',
-  OPEN_CONFIRM_DELETE = 'OPEN_CONFIRM_DELETE',
-  CLOSE_DRAWER_MODAL = 'CLOSE_DRAWER_MODAL',
+  OPEN_CONFIRM_DELETE_USER = 'OPEN_CONFIRM_DELETE_USER',
   OPEN_NAV_DRAWER = 'OPEN_NAV_DRAWER',
   OPEN_CART_DRAWER = 'OPEN_CART_DRAWER',
+  CLOSE_DRAWER_MODAL = 'CLOSE_DRAWER_MODAL',
 }
 
 export interface uiControllerActions {
-  type: uiControllerActionsKind;
+  type: uiControllerActionsType;
   payload?: any,
 }
 
@@ -23,7 +23,7 @@ export interface uiControllerState {
   confirmDelete: {
     openDialog: boolean,
     id: string,
-    status: any,
+    status: boolean,
   },
   openLoginRegisterModal: boolean,
   openNavDrawer: boolean,
@@ -36,43 +36,43 @@ export interface uiControllerState {
 const uiControllerReducer = (state: uiControllerState | Error, action: uiControllerActions) => {
   const {type, payload} = action
   switch (type) {
-    case uiControllerActionsKind.OPEN_ADDRESS_MODAL: {
+    case uiControllerActionsType.OPEN_ADDRESS_MODAL: {
       return {...state, openAddressModal: true};
     }
-    case uiControllerActionsKind.OPEN_SEARCH_MODAL: {
+    case uiControllerActionsType.OPEN_SEARCH_MODAL: {
       return {...state, openSearchModal: true};
     }
-    case uiControllerActionsKind.OPEN_LOGOUT_DIALOG: {
+    case uiControllerActionsType.OPEN_LOGOUT_DIALOG: {
       return {...state, openConfirmLogout: true};
     }
-    case uiControllerActionsKind.OPEN_LOGIN_REGISTER: {
+    case uiControllerActionsType.OPEN_LOGIN_REGISTER: {
       return {...state, openLoginRegisterModal: true};
     }
-    case uiControllerActionsKind.OPEN_CONFIRM_DELETE: {
+    case uiControllerActionsType.OPEN_CONFIRM_DELETE_USER: {
       return {
-        ...state, confirmDelete: {
-          openDialog: true, id: payload, status: payload
+        ...state, confirmDeleteUser: {
+          openDialog: true, id: payload.id, status: payload.status
         }
       };
     }
-    case uiControllerActionsKind.OPEN_CART_DRAWER: {
+    case uiControllerActionsType.OPEN_CART_DRAWER: {
       return {...state, openCartDrawer: true};
     }
-    case uiControllerActionsKind.OPEN_NAV_DRAWER: {
+    case uiControllerActionsType.OPEN_NAV_DRAWER: {
       return {...state, openNavDrawer: true};
     }
-    case uiControllerActionsKind.OPEN_FILTER_DRAWER: {
+    case uiControllerActionsType.OPEN_FILTER_DRAWER: {
       return {...state, openFiltersDrawer: true};
     }
 
-    case uiControllerActionsKind.CLOSE_DRAWER_MODAL: {
+    case uiControllerActionsType.CLOSE_DRAWER_MODAL: {
       return {
         ...state,
         openAddressModal: false,
         openSearchModal: false,
         openConfirmLogout: false,
         openLoginRegisterModal: false,
-        confirmDelete: {openDialog: false, id: 0, status: false},
+        confirmDeleteUser: {openDialog: false, id: 0, status: false},
         openCartDrawer: false,
         openFiltersDrawer: false,
         openNavDrawer: false,

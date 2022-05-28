@@ -187,6 +187,7 @@ module.exports = {
           'custom-51': '#e9ecef',
           'custom-52': '#eaeaea',
           'custom-hover': '#eaeaea',
+          'custom-499': '#a6a6a6',
           'custom-500': '#939393',
           'custom-501': '#7e8a88',
           'custom-503': '#5d5d5d',

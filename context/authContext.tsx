@@ -1,21 +1,26 @@
-import {createContext, useContext, useState, useEffect} from "react";
+import {createContext, useContext, useState, useEffect, FC, Dispatch} from "react";
 import Cookie from "cookie-cutter";
 import {accountService} from "../services/account";
+
+export interface AuthState {
+  user: object,
+  setUser: (prevState: undefined) => undefined,
+}
 
 const defaultValues = {
   user: {},
   setUser: () => null,
 };
 
-const AuthContext = createContext(defaultValues);
+const AuthContext = createContext<Partial<AuthState>>(defaultValues);
+// const AuthContext = createContext(defaultValues);
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-export function AuthProvider({children}) {
+export const AuthProvider: FC = ({children}) => {
   const [user, setUser] = useState();
-  // const [user, setUser] = useState({});
   const [isAuthorize, setIsAuthorize] = useState(false)
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export function AuthProvider({children}) {
       const verifyAuth = async () => {
         const res = await accountService.me(userInfo);
         if (res.isSuccess) {
-          setUser({...user, ...res.data})
+          setUser({...(user as object), ...res.data})
           setIsAuthorize(true)
         } else {
           setIsAuthorize(false)

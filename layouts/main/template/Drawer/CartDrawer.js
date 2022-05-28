@@ -8,6 +8,7 @@ import {Image, Text} from "../../../../core";
 import {Button, QuantityPicker} from "../../../../core/Button";
 import Drawer from "../../../../core/Navigation/Drawer";
 import {Link} from "../../../../core/Next";
+import {Col, Row} from "../../../../core/Layout";
 
 const CartDrawer = ({context}) => {
 
@@ -52,10 +53,10 @@ const CartDrawer = ({context}) => {
           {
             cartEmpty
               ? (
-                <div className='h-full text-center flex flex-col items-center justify-center '>
+                <Col align='center' justify='center' classes='h-full text-center'>
                   <Image src="/images/empty.png" classesSize='h-88 w-88' alt="empty"/>
                   <Text sx='xl' weight='bold' classes='mb-8'>Your cart is empty.</Text>
-                </div>
+                </Col>
               )
               : (
                 <div className="flex flex-col h-full overflow-x-hidden">
@@ -63,13 +64,12 @@ const CartDrawer = ({context}) => {
                     {
                       cart.map((item) => {
                         return (
-                          <div className="border-b  py-4" key={item.id}>
-                            <div className="flex">
-                              <div className='relative group bg-light rounded-lg p-1 cursor-pointer '
-                                   onClick={() => removeFromCart(item)}
-                              >
-                                <Image classesSize='h-24 w-24 ipad:h-28 ipad:w-28 m-0' src={item.image} alt={item.name}/>
-                                <div className='
+                          <Row classes='border-b  py-4' key={item.id}>
+                            <div className='relative group bg-light rounded-lg p-1 cursor-pointer '
+                                 onClick={() => removeFromCart(item)}
+                            >
+                              <Image classesSize='h-24 w-24 ipad:h-28 ipad:w-28 m-0' src={item.image} alt={item.name}/>
+                              <div className='
                                    transform duration-200 ease-in-out
                                    absolute group-hover:block hidden
                                    inset-0
@@ -77,32 +77,31 @@ const CartDrawer = ({context}) => {
                                    hover:bg-black
                                    opacity-20 rounded-lg
                               '>
-                                  <i className="fa-solid fa-circle-xmark text-3xl h-20 w-10 text-white
+                                <i className="fa-solid fa-circle-xmark text-3xl h-20 w-10 text-white
                                   !opacity-1 absolute z-10 right-[30%] top-[32%]"/>
-                                </div>
-                              </div>
-                              <div className='ml-4 w-[64%]'>
-                                <Link href={`/product/${slugify(item.name)}`}>
-                                  <Text sx='sm' color='gray-600' classes="m-0 w-80">{item.name}</Text>
-                                </Link>
-                                <Text sx='sm' color='gray-500' classes='my-2'>
-                                  Unit price: {DENOMINATION + item.price.toLocaleString()}
-                                </Text>
-                                <div className='flex justify-between'>
-                                  <QuantityPicker
-                                    // size='sx'
-                                    theme='black'
-                                    numberOfItems={item.quantity}
-                                    increment={() => increment(item)}
-                                    decrement={() => decrement(item)}
-                                  />
-                                  <Text color='gray-900' classes="m-0 pt-3 tracking-wider">
-                                    {DENOMINATION + (item.price * item.quantity).toLocaleString()}
-                                  </Text>
-                                </div>
                               </div>
                             </div>
-                          </div>
+                            <div className='ml-4 w-[64%]'>
+                              <Link href={`/product/${slugify(item.name)}`}>
+                                <Text sx='sm' color='gray-600' classes="m-0 w-80">{item.name}</Text>
+                              </Link>
+                              <Text sx='sm' color='gray-500' classes='my-2'>
+                                Unit price: {DENOMINATION + item.price.toLocaleString()}
+                              </Text>
+                              <div className='flex justify-between'>
+                                <QuantityPicker
+                                  // size='sx'
+                                  theme='black'
+                                  numberOfItems={item.quantity}
+                                  increment={() => increment(item)}
+                                  decrement={() => decrement(item)}
+                                />
+                                <Text color='gray-900' classes="m-0 pt-3 tracking-wider">
+                                  {DENOMINATION + (item.price * item.quantity).toLocaleString()}
+                                </Text>
+                              </div>
+                            </div>
+                          </Row>
                         )
                       })
                     }

@@ -1,8 +1,9 @@
 import {useFilterContext} from "../../../../context/filterContext";
 import {formatPrice, getUniqueValues, titleIfy} from "../../../../utils/helpers";
 import {Button} from "../../../../core/Button";
+import {useEffect, useState} from "react";
 
-const Filters = ({categories, launchSticky}) => {
+const Filters = ({categories, launchSticky, quantityProd}) => {
   const {
     filters: {
       brand,
@@ -15,11 +16,28 @@ const Filters = ({categories, launchSticky}) => {
     all_products,
     updateFilters, clearFilters,
   } = useFilterContext()
+  const [sticky, setSticky] = useState(false)
+
+  // useEffect(() => {
+  //   const scrollListener = () => {
+  //     if (window.scrollY > 40) {
+  //       setSticky(true)
+  //     } else {
+  //       setSticky(false)
+  //     }
+  //   }
+  //   window.addEventListener('scroll', scrollListener)
+  //   return () => {
+  //     window.removeEventListener("scroll", scrollListener)
+  //   }
+  // }, [])
 
   const colors = getUniqueValues(all_products, 'colors')
 
+
   return (
-    <div className={`${launchSticky && 'laptop:sticky top-[12%] h-[57%]'}`}>
+    <div className={``}>
+    {/*<div className={`${launchSticky ? 'laptop:sticky top-[12%] h-[57%]': ''}`}>*/}
       <div className='mb-8'>
         <h3 className='mb-4 text-xl'>Categories</h3>
         <div>

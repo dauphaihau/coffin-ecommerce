@@ -26,9 +26,9 @@ const NewUser = () => {
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    email: Yup.string().email('Email is invalid').required('Email is required'),
+    // name: Yup.string().required('Name is required'),
+    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+    // email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 
   const formOptions = {
@@ -63,16 +63,16 @@ const NewUser = () => {
   return (
     <Helmet title='Create a new user' classes='w-2/3' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4}>
+        <Grid md={2} lg={2} gapx={4} classes='laptop:max-w-[65%]'>
           <Paper classes='h-fit'>
             <AvatarInput/>
             <Row align='center' justify='between' classes='mt-8'>
-              <div>
+              <Col>
                 <Text sx='[0.875rem]' weight='bold'>Email Verified</Text>
                 <Text sx='[0.875rem]' classes='text-gray-500 w-4/5'>
                   Disabling this will automatically send the user a
                   verification email</Text>
-              </div>
+              </Col>
               <Controller
                 control={control}
                 name='isVerified'
@@ -88,7 +88,7 @@ const NewUser = () => {
             </Grid>
             <Grid md={1} lg={2} gapx={4}>
               <Input label='Email *' name='email' register={register} errors={errors}/>
-              {/*<Input label='Password' type='password' name='password' register={register} errors={errors}/>*/}
+              <Input label='Password' type='password' name='password' register={register} errors={errors}/>
             </Grid>
             <Controller
               control={control}

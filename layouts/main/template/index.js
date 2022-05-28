@@ -41,7 +41,7 @@ export const MainLayout = ({children, categories}) => {
   const {} = useUIController();
 
   return (
-    <div>
+    <>
       <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
       <AllDialog/>
       <AllDrawer/>
@@ -54,7 +54,7 @@ export const MainLayout = ({children, categories}) => {
         <Contact/>
         <Footer/>
       </Container>
-    </div>
+    </>
   );
 }
 

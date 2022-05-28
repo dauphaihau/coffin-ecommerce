@@ -6,6 +6,7 @@ import {Grid} from "../../core/Layout";
 import Image from "../../core/Next/Image";
 import {Helmet} from "../../layouts/admin/common/Helmet";
 import Table from "../../core/Table";
+import {Text} from "../../core";
 
 const Dashboard = () => {
 
@@ -74,12 +75,13 @@ const Dashboard = () => {
 
   return (
     <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
-      <Grid lg={3} gap={4}>
+      {/*<Grid sx={3} lg={3} gap={4}>*/}
+      <div className='grid laptop:grid-cols-3 gap-x-4'>
+        {/*<Grid sx={3} xl={3} gap={4}>*/}
         {data.map((e, id) => (
           <div key={id} className="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
             <div className='h-full'>
               <div className="flex justify-between">
-
                 <p className='text-gray-500 font-bold text-sm'>{e.title}</p>
                 <p className=' text-[#8592a9] text-[13px]'>6 May - 7 May</p>
               </div>
@@ -94,10 +96,9 @@ const Dashboard = () => {
             {/*</div>*/}
           </div>
         ))}
-      </Grid>
-
-      <h1 className='text-2xl mt-6 mb-3 font-bold'>Best Salesman</h1>
-
+        {/*</Grid>*/}
+      </div>
+      <Text sx='2xl' weight='bold' classes='mt-6 mb-3'>Best Salesman</Text>
       <Table
         hidePagination
         rowsPerPage={6}

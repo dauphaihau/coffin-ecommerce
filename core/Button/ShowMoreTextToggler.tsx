@@ -1,6 +1,13 @@
 import {useMemo, useState} from "react";
 
-const ShowMoreTextToggler = ({text = '', classes = '', limit}) => {
+interface ShowMoreTextTogglerProps {
+  text: string,
+  classes: string,
+  limit: number,
+}
+
+const ShowMoreTextToggler = (props: ShowMoreTextTogglerProps) => {
+  const {text = '', classes = '', limit} = props;
   const [showMore, setShowMore] = useState(false);
 
   const truncateText = useMemo(() => {

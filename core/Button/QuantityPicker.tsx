@@ -1,4 +1,13 @@
-const QuantityPicker = (props) => {
+interface QuantityPickerProps {
+  increment: () => {},
+  decrement: () => {},
+  numberOfItems: number,
+  theme: string,
+  bordered: string,
+  size: string,
+}
+
+const QuantityPicker = (props: QuantityPickerProps) => {
   const {increment, decrement, numberOfItems, theme = 'black', bordered, size} = props;
 
   let setTheme;

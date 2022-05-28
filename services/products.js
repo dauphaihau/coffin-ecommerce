@@ -39,7 +39,7 @@ export const productService = {
 
   create: async (data) => {
     try {
-      const res = await axios.post("/api/admin/products", data, getHeaders())
+      await axios.post("/api/admin/products", data, getHeaders())
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

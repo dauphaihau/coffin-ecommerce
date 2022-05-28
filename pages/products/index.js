@@ -8,6 +8,8 @@ import {useUIController} from "../../context/UIControllerContext";
 import {Button} from "../../core/Button";
 import {Product} from "../../layouts/main/pages/product/Product";
 import {Filters, ProductListView, Sorter} from "../../layouts/main/pages/products";
+import {Text} from "../../core";
+import {Grid, Row} from "../../core/Layout";
 
 const ProductsPage = ({categories = []}) => {
 
@@ -26,7 +28,7 @@ const ProductsPage = ({categories = []}) => {
   const renderProductList = () => {
     if (gridView) {
       return (
-        <div className='grid gap-4 grid-cols-1 ipad:grid-cols-2 laptop:grid-cols-3'>
+        <Grid gap={4} sx={1} md={2} lg={3}>
           {
             products?.map((item, index) => (
                 <Product
@@ -41,11 +43,11 @@ const ProductsPage = ({categories = []}) => {
               )
             ).slice(0, state)
           }
-        </div>
+        </Grid>
       )
     }
     return (
-      <div className='grid grid-cols-1'>
+      <Grid sx={1}>
         {
           products?.map((item, index) => (
             <ProductListView
@@ -59,7 +61,7 @@ const ProductsPage = ({categories = []}) => {
             />
           )).slice(0, state)
         }
-      </div>
+      </Grid>
     )
   }
 
@@ -71,29 +73,28 @@ const ProductsPage = ({categories = []}) => {
           <meta name="description" content='Coffin ECommerce - All categories'/>
           <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
         </Head>
-        <div className='grid grid-cols-5 min-h-full'>
-          <Filters categories={categories} launchSticky={products.length > 6}/>
+        <Grid sx={5} classes='min-h-full'>
+          <Filters categories={categories} quantityProd={products.length}/>
           <div className="w-full col-span-4">
-            <div className="mb-6 flex justify-between">
-              <h1 className="text-3xl laptop:text-xl font-light">{products.length} results found</h1>
+            <Row justify='between' classes="mb-6">
+              <Text h1 classes="text-3xl laptop:text-xl font-light">{products.length} results found</Text>
               <Sorter/>
-            </div>
+            </Row>
             {products.length < 1
-              ? <p>Sorry, no products matched your search...</p>
+              ? <Text>Sorry, no products matched your search...</Text>
               : <>
                 {renderProductList()}
                 {products.length > 9 &&
-                  <div className='flex justify-center mt-8'>
+                  <Row justify='center' classes='mt-8'>
                     {products.length > state &&
                       <Button variant='gray' onClick={() => setState(state + 6)}>Load more</Button>}
-                  </div>
+                  </Row>
                 }
               </>
             }
           </div>
-        </div>
+        </Grid>
       </div>
-
       {/*Mobile - Ipad version*/}
       <div className='laptop:hidden'>
         <div className='mb-4 flex justify-between gap-x-8'>
@@ -106,9 +107,10 @@ const ProductsPage = ({categories = []}) => {
           <Sorter/>
         </div>
         {products.length < 1
-          ? <p className='mt-12'>Sorry, no products matched your search...</p>
+          ? <Text classes='mt-12'>Sorry, no products matched your search...</Text>
           : <>
-            <div className='grid gap-4 grid-cols-2 ipad:grid-cols-2'>
+            <Grid sx={2} md={2} gap={4}>
+            {/*<div className='grid gap-4 grid-cols-2 ipad:grid-cols-2'>*/}
               {
                 products?.map((item, index) => (
                     <Product
@@ -122,7 +124,7 @@ const ProductsPage = ({categories = []}) => {
                   )
                 ).slice(0, state)
               }
-            </div>
+            </Grid>
           </>}
       </div>
     </>

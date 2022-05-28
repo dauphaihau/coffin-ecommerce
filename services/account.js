@@ -58,7 +58,7 @@ export const accountService = {
     }
   },
 
-  me: async () => {
+  me: async userInfo => {
     try {
       const res = await axios.get("/api/account/me", getHeaders())
       return {data: res.data, isSuccess: true};

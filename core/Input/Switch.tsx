@@ -2,8 +2,8 @@ import {ChangeEvent, useEffect, useState} from 'react'
 import {Switch} from '@headlessui/react'
 
 interface SwitchProps {
-  label: string,
-  value: boolean,
+  label?: string,
+  value?: boolean,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 

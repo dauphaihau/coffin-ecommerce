@@ -6,15 +6,21 @@ import {Row} from "../../../../core/Layout";
 import {Text} from "../../../../core";
 import {useUIController} from "../../../../context/UIControllerContext";
 import {userService} from "../../../../services/users";
+import {useEffect, useState} from "react";
+import {uiControllerActionsType} from "../../../../store/reducers/uiControllerReducer";
 
 const ConfirmDeleteDialog = () => {
-  const {confirmDelete, dispatch, closeDrawerModal} = useUIController();
-  // console.log('confirm-delete', confirmDelete)
+  const {confirmDeleteUser, dispatch, closeDrawerModal} = useUIController();
+  const {progress, setProgress} = useUIController();
+  // const [isSuccess, setIsSuccess] = useState(false)
+  // console.log('confirm-delete', confirmDeleteUser)
 
   const handleDelete = async () => {
-    const res = await userService.delete(confirmDelete.id)
+    const res = await userService.delete(confirmDeleteUser.id)
+    console.log('res', res)
     if (res.isSuccess) {
-      dispatch({type: 'OPEN_CONFIRM_DELETE', payload: {status: true}} )
+      // setIsSuccess(true)
+      dispatch({type: uiControllerActionsType.OPEN_CONFIRM_DELETE_USER, payload: {status: true}} )
       const res = await userService.getAll();
       // setUsers(res.data)
       closeDrawerModal();
@@ -24,8 +30,19 @@ const ConfirmDeleteDialog = () => {
     }
   }
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setProgress(progress + 30)
+  //     // const res = await productService.getAll(params);
+  //     const res = await productService.getAll();
+  //     setProgress(100)
+  //     setProducts(res?.data)
+  //   }
+  //   fetchData();
+  // }, [isSuccess])
+
   return (
-    <Dialog isOpen={confirmDelete.openDialog} closeDialog={closeDrawerModal}>
+    <Dialog isOpen={confirmDeleteUser.openDialog} closeDialog={closeDrawerModal}>
       <Dialog.Title title='Confirm delete'/>
       <Dialog.Content>
         <Text classes="text-sm text-gray-500 mt-2">

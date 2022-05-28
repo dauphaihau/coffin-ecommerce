@@ -12,11 +12,13 @@ import {Helmet} from "../../../layouts/admin/common/Helmet";
 import Table from "../../../core/Table";
 import {Row} from "../../../core/Layout";
 import {Link} from "../../../core/Next";
+import {uiControllerActionsType} from "../../../store/reducers/uiControllerReducer";
 
 const UserList = () => {
   const router = useRouter();
   const [users, setUsers] = useState()
-  const {progress, dispatch, setProgress, ...res} = useUIController();
+  // const [loading, setLoading] = useState(true)
+  const {progress, dispatch, setProgress, confirmDeleteUser} = useUIController();
   // console.log('res', res)
 
   useEffect(() => {
@@ -25,9 +27,18 @@ const UserList = () => {
       const res = await userService.getAll();
       setProgress(100)
       setUsers(res.data)
+      // setLoading(false)
     }
     fetchData();
   }, [])
+
+  console.log('confirm-delete-user', confirmDeleteUser)
+
+  const dataBreadcrumb = [
+    {path: "/admin", name: "Dashboard", firstLink: true},
+    {path: "/admin/users", name: "Users"},
+    {path: "", name: "List", lastLink: true}
+  ];
 
   const columns = [
     {
@@ -86,6 +97,11 @@ const UserList = () => {
         <MenuDropdown
           options={[
             {
+              label: 'Lock',
+              element: <i className='fa-solid fa-lock'/>,
+              feature: () => handleDelete(row._id)
+            },
+            {
               label: 'Edit',
               element: <i className="fa-solid fa-pen"/>,
               href: `${router.pathname}/${row._id}`
@@ -101,14 +117,8 @@ const UserList = () => {
     },
   ];
 
-  const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "/admin/users", name: "Users"},
-    {path: "", name: "List", lastLink: true}
-  ];
-
   async function handleDelete(id) {
-    dispatch({type: 'OPEN_CONFIRM_DELETE', payload: id})
+    dispatch({type: uiControllerActionsType.OPEN_CONFIRM_DELETE_USER, payload: {id}})
     // const res = await userService.delete(id)
     // if (res.isSuccess) {
     //   const res = await userService.getAll();

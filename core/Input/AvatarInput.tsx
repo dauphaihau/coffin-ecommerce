@@ -2,8 +2,8 @@ import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {Text} from "../index";
 
 interface AvatarInputProps {
-  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  classesSpace: string,
+  onFileChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  classesSpace?: string,
 }
 
 const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {

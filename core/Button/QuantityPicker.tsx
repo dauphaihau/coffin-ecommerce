@@ -1,9 +1,9 @@
 interface QuantityPickerProps {
   increment: () => {},
   decrement: () => {},
-  numberOfItems: number,
+  numberOfItems: () => {},
   theme?: string,
-  bordered?: string,
+  bordered?: boolean,
   size?: string,
 }
 

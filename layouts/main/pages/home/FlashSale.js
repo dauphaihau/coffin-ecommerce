@@ -6,16 +6,17 @@ import CountdownTimer from "./CountdownTimer";
 
 const FlashSale = ({inventoryData}) => {
   return (
-    <div className='my-12'>
+    <section className='my-12'>
       <Row justify='between' align='center' classes='mb-4'>
         <Text h1 classes='text-lg ipad:text-3xl dark:text-black'>Flash Sale</Text>
         <CountdownTimer/>
       </Row>
-      <Grid md='2' gapx='4'>
+      <Grid sx={1} lg={2} gapx={4}>
         <div className='hidden laptop:block'>
           <ProductCard
             full
             imageSrc={inventoryData[1].image}
+            imageHover={inventoryData[4].image}
             title={inventoryData[1].name}
             subtitle={inventoryData[1].categories[0]}
             link={`/product/${slugify(inventoryData[1].name)}`}
@@ -25,9 +26,10 @@ const FlashSale = ({inventoryData}) => {
           />
         </div>
         <div>
-          <Grid md='2' gap='4'>
+          <Grid md={2} gap={4}>
             <ProductCard
               imageSrc={inventoryData[7].image}
+              imageHover={inventoryData[4].image}
               title={inventoryData[7].name}
               subtitle={inventoryData[7].categories[0]}
               link={`/product/${slugify(inventoryData[7].name)}`}
@@ -37,6 +39,7 @@ const FlashSale = ({inventoryData}) => {
             />
             <ProductCard
               imageSrc={inventoryData[3].image}
+              imageHover={inventoryData[4].image}
               title={inventoryData[3].name}
               subtitle={inventoryData[3].categories[0]}
               link={`/product/${slugify(inventoryData[3].name)}`}
@@ -48,6 +51,7 @@ const FlashSale = ({inventoryData}) => {
           <Grid md='2' gap='4' classes='mt-4'>
             <ProductCard
               imageSrc={inventoryData[9].image}
+              imageHover={inventoryData[4].image}
               title={inventoryData[9].name}
               subtitle={inventoryData[9].categories[0]}
               link={`/product/${slugify(inventoryData[9].name)}`}
@@ -57,6 +61,7 @@ const FlashSale = ({inventoryData}) => {
             />
             <ProductCard
               imageSrc={inventoryData[10].image}
+              imageHover={inventoryData[4].image}
               title={inventoryData[10].name}
               subtitle={inventoryData[10].categories[0]}
               link={`/product/${slugify(inventoryData[10].name)}`}
@@ -67,8 +72,8 @@ const FlashSale = ({inventoryData}) => {
           </Grid>
         </div>
       </Grid>
-    </div>
-  );
+    </section>
+  )
 }
 
 export default FlashSale;

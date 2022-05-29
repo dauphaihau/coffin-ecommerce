@@ -170,6 +170,10 @@ const isDarkMode = () => {
   }
 }
 
+function classNames(...classes: (false | null | undefined | string)[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 
 export {
   slugify,
@@ -179,6 +183,7 @@ export {
   sumAllProduct,
   calculateTotal,
   getHeaders,
+  classNames,
   uniqElement,
   sortRows,
   paginateRows,

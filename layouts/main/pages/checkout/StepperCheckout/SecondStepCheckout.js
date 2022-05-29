@@ -32,7 +32,7 @@ const SecondStepCheckout = (props) => {
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
               <Col classes='justify-between gap-2 ipad:gap-0 flex-col ipad:flex-row'>
                 <Text color='gray-500'>365-374-4961</Text>
-                <Button size='sm' onClick={() => setSteps(3) }>Deliver to this Address</Button>
+                <Button size='sm' onClick={() => setSteps(3)}>Deliver to this Address</Button>
               </Col>
             </div>
             <div className='p-6 shadow-lg border border-gray-100 rounded-xl mb-6 w-full'>
@@ -43,7 +43,7 @@ const SecondStepCheckout = (props) => {
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
               <Col classes='justify-between gap-2 ipad:gap-0 flex-col ipad:flex-row'>
                 <Text color='gray-500'>365-374-4961</Text>
-                <Button size='sm' onClick={() => setSteps(3) }>Deliver to this Address</Button>
+                <Button size='sm' onClick={() => setSteps(3)}>Deliver to this Address</Button>
               </Col>
             </div>
           </Col>

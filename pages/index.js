@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 import {CarouselBanner, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
+import Carousel from "../core/Table/Carousel";
 
 const Home = ({inventoryData = []}) => {
 
-  console.log('inventory-data', inventoryData)
   return (
     <>
       <Head>
@@ -15,6 +15,7 @@ const Home = ({inventoryData = []}) => {
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <FlashSale inventoryData={inventoryData}/>
       <CarouselBanner/>
+      <Carousel/>
       <MemberServices/>
     </>
   )

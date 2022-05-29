@@ -1,13 +1,3 @@
-import {
-  CLEAR_FILTERS,
-  FILTER_PRODUCTS,
-  LOAD_PRODUCTS, SET_GRIDVIEW, SET_LISTVIEW,
-  SORT_PRODUCTS,
-  UPDATE_FILTERS,
-  UPDATE_SORT
-} from "../actions";
-import {uiControllerActionsType} from "./uiControllerReducer";
-
 export enum filterType {
   LOAD_PRODUCTS = 'LOAD_PRODUCTS',
   UPDATE_FILTERS = 'UPDATE_FILTERS',

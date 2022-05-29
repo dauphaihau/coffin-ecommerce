@@ -32,13 +32,15 @@ const ThirdStepCheckout = (props) => {
       <div className='col-span-2 ipad:col-span-4'>
         <div className='p-6 shadow border rounded-xl mb-6 w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Delivery options</Text>
-          <RadioGroupCustom  directionClasses='flex-col ipad:flex-row'
-                             options={deliveryOpts} onChange={(e) => updateCart({delivery: e.value})}/>
+          <RadioGroupCustom
+            options={deliveryOpts}
+            onChange={(e) => updateCart({delivery: e.value})}
+          />
         </div>
         <div className='p-6 shadow border rounded-xl w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Payment options</Text>
-          <RadioGroupCustom  directionClasses='flex-col ipad:flex-row'
-                             options={paymentOpts} onChange={(e) => updateCart({payment: e.value})}/>
+          <RadioGroupCustom directionClasses='flex-col ipad:flex-row'
+                            options={paymentOpts} onChange={(e) => updateCart({payment: e.value})}/>
         </div>
         <Button light classes='font-bold px-0 mt-4' onClick={() => setSteps(2)}>
           <i className="fa-solid fa-angle-left mr-4"/>Back

@@ -33,13 +33,15 @@ export default function RadioGroupCustom(props: PropsRadioGroup) {
         }>
           <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
           {/*${sx ? `grid-cols-${sx}` : ''}*/}
-          <div className={`
-          ${direction === 'row' ? 'flex gap-4' : direction === 'column' ? 'flex flex-col' : 'space-y-2'} 
-          ${md === 'row' ? 'flex gap-4' : md === 'column' ? 'flex flex-col' : 'space-y-2'}
-          ${lg === 'row' ? 'flex gap-4' : lg === 'column' ? 'flex flex-col' : 'space-y-2'}
-          ${xl === 'row' ? 'flex gap-4' : xl === 'column' ? 'flex flex-col' : 'space-y-2'}
-          ${directionClasses}
+          <div className={`flex flex-col ipad:flex-row gap-4 
           `}>
+          {/*<div className={`*/}
+          {/*${direction === 'row' ? 'flex gap-4' : direction === 'column' ? 'flex flex-col' : 'space-y-2'} */}
+          {/*${md === 'row' ? 'flex gap-4' : md === 'column' ? 'flex flex-col' : 'space-y-2'}*/}
+          {/*${lg === 'row' ? 'flex gap-4' : lg === 'column' ? 'flex flex-col' : 'space-y-2'}*/}
+          {/*${xl === 'row' ? 'flex gap-4' : xl === 'column' ? 'flex flex-col' : 'space-y-2'}*/}
+          {/*${directionClasses}*/}
+          {/*`}>*/}
             {options.map((option) => (
               <RadioGroup.Option
                 key={option.name}

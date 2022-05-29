@@ -1,4 +1,6 @@
 import {useMemo, useState} from "react";
+import Text from "../../core/Text";
+
 
 interface ShowMoreTextTogglerProps {
   text: string,
@@ -15,12 +17,13 @@ const ShowMoreTextToggler = (props: ShowMoreTextTogglerProps) => {
   }, [text]);
 
   return (
-    <p className={`text-gray-600 leading-7 pb-6 ${classes}`}>{showMore ? text : truncateText}
-      <span
-        className='cursor-pointer font-bold'
+    <p className={`text-gray-600 leading-7 pb-6 ${classes}`}>
+      {showMore ? text : truncateText}
+      <Text span
+        classes='cursor-pointer font-bold'
         onClick={() => setShowMore(!showMore)}>
         {showMore ? 'See less' : 'See more'}
-      </span>
+      </Text>
     </p>
   )
 }

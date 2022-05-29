@@ -20,6 +20,7 @@ interface Props {
   b?: boolean,
   span?: boolean,
   as?: 'button',
+  onClick?: () => any,
 }
 
 const Text = (props: Props) => {

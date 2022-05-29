@@ -6,11 +6,11 @@ import {slugify} from "../../utils/helpers";
 import {useFilterContext} from "../../context/filterContext";
 import {useUIController} from "../../context/UIControllerContext";
 import {Button} from "../../core/Button";
-import {Product} from "../../layouts/main/pages/product/Product";
 import {Filters, ProductListView, Sorter} from "../../layouts/main/pages/products";
 import {Text} from "../../core";
 import {Grid, Row} from "../../core/Layout";
 import {uiControllerActionsType} from "../../store/reducers/uiControllerReducer";
+import Product from "../../layouts/main/common/Product";
 
 const ProductsPage = ({categories = []}) => {
 
@@ -31,7 +31,7 @@ const ProductsPage = ({categories = []}) => {
       return (
         <Grid gap={4} sx={1} md={2} lg={3}>
           {
-            products?.map((item, index) => (
+            products?.map((item: any, index) => (
                 <Product
                   key={index}
                   // link={`${router.asPath}/product/${slugify(item.name)}`}
@@ -50,7 +50,7 @@ const ProductsPage = ({categories = []}) => {
     return (
       <Grid sx={1}>
         {
-          products?.map((item, index) => (
+          products?.map((item: any, index) => (
             <ProductListView
               key={index}
               // link={`${router.asPath}/product/${slugify(item.name)}`}

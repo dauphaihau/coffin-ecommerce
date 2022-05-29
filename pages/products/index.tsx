@@ -10,6 +10,7 @@ import {Product} from "../../layouts/main/pages/product/Product";
 import {Filters, ProductListView, Sorter} from "../../layouts/main/pages/products";
 import {Text} from "../../core";
 import {Grid, Row} from "../../core/Layout";
+import {uiControllerActionsType} from "../../store/reducers/uiControllerReducer";
 
 const ProductsPage = ({categories = []}) => {
 
@@ -100,7 +101,7 @@ const ProductsPage = ({categories = []}) => {
         <div className='mb-4 flex justify-between gap-x-8'>
           <Button
             classes='py-[7px] w-fit bg-white text-black border-[1px] border-[#d2d5da]'
-            onClick={() => dispatch({type: 'OPEN_FILTER_DRAWER'})}
+            onClick={() => dispatch({type: uiControllerActionsType.OPEN_FILTER_DRAWER})}
           >
             <i className="fa-solid fa-sliders mr-2"/>
             Filter</Button>

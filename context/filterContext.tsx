@@ -1,13 +1,5 @@
 import {createContext, useContext, useEffect, useReducer, useState} from "react";
-import {
-  CLEAR_FILTERS,
-  FILTER_PRODUCTS,
-  LOAD_PRODUCTS, SET_GRIDVIEW, SET_LISTVIEW,
-  SORT_PRODUCTS,
-  UPDATE_FILTERS,
-  UPDATE_SORT
-} from "../store/actions";
-import reducer from '../store/reducers/filterReducer';
+import reducer, {filterState, filterType} from '../store/reducers/filterReducer';
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 
 const initialState = {
@@ -27,7 +19,7 @@ const initialState = {
   },
 };
 
-const FilterContext = createContext();
+const FilterContext = createContext<Partial<filterState>>({});
 
 export const FilterProvider = ({children}) => {
   const [products, setProducts] = useState()
@@ -37,7 +29,7 @@ export const FilterProvider = ({children}) => {
     const loadInit = async () => {
       const products = await fetchInventory();
       if (products) {
-        dispatch({type: LOAD_PRODUCTS, payload: products})
+        dispatch({type: filterType.LOAD_PRODUCTS, payload: products})
         setProducts(products)
       }
     }
@@ -45,20 +37,20 @@ export const FilterProvider = ({children}) => {
   }, [])
 
   useEffect(() => {
-    dispatch({type: FILTER_PRODUCTS});
-    dispatch({type: SORT_PRODUCTS});
+    dispatch({type: filterType.FILTER_PRODUCTS});
+    dispatch({type: filterType.SORT_PRODUCTS});
   }, [products, state.filters, state.sort])
 
   const setGridView = () => {
-    dispatch({type: SET_GRIDVIEW});
+    dispatch({type: filterType.SET_GRIDVIEW});
   };
   const setListView = () => {
-    dispatch({type: SET_LISTVIEW});
+    dispatch({type: filterType.SET_LISTVIEW});
   };
 
   const updateSort = (e) => {
     const value = e.value;
-    dispatch({type: UPDATE_SORT, payload: value});
+    dispatch({type: filterType.UPDATE_SORT, payload: value});
   };
 
   const updateFilters = (e) => {
@@ -80,11 +72,11 @@ export const FilterProvider = ({children}) => {
     if (name === "price") {
       value = Number(value);
     }
-    dispatch({type: UPDATE_FILTERS, payload: {name, value}})
+    dispatch({type: filterType.UPDATE_FILTERS, payload: {name, value}})
   }
 
   const clearFilters = () => {
-    dispatch({type: CLEAR_FILTERS})
+    dispatch({type: filterType.CLEAR_FILTERS})
   }
 
   return (

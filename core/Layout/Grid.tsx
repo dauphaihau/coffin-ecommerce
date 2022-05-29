@@ -1,4 +1,4 @@
-import {ReactChildren} from "react";
+import React, {ReactChildren} from "react";
 
 interface Props {
   sx?: number,
@@ -9,7 +9,7 @@ interface Props {
   gapx?: number,
   gapy?: number,
   classes?: string
-  children: ReactChildren
+  children: React.ReactNode
 }
 
 const Grid = (props: Props) => {

@@ -6,10 +6,44 @@ import {
   UPDATE_FILTERS,
   UPDATE_SORT
 } from "../actions";
+import {uiControllerActionsType} from "./uiControllerReducer";
 
-const filterReducer = (state, action) => {
+export enum filterType {
+  LOAD_PRODUCTS = 'LOAD_PRODUCTS',
+  UPDATE_FILTERS = 'UPDATE_FILTERS',
+  FILTER_PRODUCTS = 'FILTER_PRODUCTS',
+  CLEAR_FILTERS = 'CLEAR_FILTERS',
+  UPDATE_SORT = 'UPDATE_SORT',
+  SORT_PRODUCTS = 'SORT_PRODUCTS',
+  SET_GRIDVIEW = 'SET_GRIDVIEW',
+  SET_LISTVIEW = 'SET_LISTVIEW',
+}
 
-  if (action.type === LOAD_PRODUCTS) {
+export interface filterActions {
+  type: filterType;
+  payload?: any,
+}
+
+export interface filterState {
+  filtered_products: [],
+  all_products: [],
+  gridView: boolean,
+  sort: string,
+  filters: {
+    text: string,
+    brand: string,
+    category: string,
+    color: string,
+    minPrice: number,
+    maxPrice: number,
+    price: number,
+    shipping: boolean,
+  },
+}
+
+const filterReducer = (state : filterState , action: filterActions) => {
+
+  if (action.type === filterType.LOAD_PRODUCTS) {
     let maxPrice = action.payload?.map(p => p.price);
     maxPrice = Math.max(...maxPrice);
 
@@ -21,18 +55,18 @@ const filterReducer = (state, action) => {
     }
   }
 
-  if (action.type === SET_GRIDVIEW) {
+  if (action.type === filterType.SET_GRIDVIEW) {
     return {...state, gridView: true};
   }
-  if (action.type === SET_LISTVIEW) {
+  if (action.type === filterType.SET_LISTVIEW) {
     return {...state, gridView: false};
   }
 
-  if (action.type === UPDATE_SORT) {
+  if (action.type === filterType.UPDATE_SORT) {
     return {...state, sort: action.payload}
   }
 
-  if (action.type === SORT_PRODUCTS) {
+  if (action.type === filterType.SORT_PRODUCTS) {
     const {sort, filtered_products} = state;
     let tempProducts = [...filtered_products];
     if (sort === "price-lowest") {
@@ -54,12 +88,12 @@ const filterReducer = (state, action) => {
     return {...state, filtered_products: tempProducts};
   }
 
-  if (action.type === UPDATE_FILTERS) {
+  if (action.type === filterType.UPDATE_FILTERS) {
     const {name, value} = action.payload;
     return {...state, filters: {...state.filters, [name]: value}}
   }
 
-  if (action.type === FILTER_PRODUCTS) {
+  if (action.type === filterType.FILTER_PRODUCTS) {
     const {all_products} = state;
     const {category, price, brand, color} = state.filters;
 
@@ -89,7 +123,7 @@ const filterReducer = (state, action) => {
     return {...state, filtered_products: tempProducts}
   }
 
-  if (action.type === CLEAR_FILTERS) {
+  if (action.type === filterType.CLEAR_FILTERS) {
     return {
       ...state,
       filters: {

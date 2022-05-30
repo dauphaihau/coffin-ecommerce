@@ -98,7 +98,7 @@ const NewProduct = () => {
   return (
     <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4} classes='pb-4'>
+        <Grid md={2} lg={2} gapx={4} classes='pb-4 laptop:max-w-[75%]'>
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors} clearable/>

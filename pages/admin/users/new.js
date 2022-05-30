@@ -26,9 +26,9 @@ const NewUser = () => {
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
-    // name: Yup.string().required('Name is required'),
-    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    // email: Yup.string().email('Email is invalid').required('Email is required'),
+    name: Yup.string().required('Name is required'),
+    password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 
   const formOptions = {

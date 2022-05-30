@@ -15,7 +15,7 @@ const Home = ({inventoryData = []}) => {
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <FlashSale inventoryData={inventoryData}/>
       <CarouselBanner/>
-      <Carousel/>
+      {/*<Carousel/>*/}
       <MemberServices/>
     </>
   )

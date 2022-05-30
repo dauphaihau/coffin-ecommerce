@@ -51,7 +51,7 @@ const ChatBox = () => {
           <div
             ref={innerRef}
             // className="fixed bottom-[4%] right-[3%] z-[300] flex flex-col h-2/4 w-1/5 bg-white rounded-xl shadow-2xl">
-            className="fixed bottom-0 right-[3%] z-[300] flex flex-col h-screen max-h-[53%] w-1/5 bg-white rounded-t-xl  shadow-2xl">
+            className="fixed bottom-0 right-[3%] z-[300] flex flex-col max-h-[53%] max-w-1/5 bg-white rounded-t-xl  shadow-2xl">
             <Stack classes='px-[12px] py-[8px] border-t-black border-b items-center shadow rounded-tl-xl rounded-tr-xl'>
               <div className='flex'>
                 <div className='relative mr-3'>
@@ -109,7 +109,6 @@ const ChatBox = () => {
               <p className='text-[12px] text-[#8a8d91] mx-auto'>Mon 10, 2022, 1:10 PM</p>
             </div>
 
-
             {/*Footer*/}
             <div className="flex flex-row items-center bottom-0 my-2 w-full px-2">
               <div className="flex flex-row">
@@ -145,6 +144,7 @@ const ChatBox = () => {
                 </div>
               </div>
             </div>
+
           </div>
       }
     </div>

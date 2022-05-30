@@ -10,7 +10,7 @@ const initialState = {
   openAddressModal: false,
   openSearchModal: false,
   openConfirmLogout: false,
-  handleConfirm: () => {},
+  // handleConfirm: () => {},
   confirmDeleteUser: {
     openDialog: false,
     id: '',
@@ -20,7 +20,7 @@ const initialState = {
   openNavDrawer: false,
   openFiltersDrawer: false,
   launchBackdrop: false,
-  categories: [],
+  // categories: [],
   progress: 0,
 };
 
@@ -31,6 +31,9 @@ function useUIController() {
 }
 
 const UIControllerProvider: FC = ({children}) => {
+  // const [controller, dispatch] = useReducer(reducer, initialState);
+
+  // @ts-ignore
   const [controller, dispatch] = useReducer<Reducer<uiControllerState, uiControllerActions>>(reducer, initialState);
   const {
     // openLoginRegisterModal,
@@ -41,6 +44,7 @@ const UIControllerProvider: FC = ({children}) => {
     openSearchModal
 
   } = controller
+  // @ts-ignore
   const {categories: c, progress: g, ...res} = controller
 
   const [launchBackdrop, setLaunchBackdrop] = useState(false)
@@ -64,13 +68,16 @@ const UIControllerProvider: FC = ({children}) => {
   // }, [openCartDrawer, openLoginRegisterModal, openSearchModal, openNavDrawer, openFiltersDrawer, openAddressModal])
 
   const closeDrawerModal = () => {
+    // @ts-ignore
     dispatch({type: uiControllerActionsType.CLOSE_DRAWER_MODAL})
   }
 
   return (
     <UIControllerContext.Provider value={{
-      ...controller, dispatch,
+      // @ts-ignore
+      ...(controller as object), dispatch,
       launchBackdrop,
+      // @ts-ignore
       setCategories, categories,
       closeDrawerModal,
       progress, setProgress,

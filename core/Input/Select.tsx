@@ -17,7 +17,6 @@ interface Props {
   classesBtn?: string,
 }
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -43,7 +42,7 @@ export default function Select(props: Props) {
   }, [value])
 
   return (
-    <Listbox value={selected} onChange={(e) => {
+    <Listbox value={selected} onChange={(e: any) => {
       setSelected(e)
       onChange(e)
     }}

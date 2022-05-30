@@ -14,6 +14,7 @@ const Filters = ({categories, launchSticky, quantityProd}) => {
       price,
     },
     all_products,
+    // @ts-ignore
     updateFilters, clearFilters,
   } = useFilterContext()
   const [sticky, setSticky] = useState(false)
@@ -91,6 +92,7 @@ const Filters = ({categories, launchSticky, quantityProd}) => {
               <button
                 key={index}
                 name="color"
+                // @ts-ignore
                 style={{background: c}}
                 className={`${color === c ? "color-btn active " : "color-btn"}`}
                 data-color={c}

@@ -2,14 +2,14 @@ import {FieldErrors} from "react-hook-form";
 
 interface TextareaProps {
   name: string,
-  classes: string,
-  label: string,
+  classes?: string,
+  label?: string,
   register?: (name: string) => void,
-  placeholder: string,
-  classNameLabel: string,
+  placeholder?: string,
+  classNameLabel?: string,
   errors?: FieldErrors,
-  type: string,
-  rows: number,
+  type?: string,
+  rows?: number,
 }
 
 const Textarea = (props: TextareaProps) => {

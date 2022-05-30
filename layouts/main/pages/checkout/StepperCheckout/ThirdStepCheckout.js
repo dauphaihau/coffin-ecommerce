@@ -3,7 +3,7 @@ import {Text} from "../../../../../core";
 import RadioGroupCustom from "../../../../../core/Input/RadioGroup";
 import {deliveryOpts, paymentOpts} from "../../../../../assets/data/options";
 import {Button} from "../../../../../core/Button";
-import {Grid, Row, Stack} from "../../../../../core/Layout";
+import {Grid, Row} from "../../../../../core/Layout";
 import {useAuth} from "../../../../../context/authContext";
 import {formatPrice} from "../../../../../utils/helpers";
 

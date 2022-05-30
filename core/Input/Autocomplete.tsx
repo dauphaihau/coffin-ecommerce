@@ -8,18 +8,25 @@ interface AutocompleteProps {
   className: string,
   placeholder: string,
   defaultValue: string,
-  value: string,
+  value: string | any,
   label: string,
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: { name: string; id: string }[]) => void;
   options: Array<{
     name: string,
+    id: string
   }>
 }
+
+type Result = {
+  name: string,
+  id: string
+}[]
+
 
 export default function CustomAutocomplete({label, onChange, options, value}: AutocompleteProps ) {
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
-  const [arrResult, setArrResult] = useState([options[0]])
+  const [arrResult, setArrResult] = useState<Result | null>([options[0]])
 
   useEffect(() => {
     if (value?.length > 0) {
@@ -42,6 +49,7 @@ export default function CustomAutocomplete({label, onChange, options, value}: Au
     let tempArr = [...arrResult, ...e];
     tempArr = uniqElement(tempArr)
     setArrResult(tempArr);
+    // @ts-ignore
     onChange(tempArr);
   }
 

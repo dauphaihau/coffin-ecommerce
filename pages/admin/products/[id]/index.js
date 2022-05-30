@@ -115,20 +115,20 @@ const ProductEdit = () => {
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
-              {/*<Textarea name='description' label='Description *' register={register} errors={errors}/>*/}
-              <Controller
-                control={control}
-                name='description'
-                render={({field: {onChange, onBlur, value, ref}}) => {
-                  console.log('value textEditor', value)
-                  return <TextEditor
-                    onChange={onChange}
-                    // name="description"
-                    label="Description"
-                    value={value}
-                  />
-                }}
-              />
+              <Textarea name='description' label='Description *' register={register} errors={errors}/>
+              {/*<Controller*/}
+              {/*  control={control}*/}
+              {/*  name='description'*/}
+              {/*  render={({field: {onChange, onBlur, value, ref}}) => {*/}
+              {/*    console.log('value textEditor', value)*/}
+              {/*    return <TextEditor*/}
+              {/*      onChange={onChange}*/}
+              {/*      // name="description"*/}
+              {/*      label="Description"*/}
+              {/*      value={value}*/}
+              {/*    />*/}
+              {/*  }}*/}
+              {/*/>*/}
               <ImageInput onFileChange={onFileChange} classesSpace='mb-0'/>
             </Grid>
           </Paper>

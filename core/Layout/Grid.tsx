@@ -87,9 +87,8 @@ type Props = {
 const Grid = (props: Props) => {
 
   const {
-    children, gap, classes = '',
-    sx = '', md = '', lg = '', xl = '',
-    gapx = '', gapy = ''
+    children, gap, classes,
+    sx, md, lg, xl, gapx, gapy
   } = props;
 
   return (

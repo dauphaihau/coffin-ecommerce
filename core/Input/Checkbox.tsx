@@ -36,6 +36,7 @@ const Checkbox = forwardRef(
       <div onClick={() => setIsChecked(!isChecked)} className={`form-checkbox-input ${classesForm}`}>
         <input
           type="checkbox"
+          // @ts-ignore
           ref={ref}
           // checked={value || defaultChecked}
           // checked={value}

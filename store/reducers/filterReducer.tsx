@@ -15,14 +15,24 @@ export interface filterActions {
 }
 
 export interface filterState {
-  filtered_products: [],
-  all_products: [],
+  updateFilters: (prev) => void,
+  filtered_products: {
+    name: string,
+    price: number,
+  }[],
+  all_products: {
+    categories: [],
+    brand: string,
+    colors: string[],
+    price: number,
+  }[],
   gridView: boolean,
   sort: string,
   filters: {
     text: string,
     brand: string,
-    category: string,
+    // category:  never,
+    category:  string,
     color: string,
     minPrice: number,
     maxPrice: number,
@@ -91,7 +101,7 @@ const filterReducer = (state : filterState , action: filterActions) => {
 
     if (category !== 'all') {
       tempProducts = tempProducts.filter((prod) => {
-          return prod.categories.includes(category);
+          return prod.categories.includes(category as never);
         }
       )
     }

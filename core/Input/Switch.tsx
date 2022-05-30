@@ -19,7 +19,7 @@ export default function CustomSwitch({label, onChange, value}: SwitchProps) {
       <div className="flex items-center">
         <Switch
           checked={enabled}
-          onChange={(e) => {
+          onChange={(e: any) => {
             setEnabled(e)
             onChange(e)
           }}

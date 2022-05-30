@@ -94,7 +94,7 @@ const UserEdit = () => {
           {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
           {/*</Grid>*/}
 
-          <Grid md={2} lg={2} gapx={4} classes='pb-4 laptop:max-w-[65%]'>
+          <Grid md={2} lg={2} gapx={4} classes='w-[60rem] laptop:max-w-[80rem]'>
             <Paper>
               <div className='text-right mb-6'>
                 {isBanned ?

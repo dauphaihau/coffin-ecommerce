@@ -4,23 +4,34 @@ import {accountService} from "../services/account";
 
 export interface AuthState {
   user: object,
-  setUser: (prevState: undefined) => undefined,
+  setUser: (prevState) => void,
+  isAuthorize: boolean,
+  setIsAuthorize: (prevState: boolean) => void,
+}
+
+interface User {
+  _id: string,
+  email: string,
+  exp: number,
+  iat: number,
+  name: string,
+  numberAllOfItemsInCart: number,
+  role: string
 }
 
 const defaultValues = {
   user: {},
-  setUser: () => null,
+  setUser: () => {},
 };
 
 const AuthContext = createContext<Partial<AuthState>>(defaultValues);
-// const AuthContext = createContext(defaultValues);
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
 export const AuthProvider: FC = ({children}) => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<User | null>();
   const [isAuthorize, setIsAuthorize] = useState(false)
 
   useEffect(() => {

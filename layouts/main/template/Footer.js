@@ -104,9 +104,8 @@ const Footer = () => {
 
         </div>
       </div>
-
       <div className="flex flex-col items-center justify-around
-      border-solid border-t border-gray-300 py-3
+      border-solid border-t border-gray-300 py-7
       ipad:flex-row ipad:px-0
       ">
         <span className="block text-gray-700 text-xs text-center ipad:pb-0">Copyright © 2022 Coffin Store, Inc. All rights reserved.</span>

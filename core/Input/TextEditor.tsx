@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import {ChangeEvent, useEffect, useLayoutEffect, useRef} from "react";
-import 'quill/dist/quill.snow.css';
+// import 'quill/dist/quill.snow.css';
 import PropTypes from "prop-types";
 // const Quill = dynamic(() => import('quill'), { ssr: false });
 // export const Quill = dynamic(() => import('quill'), { ssr: false });
@@ -14,7 +14,7 @@ interface TextEditorProps {
   value: string,
   label: string,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  getEditor: () => void,
+  getEditor: (p: { getValue: () => string }) => void,
 }
 
 const TextEditor = (props: TextEditorProps) => {
@@ -38,31 +38,32 @@ const TextEditor = (props: TextEditorProps) => {
   const $editorRef = useRef();
   const initialValueRef = useRef(defaultValue || alsoDefaultValue || '');
 
-  useEffect(() => {
-  // useLayoutEffect(() => {
-    let quill = new Quill($editorRef.current, {placeholder, ...quillConfig});
-
-    const insertInitialValue = () => {
-      // quill.clipboard.dangerouslyPasteHTML(0, initialValueRef.current);
-      quill.clipboard.dangerouslyPasteHTML(0, alsoDefaultValue);
-      quill.blur();
-    };
-
-    const handleContentsChange = () => {
-      onChange(getHTMLValue());
-    };
-    const getHTMLValue = () => $editorContRef.current.querySelector('.ql-editor').innerHTML;
-
-    insertInitialValue();
-    getEditor({getValue: getHTMLValue});
-
-    quill.on('text-change', handleContentsChange);
-    return () => {
-      quill.off('text-change', handleContentsChange);
-      quill = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  // // useLayoutEffect(() => {
+  //   let quill = new Quill($editorRef.current, {placeholder, ...quillConfig});
+  //
+  //   const insertInitialValue = () => {
+  //     // quill.clipboard.dangerouslyPasteHTML(0, initialValueRef.current);
+  //     quill.clipboard.dangerouslyPasteHTML(0, alsoDefaultValue);
+  //     quill.blur();
+  //   };
+  //
+  //   const handleContentsChange = () => {
+  //     onChange(getHTMLValue());
+  //   };
+  //   // @ts-ignore
+  //   const getHTMLValue = () => $editorContRef.current.querySelector('.ql-editor').innerHTML;
+  //
+  //   insertInitialValue();
+  //   getEditor({getValue: getHTMLValue});
+  //
+  //   quill.on('text-change', handleContentsChange);
+  //   return () => {
+  //     quill.off('text-change', handleContentsChange);
+  //     quill = null;
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
 
   return (

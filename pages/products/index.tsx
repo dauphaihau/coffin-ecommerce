@@ -16,6 +16,7 @@ const ProductsPage = ({categories = []}) => {
 
   const {gridView, filtered_products: products} = useFilterContext()
   const [state, setState] = useState(9)
+  // @ts-ignore
   const {dispatch, setCategories} = useUIController();
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const ProductsPage = ({categories = []}) => {
           <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
         </Head>
         <Grid sx={5} classes='min-h-full'>
-          <Filters categories={categories} quantityProd={products.length}/>
+          <Filters categories={categories} quantityProd={products.length} launchSticky={undefined}/>
           <div className="w-full col-span-4">
             <Row justify='between' classes="mb-6">
               <Text h1 classes="text-3xl laptop:text-xl font-light">{products.length} results found</Text>
@@ -120,6 +121,7 @@ const ProductsPage = ({categories = []}) => {
                       link={`/product/${slugify(item.name)}`}
                       title={item.name}
                       price={item.price}
+                      // @ts-ignore
                       imageSrc={item.image}
                     />
                   )

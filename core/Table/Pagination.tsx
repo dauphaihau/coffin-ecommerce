@@ -71,6 +71,7 @@ const Pagination = (props: Props) => {
               borderLight
               size='medium'
               options={options}
+              // @ts-ignore
               onChange={(e) => setRowsPerPage(e.value)}
             />
             :

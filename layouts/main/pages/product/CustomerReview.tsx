@@ -318,6 +318,7 @@ const CustomerReview = () => {
           rowsPerPage={4}
           currentPage={1}
           rowsChecked={4}
+          // @ts-ignore
           totalNumberOfRows={20}
           quantityRows={20}
           // onPageChange={page => setCurrentPage(page)}

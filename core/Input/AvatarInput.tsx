@@ -2,16 +2,17 @@ import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {Text} from "../index";
 
 interface AvatarInputProps {
-  onFileChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFileChange?: (event: any[]) => void;
   classesSpace?: string,
 }
+
 
 const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
 
   const wrapperRef = useRef(null);
   const [fileList, setFileList] = useState([]);
   const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState()
+  const [preview, setPreview] = useState<string | null>(null)
 
   useEffect(() => {
     if (!selectedFile) {
@@ -63,7 +64,7 @@ const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
           <div className='avatar-input__image'>
             <input type="file" onChange={onFileDrop}/>
             {selectedFile
-              ? <img src={preview}/>
+              ? <img src={preview} alt='img'/>
               : <div className='avatar-input__placeholder'>
                 <i className="fa-solid fa-image "/>
                 <Text>Upload file</Text>

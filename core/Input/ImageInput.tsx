@@ -1,10 +1,9 @@
 import {ChangeEvent, useEffect, useRef, useState} from "react";
 
 interface propsImageInput {
-  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  classSpace: string,
+  onFileChange: (event: any[]) => void;
+  classesSpace: string,
 }
-
 
 const ImageInput = ({onFileChange, classesSpace}: propsImageInput) => {
 

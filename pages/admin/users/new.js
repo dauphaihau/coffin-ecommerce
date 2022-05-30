@@ -63,7 +63,7 @@ const NewUser = () => {
   return (
     <Helmet title='Create a new user' classes='w-2/3' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4} classes='laptop:max-w-[65%]'>
+        <Grid md={2} lg={2} gapx={4} classes='w-[60rem] laptop:max-w-[80rem]'>
           <Paper classes='h-fit'>
             <AvatarInput/>
             <Row align='center' justify='between' classes='mt-8'>

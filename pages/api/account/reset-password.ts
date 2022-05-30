@@ -2,7 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import handler from "./forgot-password";
 import bcrypt from "bcryptjs";
 
-const sendEmail = require('../../../server/middlewares/email')
+// const sendEmail = require('../../../server/middlewares/email')
 const bcryptSalt = process.env.BCRYPT_SALT;
 import Token from "../../../server/models/Token";
 import User from "../../../server/models/User";
@@ -25,14 +25,14 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     {new: true}
   );
   const user = await User.findById({_id: userId});
-  sendEmail(
-    user.email,
-    "Password Reset Successfully",
-    {
-      name: user.name,
-    },
-    "./layouts/resetPassword.handlebars"
-  );
+  // sendEmail(
+  //   user.email,
+  //   "Password Reset Successfully",
+  //   {
+  //     name: user.name,
+  //   },
+  //   "./layouts/resetPassword.handlebars"
+  // );
   await passwordResetToken.deleteOne();
   return true;
 });

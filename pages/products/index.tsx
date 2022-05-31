@@ -69,7 +69,7 @@ const ProductsPage = ({categories = []}) => {
 
   return (
     <>
-      <div className='hidden laptop:block'>
+      <section className='hidden laptop:block'>
         <Head>
           <title>Coffin ECommerce - All Index</title>
           <meta name="description" content='Coffin ECommerce - All categories'/>
@@ -96,7 +96,7 @@ const ProductsPage = ({categories = []}) => {
             }
           </div>
         </Grid>
-      </div>
+      </section>
       {/*Mobile - Ipad version*/}
       <div className='laptop:hidden'>
         <div className='mb-4 flex justify-between gap-x-8'>
@@ -112,7 +112,6 @@ const ProductsPage = ({categories = []}) => {
           ? <Text classes='mt-12'>Sorry, no products matched your search...</Text>
           : <>
             <Grid sx={2} md={2} gap={4}>
-            {/*<div className='grid gap-4 grid-cols-2 ipad:grid-cols-2'>*/}
               {
                 products?.map((item, index) => (
                     <Product

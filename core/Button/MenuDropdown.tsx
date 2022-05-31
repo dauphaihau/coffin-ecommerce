@@ -1,5 +1,5 @@
 import {Menu, Transition} from '@headlessui/react'
-import React, {Fragment} from 'react'
+import React, {forwardRef, Fragment, useEffect, useRef} from 'react'
 import {Link} from "../Next";
 
 interface MenuDropdownProps {
@@ -12,8 +12,18 @@ interface MenuDropdownProps {
   }[],
 }
 
-export default function CustomMenuDropdown(props: MenuDropdownProps) {
+const MenuDropdownCustom = forwardRef((props: MenuDropdownProps, ref) => {
+
+  const someInternalRef = useRef('someValue').current;
+
+  useEffect(() => {
+    if (!ref) return;
+    typeof ref === 'function' ? ref(someInternalRef) : (ref.current = someInternalRef);
+    return () => typeof ref === 'function' ? ref(null) : (ref.current = null);
+  }, [someInternalRef, ref])
+
   const {options} = props;
+
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -21,11 +31,6 @@ export default function CustomMenuDropdown(props: MenuDropdownProps) {
          px-4 py-2 text-sm font-medium text-black hover:bg-gray-400 animate
          hover:bg-opacity-30 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           <i className="fa-solid fa-ellipsis-vertical"></i>
-          {/*Options*/}
-          {/*<ChevronDownIcon*/}
-          {/*  className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"*/}
-          {/*  aria-hidden="true"*/}
-          {/*/>*/}
         </Menu.Button>
       </div>
       <Transition
@@ -46,7 +51,8 @@ export default function CustomMenuDropdown(props: MenuDropdownProps) {
                 {({active}) => (
                   <Link href={item.href ?? ''}>
                     <button
-                      onClick={item.feature ? () => item.feature() : () => {}}
+                      onClick={item.feature ? () => item.feature() : () => {
+                      }}
                       className={`${
                         active ? 'text-gray-700 bg-light-200' : 'text-black'
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -65,4 +71,5 @@ export default function CustomMenuDropdown(props: MenuDropdownProps) {
       </Transition>
     </Menu>
   )
-}
+})
+export default MenuDropdownCustom

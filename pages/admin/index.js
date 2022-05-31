@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {userService} from "../../services/users";
 import {formatPrice} from "../../utils/helpers";
 import {useUIController} from "../../context/UIControllerContext";
-import {Grid} from "../../core/Layout";
+import {Grid, Row} from "../../core/Layout";
 import Image from "../../core/Next/Image";
 import {Helmet} from "../../layouts/admin/common/Helmet";
 import Table from "../../core/Table";
@@ -10,15 +10,19 @@ import {Text} from "../../core";
 
 const Dashboard = () => {
 
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
   const {progress, setProgress} = useUIController();
 
   useEffect(() => {
     const fetchData = async () => {
       setProgress(progress + 30)
       const res = await userService.getAll();
-      setProgress(100)
-      setUsers(res.data)
+      if (res) {
+        setLoading(false)
+        setProgress(100)
+        setUsers(res?.data)
+      }
     }
     fetchData();
   }, [])
@@ -75,33 +79,27 @@ const Dashboard = () => {
 
   return (
     <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
-      {/*<Grid sx={3} lg={3} gap={4}>*/}
-      <div className='grid laptop:grid-cols-3 gap-x-4'>
-        {/*<Grid sx={3} xl={3} gap={4}>*/}
+        <Grid sx={3} lg={3} gap={4}>
         {data.map((e, id) => (
           <div key={id} className="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
             <div className='h-full'>
-              <div className="flex justify-between">
-                <p className='text-gray-500 font-bold text-sm'>{e.title}</p>
-                <p className=' text-[#8592a9] text-[13px]'>6 May - 7 May</p>
-              </div>
-              <p className='text-xl text-gray-700 font-semibold my-1'>{e.number} </p>
-              <p className='text-[#8592a9] text-sm'>
-                <span className='text-[#96d245] font-bold text-sm mr-1 '>{e.percentage}</span>
-                since last month</p>
+              <Row justify='between'>
+                <Text classes='text-gray-500 font-bold text-sm'>{e.title}</Text>
+                <Text classes=' text-[#8592a9] text-[13px]'>6 May - 7 May</Text>
+              </Row>
+              <Text weight='semibold' classes='text-xl text-gray-700 my-1'>{e.number} </Text>
+              <Text classes='text-[#8592a9] text-sm'>
+                <Text weight='bold' span classes='text-[#96d245] text-sm mr-1'>{e.percentage}</Text>since last month
+              </Text>
             </div>
-
-            {/*<div>*/}
-            {/*  <i className="fa-solid fa-message p-4 bg-gradient-to-t from-gray-400 to-gray-300 rounded-xl text-black fa-circle-dollar "></i>*/}
-            {/*</div>*/}
           </div>
         ))}
-        {/*</Grid>*/}
-      </div>
+        </Grid>
       <Text sx='2xl' weight='bold' classes='mt-6 mb-3'>Best Salesman</Text>
       <Table
         hidePagination
         rowsPerPage={6}
+        loading={loading}
         columns={columns}
         rows={users?.list}
       />

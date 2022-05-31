@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 import {CarouselBanner, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
-import Carousel from "../core/Table/Carousel";
-// import Script from "next/script";
-//
+import Carousel from "../core/Carousel";
+
 const Home = ({inventoryData = []}) => {
 
   return (
@@ -13,10 +12,6 @@ const Home = ({inventoryData = []}) => {
         <meta name="description" content="Coffin ECommerce Next provides a way to quickly get up and running with a fully configurable ECommerce site using Next.js."/>
         <meta property="og:title" content="Coffin ECommerce" key="title"/>
       </Head>
-
-      {/*<Script src="https://cdn.quilljs.com/1.3.6/quill.snow.css"></Script>*/}
-      {/*<Script src="https://cdn.quilljs.com/1.3.6/quill.js"></Script>*/}
-
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <FlashSale inventoryData={inventoryData}/>
       <CarouselBanner/>

@@ -89,13 +89,13 @@ const AdminSidebar = () => {
   const handleActive = (link) => router.pathname === link.href
 
   return (
-    // <aside className="hidden laptop:block w-[18%] h-full shadow-2xl rounded-2xl" aria-label="Sidebar">
     <aside className='sidebar' aria-label="Sidebar">
       <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901'>
         <Row justify='center'>
           <Link href="/">
             <img
-              src={`/images/logo${isDarkMode() ? '-dark' : ''}.png`}
+              src='/images/logo.png'
+              // src={`/images/logo${isDarkMode() ? '-dark' : ''}.png`}
               alt="logo"
               className='ipad:h-[55px]'
             />

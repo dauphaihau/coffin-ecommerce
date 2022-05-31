@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 import * as Yup from "yup";
 
-import {Grid, Stack} from "@core/Layout";
+import {Grid} from "@core/Layout";
 import {Input, Select, Switch, AvatarInput} from "@core/Input";
 import {Button} from "@core/Button";
 import {userService} from "@services/users";
@@ -76,7 +76,6 @@ const UserEdit = () => {
       if (res.message === 'you are not authorized') {
         return toast.error(res.message)
       }
-      console.log('res-message', res)
       if (errors) {
         setError('email', {
           type: "server",

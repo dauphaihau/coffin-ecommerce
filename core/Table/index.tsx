@@ -21,6 +21,7 @@ interface PropsTable {
   onChange?: (params) => {},
   rowsPerPage?: number,
   totalRows?: number,
+  loading?: ReactNode,
   align?: 'center' | 'left' | 'right',
   hidePagination?: boolean,
 }
@@ -34,6 +35,7 @@ const Table = (props: PropsTable) => {
     hidePagination,
     onChange = () => {},
     onChangeCheckbox,
+    loading,
     searchInputSelection,
     checkboxSelection, ...res
   } = props;
@@ -61,7 +63,7 @@ const Table = (props: PropsTable) => {
   };
 
   const handleRowsPerPageChange = (value) => {
-    console.log('value', value)
+    // console.log('value', value)
     const limit = value
     setRowsPerPage(limit);
     // query.setFrom(0)
@@ -177,6 +179,7 @@ const Table = (props: PropsTable) => {
           {TableColumn()}
           <tbody>
             <TableRow
+              loading={loading}
               rowsPerPage={rowsPerPage}
               currentPage={currentPage}
               quantityRows={rows.length}

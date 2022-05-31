@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import {userService} from "@services/users";
 import {useUIController} from "@context/UIControllerContext";
@@ -16,23 +16,27 @@ import {uiControllerActionsType} from "../../../store/reducers/uiControllerReduc
 
 const UserList = () => {
   const router = useRouter();
-  const [users, setUsers] = useState()
-  // const [loading, setLoading] = useState(true)
   const {progress, dispatch, setProgress, confirmDeleteUser} = useUIController();
-  // console.log('res', res)
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const getAllUsers = useCallback(
+    async () => {
       setProgress(progress + 30)
       const res = await userService.getAll();
-      setProgress(100)
-      setUsers(res.data)
-      // setLoading(false)
-    }
-    fetchData();
-  }, [])
+      if (res) {
+        setProgress(100)
+        setUsers(res.data)
+        setLoading(false)
+      }
+    }, []
+  )
 
-  console.log('confirm-delete-user', confirmDeleteUser)
+  useEffect(() => {
+    getAllUsers();
+  }, [getAllUsers])
+
+  // console.log('confirm-delete-user', confirmDeleteUser)
 
   const dataBreadcrumb = [
     {path: "/admin", name: "Dashboard", firstLink: true},
@@ -93,8 +97,9 @@ const UserList = () => {
     },
     {
       id: 'actions', align: 'center',
-      render: (row) => <>
+      render: (row) => (
         <MenuDropdown
+          ref={null}
           options={[
             {
               label: 'Lock',
@@ -113,7 +118,7 @@ const UserList = () => {
             },
           ]}
         />
-      </>
+      )
     },
   ];
 
@@ -148,12 +153,15 @@ const UserList = () => {
     <>
       <div className='flex items-center justify-between'>
         <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
+
+        {/*<Loading/>*/}
         <Link href='/admin/users/new'>
           <Button classes='ml-auto mb-4' icon={<i className="fa-solid fa-plus"/>}> New User</Button>
         </Link>
       </div>
       <Table
         onChangeCheckbox={handleDeleteMultiItems}
+        loading={loading}
         // checkboxSelection
         columns={columns}
         // rowsPerPage={5}

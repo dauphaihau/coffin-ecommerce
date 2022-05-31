@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 import moment from "moment";
 import {toast} from "react-hot-toast";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 import {productService} from "@services/products";
 import {formatPrice} from "@utils/helpers";
@@ -14,24 +14,38 @@ import {Link} from "../../../core/Next";
 import {Row} from "../../../core/Layout";
 import Table from "../../../core/Table";
 
+
+const dataBreadcrumb = [
+  {path: "/admin", name: "Dashboard", firstLink: true},
+  {path: "/admin/products", name: "Products"},
+  {path: "", name: "List", lastLink: true}
+];
+
 const ProductList = () => {
   const router = useRouter();
-  const [products, setProducts] = useState()
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const [params, setParams] = useState({
     skip: 0, limit: 3
   })
   const {progress, setProgress} = useUIController();
 
-  useEffect(() => {
-    const fetchData = async () => {
+
+  const getAllProducts = useCallback(
+    async () => {
       setProgress(progress + 30)
       // const res = await productService.getAll(params);
       const res = await productService.getAll();
-      setProgress(100)
-      setProducts(res?.data)
-    }
-    fetchData();
-  }, [params])
+      if (res) {
+        setProgress(100)
+        setProducts(res.data)
+        setLoading(false)
+      }
+    }, []
+  )
+  useEffect(() => {
+    getAllProducts();
+  }, [getAllProducts])
 
   const handleQuantity = (quantity) => {
     if (quantity == 0) {
@@ -61,7 +75,7 @@ const ProductList = () => {
     {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('LL')}</>},
     {
       id: 'actions', title: '', align: 'center',
-      render: (row) => <>
+      render: (row) => (
         <MenuDropdown
           options={[
             {
@@ -76,15 +90,10 @@ const ProductList = () => {
             },
           ]}
         />
-      </>
+      )
     },
   ];
 
-  const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "/admin/products", name: "Products"},
-    {path: "", name: "List", lastLink: true}
-  ];
 
   async function handleDelete(id) {
     if (!window.confirm('Are you sure?')) {
@@ -115,12 +124,11 @@ const ProductList = () => {
   }
 
   const handleOnChangeTable = (values) => {
-    console.log('values', values)
-    setParams({ ...params, ...values  })
+    setParams({...params, ...values})
   }
 
   // console.log('products', products)
-  console.log('params', params)
+  // console.log('params', params)
 
   return (
     <>
@@ -133,10 +141,11 @@ const ProductList = () => {
       <Table
         searchInputSelection
         checkboxSelection
-        // onChange={(values) => setParams((preParams) => {...preParams, ...values})}
+        // onChange={(values) => setParams(values)}
         onChange={handleOnChangeTable}
         // onChange={setParams}
         onChangeSelected={handleDeleteMultiItems}
+        loading={loading}
         // rowsPerPage={3}
         rowsPerPageOptions={[3, 5, 25]}
         // rowsPerPageOptions={[3, 4, 5]}

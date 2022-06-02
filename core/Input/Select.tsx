@@ -1,12 +1,17 @@
 import React, {ChangeEvent, Fragment, useEffect, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
+import {classNames} from "../../utils/helpers";
 
-interface Props {
-  options: {
-    label: string,
-    value: string | number,
-  }[],
+type OptionValue = number | string;
+
+type Option<Type extends OptionValue> = {
+  value: Type;
+  label: string;
+};
+
+interface SelectProps<Type extends OptionValue> {
+  options: Option<Type>[];
   label?: string,
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   size?: string,
@@ -17,11 +22,7 @@ interface Props {
   classesBtn?: string,
 }
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Select(props: Props) {
+function Select<Type extends OptionValue>(props: SelectProps<Type>) {
   const {
     options,
     onChange,
@@ -118,3 +119,5 @@ export default function Select(props: Props) {
     </Listbox>
   )
 }
+
+export default Select

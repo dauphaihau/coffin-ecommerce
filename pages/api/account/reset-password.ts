@@ -1,39 +1,52 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import handler from "./forgot-password";
-import bcrypt from "bcryptjs";
+import {NextApiRequest, NextApiResponse} from 'next';
+import nc from 'next-connect';
+import bcrypt from 'bcryptjs';
 
-// const sendEmail = require('../../../server/middlewares/email')
 const bcryptSalt = process.env.BCRYPT_SALT;
-import Token from "../../../server/models/Token";
-import User from "../../../server/models/User";
+import Token from '../../../server/models/Token';
+import User from '../../../server/models/User';
 
-handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = nc();
+handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   const {userId, token, password} = req.body
 
-  let passwordResetToken = await Token.findOne({userId});
-  if (!passwordResetToken) {
-    throw new Error("Invalid or expired password reset token");
+  try {
+    let dataTokenUser = await Token.findOne({userId});
+    if (!dataTokenUser) {
+      res.send({
+        status: '401',
+        message: 'User does not exists! '
+      });
+    }
+    bcrypt.hash(dataTokenUser.token, 10, function (err, hash) {
+      if (err) throw (err);
+      bcrypt.compare(token, hash, function (err, result) {
+        if (err) {
+          res.status(401);
+          res.send({
+            status: '401',
+            message: 'Invalid or expired password reset token'
+          });
+        }
+        console.log(result);
+      });
+    });
+
+    const hash = await bcrypt.hash(password, Number(bcryptSalt));
+    await User.updateOne(
+      {_id: userId},
+      {$set: {password: hash}},
+      {new: true}
+    );
+    return res.send({
+      status: '200',
+      message: 'Password has been reseted!'
+    });
+  } catch (error) {
+    console.log('error', error)
+    return res.status(422).send('Ooops, something went wrong!');
   }
-  const isValid = await bcrypt.compare(token, passwordResetToken.token);
-  if (!isValid) {
-    throw new Error("Invalid or expired password reset token");
-  }
-  const hash = await bcrypt.hash(password, Number(bcryptSalt));
-  await User.updateOne(
-    {_id: userId},
-    {$set: {password: hash}},
-    {new: true}
-  );
-  const user = await User.findById({_id: userId});
-  // sendEmail(
-  //   user.email,
-  //   "Password Reset Successfully",
-  //   {
-  //     name: user.name,
-  //   },
-  //   "./layouts/resetPassword.handlebars"
-  // );
-  await passwordResetToken.deleteOne();
-  return true;
 });
+
+export default handler
 

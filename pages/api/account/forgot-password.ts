@@ -1,74 +1,54 @@
 import nc from 'next-connect';
 import crypto from 'crypto';
-import bcrypt from "bcryptjs";
-import {NextApiRequest, NextApiResponse} from "next";
-let nodemailer = require('nodemailer')
+import bcrypt from 'bcryptjs';
+import {NextApiRequest, NextApiResponse} from 'next';
+const {sendConfirmationEmail, sendResetPasswordEmail} = require('../../../server/middlewares/mailer');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
 import User from '../../../server/models/User';
 import Token from '../../../server/models/Token';
-import db from "../../../server/db/db";
-import fs from "fs";
-import path from "path";
+import db from '../../../server/db/db';
+import mongoose from "mongoose";
 
 const handler = nc();
+// const Token = mongoose.model('Token')
+
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    await db.connect();
+    let user = await User.findOne({email: req.body.email});
+    if (!user) res.send({
+      status: '401',
+      message: 'User does not exists! '
+    });
 
-  await db.connect();
-  let user = await User.findOne({email: req.body.email});
-  // if (!user) throw new Error("User does not exist");
-  if (!user) res.status(401).send("User does not exist");
+    let token = await Token.findOne({userId: user._id});
+    if (token) await token.deleteOne();
 
-  let token = await Token.findOne({userId: user._id});
-  if (token) await token.deleteOne();
+    // token will send to the user
+    let resetToken = crypto.randomBytes(32).toString('hex');
+    const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
 
-  // token will send to the user
-  let resetToken = crypto.randomBytes(32).toString("hex");
-  const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+    await sendResetPasswordEmail({toUser: user, token: hash});
+    // await sendResetPasswordEmail({toUser: user, hash: hash._id});
 
-  await new Token({
-    userId: user._id,
-    token: hash,
-    createdAt: Date.now(),
-  }).save();
+    await new Token({
+      userId: user._id,
+      token: hash,
+      createdAt: Date.now(),
+    }).save();
 
-  await db.disconnect();
-  // const link = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
-  const link = `https://coffin-ecommerce.vercel.app/reset-password?token=${resetToken}&id=${user._id}`;
+    await db.disconnect();
 
-  // await sendEmail(user.email, "Password Reset Request", {
-  //   name: user.name,
-  //   link: link,
-  // }, "./layouts/requestResetPassword.handlebars");
-  // return link;
-
-  const transporter = nodemailer.createTransport({
-    port: 465,
-    host: "smtp.gmail.com",
-    auth: {
-      user: 'mailtestcoffin@gmail.com',
-      pass: 'Landmaro12',
-    },
-    secure: true,
-  })
-
-  const mailData = {
-    from: 'demo@demo.com',
-    to: 'your email',
-    subject: `Message From coffin-store@gmail.com`,
-    text: `abckabcla`,
-    // html: <div>{req.body.message}</div>
+    // return res.status(200).json({message: 'Please check your email to reset the password!'})
+    return res.send({
+      status: '200',
+      message: 'Please check your email to reset the password!'
+    });
+  } catch (error) {
+    console.log('error', error)
+    return res.status(422).send('Ooops, something went wrong!');
   }
-
-  // Send email
-  await transporter.sendMail(mailData, (err, info) => {
-    if (err)
-      console.log(err)
-    else
-      console.log(info)
-  })
-
-  res.status(200)
 });
 
 export default handler;

@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import nc from 'next-connect';
-import bcrypt from "bcryptjs";
+const bcrypt = require('bcryptjs');
+const nc = require('next-connect');
 
 import User from '../../../server/models/User';
 import {signToken} from '../../../server/middlewares/auth';

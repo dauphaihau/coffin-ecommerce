@@ -90,7 +90,7 @@ const AdminSidebar = () => {
 
   return (
     <aside className='sidebar' aria-label="Sidebar">
-      <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901'>
+      <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901 rounded-2xl'>
         <Row justify='center'>
           <Link href="/">
             <img

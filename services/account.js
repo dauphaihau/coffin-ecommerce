@@ -32,9 +32,22 @@ export const accountService = {
     }
   },
 
+  // updatePassword: async (values) => {
+  //   try {
+  //     await axios.put('/api/account/change-pass', values, getHeaders());
+  //     return {isLoading: false, isSuccess: true};
+  //   } catch ({response}) {
+  //     return {
+  //       isSuccess: false,
+  //       isLoading: false,
+  //       message: response?.data.message,
+  //     };
+  //   }
+  // },
   updatePassword: async (values) => {
+    console.log('values', values)
     try {
-      await axios.put('/api/account/change-pass', values, getHeaders());
+      await axios.put('/api/account/reset-password', values);
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

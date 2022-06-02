@@ -10,10 +10,10 @@ import {Checkbox, Input} from "../../../../core/Input";
 import {Button} from "../../../../core/Button";
 import {accountService} from "../../../../services/account";
 import {Text} from "../../../../core";
-import {Modal} from "../../../../core/Modal";
-import {Col, Row} from "../../../../core/Layout";
+import {Row} from "../../../../core/Layout";
 import Dialog from "../../../../core/Modal/Dialog";
-import {XIcon} from "@heroicons/react/solid";
+import {UserIcon as UserIconSolid, XIcon} from "@heroicons/react/solid";
+import {Link} from "../../../../core/Next";
 
 const LoginRegisterModal = () => {
   const [currentForm, setCurrentForm] = useState('login')
@@ -42,8 +42,8 @@ const LoginRegisterModal = () => {
       title: 'Login',
       message: '',
       textButton: 'Login to your account',
-      labelTextFooter: 'Not registered?',
-      textFooter: 'Create account'
+      labelTextFooter: 'Don\'t have an account?',
+      textFooter: 'Create one'
     },
     register: {
       title: 'Register',
@@ -102,21 +102,22 @@ const LoginRegisterModal = () => {
 
   const handleLogin = async (values) => {
     setIsBtnLoading(true)
-    const res = await accountService.login(values)
-    setIsBtnLoading(res.isLoading)
+    const {isSuccess, isLoading, data, message} = await accountService.login(values)
+    // const res = await accountService.login(values)
+    setIsBtnLoading(isLoading)
 
-    if (res.isSuccess) {
-      if (res.data.role !== 'customer') {
+    if (isSuccess) {
+      if (data.role !== 'customer') {
         await router.push('/admin')
       }
-      setUser({...user, ...res.data})
+      setUser({...user, ...data})
       setIsAuthorize(true)
       closeDrawerModal();
     } else {
       if (errors) {
         setError('email', {
           type: "server",
-          message: res.message
+          message
         });
       }
     }
@@ -124,25 +125,25 @@ const LoginRegisterModal = () => {
 
   const handleRegister = async (values) => {
     setIsBtnLoading(true)
-    const res = await accountService.register(values)
-    setIsBtnLoading(res.isLoading)
+    const {isSuccess, isLoading, data, message} = await accountService.register(values)
+    setIsBtnLoading(isLoading)
 
-    if (res.isSuccess) {
-      setUser({...user, ...res.data})
+    if (isSuccess) {
+      setUser({...user, ...data})
       setIsAuthorize(true)
       closeDrawerModal();
     } else {
       if (errors) {
         setError('email', {
           type: "server",
-          message: res.message
+          message
         });
       }
     }
   }
 
   const handleForgotPassword = async (values) => {
-    // console.log('values', values)
+    console.log('values', values)
     const {email} = values;
     const res = await accountService.forgotPassword({email})
     console.log('res', res)
@@ -189,10 +190,13 @@ const LoginRegisterModal = () => {
             currentForm === 'login' &&
             <Row justify='between' align='center'>
               <Checkbox name='rememberMe' label='Remember me'/>
-              <Text
-                as='button' classes="text-sm text-black hover:underline pt-[2px]"
-                onClick={() => setCurrentForm('forgotPassword')}
-              >Forgot Password?</Text>
+              {/*<Text*/}
+              {/*  as='button' classes="text-sm text-black hover:underline pt-[2px]"*/}
+              {/*  onClick={() => setCurrentForm('forgotPassword')}*/}
+              {/*>Forgot Password?</Text>*/}
+              <Link href='/forgot-password'>
+                <Text as='button' classes="text-sm text-black hover:underline pt-[2px]">Forgot Password?</Text>
+              </Link>
             </Row>
           }
           <Button

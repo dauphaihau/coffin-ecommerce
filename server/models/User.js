@@ -9,9 +9,11 @@ const userSchema = new mongoose.Schema(
     password: { type: String },
     address: { type: String },
     phoneNumber: { type: String },
+    role: { type: String, required: true },
+
     isVerified: {type: Boolean},
     isBanned: {type: Boolean},
-    role: { type: String, required: true },
+    // status: {type: Number}
   },
   {
     timestamps: true,

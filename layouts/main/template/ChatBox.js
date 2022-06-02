@@ -39,8 +39,7 @@ const ChatBox = () => {
       {
         !openChatBox
           ? <div
-            className='p-3 px-4 bg-black rounded-full fixed bottom-[2%] right-[1%] z-10
-
+            className='p-3 px-4 bg-black rounded-full fixed bottom-[2%] right-[1%] z-30
            cursor-pointer
            drop-shadow-2xl '
             onClick={() => setOpenChatBox(true)}

@@ -14,6 +14,8 @@ interface MenuDropdownProps {
 
 const MenuDropdownCustom = forwardRef((props: MenuDropdownProps, ref) => {
 
+  const {options} = props;
+
   const someInternalRef = useRef('someValue').current;
 
   useEffect(() => {
@@ -22,7 +24,6 @@ const MenuDropdownCustom = forwardRef((props: MenuDropdownProps, ref) => {
     return () => typeof ref === 'function' ? ref(null) : (ref.current = null);
   }, [someInternalRef, ref])
 
-  const {options} = props;
 
   return (
     <Menu as="div" className="relative inline-block text-left">

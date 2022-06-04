@@ -9,18 +9,31 @@ import {Grid} from "@core/Layout";
 import {Input, Select, Switch, AvatarInput} from "@core/Input";
 import {Button} from "@core/Button";
 import {userService} from "@services/users";
-import {roleOpts} from "@assets/data/options";
 import {useAuth} from "@context/authContext";
 import {Paper} from "@core";
 import {Helmet} from "../../../../layouts/admin/common/Helmet";
 import {Col, Row} from "../../../../core/Layout";
 import {Link} from "../../../../core/Next";
+import {ROLE_OPTIONS, USER_STATUS} from "../../../../utils/enums";
+import {capitalize} from "../../../../utils/helpers";
+
+const handleRole = (role) => {
+  let arr = [];
+  for (let n in ROLE_OPTIONS) {
+    if (typeof ROLE_OPTIONS[n] === 'number') arr.push(n);
+  }
+  let options = arr.map((opt) => ({
+    label: capitalize(ROLE_OPTIONS[ROLE_OPTIONS[opt]].toLowerCase()),
+    value: ROLE_OPTIONS[opt]
+  }));
+  return options.filter(({value}) => role !== ROLE_OPTIONS.ADMIN ? value !== ROLE_OPTIONS.ADMIN : value)
+}
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
   const {user: userInfo} = useAuth();
-  const [isBanned, setIsBanned] = useState(false)
+  const [statusBadgeLock, setStatusBadgeLock] = useState()
   const [user, setUser] = useState()
 
   useEffect(() => {
@@ -30,9 +43,10 @@ const UserEdit = () => {
 
   const loadInit = async () => {
     const {id} = router.query;
-    const res = await userService.detail(id);
-    setUser(res.data)
-    setIsBanned(res.data.isBanned)
+    const {data} = await userService.detail(id);
+    setUser(data)
+    setStatusBadgeLock(data.status)
+    // setIsLocked(data.status)
   }
 
   const dataBreadcrumb = [
@@ -62,8 +76,7 @@ const UserEdit = () => {
 
   const onSubmit = async (values) => {
     const formatForm = {
-      ...values,
-      role: values.role.value ?? values.role
+      ...values, role: values.role.value ?? values.role
     }
     setIsBtnLoading(true)
     const res = await userService.update(formatForm)
@@ -96,8 +109,8 @@ const UserEdit = () => {
           <Grid md={2} lg={2} gapx={4} classes='w-[60rem] laptop:max-w-[80rem]'>
             <Paper>
               <div className='text-right mb-6'>
-                {isBanned ?
-                  <span className="badge-danger">Banned</span>
+                {statusBadgeLock === USER_STATUS.LOCKED ?
+                  <span className="badge-danger">Locked</span>
                   : <span className="badge-green">Active</span>
                 }
               </div>
@@ -109,32 +122,33 @@ const UserEdit = () => {
               </div>
               <Row align='center' justify='between' classes='mb-4'>
                 <div>
-                  <p className='font-bold text-[0.875rem]'>Banned</p>
+                  <p className='font-bold text-[0.875rem]'>Locked</p>
                   <p className='text-gray-500 text-[0.875rem]'>Apply disable account</p>
                 </div>
                 <Controller
                   control={control}
-                  name='isBanned'
+                  name='status'
                   render={({field: {onChange, value}}) => (
-                    <Switch value={value} onChange={(e) => {
-                      onChange(e);
-                      setIsBanned(e);
+                    <Switch value={value === USER_STATUS.LOCKED} onChange={(e) => {
+                      // console.log('eee', e)
+                      onChange(e ? USER_STATUS.LOCKED : USER_STATUS.ACTIVE);
+                      setStatusBadgeLock(e ? USER_STATUS.LOCKED : USER_STATUS.ACTIVE);
                     }}/>)}
                 />
               </Row>
-              <Row align='center' justify='between' classes='mb-4'>
-                <div>
-                  <p className='font-bold text-[0.875rem]'>Email Verified</p>
-                  <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a
-                    verification email</p>
-                </div>
-                <Controller
-                  control={control}
-                  name='isVerified'
-                  render={({field: {onChange, value}}) => (
-                    <Switch value={value} onChange={onChange}/>)}
-                />
-              </Row>
+              {/*<Row align='center' justify='between' classes='mb-4'>*/}
+              {/*  <div>*/}
+              {/*    <p className='font-bold text-[0.875rem]'>Email Verified</p>*/}
+              {/*    <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a*/}
+              {/*      verification email</p>*/}
+              {/*  </div>*/}
+              {/*  <Controller*/}
+              {/*    control={control}*/}
+              {/*    name='isVerified'*/}
+              {/*    render={({field: {onChange, value}}) => (*/}
+              {/*      <Switch value={value} onChange={onChange}/>)}*/}
+              {/*  />*/}
+              {/*</Row>*/}
             </Paper>
             <Paper classes='h-fit'>
               <Grid md={1} lg={2} gapx={4}>
@@ -154,7 +168,7 @@ const UserEdit = () => {
                     size='medium'
                     name='role'
                     title='Role'
-                    options={roleOpts.filter(({value}) => userInfo?.role !== 'admin' ? value !== 'admin' : value)}
+                    options={handleRole(user?.role)}
                     value={value}
                     onChange={onChange}
                   />

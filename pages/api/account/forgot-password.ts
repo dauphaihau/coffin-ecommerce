@@ -1,17 +1,15 @@
 import nc from 'next-connect';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs');
 import {NextApiRequest, NextApiResponse} from 'next';
-const {sendConfirmationEmail, sendResetPasswordEmail} = require('../../../server/middlewares/mailer');
+const {sendResetPasswordEmail} = require('../../../server/middlewares/mailer');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
 import User from '../../../server/models/User';
 import Token from '../../../server/models/Token';
 import db from '../../../server/db/db';
-import mongoose from "mongoose";
 
 const handler = nc();
-// const Token = mongoose.model('Token')
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
@@ -40,7 +38,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     await db.disconnect();
 
-    // return res.status(200).json({message: 'Please check your email to reset the password!'})
     return res.send({
       status: '200',
       message: 'Please check your email to reset the password!'

@@ -3,6 +3,7 @@ import {UserIcon as UserIconSolid, UserGroupIcon} from "@heroicons/react/solid";
 import {useUIController} from "../../../../context/UIControllerContext";
 import {useAuth} from "../../../../context/authContext";
 import {Link} from "../../../../core/Next";
+import {ROLE_OPTIONS} from "../../../../utils/enums";
 
 function NavControl() {
   const {dispatch} = useUIController();
@@ -30,7 +31,7 @@ function NavControl() {
         {
           isAuthorize
             ? <>
-              {user?.role === 'customer'
+              {user?.role === ROLE_OPTIONS.CUSTOMER
                 ? <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
                 : <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>
               }

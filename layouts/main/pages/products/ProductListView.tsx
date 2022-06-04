@@ -1,4 +1,4 @@
-import {DENOMINATION} from "../../../../utils/constant";
+import {DENOMINATION} from "../../../../utils/enums";
 import {Image, Link, Text} from "../../../../core";
 import {Col, Row} from "../../../../core/Layout";
 

@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import getConfig from "next/config";
+import {ROLE_OPTIONS} from "../../utils/enums";
 
 const {publicRuntimeConfig} = getConfig();
 
@@ -38,12 +39,12 @@ const isAuth = async (req, res, next) => {
       }
     });
   } else {
-    res.status(401).send({message: 'Token is not suppiled'});
+    res.status(401).send({message: 'Token is not supplied'});
   }
 };
 
 const isAdmin = async (req, res, next) => {
-  if (req.user.role !== 'admin') {
+  if (req.user.role !== ROLE_OPTIONS.ADMIN) {
     res.status(401).send({message: 'you are not authorized'});
   } else {
     next();
@@ -51,7 +52,7 @@ const isAdmin = async (req, res, next) => {
 };
 
 const rolesCanView = async (req, res, next) => {
-  if (req.user.role === 'customer') {
+  if (req.user.role === ROLE_OPTIONS.CUSTOMER) {
     res.status(401).send({message: 'you are not authorized'});
   } else {
     next();
@@ -59,7 +60,7 @@ const rolesCanView = async (req, res, next) => {
 };
 
 const rolesCanCreate = async (req, res, next) => {
-  if (req.user.role === 'staff') {
+  if (req.user.role === ROLE_OPTIONS.STAFF) {
     res.status(401).send({message: 'you are not authorized'});
   } else {
     next();
@@ -67,7 +68,7 @@ const rolesCanCreate = async (req, res, next) => {
 };
 
 const rolesCanUpdate = async (req, res, next) => {
-  if (req.user.role === 'staff') {
+  if (req.user.role === ROLE_OPTIONS.STAFF) {
     res.status(401).send({message: 'you are not authorized'});
   } else {
     next();
@@ -75,7 +76,7 @@ const rolesCanUpdate = async (req, res, next) => {
 };
 
 const rolesCanDelete = async (req, res, next) => {
-  if (req.user.role === 'staff') {
+  if (req.user.role === ROLE_OPTIONS.STAFF) {
     res.status(401).send({message: 'you are not authorized'});
   } else {
     next();

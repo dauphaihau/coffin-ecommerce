@@ -6,7 +6,7 @@ import {Grid, Stack} from "../../../../../core/Layout";
 import {Link, Text, Tooltip} from "../../../../../core";
 import {Input} from "../../../../../core/Input";
 import {useAuth} from "../../../../../context/authContext";
-import {DENOMINATION} from "../../../../../utils/constant";
+import {DENOMINATION} from "../../../../../utils/enums";
 import {formatPrice} from "../../../../../utils/helpers";
 import Table from "../../../../../core/Table";
 

@@ -24,8 +24,11 @@ const ThirdStepCheckout = (props) => {
   }
 
   function updateCart(res) {
+    console.log('res', res)
     setUser({...user, ...res})
   }
+
+  console.log('user', user)
 
   return (
     <Grid lg={6} gapx={8}>
@@ -39,8 +42,11 @@ const ThirdStepCheckout = (props) => {
         </div>
         <div className='p-6 shadow border rounded-xl w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Payment options</Text>
-          <RadioGroupCustom directionClasses='flex-col ipad:flex-row'
-                            options={paymentOpts} onChange={(e) => updateCart({payment: e.value})}/>
+          <RadioGroupCustom
+            directionClasses='flex-col ipad:flex-row'
+            options={paymentOpts}
+            onChange={(e) => updateCart({payment: e.value})}
+          />
         </div>
         <Button light classes='font-bold px-0 mt-4' onClick={() => setSteps(2)}>
           <i className="fa-solid fa-angle-left mr-4"/>Back

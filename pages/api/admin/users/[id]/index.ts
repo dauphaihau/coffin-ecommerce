@@ -22,9 +22,10 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     user.password = req.body.password;
     user.address = req.body.address;
     user.email = req.body.email;
-    user.isVerified = req.body.isVerified;
-    user.isBanned = req.body.isBanned;
-    user.phoneNumber = req.body.phoneNumber;
+    // user.isVerified = req.body.isVerified;
+    // user.isBanned = req.body.isBanned;
+    user.phone = req.body.phone;
+    user.status = req.body.status;
     user.role = req.body.role;
     await user.save();
     await db.disconnect();

@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from 'next/server';
+import {ROLE_OPTIONS} from "../../utils/enums";
 
 export async function middleware(req: NextRequest) {
 
@@ -7,7 +8,7 @@ export async function middleware(req: NextRequest) {
 
     if (req.cookies.userInfo) {
         const userInfo = JSON.parse(req.cookies.userInfo)
-        if (userInfo.role !== "customer") {
+        if (userInfo.role !== ROLE_OPTIONS.CUSTOMER) {
             return NextResponse.json({message: 'Not authenticated.', status: 401})
         }
         return NextResponse.next();

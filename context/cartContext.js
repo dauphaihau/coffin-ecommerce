@@ -1,5 +1,5 @@
 import React, {createContext, Component} from 'react'
-import {STORAGE_KEY} from "../utils/constant";
+import {STORAGE_KEY} from "../utils/enums";
 import {calculateTotal, sumAllProduct} from "../utils/helpers";
 
 const initialState = {

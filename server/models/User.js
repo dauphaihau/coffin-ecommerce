@@ -1,19 +1,17 @@
 import mongoose from 'mongoose';
+
 const bcrypt = require("bcryptjs");
 const bcryptSalt = process.env.BCRYPT_SALT;
 
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String },
-    address: { type: String },
-    phoneNumber: { type: String },
-    role: { type: String, required: true },
-
-    isVerified: {type: Boolean},
-    isBanned: {type: Boolean},
-    // status: {type: Number}
+    name: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    password: {type: String},
+    address: {type: String},
+    phone: {type: String},
+    role: {type: Number, required: true},
+    status: {type: Number, required: true}
   },
   {
     timestamps: true,

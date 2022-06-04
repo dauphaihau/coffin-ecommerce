@@ -31,7 +31,6 @@ export const userService = {
   create: async (data) => {
     try {
       const res = await axios.post("/api/admin/users", data, getHeaders())
-      console.log('res', res)
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

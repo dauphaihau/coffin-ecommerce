@@ -174,6 +174,8 @@ function classNames(...classes: (false | null | undefined | string)[]) {
   return classes.filter(Boolean).join(" ");
 }
 
+export const capitalize = s => (s && s[0].toUpperCase() + s.slice(1)) || ""
+
 export {
   slugify,
   titleIfy,

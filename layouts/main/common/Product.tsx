@@ -4,7 +4,7 @@ import {useEffect, useRef} from "react";
 
 import dynamic from "next/dynamic";
 import { Link } from "../../../core/Next";
-import {DENOMINATION} from "../../../utils/constant";
+import {DENOMINATION} from "../../../utils/enums";
 const HoverEffect = dynamic(() => import('hover-effect'), {ssr: false});
 
 interface ProductProps {

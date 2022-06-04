@@ -1,24 +1,37 @@
-import * as Yup from "yup";
 import {useState} from "react";
 import {Controller, useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
+import * as Yup from "yup";
 
 import {useAuth} from "../../../context/authContext";
 import {AvatarInput, Input, Select, Switch} from "../../../core/Input";
-import {Col, Grid, Row, Stack} from "../../../core/Layout";
+import {Col, Grid, Row} from "../../../core/Layout";
 import {Link, Paper, Text} from "../../../core";
 import {Button} from "../../../core/Button";
-import {roleOpts} from "../../../assets/data/options";
 import {userService} from "../../../services/users";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
+import {ROLE_OPTIONS} from "../../../utils/enums";
+import {capitalize} from "../../../utils/helpers";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
   {path: "/admin/users", name: "Users"},
   {path: "", name: "New User", lastLink: true}
 ];
+
+const handleRole = (role) => {
+  let arr = [];
+  for (let n in ROLE_OPTIONS) {
+    if (typeof ROLE_OPTIONS[n] === 'number') arr.push(n);
+  }
+  let options = arr.map((opt) => ({
+    label: capitalize(ROLE_OPTIONS[ROLE_OPTIONS[opt]].toLowerCase()),
+    value: ROLE_OPTIONS[opt]
+  }));
+  return options.filter(({value}) => role !== ROLE_OPTIONS.ADMIN ? value !== ROLE_OPTIONS.ADMIN : value)
+}
 
 const NewUser = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -27,14 +40,14 @@ const NewUser = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
+    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
     email: Yup.string().email('Email is invalid').required('Email is required'),
   });
 
   const formOptions = {
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      role: roleOpts[0].value
+      role: ROLE_OPTIONS.STAFF
     }
   };
 
@@ -60,6 +73,7 @@ const NewUser = () => {
     }
   }
 
+
   return (
     <Helmet title='Create a new user' classes='w-2/3' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,6 +93,7 @@ const NewUser = () => {
                 render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
               />
             </Row>
+
           </Paper>
           <Paper classes='h-fit'>
             <Input label='Full Name *' name='name' register={register} errors={errors}/>
@@ -93,12 +108,12 @@ const NewUser = () => {
             <Controller
               control={control}
               name='role'
-              render={({field: {onChange, onBlur, value, ref}}) => (
+              render={({field: {onChange, value}}) => (
                 <Select
                   size='medium'
                   name='role'
                   title='Role'
-                  options={roleOpts.filter(({value}) => user?.role !== 'admin' ? value !== 'admin' : value)}
+                  options={handleRole(user?.role)}
                   value={value}
                   onChange={onChange}
                 />

@@ -5,6 +5,8 @@ import {useOnOutsideClick} from "../../../utils/hooks/useOnOutsideClick";
 import {Row} from "../../../core/Layout";
 import {useUIController} from "../../../context/UIControllerContext";
 import {Link} from "../../../core/Next";
+import {ROLE_OPTIONS} from "../../../utils/enums";
+import {capitalize} from "../../../utils/helpers";
 
 const Navbar = () => {
 
@@ -30,8 +32,8 @@ const Navbar = () => {
     <header className="fixed border-gray-200 desktop:w-4/5 monitor:w-[82%] z-30 bg-transparent pb-4">
 
       {/*<header className="fixed right-0 left-auto border-gray-200 w-4/5 desktop:w-[80%] z-30 bg-transparent pb-4">*/}
-    {/*<nav className="border-gray-200 bg-transparent dark:border-gray-700 py-4">*/}
-    {/*  <div className="flex flex-wrap justify-between items-center ">*/}
+      {/*<nav className="border-gray-200 bg-transparent dark:border-gray-700 py-4">*/}
+      {/*  <div className="flex flex-wrap justify-between items-center ">*/}
       <Row wrap='wrap' justify='between' align='center'>
         <Row>
           {/*<MenuIcon className='btn-icon w-10 h-10 mr-4 text-gray-600' onClick={() => {}}/>*/}
@@ -64,7 +66,8 @@ const Navbar = () => {
             <div className='navbar-admin__info' ref={innerRef} onClick={() => setDropdown(!dropdown)}>
               <div className='text-right mr-3 '>
                 <Text>{user?.name}</Text>
-                <Text>{user?.role}</Text>
+                <Text>{user?.role ? capitalize(ROLE_OPTIONS[user.role].toLowerCase()) : '-'}</Text>
+                {/*<Text>{user?.role}</Text>*/}
               </div>
               <img
                 className="h-10 w-10 rounded-full"
@@ -80,7 +83,7 @@ const Navbar = () => {
                       return (
                         <a
                           onClick={() => item.logout()}
-                           key={item.name}>
+                          key={item.name}>
                           {item.name}
                         </a>
                       )

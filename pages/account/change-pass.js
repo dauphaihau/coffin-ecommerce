@@ -35,7 +35,7 @@ const ChangePass = () => {
     const formatData = {...values, email: user.email}
 
     setIsBtnLoading(true)
-    const res = await accountService.updatePassword(formatData)
+    const res = await accountService.changePassword(formatData)
     setIsBtnLoading(res.isLoading)
 
     if (res.isSuccess) {

@@ -1,4 +1,4 @@
-import {DENOMINATION} from "../../../../utils/constant";
+import {DENOMINATION} from "../../../../utils/enums";
 import {Link} from "../../../../core";
 import {useEffect, useRef} from "react";
 // import HoverEffect from 'hover-effect';

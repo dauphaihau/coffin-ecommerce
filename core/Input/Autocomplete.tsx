@@ -5,15 +5,15 @@ import {uniqElement} from "../../utils/helpers";
 
 
 interface AutocompleteProps {
-  className: string,
-  placeholder: string,
-  defaultValue: string,
-  value: string | any,
-  label: string,
+  className?: string,
+  placeholder?: string,
+  defaultValue?: string,
+  value?: string | any,
+  label?: string,
   onChange: (event: { name: string; id: string }[]) => void;
   options: Array<{
     name: string,
-    id: string
+    id: string | number
   }>
 }
 
@@ -26,6 +26,7 @@ type Result = {
 export default function CustomAutocomplete({label, onChange, options, value}: AutocompleteProps ) {
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
+  // @ts-ignore
   const [arrResult, setArrResult] = useState<Result | null>([options[0]])
 
   useEffect(() => {

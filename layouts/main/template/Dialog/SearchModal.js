@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import {useUIController} from "../../../../context/UIControllerContext";
 import {fetchInventory} from "../../../../utils/provider/inventoryProvider";
 import {slugify} from "../../../../utils/helpers";
-import {DENOMINATION} from "../../../../utils/constant";
+import {DENOMINATION} from "../../../../utils/enums";
 import {Link, Text} from "../../../../core";
 import {Input} from "../../../../core/Input";
 import {Col, Row} from "../../../../core/Layout";

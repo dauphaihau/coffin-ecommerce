@@ -13,6 +13,8 @@ import Table from "../../../core/Table";
 import {Row} from "../../../core/Layout";
 import {Link} from "../../../core/Next";
 import {uiControllerActionsType} from "../../../store/reducers/uiControllerReducer";
+import {capitalize, isNil} from "../../../utils/helpers";
+import {ROLE_OPTIONS, USER_STATUS} from "../../../utils/enums";
 
 const UserList = () => {
   const router = useRouter();
@@ -57,12 +59,14 @@ const UserList = () => {
       )
     },
     {id: 'email', title: 'Email',},
-    {id: 'role', title: 'Role',},
+    {id: 'role', title: 'Role',
+      render: (row) => !isNil(row.role) ? capitalize(ROLE_OPTIONS[row.role].toLowerCase()) : '-'
+    },
     {
       id: 'verified', title: 'Verified', align: 'center',
-      render: (row) => (
+      render: ({status}) => (
         <>
-          {row.isVerified ?
+          {status !== USER_STATUS.NOT_ACTIVATED ?
             // <i className="fa-solid fa-badge-check"/>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd"
@@ -81,10 +85,10 @@ const UserList = () => {
     },
     {
       id: 'status', title: 'Status',
-      render: (row) => (
+      render: ({status}) => (
         <>
-          {row.isBanned ?
-            <Text span classes="badge-danger">Banned</Text>
+          {status === USER_STATUS.LOCKED ?
+            <Text span classes="badge-danger">Locked</Text>
             : <Text span classes="badge-green">Active</Text>
           }
         </>
@@ -104,7 +108,7 @@ const UserList = () => {
             {
               label: 'Lock',
               element: <i className='fa-solid fa-lock'/>,
-              feature: () => handleDelete(row._id)
+              // feature: () => handleDelete(row._id)
             },
             {
               label: 'Edit',

@@ -14,7 +14,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
     user.password = bcrypt.hashSync(req.body.newPassword)
     await user.save();
     await db.disconnect();
-    res.send({ message: 'Updated Successfully' });
+    res.send({message: 'Updated Successfully'});
   } else {
     await db.disconnect();
     res.status(401).send({message: 'Password not match'});

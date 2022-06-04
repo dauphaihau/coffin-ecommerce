@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import {useRouter} from "next/router";
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {XIcon} from "@heroicons/react/solid";
 
 import {useUIController} from "../../../../context/UIControllerContext";
 import {useAuth} from "../../../../context/authContext";
@@ -12,8 +13,27 @@ import {accountService} from "../../../../services/account";
 import {Text} from "../../../../core";
 import {Row} from "../../../../core/Layout";
 import Dialog from "../../../../core/Modal/Dialog";
-import {UserIcon as UserIconSolid, XIcon} from "@heroicons/react/solid";
 import {Link} from "../../../../core/Next";
+import {ROLE_OPTIONS} from "../../../../utils/enums";
+
+
+const formType = {
+  login: {
+    title: 'Login',
+    message: '',
+    textButton: 'Login to your account',
+    textFooter: 'Don\'t have an account?',
+    linkTextFooter: 'Create one'
+  },
+  register: {
+    title: 'Register',
+    message: '',
+    textButton: 'Register',
+    textFooter: 'Already have an account?',
+    linkTextFooter: 'Login'
+  },
+}
+
 
 const LoginRegisterModal = () => {
   const [currentForm, setCurrentForm] = useState('login')
@@ -37,30 +57,6 @@ const LoginRegisterModal = () => {
     setCurrentForm('login')
   }, [openLoginRegisterModal])
 
-  const formType = {
-    login: {
-      title: 'Login',
-      message: '',
-      textButton: 'Login to your account',
-      labelTextFooter: 'Don\'t have an account?',
-      textFooter: 'Create one'
-    },
-    register: {
-      title: 'Register',
-      message: '',
-      textButton: 'Register',
-      labelTextFooter: 'Already have an account?',
-      textFooter: 'Login'
-    },
-    forgotPassword: {
-      title: 'Forgot Password',
-      message: 'Enter the email address you used when you joined and we’ll send you instructions to reset your password.\n',
-      textButton: 'Send reset link',
-      labelTextFooter: '',
-      textFooter: ''
-    }
-  }
-
   const formOptions = {
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -75,7 +71,6 @@ const LoginRegisterModal = () => {
     formState: {errors},
   } = useForm(formOptions);
 
-
   useEffect(() => {
     if (currentForm === 'login') {
       setValue('email', 'customer@email.com')
@@ -87,27 +82,19 @@ const LoginRegisterModal = () => {
   }, [currentForm])
 
   const onSubmit = (data) => {
-    switch (currentForm) {
-      case 'login':
-        return handleLogin(data)
-        break;
-      case 'register':
-        return handleRegister(data)
-        break
-      case 'forgotPassword':
-        return handleForgotPassword(data)
-        break
+    if (currentForm === 'register') {
+      return handleRegister(data)
     }
+    return handleLogin(data)
   };
 
   const handleLogin = async (values) => {
     setIsBtnLoading(true)
     const {isSuccess, isLoading, data, message} = await accountService.login(values)
-    // const res = await accountService.login(values)
     setIsBtnLoading(isLoading)
 
     if (isSuccess) {
-      if (data.role !== 'customer') {
+      if (data.role !== ROLE_OPTIONS.CUSTOMER) {
         await router.push('/admin')
       }
       setUser({...user, ...data})
@@ -140,13 +127,6 @@ const LoginRegisterModal = () => {
         });
       }
     }
-  }
-
-  const handleForgotPassword = async (values) => {
-    console.log('values', values)
-    const {email} = values;
-    const res = await accountService.forgotPassword({email})
-    console.log('res', res)
   }
 
   return (
@@ -190,10 +170,6 @@ const LoginRegisterModal = () => {
             currentForm === 'login' &&
             <Row justify='between' align='center'>
               <Checkbox name='rememberMe' label='Remember me'/>
-              {/*<Text*/}
-              {/*  as='button' classes="text-sm text-black hover:underline pt-[2px]"*/}
-              {/*  onClick={() => setCurrentForm('forgotPassword')}*/}
-              {/*>Forgot Password?</Text>*/}
               <Link href='/forgot-password'>
                 <Text as='button' classes="text-sm text-black hover:underline pt-[2px]">Forgot Password?</Text>
               </Link>
@@ -208,7 +184,7 @@ const LoginRegisterModal = () => {
           {
             formType[currentForm].textFooter &&
             <Row classes="text-sm font-medium text-gray-500 dark:text-gray-300">
-              <Text noDarkMode span classes='mr-2'>{formType[currentForm].labelTextFooter}</Text>
+              <Text noDarkMode span classes='mr-2'>{formType[currentForm].textFooter}</Text>
               <Text
                 noDarkMode as='button' span
                 color='black' weight='medium'
@@ -218,7 +194,7 @@ const LoginRegisterModal = () => {
                   reset();
                 }}
               >
-                {formType[currentForm].textFooter}
+                {formType[currentForm].linkTextFooter}
               </Text>
             </Row>
           }

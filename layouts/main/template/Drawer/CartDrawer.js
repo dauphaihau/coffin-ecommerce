@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useUIController} from "../../../../context/UIControllerContext";
 import {CartProvider, CartContext} from "../../../../context/cartContext";
-import {DENOMINATION} from "../../../../utils/constant";
+import {DENOMINATION} from "../../../../utils/enums";
 import {slugify} from "../../../../utils/helpers";
 import {useAuth} from "../../../../context/authContext";
 import {Image, Text} from "../../../../core";

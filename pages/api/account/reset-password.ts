@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import nc from 'next-connect';
-import bcrypt from 'bcryptjs';
+const bcrypt = require('bcryptjs');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
 import Token from '../../../server/models/Token';
@@ -9,7 +9,6 @@ import User from '../../../server/models/User';
 const handler = nc();
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   const {userId, token, password} = req.body
-
   try {
     let dataTokenUser = await Token.findOne({userId});
     if (!dataTokenUser) {
@@ -18,7 +17,7 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
         message: 'User does not exists! '
       });
     }
-    bcrypt.hash(dataTokenUser.token, 10, function (err, hash) {
+    bcrypt.hash(dataTokenUser.token, Number(bcryptSalt), function (err, hash) {
       if (err) throw (err);
       bcrypt.compare(token, hash, function (err, result) {
         if (err) {

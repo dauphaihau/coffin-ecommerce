@@ -1,71 +1,26 @@
-const brandOpts = [
+import {
+  PRODUCT_BRAND_OPTIONS,
+  PRODUCT_CATEGORIES_OPTIONS,
+  PRODUCT_COLOR_OPTIONS, PRODUCT_TAGS_OPTIONS,
+} from "../../utils/enums";
+import {capitalize} from "../../utils/helpers";
 
-  {
-    value: 'aurora',
-    label: 'Aurora',
-  },
-  {
-    value: 'batesville',
-    label: 'Batesville',
-  },
-  {
-    value: 'astral',
-    label: 'Astral',
-  },
-]
-
-const colorOpts = [
-  {
-    value: 'light-gray',
-    label: 'Light Gray',
-  },
-  {
-    value: 'light-brown',
-    label: 'Light Brown',
-  },
-  {
-    value: 'dark-brown',
-    label: 'Dark Brown',
-  },
-  {
-    value: 'cream',
-    label: 'Cream',
-  },
-]
-
-const categoryOpts = [
-  {
-    value: 'natural material coffin',
-    label: 'Natural material coffin',
-  },
-  {
-    value: 'american caskets',
-    label: 'American caskets',
-  },
-  {
-    value: 'traditional',
-    label: 'Traditional',
-  },
-]
-
-const roleOpts = [
-  {
-    value: 'staff',
-    label: 'Staff',
-  },
-  {
-    value: 'manager',
-    label: 'Manager',
-  },
-  {
-    value: 'admin',
-    label: 'Admin',
-  },
-  {
-    value: 'customer',
-    label: 'Customer',
-  },
-]
+const productBrandOptions = Object.keys(PRODUCT_BRAND_OPTIONS).map(key => ({
+  label: capitalize(PRODUCT_BRAND_OPTIONS[key]),
+  value: PRODUCT_BRAND_OPTIONS[key]
+}))
+const productColorOptions = Object.keys(PRODUCT_COLOR_OPTIONS).map(key => ({
+  label: capitalize(PRODUCT_COLOR_OPTIONS[key]),
+  value: PRODUCT_COLOR_OPTIONS[key]
+}))
+const productCategoriesOptions = Object.keys(PRODUCT_CATEGORIES_OPTIONS).map(key => ({
+  label: capitalize(PRODUCT_CATEGORIES_OPTIONS[key]),
+  value: PRODUCT_CATEGORIES_OPTIONS[key]
+}))
+const productTagsOptions = Object.keys(PRODUCT_TAGS_OPTIONS).map(key => ({
+  label: capitalize(PRODUCT_TAGS_OPTIONS[key]),
+  value: PRODUCT_TAGS_OPTIONS[key]
+}))
 
 const sortOpts = [
   {
@@ -118,15 +73,6 @@ const paymentOpts = [
 ]
 
 
-const TagOpts = [
-  {id: 1, name: 'Coffin'},
-  {id: 2, name: 'Casket'},
-  {id: 3, name: 'Death'},
-  {id: 4, name: 'Die'},
-  {id: 5, name: 'Willow'},
-  {id: 6, name: 'Curved'},
-]
-
 const rowsPerPageOpts = [
   {
     value: '5',
@@ -144,7 +90,8 @@ const rowsPerPageOpts = [
 
 
 export {
-  colorOpts, categoryOpts,
-  brandOpts, roleOpts, sortOpts, deliveryOpts,
-  paymentOpts, TagOpts, rowsPerPageOpts,
+  productCategoriesOptions, productBrandOptions, productColorOptions,
+  productTagsOptions,
+  sortOpts, deliveryOpts,
+  paymentOpts, rowsPerPageOpts,
 }

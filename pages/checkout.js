@@ -9,7 +9,7 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useForm} from "react-hook-form";
 import * as Yup from "yup";
 
-import {DENOMINATION} from "../utils/constant";
+import {DENOMINATION} from "../utils/enums";
 import {useAuth} from "../context/authContext";
 import {CartProvider, CartContext} from "../context/cartContext";
 import getStripejs from "../utils/get-stripejs";

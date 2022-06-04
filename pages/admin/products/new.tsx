@@ -5,13 +5,19 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import {useRouter} from "next/router";
 import {toast} from "react-hot-toast";
 
+// @ts-ignore
 import {Button} from "@core/Button";
 import {
   Select, Checkbox, Textarea, Input, Switch, Autocomplete, ImageInput,
   TextEditor
 } from "../../../core/Input"
 import {productService} from "../../../services/products";
-import {brandOpts, categoryOpts, colorOpts, TagOpts} from "../../../assets/data/options";
+import {
+  productBrandOptions,
+  productCategoriesOptions,
+  productColorOptions,
+  productTagsOptions,
+} from "../../../assets/data/options";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Col, Grid, Row} from "../../../core/Layout";
 import {Paper} from "../../../core";
@@ -56,9 +62,9 @@ const NewProduct = () => {
   const formOptions = {
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      category: categoryOpts[0],
-      color: colorOpts[0],
-      brand: brandOpts[0],
+      category: productCategoriesOptions[0],
+      color: productColorOptions[0],
+      brand: productBrandOptions[0],
     }
   };
 
@@ -129,7 +135,7 @@ const NewProduct = () => {
                     <Select
                       size='medium'
                       label='Category *'
-                      options={categoryOpts}
+                      options={productCategoriesOptions}
                       onChange={onChange}
                     />
                   )}
@@ -141,7 +147,7 @@ const NewProduct = () => {
                     <Select
                       size='medium'
                       label='Brand *'
-                      options={brandOpts}
+                      options={productBrandOptions}
                       onChange={onChange}
                     />
                   )}
@@ -153,13 +159,16 @@ const NewProduct = () => {
                     <Select
                       size='medium'
                       label='Color *'
-                      options={colorOpts}
+                      options={productColorOptions}
                       onChange={onChange}
                     />
                   )}
                 />
-                <Input label='SKU *' name='sku' register={register} errors={errors} placeholder='712834657911'
-                       classesSpace='mb-0'/>
+                <Input
+                  label='SKU *' name='sku'
+                  register={register} errors={errors} placeholder='712834657911'
+                  classesSpace='mb-0'
+                />
                 <Controller
                   control={control}
                   name='tag'
@@ -167,7 +176,7 @@ const NewProduct = () => {
                     <Autocomplete
                       label='Tags'
                       onChange={onChange}
-                      options={TagOpts}/>
+                      options={productTagsOptions}/>
                   )}
                 />
               </Grid>
@@ -208,7 +217,6 @@ const NewProduct = () => {
     </Helmet>
   );
 }
-
 
 NewProduct.layout = 'admin';
 export default NewProduct;

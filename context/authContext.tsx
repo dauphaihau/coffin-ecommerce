@@ -1,6 +1,9 @@
-import {createContext, useContext, useState, useEffect, FC, Dispatch} from "react";
-import Cookie from "cookie-cutter";
+import {createContext, useContext, useState, useEffect, FC} from "react";
+import {parseCookies} from "nookies";
+
 import {accountService} from "../services/account";
+import {hashMD5} from "../utils/helpers";
+import config from "../config.json";
 
 export interface AuthState {
   user: object,
@@ -21,7 +24,8 @@ interface User {
 
 const defaultValues = {
   user: {},
-  setUser: () => {},
+  setUser: () => {
+  },
 };
 
 const AuthContext = createContext<Partial<AuthState>>(defaultValues);
@@ -35,13 +39,12 @@ export const AuthProvider: FC = ({children}) => {
   const [isAuthorize, setIsAuthorize] = useState(false)
 
   useEffect(() => {
-    if (Cookie.get("userInfo")) {
-      const userInfo = JSON.parse(Cookie.get("userInfo"))
-
+    const cookies = parseCookies();
+    if (cookies[hashMD5(config.cookies.auth)]) {
       const verifyAuth = async () => {
-        const res = await accountService.me(userInfo);
-        if (res.isSuccess) {
-          setUser({...(user as object), ...res.data})
+        const {isSuccess, data} = await accountService.me();
+        if (isSuccess) {
+          setUser({...(user as object), ...data})
           setIsAuthorize(true)
         } else {
           setIsAuthorize(false)

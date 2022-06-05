@@ -21,17 +21,21 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = signToken(user);
-      res.send(
+      res.json(
         {
           code: '200',
           message: 'You have been successfully logged in',
           data: {
-            token,
-            name: user.name,
-            role: user.role,
-            status: user.status,
-            // _id: user._id,
-            // email: user.email,
+            auth: {
+              token,
+              expireAt: 1654420589070,
+              refreshAt: 1654420589070,
+            },
+            profile: {
+              name: user.name,
+              role: user.role,
+              status: user.status,
+            }
           }
         });
     } else {

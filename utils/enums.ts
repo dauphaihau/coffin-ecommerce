@@ -11,13 +11,6 @@ export enum ROLE_OPTIONS {
   ADMIN,
 }
 
-// export enum ROLE_OPTIONS {
-//   STAFF = 'staff',
-//   MANAGER = 'manager',
-//   ADMIN = 'admin',
-//   CUSTOMER = 'customer',
-// }
-
 export enum PRODUCT_BRAND_OPTIONS {
   AURORA = 'aurora',
   BATESVILLE = 'batesville',

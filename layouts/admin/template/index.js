@@ -17,8 +17,7 @@ const AdminLayout = ({children}) => {
       <Toaster position="top-right" reverseOrder={false}/>
       <Container display='flex' classes='bg-[#f8f9fa] dark:bg-gray-custom-903 h-screen'>
         <Sidebar/>
-        {/*<div className=''></div>*/}
-        <Col classes='p-[24px] ml-[18rem] desktop:ml-[16%] w-[calc(100%-280px)] relative'>
+        <Col classes='p-[24px] ml-[18rem] desktop:ml-[16%] monitor:ml-[12%] w-[calc(100%-280px)] relative'>
           <Navbar/>
           <main className='laptop:pt-[70px] w-full'>
             {children}

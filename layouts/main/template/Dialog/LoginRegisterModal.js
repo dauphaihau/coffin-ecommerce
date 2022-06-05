@@ -16,7 +16,6 @@ import Dialog from "../../../../core/Modal/Dialog";
 import {Link} from "../../../../core/Next";
 import {ROLE_OPTIONS} from "../../../../utils/enums";
 
-
 const formType = {
   login: {
     title: 'Login',
@@ -34,36 +33,35 @@ const formType = {
   },
 }
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().min(6, 'Name must be at least 6 characters'),
+  email: Yup.string()
+    .email('Email is invalid')
+    .required('Email is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters'),
+});
+
+const formOptions = {
+  resolver: yupResolver(validationSchema),
+  defaultValues: {
+    email: 'customer@email.com',
+    password: '111111'
+  }
+};
 
 const LoginRegisterModal = () => {
+  const router = useRouter();
   const [currentForm, setCurrentForm] = useState('login')
   const {openLoginRegisterModal, closeDrawerModal} = useUIController();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
   const {setUser, user, setIsAuthorize} = useAuth();
-  const router = useRouter();
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().min(6, 'Name must be at least 6 characters'),
-    email: Yup.string()
-      .email('Email is invalid')
-      .required('Email is required'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
 
   useEffect(() => {
     reset();
     setCurrentForm('login')
   }, [openLoginRegisterModal])
-
-  const formOptions = {
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      email: 'customer@email.com',
-      password: '111111'
-    }
-  };
 
   const {
     register, handleSubmit,
@@ -93,11 +91,12 @@ const LoginRegisterModal = () => {
     const {isSuccess, isLoading, data, message} = await accountService.login(values)
     setIsBtnLoading(isLoading)
 
+    console.log('data', data)
     if (isSuccess) {
-      if (data.role !== ROLE_OPTIONS.CUSTOMER) {
+      if (data.profile.role !== ROLE_OPTIONS.CUSTOMER) {
         await router.push('/admin')
       }
-      setUser({...user, ...data})
+      setUser({...user, ...data.profile})
       setIsAuthorize(true)
       closeDrawerModal();
     } else {

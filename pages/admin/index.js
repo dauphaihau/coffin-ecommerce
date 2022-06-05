@@ -59,7 +59,8 @@ const Dashboard = () => {
         <div className='flex items-center'>
           <div className='rounded-lg '>
             <Image
-              src={`https://i.pravatar.cc/150?u=${row._id}`}
+              // src={`https://i.pravatar.cc/150?u=${row._id}`}
+              src='/images/default/avatar-default.jpeg'
               classesSize='max-w-9 max-h-9 w-9 h-9'
               classes='rounded-md'
             />
@@ -79,7 +80,7 @@ const Dashboard = () => {
 
   return (
     <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
-        <Grid sx={3} lg={3} gap={4}>
+      <Grid sx={3} lg={3} gap={4}>
         {data.map((e, id) => (
           <div key={id} className="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
             <div className='h-full'>
@@ -94,7 +95,7 @@ const Dashboard = () => {
             </div>
           </div>
         ))}
-        </Grid>
+      </Grid>
       <Text sx='2xl' weight='bold' classes='mt-6 mb-3'>Best Salesman</Text>
       <Table
         hidePagination

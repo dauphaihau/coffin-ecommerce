@@ -10,11 +10,11 @@ import {Button} from "@core/Button";
 import {Select, Checkbox, Textarea, Input} from "@core/Input"
 import {productService} from "@services/products";
 import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
-import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../../core/Input";
-import {TagOpts} from "../../../../assets/data/options";
-import {Helmet} from "../../../../layouts/admin/common/Helmet";
-import {Link, Paper} from "../../../../core";
-import {Col, Row} from "../../../../core/Layout";
+import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../core/Input";
+import {TagOpts} from "../../../assets/data/options";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
+import {Link, Paper} from "../../../core";
+import {Col, Row} from "../../../core/Layout";
 
 const ProductEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);

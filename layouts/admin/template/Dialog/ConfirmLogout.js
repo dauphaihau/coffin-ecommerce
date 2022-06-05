@@ -1,24 +1,29 @@
-import Cookie from "cookie-cutter";
-
 import Dialog from "../../../../core/Modal/Dialog";
 import {Text} from "../../../../core";
 import {Row} from "../../../../core/Layout";
 import {Button} from "../../../../core/Button";
 import {useUIController} from "../../../../context/UIControllerContext";
+import {destroyCookie} from "nookies";
+import {hashMD5} from "../../../../utils/helpers";
+import config from "../../../../config.json";
 
 const ConfirmLogoutDialog = () => {
   const {openConfirmLogout, closeDrawerModal} = useUIController();
 
   const handleLogout = () => {
-    Cookie.set("userInfo", "", {
+    destroyCookie(null, hashMD5(config.cookies.auth), {
+      path: "/",
+      expires: new Date(0),
+    });
+    destroyCookie(null, hashMD5(config.cookies.profile), {
       path: "/",
       expires: new Date(0),
     });
     window.location.href = '/'
   }
 
-return (
-  <Dialog isOpen={openConfirmLogout} closeDialog={closeDrawerModal}>
+  return (
+    <Dialog isOpen={openConfirmLogout} closeDialog={closeDrawerModal}>
       <Dialog.Title title='Close this app?'/>
       <Dialog.Content>
         <div className="mt-2">

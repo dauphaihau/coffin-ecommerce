@@ -132,7 +132,7 @@ const FirstStepCheckout = (props) => {
             </div>
           </Stack>
           <div className='relative'>
-            <Input name='discounted' value='DISCOUNT11' classes='!p-6 font-bold'/>
+            <Input name='discounted' defaultValue='DISCOUNT11' classes='!p-6 font-bold'/>
             {
               !discounted
                 ? <Button light classes='absolute top-[5px] right-[10px]

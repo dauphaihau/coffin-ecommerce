@@ -23,7 +23,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
       role: ROLE_OPTIONS.CUSTOMER,
-      // role: 'customer',
       status: USER_STATUS.ACTIVE
     });
 
@@ -34,19 +33,28 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await sendResultRegister({email: req.body.email});
 
     const token = signToken(user);
-    res.send({
-      token,
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      status: USER_STATUS.ACTIVE
-    });
-
-    // return res.send({
-    //   status: '200',
-    //   message: 'OK'
+    // res.send({
+    //   token,
+    //   _id: user._id,
+    //   name: user.name,
+    //   email: user.email,
+    //   role: user.role,
+    //   status: USER_STATUS.ACTIVE
     // });
+
+    res.send(
+      {
+        code: '200',
+        message: 'OK',
+        data: {
+          token,
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          status: USER_STATUS.ACTIVE
+        }
+      });
   } catch (error) {
     console.log('error', error)
     return res.status(422).send('Ooops, something went wrong!');

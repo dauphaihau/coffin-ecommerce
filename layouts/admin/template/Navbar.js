@@ -29,11 +29,8 @@ const Navbar = () => {
   ]
 
   return (
-    <header className="fixed border-gray-200 desktop:w-4/5 monitor:w-[82%] z-30 bg-transparent pb-4">
-
-      {/*<header className="fixed right-0 left-auto border-gray-200 w-4/5 desktop:w-[80%] z-30 bg-transparent pb-4">*/}
+    <header className="fixed border-gray-200 laptop:w-[73.8%] desktop:w-4/5 monitor:w-[86.5%] z-30 bg-transparent pb-4">
       {/*<nav className="border-gray-200 bg-transparent dark:border-gray-700 py-4">*/}
-      {/*  <div className="flex flex-wrap justify-between items-center ">*/}
       <Row wrap='wrap' justify='between' align='center'>
         <Row>
           {/*<MenuIcon className='btn-icon w-10 h-10 mr-4 text-gray-600' onClick={() => {}}/>*/}

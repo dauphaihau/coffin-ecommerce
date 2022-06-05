@@ -17,7 +17,7 @@ const signToken = (user, options) => {
     process.env.NEXT_PUBLIC_JWT_SECRET,
     // publicRuntimeConfig.JWT_SECRET,
     {
-      expiresIn: '30d', ...options
+      expiresIn: '1d', ...options
     }
   );
 };

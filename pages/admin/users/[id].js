@@ -9,13 +9,19 @@ import {Grid} from "@core/Layout";
 import {Input, Select, Switch, AvatarInput} from "@core/Input";
 import {Button} from "@core/Button";
 import {userService} from "@services/users";
-import {useAuth} from "@context/authContext";
-import {Paper} from "@core";
-import {Helmet} from "../../../../layouts/admin/common/Helmet";
-import {Col, Row} from "../../../../core/Layout";
-import {Link} from "../../../../core/Next";
-import {ROLE_OPTIONS, USER_STATUS} from "../../../../utils/enums";
-import {capitalize} from "../../../../utils/helpers";
+// import {useAuth} from "@context/authContext";
+import {Paper, Text} from "@core";
+import {Helmet} from "../../../layouts/admin/common/Helmet";
+import {Col, Row} from "../../../core/Layout";
+import {Link} from "../../../core/Next";
+import {ROLE_OPTIONS, USER_STATUS} from "../../../utils/enums";
+import {capitalize} from "../../../utils/helpers";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Email is invalid').required('Email is required'),
+});
+const formOptions = {resolver: yupResolver(validationSchema)};
 
 const handleRole = (role) => {
   let arr = [];
@@ -32,7 +38,7 @@ const handleRole = (role) => {
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const router = useRouter();
-  const {user: userInfo} = useAuth();
+  // const {user: userInfo} = useAuth();
   const [statusBadgeLock, setStatusBadgeLock] = useState()
   const [user, setUser] = useState()
 
@@ -55,18 +61,11 @@ const UserEdit = () => {
     {path: "", name: user?.name, lastLink: true}
   ];
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().email('Email is invalid').required('Email is required'),
-  });
-  const formOptions = {resolver: yupResolver(validationSchema)};
-
   if (user) {
     const {...defaultValue} = user;
     formOptions.defaultValue = defaultValue;
   }
-  const {register, handleSubmit, reset, formState, setError, control} = useForm(formOptions);
-  const {errors} = formState;
+  const {register, handleSubmit, reset, formState: {errors}, setError, control} = useForm(formOptions);
 
   useEffect(() => {
     if (user) {
@@ -75,6 +74,7 @@ const UserEdit = () => {
   }, [user, reset])
 
   const onSubmit = async (values) => {
+    console.log('values', values)
     const formatForm = {
       ...values, role: values.role.value ?? values.role
     }
@@ -99,19 +99,19 @@ const UserEdit = () => {
   }
 
   return (
-    <div className='w-2/3'>
+    <section className='w-2/3'>
       <Helmet title='Edit user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*<Grid md={2} lg={2} gapx={4}>*/}
           {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
           {/*</Grid>*/}
 
-          <Grid md={2} lg={2} gapx={4} classes='w-[60rem] laptop:max-w-[80rem]'>
+          <Grid md={2} lg={2} gapx={4} classes='w-[57rem] laptop:max-w-[80rem]'>
             <Paper>
               <div className='text-right mb-6'>
                 {statusBadgeLock === USER_STATUS.LOCKED ?
-                  <span className="badge-danger">Locked</span>
-                  : <span className="badge-green">Active</span>
+                  <Text span classes="badge-danger">Locked</Text>
+                  : <Text span classes="badge-green">Active</Text>
                 }
               </div>
               <div className='flex justify-center flex-col mb-4'>
@@ -136,38 +136,36 @@ const UserEdit = () => {
                     }}/>)}
                 />
               </Row>
-              {/*<Row align='center' justify='between' classes='mb-4'>*/}
-              {/*  <div>*/}
-              {/*    <p className='font-bold text-[0.875rem]'>Email Verified</p>*/}
-              {/*    <p className='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a*/}
-              {/*      verification email</p>*/}
-              {/*  </div>*/}
-              {/*  <Controller*/}
-              {/*    control={control}*/}
-              {/*    name='isVerified'*/}
-              {/*    render={({field: {onChange, value}}) => (*/}
-              {/*      <Switch value={value} onChange={onChange}/>)}*/}
-              {/*  />*/}
-              {/*</Row>*/}
+              <Row align='center' justify='between' classes='mb-4'>
+                <Col>
+                  <Text classes='font-bold text-[0.875rem]'>Reset Password</Text>
+                  <Text classes='text-gray-500 text-[0.875rem] w-4/5'>Enable this will automatically send the user a
+                    reset password email</Text>
+                </Col>
+                <Controller
+                  control={control}
+                  name='sendResetPasswordEmail'
+                  render={({field: {onChange, value}}) => (
+                    <Switch value={value} onChange={onChange}/>)}
+                />
+              </Row>
             </Paper>
             <Paper classes='h-fit'>
-              <Grid md={1} lg={2} gapx={4}>
-                <Input label='Full Name *' name='name' register={register} errors={errors}/>
-                <Input label='Email *' name='email' register={register} errors={errors}/>
-              </Grid>
+              <Input label='Full Name *' name='name' register={register} errors={errors}/>
               <Grid md={2} lg={2} gapx={4}>
                 <Input label='Address' name='address' register={register} errors={errors}/>
                 <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
               </Grid>
               {/*<Checkbox label=''/>*/}
+              <Input label='Email *' name='email' register={register} errors={errors}/>
               <Controller
                 control={control}
                 name='role'
-                render={({field: {onChange, onBlur, value, ref}}) => (
+                render={({field: {onChange, value}}) => (
                   <Select
                     size='medium'
                     name='role'
-                    title='Role'
+                    label='Role'
                     options={handleRole(user?.role)}
                     value={value}
                     onChange={onChange}
@@ -184,7 +182,7 @@ const UserEdit = () => {
           </Grid>
         </form>
       </Helmet>
-    </div>
+    </section>
   );
 }
 

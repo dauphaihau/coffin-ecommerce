@@ -21,6 +21,18 @@ const dataBreadcrumb = [
   {path: "", name: "New User", lastLink: true}
 ];
 
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Name is required'),
+  email: Yup.string().email('Email is invalid').required('Email is required'),
+});
+
+const formOptions = {
+  resolver: yupResolver(validationSchema),
+  defaultValues: {
+    role: ROLE_OPTIONS.STAFF
+  }
+};
+
 const handleRole = (role) => {
   let arr = [];
   for (let n in ROLE_OPTIONS) {
@@ -33,26 +45,12 @@ const handleRole = (role) => {
   return options.filter(({value}) => role !== ROLE_OPTIONS.ADMIN ? value !== ROLE_OPTIONS.ADMIN : value)
 }
 
+
 const NewUser = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const {user} = useAuth();
   const router = useRouter();
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    // password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-    email: Yup.string().email('Email is invalid').required('Email is required'),
-  });
-
-  const formOptions = {
-    resolver: yupResolver(validationSchema),
-    defaultValues: {
-      role: ROLE_OPTIONS.STAFF
-    }
-  };
-
-  const {register, handleSubmit, control, formState, setError} = useForm(formOptions);
-  const {errors} = formState;
+  const {register, handleSubmit, control, formState: {errors}, setError} = useForm(formOptions);
 
   const onSubmit = async (values) => {
     const formatData = {...values, role: values.role.value ?? values.role}
@@ -73,27 +71,24 @@ const NewUser = () => {
     }
   }
 
-
   return (
     <Helmet title='Create a new user' classes='w-2/3' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4} classes='w-[60rem] laptop:max-w-[80rem]'>
+        <Grid md={2} lg={2} gapx={4} classes='w-[57rem] laptop:max-w-[80rem]'>
           <Paper classes='h-fit'>
             <AvatarInput/>
             <Row align='center' justify='between' classes='mt-8'>
               <Col>
-                <Text sx='[0.875rem]' weight='bold'>Email Verified</Text>
-                <Text sx='[0.875rem]' classes='text-gray-500 w-4/5'>
-                  Disabling this will automatically send the user a
-                  verification email</Text>
+                <Text classes='font-bold text-[0.875rem]'>Set Password</Text>
+                <Text classes='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a
+                  set password email</Text>
               </Col>
               <Controller
                 control={control}
-                name='isVerified'
+                name='sendSetPasswordEmail'
                 render={({field: {onChange}}) => (<Switch onChange={onChange}/>)}
               />
             </Row>
-
           </Paper>
           <Paper classes='h-fit'>
             <Input label='Full Name *' name='name' register={register} errors={errors}/>
@@ -101,15 +96,15 @@ const NewUser = () => {
               <Input label='Address' name='address' register={register} errors={errors}/>
               <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
             </Grid>
-            <Grid md={1} lg={2} gapx={4}>
-              <Input label='Email *' name='email' register={register} errors={errors}/>
-              <Input label='Password' type='password' name='password' register={register} errors={errors}/>
-            </Grid>
+            <Input label='Email *' name='email' register={register} errors={errors}/>
+            {/*<Grid md={1} lg={2} gapx={4}>*/}
+            {/*</Grid>*/}
             <Controller
               control={control}
               name='role'
               render={({field: {onChange, value}}) => (
                 <Select
+                  label='Role'
                   size='medium'
                   name='role'
                   title='Role'

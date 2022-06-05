@@ -1,14 +1,16 @@
-import Cookie from "cookie-cutter";
-import axios from "axios";
-import {getHeaders} from "../utils/helpers";
+import Cookie from 'cookie-cutter';
+import axios from 'axios';
+import {getHeaders, hashMD5} from '../utils/helpers';
+import { parseCookies, setCookie, destroyCookie } from "nookies";
+import config from '../config.json';
 
 export const accountService = {
 
   register: async (values) => {
     try {
-      const res = await axios.post('/api/account/register', values);
-      Cookie.set('userInfo', JSON.stringify(res.data));
-      return {data: res.data, isLoading: false, isSuccess: true};
+      const {data: {data}} = await axios.post('/api/account/register', values);
+      Cookie.set('userInfo', JSON.stringify(data));
+      return {data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
         isSuccess: false,
@@ -21,7 +23,16 @@ export const accountService = {
   login: async (values) => {
     try {
       const {data: {data}} = await axios.post('/api/account/login', values);
-      Cookie.set('userInfo', JSON.stringify(data));
+      // console.log('data', data)
+      setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/"
+      });
+      setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/"
+      });
+      // cookies.set(Helper.hashMD5(key), data, { expires: expiredAt, path: '/' })
       return {data, isLoading: false, isSuccess: true,};
     } catch ({response}) {
       return {
@@ -70,10 +81,10 @@ export const accountService = {
     }
   },
 
-  me: async (userInfo) => {
+  me: async () => {
     try {
-      const res = await axios.get("/api/account/me", getHeaders())
-      return {data: res.data, isSuccess: true};
+      const {data} = await axios.get('/api/account/me', getHeaders())
+      return {data, isSuccess: true};
     } catch ({response}) {
       return {
         isSuccess: false,

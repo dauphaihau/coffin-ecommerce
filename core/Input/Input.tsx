@@ -3,6 +3,10 @@ import Text from "../Text";
 import {FieldErrors} from "react-hook-form";
 import {isEmpty} from "../../utils/helpers";
 
+type Value = {
+  value: string | number
+}
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string,
   label?: string,
@@ -31,7 +35,12 @@ const Input: FC<InputProps> = forwardRef(
       ...others
     } = props;
 
-    // const [value, setValue] = useState()
+    const [value, setValue] = useState<string | null>('')
+
+    useEffect(() => {
+      // @ts-ignore
+      setValue(defaultValue);
+    }, [defaultValue]);
 
     return (
       <>
@@ -59,7 +68,7 @@ const Input: FC<InputProps> = forwardRef(
             autoFocus={false}
             ref={ref}
             type={type}
-            // value={value}
+            value={value}
             name={name}
             {...register(name)}
             className={`peer p-4 ${className} ${classes}

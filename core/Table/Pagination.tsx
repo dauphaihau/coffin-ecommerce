@@ -50,7 +50,7 @@ const Pagination = (props: Props) => {
   });
 
   return (
-    <div className="pagination">
+    <section className="pagination">
       <div className='pagination__left'>
         {checkboxSelection && <Text>{rowsChecked} selected</Text>}
         <Text>
@@ -89,13 +89,15 @@ const Pagination = (props: Props) => {
             >
               <ChevronLeftIcon height={15} width={15}/>
             </button>
-            {pageNumbers?.map(pageNumber => {
-              {
-                pageNumber === DOTS && <button key={pageNumber}>{pageNumber}</button>
-              }
+            {pageNumbers?.map(( pageNumber, idx ) => {
+              // {
+              //   pageNumber === DOTS && <button key={pageNumber}>{pageNumber}</button>
+              // }
               return (
                 <button
-                  key={pageNumber} onClick={() => onPageChange(pageNumber)}
+                  key={idx}
+                  // key={pageNumber}
+                  onClick={() => onPageChange(pageNumber)}
                   className={` ${currentPage === pageNumber ? 'selected' : ''}`}>
                   {pageNumber}
                 </button>
@@ -111,7 +113,7 @@ const Pagination = (props: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

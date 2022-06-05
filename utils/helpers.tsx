@@ -1,4 +1,7 @@
 import Cookie from "cookie-cutter";
+import CryptoJS from 'crypto-js'
+import config from "../config.json";
+import {parseCookies} from "nookies";
 
 const slugify = (string) => {
   const a = 'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;'
@@ -41,23 +44,29 @@ const getUniqueValues = (data, type) => {
 };
 
 const calculateTotal = (cart) => {
-  const total = cart.reduce((acc, next) => {
+  return cart.reduce((acc, next) => {
     const quantity = next.quantity
     acc = acc + JSON.parse(next.price) * quantity
     return acc
   }, 0)
-  return total
 }
 
 const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.quantity, 0);
 
 const getHeaders = () => {
-  const user = JSON.parse(Cookie.get("userInfo"))
+  const cookies = parseCookies();
+  let cookieAuth = JSON.parse(cookies[hashMD5(config.cookies.auth)])
+  const user = JSON.parse(Cookie.get(hashMD5(config.cookies.userInfo)))
   return {
     headers: {
-      authorization: `Bearer ${user.token}`,
+      authorization: `Bearer ${cookieAuth.token}`,
+      // authorization: `Bearer ${user.token}`,
     }
   }
+}
+
+const hashMD5 = (string = '') => {
+  return CryptoJS.MD5(string).toString()
 }
 
 const uniqElement = (arr) => {
@@ -182,6 +191,7 @@ export {
   formatPrice,
   getUniqueValues,
   sumAllProduct,
+  hashMD5,
   calculateTotal,
   getHeaders,
   classNames,

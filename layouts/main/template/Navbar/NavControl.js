@@ -31,7 +31,7 @@ function NavControl() {
         {
           isAuthorize
             ? <>
-              {user?.role === ROLE_OPTIONS.CUSTOMER
+              {user.role === ROLE_OPTIONS.CUSTOMER
                 ? <Link href='/account'><UserIconSolid width={35} height={30}/></Link>
                 : <Link href='/admin'><UserGroupIcon width={35} height={30}/></Link>
               }

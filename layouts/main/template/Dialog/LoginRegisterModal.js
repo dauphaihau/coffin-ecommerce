@@ -51,6 +51,7 @@ const formOptions = {
   }
 };
 
+
 const LoginRegisterModal = () => {
   const router = useRouter();
   const [currentForm, setCurrentForm] = useState('login')
@@ -79,19 +80,15 @@ const LoginRegisterModal = () => {
     }
   }, [currentForm])
 
-  const onSubmit = (data) => {
-    if (currentForm === 'register') {
-      return handleRegister(data)
-    }
-    return handleLogin(data)
-  };
-
-  const handleLogin = async (values) => {
+  const onSubmit = async (values) => {
     setIsBtnLoading(true)
-    const {isSuccess, isLoading, data, message} = await accountService.login(values)
+    const {
+      isSuccess,
+      isLoading,
+      data,
+      message
+    } = currentForm === 'register' ? await accountService.register(values) : await accountService.login(values)
     setIsBtnLoading(isLoading)
-
-    console.log('data', data)
     if (isSuccess) {
       if (data.profile.role !== ROLE_OPTIONS.CUSTOMER) {
         await router.push('/admin')
@@ -107,26 +104,7 @@ const LoginRegisterModal = () => {
         });
       }
     }
-  }
-
-  const handleRegister = async (values) => {
-    setIsBtnLoading(true)
-    const {isSuccess, isLoading, data, message} = await accountService.register(values)
-    setIsBtnLoading(isLoading)
-
-    if (isSuccess) {
-      setUser({...user, ...data})
-      setIsAuthorize(true)
-      closeDrawerModal();
-    } else {
-      if (errors) {
-        setError('email', {
-          type: "server",
-          message
-        });
-      }
-    }
-  }
+  };
 
   return (
     <Dialog

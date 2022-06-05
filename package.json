@@ -17,7 +17,6 @@
     "@stripe/stripe-js": "^1.27.0",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
-    "cookie-cutter": "^0.2.0",
     "crypto": "^1.0.1",
     "crypto-js": "^4.1.1",
     "hover-effect": "^1.1.0",

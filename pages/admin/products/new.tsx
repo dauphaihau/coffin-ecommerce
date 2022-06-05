@@ -176,6 +176,7 @@ const NewProduct = () => {
                     <Autocomplete
                       label='Tags'
                       onChange={onChange}
+                      // @ts-ignore
                       options={productTagsOptions}/>
                   )}
                 />

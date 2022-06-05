@@ -23,12 +23,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     let token = await Token.findOne({userId: user._id});
     if (token) await token.deleteOne();
 
-    // token will send to the user
     let resetToken = crypto.randomBytes(32).toString('hex');
     const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
-
     await sendResetPasswordEmail({toUser: user, token: hash});
-    // await sendResetPasswordEmail({toUser: user, hash: hash._id});
 
     await new Token({
       userId: user._id,

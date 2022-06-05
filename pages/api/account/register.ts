@@ -22,6 +22,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password),
+      // password: req.body.password,
       role: ROLE_OPTIONS.CUSTOMER,
       status: USER_STATUS.ACTIVE
     });
@@ -29,30 +30,24 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     const user = await newUser.save();
     await db.disconnect();
 
-    // @ts-ignore
     await sendResultRegister({email: req.body.email});
 
     const token = signToken(user);
-    // res.send({
-    //   token,
-    //   _id: user._id,
-    //   name: user.name,
-    //   email: user.email,
-    //   role: user.role,
-    //   status: USER_STATUS.ACTIVE
-    // });
-
     res.send(
       {
         code: '200',
-        message: 'OK',
+        message: 'You have been successfully logged in',
         data: {
-          token,
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          status: USER_STATUS.ACTIVE
+          auth: {
+            token,
+            expireAt: 1654420589070,
+            refreshAt: 1654420589070,
+          },
+          profile: {
+            name: user.name,
+            role: user.role,
+            status: USER_STATUS.ACTIVE
+          }
         }
       });
   } catch (error) {

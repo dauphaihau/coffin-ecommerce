@@ -6,9 +6,13 @@ import {useUIController} from "../../../../context/UIControllerContext";
 import {destroyCookie} from "nookies";
 import {hashMD5} from "../../../../utils/helpers";
 import config from "../../../../config.json";
+import {useRouter} from "next/router";
+import {useAuth} from "../../../../context/authContext";
 
 const ConfirmLogoutDialog = () => {
   const {openConfirmLogout, closeDrawerModal} = useUIController();
+  const {setIsAuthorize} = useAuth();
+  const router = useRouter();
 
   const handleLogout = () => {
     destroyCookie(null, hashMD5(config.cookies.auth), {
@@ -19,7 +23,8 @@ const ConfirmLogoutDialog = () => {
       path: "/",
       expires: new Date(0),
     });
-    window.location.href = '/'
+    router.push('/');
+    setIsAuthorize(false);
   }
 
   return (

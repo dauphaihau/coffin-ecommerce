@@ -51,6 +51,8 @@ export const AuthProvider: FC = ({children}) => {
         }
       }
       verifyAuth();
+    } else {
+      setIsAuthorize(false)
     }
   }, []);
 

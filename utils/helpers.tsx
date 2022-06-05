@@ -1,4 +1,3 @@
-import Cookie from "cookie-cutter";
 import CryptoJS from 'crypto-js'
 import config from "../config.json";
 import {parseCookies} from "nookies";
@@ -56,11 +55,9 @@ const sumAllProduct = (cart) => cart.reduce((total, element) => total + element.
 const getHeaders = () => {
   const cookies = parseCookies();
   let cookieAuth = JSON.parse(cookies[hashMD5(config.cookies.auth)])
-  const user = JSON.parse(Cookie.get(hashMD5(config.cookies.userInfo)))
   return {
     headers: {
       authorization: `Bearer ${cookieAuth.token}`,
-      // authorization: `Bearer ${user.token}`,
     }
   }
 }

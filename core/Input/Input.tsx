@@ -1,11 +1,11 @@
-import {FC, forwardRef, InputHTMLAttributes, ReactNode, useEffect, useState} from "react";
+import {ChangeEvent, FC, forwardRef, InputHTMLAttributes, ReactNode, useEffect, useState} from "react";
 import Text from "../Text";
 import {FieldErrors} from "react-hook-form";
 import {isEmpty} from "../../utils/helpers";
 
-type Value = {
-  value: string | number
-}
+// type Value = {
+//   value: string | number
+// }
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string,
@@ -13,6 +13,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   classes?: string,
   classesSpace?: string,
   register?: (name: string) => void,
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   clearable?: boolean,
   defaultValue?: string | number,
   errors?: FieldErrors,
@@ -28,6 +29,7 @@ const Input: FC<InputProps> = forwardRef(
       type = 'text',
       label, name = '',
       register = () => {},
+      onChange= () => {},
       errors, clearable,
       defaultValue,
       className, classes, placeholder,
@@ -70,6 +72,7 @@ const Input: FC<InputProps> = forwardRef(
             type={type}
             value={value}
             name={name}
+            onChange={onChange}
             {...register(name)}
             className={`peer p-4 ${className} ${classes}
            ${contentLeft && '!pl-7'}

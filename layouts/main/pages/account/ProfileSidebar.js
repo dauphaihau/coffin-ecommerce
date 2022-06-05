@@ -1,9 +1,11 @@
 import {useRouter} from "next/router";
-import Cookie from "cookie-cutter";
+import {destroyCookie} from "nookies";
 
 import {Link} from "../../../../core";
 import {CogIcon, HomeIcon, IdentificationIcon, LogoutIcon, ShoppingCartIcon} from "@heroicons/react/outline";
 import {useAuth} from "../../../../context/authContext";
+import {hashMD5} from "../../../../utils/helpers";
+import config from "../../../../config.json";
 
 const ProfileSidebar = ({active}) => {
 
@@ -13,7 +15,11 @@ const ProfileSidebar = ({active}) => {
   let css = 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg'
 
   const logout = () => {
-    Cookie.set("userInfo", "", {
+    destroyCookie(null, hashMD5(config.cookies.auth), {
+      path: "/",
+      expires: new Date(0),
+    });
+    destroyCookie(null, hashMD5(config.cookies.profile), {
       path: "/",
       expires: new Date(0),
     });

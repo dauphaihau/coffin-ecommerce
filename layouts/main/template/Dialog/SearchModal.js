@@ -10,7 +10,7 @@ import {Col, Row} from "../../../../core/Layout";
 
 const SearchModal = () => {
   const {openSearchModal} = useUIController();
-  const inputRef = useRef(null);
+  const inputRef = useRef('');
   const [inventory, setInventory] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -53,6 +53,7 @@ const SearchModal = () => {
       <Input
         name='search'
         ref={inputRef}
+        defaultValue=''
         onChange={(e) => searchItems(e.target.value)}
         classes='!pl-[3.5rem] h-[60px] '
       />

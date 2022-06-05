@@ -1,15 +1,30 @@
-import Cookie from 'cookie-cutter';
 import axios from 'axios';
 import {getHeaders, hashMD5} from '../utils/helpers';
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import {setCookie} from 'nookies';
+const CryptoJS = require('crypto-js');
 import config from '../config.json';
 
 export const accountService = {
 
   register: async (values) => {
+    console.log('values', values)
+    const {password} = values
+    const ciphertext = CryptoJS.AES.encrypt(password, 'dauphaihau').toString();
+    const valuesss = {...values, password: ciphertext}
+    console.log('test', ciphertext)
+    console.log('test', valuesss)
+
     try {
+      // const {data: {data}} = await axios.post('/api/account/register', valuesss);
       const {data: {data}} = await axios.post('/api/account/register', values);
-      Cookie.set('userInfo', JSON.stringify(data));
+      setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/'
+      });
+      setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/'
+      });
       return {data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -19,18 +34,17 @@ export const accountService = {
       };
     }
   },
-
   login: async (values) => {
     try {
       const {data: {data}} = await axios.post('/api/account/login', values);
       // console.log('data', data)
       setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
         maxAge: 30 * 24 * 60 * 60,
-        path: "/"
+        path: '/'
       });
       setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
         maxAge: 30 * 24 * 60 * 60,
-        path: "/"
+        path: '/'
       });
       // cookies.set(Helper.hashMD5(key), data, { expires: expiredAt, path: '/' })
       return {data, isLoading: false, isSuccess: true,};
@@ -67,7 +81,6 @@ export const accountService = {
       };
     }
   },
-
   forgotPassword: async (values) => {
     try {
       const {data} = await axios.post('/api/account/forgot-password', values);
@@ -80,7 +93,6 @@ export const accountService = {
       };
     }
   },
-
   me: async () => {
     try {
       const {data} = await axios.get('/api/account/me', getHeaders())
@@ -91,5 +103,5 @@ export const accountService = {
         message: response?.data.message,
       };
     }
-  }
+  },
 }

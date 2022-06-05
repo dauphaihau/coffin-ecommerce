@@ -2,6 +2,7 @@ import {NextApiRequest, NextApiResponse} from "next";
 import nc from 'next-connect';
 
 const bcrypt = require('bcryptjs');
+const CryptoJS = require("crypto-js");
 
 import User from '../../../server/models/User';
 import db from "../../../server/db/db";
@@ -15,9 +16,25 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect();
     const user = await User.findOne({email});
     if (!user) {
-      return res.status(422).send('Invalid credentials!')
+      return res.status(422).send({code: '422', messages: 'Invalid credentials!'})
     }
     await db.disconnect();
+
+
+    // register or user login post password was encrypted
+    // var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
+    // // console.log('test', ciphertext)
+    //
+    // // Decrypt
+    // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+    // console.log('bytes', bytes)
+    //
+    //
+    // var originalText = bytes.toString(CryptoJS.enc.Utf8);
+    //
+    // // console.log('test', bytes)
+    // console.log('test', originalText)
+    // console.log('test', originalText === 'my message')
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = signToken(user);

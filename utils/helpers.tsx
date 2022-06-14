@@ -182,6 +182,13 @@ function classNames(...classes: (false | null | undefined | string)[]) {
 
 export const capitalize = s => (s && s[0].toUpperCase() + s.slice(1)) || ""
 
+export const encryptText = (text, key) => {
+  const keyUtf = CryptoJS.enc.Utf8.parse(key);
+  const iv = CryptoJS.enc.Base64.parse(key);
+  const enc = CryptoJS.AES.encrypt(text, keyUtf, {iv});
+  return enc.toString()
+}
+
 export {
   slugify,
   titleIfy,

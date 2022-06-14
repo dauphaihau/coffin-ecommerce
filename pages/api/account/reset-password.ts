@@ -5,19 +5,21 @@ const bcrypt = require('bcryptjs');
 const bcryptSalt = process.env.BCRYPT_SALT;
 import Token from '../../../server/models/Token';
 import User from '../../../server/models/User';
+import {encryptText} from "../../../utils/helpers";
+import config from "../../../config.json";
 
 const handler = nc();
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   const {userId, token, password} = req.body
   try {
-    let dataTokenUser = await Token.findOne({userId});
-    if (!dataTokenUser) {
+    let tokenUserData = await Token.findOne({userId});
+    if (!tokenUserData) {
       res.send({
         status: '401',
         message: 'User does not exists! '
       });
     }
-    bcrypt.hash(dataTokenUser.token, Number(bcryptSalt), function (err, hash) {
+    bcrypt.hash(tokenUserData.token, Number(bcryptSalt), function (err, hash) {
       if (err) throw (err);
       bcrypt.compare(token, hash, function (err, result) {
         if (err) {
@@ -31,10 +33,13 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
       });
     });
 
-    const hash = await bcrypt.hash(password, Number(bcryptSalt));
+    // const hash = await bcrypt.hash(password, Number(bcryptSalt));
+    const encrypted = encryptText(password, config.cryptoKey)
+
     await User.updateOne(
       {_id: userId},
-      {$set: {password: hash}},
+      {$set: {password: encrypted}},
+      // {$set: {password: hash}},
       {new: true}
     );
     return res.send({

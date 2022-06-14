@@ -24,7 +24,7 @@ interface SelectProps<Type extends OptionValue> {
 
 function Select<Type extends OptionValue>(props: SelectProps<Type>) {
   const {
-    options,
+    options = [{label: '', value: ''}],
     onChange,
     value,
     label = '',

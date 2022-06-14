@@ -48,7 +48,7 @@ const ProductList = () => {
   }, [getAllProducts])
 
   const handleQuantity = (quantity) => {
-    if (quantity == 0) {
+    if (quantity === 0) {
       return <span className='badge-danger'>Out Of Stock</span>
     }
     if (quantity < 0 || quantity <= 100) {
@@ -68,11 +68,11 @@ const ProductList = () => {
     {id: 'sku', title: 'SKU'},
     {id: 'quantity', title: 'quantity'},
     // {id: 'brand', title: 'Brand'},
-    {
-      id: 'status', title: 'Status',
-      render: (row) => (<>{handleQuantity(row.quantity)}</>)
-    },
-    {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('LL')}</>},
+    // {
+    //   id: 'status', title: 'Status',
+    //   render: (row) => (<>{handleQuantity(row.quantity)}</>)
+    // },
+    // {id: 'createAt', title: 'Date Create', render: (row) => <>{moment(row.createAt).format('LL')}</>},
     {
       id: 'actions', title: '', align: 'center',
       render: (row) => (

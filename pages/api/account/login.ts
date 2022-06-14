@@ -15,28 +15,33 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await db.connect();
     const user = await User.findOne({email});
-    if (!user) {
-      return res.status(422).send({code: '422', messages: 'Invalid credentials!'})
-    }
+    if (!user) return res.status(422).send({code: '422', messages: 'User doesn\'t exist'});
     await db.disconnect();
 
+    // const key = 'dauphaihau';
+    // const keyutf = CryptoJS.enc.Utf8.parse(key);
+    // const iv = CryptoJS.enc.Base64.parse(key);
+    //
+    // const dec = CryptoJS.AES.decrypt(
+    //   {ciphertext: CryptoJS.enc.Base64.parse(user.password)},
+    //   keyutf,
+    //   {iv}
+    // );
+    // const decPassword = CryptoJS.AES.decrypt(
+    //   {ciphertext: CryptoJS.enc.Base64.parse(password)},
+    //   keyutf,
+    //   {iv}
+    // );
+    // const decStr = CryptoJS.enc.Utf8.stringify(dec)
+    // const decStrPassword = CryptoJS.enc.Utf8.stringify(decPassword)
 
-    // register or user login post password was encrypted
-    // var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
-    // // console.log('test', ciphertext)
-    //
-    // // Decrypt
-    // var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
-    // console.log('bytes', bytes)
-    //
-    //
-    // var originalText = bytes.toString(CryptoJS.enc.Utf8);
-    //
-    // // console.log('test', bytes)
-    // console.log('test', originalText)
-    // console.log('test', originalText === 'my message')
+    // console.log('dec-str', decStr)
+    // console.log('dec-password', decStrPassword)
+    // console.log('compare', decStrPassword === decStr)
 
-    if (user && bcrypt.compareSync(password, user.password)) {
+    // if (user && decStrPassword === decStr) {
+    if (user && password === user.password) {
+    // if (user && bcrypt.compareSync(password, user.password)) {
       const token = signToken(user);
       res.json(
         {
@@ -45,7 +50,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
           data: {
             auth: {
               token,
-              expireAt: 1654420589070,
+              expireAt: new Date(Date.now() + 8 * 3600000),
               refreshAt: 1654420589070,
             },
             profile: {
@@ -58,7 +63,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       res.status(422).send({message: 'Invalid password!'});
     }
-
   } catch (e) {
     res.status(404).send(e.message);
   }

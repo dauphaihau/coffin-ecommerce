@@ -24,7 +24,6 @@ const signToken = (user, options) => {
 
 const isAuth = async (req, res, next) => {
   const {authorization} = req.headers;
-  // console.log('authorization at middleware isAuth', authorization)
 
   if (authorization) {
     // Bearer xxx => xxx

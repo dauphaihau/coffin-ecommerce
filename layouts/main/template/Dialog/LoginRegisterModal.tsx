@@ -20,15 +20,15 @@ const formType = {
   login: {
     title: 'Login',
     message: '',
-    textButton: 'Login to your account',
-    textFooter: 'Don\'t have an account?',
+    textButton: 'Login to your profile',
+    textFooter: 'Don\'t have an profile?',
     linkTextFooter: 'Create one'
   },
   register: {
     title: 'Register',
     message: '',
     textButton: 'Register',
-    textFooter: 'Already have an account?',
+    textFooter: 'Already have an profile?',
     linkTextFooter: 'Login'
   },
 }
@@ -51,10 +51,10 @@ const formOptions = {
   }
 };
 
-
 const LoginRegisterModal = () => {
   const router = useRouter();
   const [currentForm, setCurrentForm] = useState('login')
+  // @ts-ignore
   const {openLoginRegisterModal, closeDrawerModal} = useUIController();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
   const {setUser, user, setIsAuthorize} = useAuth();

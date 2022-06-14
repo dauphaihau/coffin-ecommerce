@@ -1,10 +1,10 @@
 import banner from '../../public/images/banners/contemporary-banner.png';
 import {ProfileSidebar} from "../../core/Navigation";
-import BannerCard from "../../layouts/main/pages/account/BannerCard";
+import BannerCard from "../../layouts/main/pages/profile/BannerCard";
 import {Grid} from "../../core/Layout";
 import {Link} from "../../core/Next";
 
-const MyAccount = () => {
+const MyProfile = () => {
 
   return (
     <div>
@@ -17,16 +17,16 @@ const MyAccount = () => {
           <div className="flex flex-col w-full">
             <div className='p-4 rounded-lg'>
               <h1 className='text-3xl font-bold mb-6'>Dashboard</h1>
-              <p> From your account dashboard you can view your
-                <Link scroll={false} href='/account/order' className='font-bold underline mx-1'>
+              <p> From your profile dashboard you can view your
+                <Link scroll={false} href='/profile/order' className='font-bold underline mx-1'>
                   recent orders
                 </Link>
                 , manage your
-                <Link scroll={false} href='/account/info' className='font-bold underline mx-1'>
+                <Link scroll={false} href='/profile/info' className='font-bold underline mx-1'>
                   Account Details
                 </Link>
                 and
-                <Link scroll={false} href='/account/change-pass' className='font-bold underline mx-1'>
+                <Link scroll={false} href='/profile/change-pass' className='font-bold underline mx-1'>
                   change your password.
                 </Link>
               </p>
@@ -39,4 +39,4 @@ const MyAccount = () => {
   );
 }
 
-export default MyAccount;
+export default MyProfile;

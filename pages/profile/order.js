@@ -1,12 +1,13 @@
 import {useRouter} from "next/router";
 
 import banner from "../../public/images/banners/contemporary-banner.png";
-import BannerCard from "../../layouts/main/pages/account/BannerCard";
-import ProfileSidebar from "../../layouts/main/pages/account/ProfileSidebar";
+import BannerCard from "../../layouts/main/pages/profile/BannerCard";
+import ProfileSidebar from "../../layouts/main/pages/profile/ProfileSidebar";
 import {EyeIcon} from "@heroicons/react/outline";
 import {Link} from "../../core";
 import {rows} from "../../assets/data/orders";
 import Table from "../../core/Table";
+import {Grid} from "../../core/Layout";
 
 const Order = () => {
   const router = useRouter();
@@ -28,11 +29,13 @@ const Order = () => {
   ];
 
   return (
-    <div>
+    <>
       <BannerCard srcImg={banner} title='Profile'/>
-      <div className='mt-12 grid ipad:grid-cols-2 laptop:grid-cols-6 gap-x-12 '>
-        <ProfileSidebar active='order'/>
-        <div className='col-span-3'>
+      <Grid md={2} lg={6} gapx={12} classes='mt-12'>
+        <div className='col-span-1'>
+          <ProfileSidebar active='order'/>
+        </div>
+        <div className='col-span-4'>
           <div className="flex flex-col w-full">
             <div className='p-4 rounded-lg'>
               <h1 className='text-3xl font-bold mb-6'>Order</h1>
@@ -44,8 +47,8 @@ const Order = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Grid>
+    </>
   );
 }
 

@@ -51,7 +51,7 @@ const ForgotPassword = () => {
     if (Number(status) === 401) {
       setError('email', {
         type: 'server',
-        message: 'No account found with that email.'
+        message: 'No profile found with that email.'
       })
       return
     }

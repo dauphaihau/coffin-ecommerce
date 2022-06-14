@@ -34,7 +34,7 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/account'
+            href='/profile'
             className={`${css} ${active === 'dashboard' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <HomeIcon
@@ -45,7 +45,7 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/account/order'
+            href='/profile/order'
             className={`${css} ${active === 'order' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <ShoppingCartIcon
@@ -56,7 +56,7 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/account/info'
+            href='/profile/info'
             className={`${css} ${active === 'info' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <IdentificationIcon
@@ -67,7 +67,7 @@ const ProfileSidebar = ({active}) => {
         <li>
           <Link
             scroll={false}
-            href='/account/change-pass'
+            href='/profile/change-pass'
             className={`${css} ${active === 'change-pass' ? 'bg-gray-custom-50' : 'hover:bg-gray-custom-hover'}`}
           >
             <CogIcon

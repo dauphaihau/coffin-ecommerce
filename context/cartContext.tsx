@@ -7,11 +7,17 @@ const initialState = {
   numberOfItemsInCart: 0,
   numberAllOfItemsInCart: 0,
   total: 0,
+  step: 0,
+  addToCart: (item: object) => {},
+  clearCart: () => {},
+  removeFromCart: (item: object) => {},
+  setItemQuantity: (item: object) => {},
+  setStep: (step: number) => {},
 }
 
 const CartContext = createContext(initialState)
 
-class CartProvider extends Component {
+class CartProvider extends Component<{}, { step: number }> {
 
   constructor(props) {
     super(props);

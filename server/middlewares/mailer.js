@@ -43,7 +43,7 @@ exports.sendResetPasswordEmail = ({toUser, token}) => {
     from: 'customercare@drop.com',
     // from: process.env.EMAIL_USERNAME,
     to: toUser.email,
-    subject: 'Customer account password reset',
+    subject: 'Customer profile password reset',
     html: `
       <h1>Drop</h1>
 <!--       <hr style="border-top:1px solid #eaeaea">-->
@@ -92,7 +92,7 @@ exports.sendResultRegister = function ({email}) {
   const message = {
     from: process.env.EMAIL_USERNAME,
     to: email,
-    subject: 'Customer account confirmation',
+    subject: 'Customer profile confirmation',
     html: `
       <h1>Drop</h1>
       <h3>Welcome to Drop store,</h3>

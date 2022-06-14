@@ -1,30 +1,26 @@
 import axios from 'axios';
-import {getHeaders, hashMD5} from '../utils/helpers';
 import {setCookie} from 'nookies';
-const CryptoJS = require('crypto-js');
+import {encryptText, getHeaders, hashMD5} from '../utils/helpers';
 import config from '../config.json';
 
+const handleSetCookie = (data) => {
+  setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
+    maxAge: 30 * 24 * 60 * 60,
+    path: '/'
+  });
+  setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
+    maxAge: 30 * 24 * 60 * 60,
+    path: '/'
+  });
+}
+
 export const accountService = {
-
   register: async (values) => {
-    console.log('values', values)
     const {password} = values
-    const ciphertext = CryptoJS.AES.encrypt(password, 'dauphaihau').toString();
-    const valuesss = {...values, password: ciphertext}
-    console.log('test', ciphertext)
-    console.log('test', valuesss)
-
+    const modifiedValues = {...values, password: encryptText(password, config.cryptoKey)}
     try {
-      // const {data: {data}} = await axios.post('/api/account/register', valuesss);
-      const {data: {data}} = await axios.post('/api/account/register', values);
-      setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: '/'
-      });
-      setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: '/'
-      });
+      const {data: {data}} = await axios.post('/api/account/register', modifiedValues);
+      handleSetCookie(data)
       return {data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -35,17 +31,11 @@ export const accountService = {
     }
   },
   login: async (values) => {
+    const {password} = values
+    const modifiedValues = {...values, password: encryptText(password, config.cryptoKey)}
     try {
-      const {data: {data}} = await axios.post('/api/account/login', values);
-      // console.log('data', data)
-      setCookie(null, hashMD5(config.cookies.auth), JSON.stringify(data.auth), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: '/'
-      });
-      setCookie(null, hashMD5(config.cookies.profile), JSON.stringify(data.profile), {
-        maxAge: 30 * 24 * 60 * 60,
-        path: '/'
-      });
+      const {data: {data}} = await axios.post('/api/account/login', modifiedValues);
+      handleSetCookie(data)
       // cookies.set(Helper.hashMD5(key), data, { expires: expiredAt, path: '/' })
       return {data, isLoading: false, isSuccess: true,};
     } catch ({response}) {
@@ -56,10 +46,10 @@ export const accountService = {
       };
     }
   },
-  changePassword: async (values) => {
+  forgotPassword: async (email) => {
     try {
-      await axios.put('/api/account/change-pass', values, getHeaders());
-      return {isLoading: false, isSuccess: true};
+      const {data} = await axios.post('/api/account/forgot-password', email);
+      return {status: data.status, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
         isSuccess: false,
@@ -69,7 +59,6 @@ export const accountService = {
     }
   },
   updatePassword: async (values) => {
-    console.log('values', values)
     try {
       await axios.put('/api/account/reset-password', values);
       return {isLoading: false, isSuccess: true};
@@ -81,10 +70,17 @@ export const accountService = {
       };
     }
   },
-  forgotPassword: async (values) => {
+  changePassword: async (values) => {
+
+    // const {password} = values
+    const modifiedValues = {
+      ...values,
+      password: encryptText(values.password, config.cryptoKey),
+      newPassword: encryptText(values.newPassword, config.cryptoKey)
+    }
     try {
-      const {data} = await axios.post('/api/account/forgot-password', values);
-      return {status: data.status, isLoading: false, isSuccess: true};
+      await axios.put('/api/account/change-pass', modifiedValues, getHeaders());
+      return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
         isSuccess: false,

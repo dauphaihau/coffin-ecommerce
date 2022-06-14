@@ -12,26 +12,22 @@ import {sendResultRegister} from "../../../server/middlewares/mailer";
 const handler = nc();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+  const {email, name, password} = req.body
   try {
     await db.connect();
-    if (await User.findOne({email: req.body.email})) {
-      res.status(409).send({message: `Email "${req.body.email}" already exists`});
+    if (await User.findOne({email})) {
+      res.status(409).send({message: `Email "${email}" already exists`});
     }
-
     const newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
-      // password: req.body.password,
+       name, email,
+      // password: bcrypt.hashSync(password),
+       password,
       role: ROLE_OPTIONS.CUSTOMER,
       status: USER_STATUS.ACTIVE
     });
-
     const user = await newUser.save();
     await db.disconnect();
-
-    await sendResultRegister({email: req.body.email});
-
+    await sendResultRegister({email});
     const token = signToken(user);
     res.send(
       {

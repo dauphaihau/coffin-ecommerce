@@ -5,7 +5,7 @@ import {useAuth} from "../../context/authContext";
 import {Input} from "../../core/Input";
 import {Button} from "../../core/Button";
 import {ProfileSidebar} from "../../core/Navigation";
-import BannerCard from "../../layouts/main/pages/account/BannerCard";
+import BannerCard from "../../layouts/main/pages/profile/BannerCard";
 import {Grid} from "../../core/Layout";
 
 const Info = () => {

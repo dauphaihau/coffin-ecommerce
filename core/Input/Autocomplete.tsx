@@ -2,7 +2,7 @@ import {ChangeEvent, Fragment, useEffect, useState} from 'react'
 import {Combobox, Transition} from '@headlessui/react'
 import {CheckIcon, SelectorIcon} from '@heroicons/react/solid'
 import {uniqElement} from "../../utils/helpers";
-
+import {checkOffsetValue} from "smart-buffer/typings/utils";
 
 interface AutocompleteProps {
   className?: string,
@@ -22,8 +22,8 @@ type Result = {
   id: string
 }[]
 
-
-export default function CustomAutocomplete({label, onChange, options, value}: AutocompleteProps ) {
+export default function CustomAutocomplete(props: AutocompleteProps) {
+  const {label, onChange, options = [{id: '', name: '',}], value} = props;
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
   // @ts-ignore
@@ -44,7 +44,6 @@ export default function CustomAutocomplete({label, onChange, options, value}: Au
           .replace(/\s+/g, '')
           .includes(query.toLowerCase().replace(/\s+/g, ''))
       )
-
 
   const handleAutoComplete = (...e) => {
     let tempArr = [...arrResult, ...e];

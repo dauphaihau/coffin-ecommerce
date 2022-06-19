@@ -1,16 +1,15 @@
-import Dialog from "../../../../core/Modal/Dialog";
+import Dialog from "../../../../core/Dialog/Dialog";
 import {Text} from "../../../../core";
 import {Row} from "../../../../core/Layout";
 import {Button} from "../../../../core/Button";
-import {useUIController} from "../../../../context/UIControllerContext";
 import {destroyCookie} from "nookies";
 import {hashMD5} from "../../../../utils/helpers";
 import config from "../../../../config.json";
 import {useRouter} from "next/router";
 import {useAuth} from "../../../../context/authContext";
 
-const ConfirmLogoutDialog = () => {
-  const {openConfirmLogout, closeDrawerModal} = useUIController();
+const ConfirmLogoutDialog = (props) => {
+  const {defaultStatus, setShowDialog} = props;
   const {setIsAuthorize} = useAuth();
   const router = useRouter();
 
@@ -28,7 +27,7 @@ const ConfirmLogoutDialog = () => {
   }
 
   return (
-    <Dialog isOpen={openConfirmLogout} closeDialog={closeDrawerModal}>
+    <Dialog isOpen={defaultStatus}>
       <Dialog.Title title='Close this app?'/>
       <Dialog.Content>
         <div className="mt-2">
@@ -37,7 +36,7 @@ const ConfirmLogoutDialog = () => {
           </Text>
         </div>
         <Row classes='mt-4' justify='end'>
-          <Button light onClick={closeDrawerModal}>
+          <Button light onClick={() => setShowDialog(false)}>
             Cancel
           </Button>
           <Button variant='warning' shadow onClick={() => handleLogout()}>

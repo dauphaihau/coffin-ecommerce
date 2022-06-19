@@ -70,7 +70,7 @@ exports.sendResetPasswordEmail = ({toUser, token}) => {
               onmouseover="this.style.color='white'"
               onmouseout="this.style.opacity='0.8'"
       >
-            <a target="_" href="${process.env.DOMAIN}/reset-password/?token=${token}&id=${toUser._id}">Reset Password Link</a></p>
+            <a target="_" href="${process.env.DOMAIN}/account/reset-password/?token=${token}&id=${toUser._id}">Reset Password Link</a></p>
       </button>
       <p>If you didn't request a password reset, you can ignore this email.</p>
       <p>You can find answers to most questions and get in touch with us at 

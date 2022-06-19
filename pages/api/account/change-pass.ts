@@ -1,5 +1,4 @@
 import nc from 'next-connect';
-import bcrypt from 'bcryptjs';
 import User from '../../../server/models/User';
 import db from "../../../server/db/db";
 import {NextApiRequest, NextApiResponse} from "next";
@@ -13,23 +12,19 @@ handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await db.connect();
     let user = await User.findOne({email});
-
-    // if (user && bcrypt.compareSync(password, user.password)) {
-    if (user && password === user.password) {
-      // user.password = bcrypt.hashSync(newPassword)
-      user.password = encryptText(newPassword, config.cryptoKey)
-      await user.save();
-      await db.disconnect();
-      res.send({
-        code: '200',
-        message: 'Updated Successfully'
-      });
-    } else {
+    if (user && password !== user.password) {
       res.status(401).send({
         code: '401',
         message: 'Password not match'
       });
     }
+    user.password = encryptText(newPassword, config.cryptoKey)
+    await user.save();
+    await db.disconnect();
+    res.send({
+      code: '200',
+      message: 'Updated Successfully'
+    });
   } catch (e) {
     res.status(404).send(e.message);
   }

@@ -1,14 +1,14 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import {NextApiRequest, NextApiResponse} from 'next';
 import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
-import crypto from "crypto";
+import crypto from 'crypto';
 
 import User from '../../../../server/models/User';
-import {isAuth, rolesCanCreate, rolesCanView} from "../../../../server/middlewares/auth";
-import db from "../../../../server/db/db";
+import {isAuth, rolesCanCreate, rolesCanView} from '../../../../server/middlewares/auth';
+import db from '../../../../server/db/db';
 import {sendResetPasswordEmail} from '../../../../server/middlewares/mailer';
-import Token from "../../../../server/models/Token";
-import {USER_STATUS} from "../../../../utils/enums";
+import Token from '../../../../server/models/Token';
+import {USER_STATUS} from '../../../../utils/enums';
 
 const bcryptSalt = process.env.BCRYPT_SALT;
 
@@ -28,15 +28,16 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
 handler.use(rolesCanCreate);
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-  const {email, name, address, phone, role, sendSetPasswordEmail} = req.body
+  const {email, name, address, phone, role, avatar, sendSetPasswordEmail} = req.body
   try {
     await db.connect();
     if (await User.findOne({email})) {
-      res.status(409).send({message: `"${email}" already exists`});
+      res.status(409).send({message: `'${email}' already exists`});
     }
     const newUser = new User({
       name,
       email,
+      avatar,
       address,
       phone,
       role,
@@ -53,7 +54,6 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
       let resetToken = crypto.randomBytes(32).toString('hex');
       const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
-
       await sendResetPasswordEmail({toUser: user, token: hash});
 
       await new Token({

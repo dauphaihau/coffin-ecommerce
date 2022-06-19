@@ -1,6 +1,4 @@
 import {NextApiRequest, NextApiResponse} from "next";
-
-const bcrypt = require('bcryptjs');
 import nc from 'next-connect';
 
 import User from '../../../server/models/User';
@@ -19,14 +17,13 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(409).send({message: `Email "${email}" already exists`});
     }
     const newUser = new User({
-       name, email,
-      // password: bcrypt.hashSync(password),
-       password,
+      name, email, password,
       role: ROLE_OPTIONS.CUSTOMER,
       status: USER_STATUS.ACTIVE
     });
     const user = await newUser.save();
     await db.disconnect();
+
     await sendResultRegister({email});
     const token = signToken(user);
     res.send(

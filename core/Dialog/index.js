@@ -2,7 +2,6 @@ import {XIcon} from "@heroicons/react/solid";
 import {useUIController} from "../../context/UIControllerContext";
 
 export function Modal(props) {
-
   const {isOpen, children, classes, width} = props;
   const {closeDrawerModal} = useUIController();
 

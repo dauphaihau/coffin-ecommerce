@@ -1,8 +1,8 @@
+import {NextApiRequest, NextApiResponse} from 'next';
 import nc from 'next-connect';
 import crypto from 'crypto';
-const CryptoJS = require('crypto-js');
+
 const bcrypt = require('bcryptjs');
-import {NextApiRequest, NextApiResponse} from 'next';
 const {sendResetPasswordEmail} = require('../../../server/middlewares/mailer');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
@@ -16,7 +16,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await db.connect();
     let user = await User.findOne({email: req.body.email});
-    if (!user) res.send({
+    if (!user) res.status(401).send({
       status: '401',
       message: 'User does not exists! '
     });
@@ -25,17 +25,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     if (token) await token.deleteOne();
 
     let resetToken = crypto.randomBytes(32).toString('hex');
-    // console.log('reset-token', resetToken)
-
-    let resetTokenCryptoJS = CryptoJS.lib.WordArray.random(32)
-    let key = CryptoJS.enc.Hex.parse(resetTokenCryptoJS);
-    console.log('reset-token-crypto-js', resetTokenCryptoJS)
-    console.log('reset-token', key)
-
-
     const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
-    console.log('hash', hash)
-    
     await sendResetPasswordEmail({toUser: user, token: hash});
 
     await new Token({

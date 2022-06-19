@@ -84,7 +84,7 @@ const ForgotPassword = () => {
           {formType[currentForm].textButton}
         </Button>
       </Col>
-      <Link href='/' classes={currentForm === 'forgotPassword' ? 'hidden' : 'block'}>
+      <Link href='/pages' classes={currentForm === 'forgotPassword' ? 'hidden' : 'block'}>
         <Button
           type="submit" width='full'
           classes='mt-5' size='lg'

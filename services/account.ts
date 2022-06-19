@@ -91,7 +91,7 @@ export const accountService = {
   },
   me: async () => {
     try {
-      const {data} = await axios.get('/api/account/me', getHeaders())
+      const {data: {data}} = await axios.get('/api/account/me', getHeaders())
       return {data, isSuccess: true};
     } catch ({response}) {
       return {

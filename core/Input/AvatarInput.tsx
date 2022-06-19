@@ -1,25 +1,27 @@
-import {ChangeEvent, useEffect, useRef, useState} from "react";
+import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import {Text} from "../index";
 
 interface AvatarInputProps {
-  onFileChange?: (event: any[]) => void;
+  onFileChange?: (name, formData: FormData) => void;
+  // onFileChange?: (event: any[]) => void;
   classesSpace?: string,
+  defaultValue?: string,
+  name: string,
 }
 
-
-const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
-
+const AvatarInput = ({name, defaultValue, onFileChange, classesSpace}: AvatarInputProps) => {
   const wrapperRef = useRef(null);
   const [fileList, setFileList] = useState([]);
   const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<string | null>('')
+
+  useEffect(() => setPreview(defaultValue), [defaultValue])
 
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined)
       return
     }
-
     const objectUrl = URL.createObjectURL(selectedFile)
     setPreview(objectUrl)
 
@@ -33,7 +35,7 @@ const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
 
   const onDrop = () => wrapperRef.current.classList.remove('dragover');
 
-  const onFileDrop = (e) => {
+  const onFileDrop = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     const newFile = e.target.files
     if (!newFile || newFile.length === 0) {
@@ -43,13 +45,14 @@ const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
 
     // I've kept this example simple by using the first image instead of multiple
     setSelectedFile(newFile[0])
+    onFileChange(name, newFile[0]);
   }
 
   const fileRemove = (file) => {
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
-    onFileChange(updatedList);
+    onFileChange(name, updatedList);
   }
 
   return (
@@ -63,7 +66,7 @@ const AvatarInput = ({onFileChange, classesSpace}: AvatarInputProps) => {
           className='avatar-input__upload'>
           <div className='avatar-input__image'>
             <input type="file" onChange={onFileDrop}/>
-            {selectedFile
+            {preview
               ? <img src={preview} alt='img'/>
               : <div className='avatar-input__placeholder'>
                 <i className="fa-solid fa-image "/>

@@ -16,6 +16,7 @@ import {Container} from "../../../core/Layout";
 export const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)
   const [isMobileScreen, setIsMobileScreen] = useState(false)
+  const [accountLayout, setAccountLayout] = useState(false)
   const router = useRouter();
 
   useEffect(() => {
@@ -26,11 +27,16 @@ export const MainLayout = ({children, categories}) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const arrPathAccount = ['forgot-password', 'reset-password']
+    if (arrPathAccount.includes(router.pathname.slice(9))) {
+      setAccountLayout(true)
+    } else setAccountLayout(false)
+
     if (router.pathname === '/') {
       setShowBanner(true)
-    } else {
-      setShowBanner(false)
-    }
+    } else setShowBanner(false)
+
   }, [router.asPath])
 
   let navItemLength = 5;
@@ -50,7 +56,7 @@ export const MainLayout = ({children, categories}) => {
       <Navbar categories={categories}/>
       <BannerHomeCard isDisplay={showBanner}/>
       <Container classes='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
-        <main className="pt-28">{children}</main>
+        <main className={`pt-28 ${accountLayout && 'flex items-center h-screen'}`}>{children}</main>
         <Contact/>
         <Footer/>
       </Container>

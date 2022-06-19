@@ -9,7 +9,7 @@ import {useUIController} from "../../../../context/UIControllerContext";
 import countryOpts from "../../../../assets/data/country.json";
 import {useAuth} from "../../../../context/authContext";
 import {Grid, Row} from "../../../../core/Layout";
-import Dialog from "../../../../core/Modal/Dialog";
+import Dialog from "../../../../core/Dialog/Dialog";
 
 const AddressDialog = () => {
 

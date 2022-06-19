@@ -1,26 +1,36 @@
-import moment from "moment/moment";
-import {useRouter} from "next/router";
-import {toast} from "react-hot-toast";
-import {useCallback, useEffect, useState} from "react";
+import moment from 'moment/moment';
+import {useRouter} from 'next/router';
+import {toast} from 'react-hot-toast';
+import {useCallback, useEffect, useState} from 'react';
 
-import {userService} from "@services/users";
-import {useUIController} from "@context/UIControllerContext";
-import {Text} from "../../../core";
-import {Button} from "../../../core/Button";
-import {MenuDropdown} from "../../../core/Navigation";
-import {Helmet} from "../../../layouts/admin/common/Helmet";
-import Table from "../../../core/Table";
-import {Row} from "../../../core/Layout";
-import {Link} from "../../../core/Next";
-import {uiControllerActionsType} from "../../../store/reducers/uiControllerReducer";
-import {capitalize, isNil} from "../../../utils/helpers";
-import {ROLE_OPTIONS, USER_STATUS} from "../../../utils/enums";
+import {userService} from '@services/users';
+import {useUIController} from '@context/UIControllerContext';
+import {Text} from '../../../core';
+import {Button} from '../../../core/Button';
+import {MenuDropdown} from '../../../core/Navigation';
+import {Helmet} from '../../../layouts/admin/common/Helmet';
+import Table from '../../../core/Table';
+import {Row} from '../../../core/Layout';
+import {Link} from '../../../core/Next';
+import {capitalize, isNil} from '../../../utils/helpers';
+import {ROLE_OPTIONS, USER_STATUS} from '../../../utils/enums';
+import ConfirmDeleteDialog from "../../../layouts/admin/template/Dialog/ConfirmDelete";
+
+
+const dataBreadcrumb = [
+  {path: '/admin', name: 'Dashboard', firstLink: true},
+  {path: '/admin/users', name: 'Users'},
+  {path: '', name: 'List', lastLink: true}
+];
+
 
 const UserList = () => {
   const router = useRouter();
-  const {progress, dispatch, setProgress, confirmDeleteUser} = useUIController();
+  const {progress, dispatch, setProgress} = useUIController();
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showDialog, setShowDialog] = useState(false)
+  const [idUser, setIdUser] = useState()
 
   const getAllUsers = useCallback(
     async () => {
@@ -38,59 +48,31 @@ const UserList = () => {
     getAllUsers();
   }, [getAllUsers])
 
-  // console.log('confirm-delete-user', confirmDeleteUser)
-
-  const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "/admin/users", name: "Users"},
-    {path: "", name: "List", lastLink: true}
-  ];
-
   const columns = [
     {
       id: 'name', title: 'Name',
       render: (row) => (
         <Row align='center'>
           <div className='rounded-lg '>
-            <img src='/images/default/avatar-default.jpeg' className='h-9 w-9 rounded-md ' alt='avatar'/>
-            {/*<img src={`https://i.pravatar.cc/150?u=${row._id}`} className='h-9 w-9 rounded-md ' alt='avatar'/>*/}
+            <img src={row.avatar ?? '/images/default/avatar-default.jpeg'} className='h-9 w-9 rounded-md '
+                 alt='avatar'/>
           </div>
           <Text weight='bold' sx='sm' classes='ml-4'>{row.name}</Text>
         </Row>
       )
     },
     {id: 'email', title: 'Email',},
-    {id: 'role', title: 'Role',
+    {
+      id: 'role', title: 'Role',
       render: (row) => !isNil(row.role) ? capitalize(ROLE_OPTIONS[row.role].toLowerCase()) : '-'
     },
-    // {
-    //   id: 'verified', title: 'Verified', align: 'center',
-    //   render: ({status}) => (
-    //     <>
-    //       {status !== USER_STATUS.NOT_ACTIVATED ?
-    //         // <i className="fa-solid fa-badge-check"/>
-    //         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline" viewBox="0 0 20 20" fill="currentColor">
-    //           <path fillRule="evenodd"
-    //                 d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-    //                 clipRule="evenodd"/>
-    //         </svg>
-    //         :
-    //         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 inline" viewBox="0 0 20 20" fill="currentColor">
-    //           <path fillRule="evenodd"
-    //                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-    //                 clipRule="evenodd"/>
-    //         </svg>
-    //       }
-    //     </>
-    //   )
-    // },
     {
       id: 'status', title: 'Status',
       render: ({status}) => (
         <>
           {status === USER_STATUS.LOCKED ?
-            <Text span classes="badge-danger">Locked</Text>
-            : <Text span classes="badge-green">Active</Text>
+            <Text span classes='badge-danger'>Locked</Text>
+            : <Text span classes='badge-green'>Active</Text>
           }
         </>
       )
@@ -106,20 +88,23 @@ const UserList = () => {
         <MenuDropdown
           ref={null}
           options={[
-            {
-              label: 'Lock',
-              element: <i className='fa-solid fa-lock'/>,
-              // feature: () => handleDelete(row._id)
-            },
+            // {
+            //   label: 'Lock',
+            //   element: <i className='fa-solid fa-lock'/>,
+            //   // feature: () => handleDelete(row._id)
+            // },
             {
               label: 'Edit',
-              element: <i className="fa-solid fa-pen"/>,
+              element: <i className='fa-solid fa-pen'/>,
               href: `${router.pathname}/${row._id}`
             },
             {
               label: 'Delete',
-              element: <i className="fa-solid fa-trash-can"/>,
-              feature: () => handleDelete(row._id)
+              element: <i className='fa-solid fa-trash-can'/>,
+              feature: () => {
+                setShowDialog(true)
+                setIdUser(row._id);
+              }
             },
           ]}
         />
@@ -127,16 +112,16 @@ const UserList = () => {
     },
   ];
 
-  async function handleDelete(id) {
-    dispatch({type: uiControllerActionsType.OPEN_CONFIRM_DELETE_USER, payload: {id}})
-    // const res = await userService.delete(id)
-    // if (res.isSuccess) {
-    //   const res = await userService.getAll();
-    //   setUsers(res.data)
-    //   toast.success('Delete success!')
-    // } else {
-    //   toast.error(res.message)
-    // }
+
+  async function handleDelete() {
+    const {isSuccess} = await userService.delete(idUser)
+    if (isSuccess) {
+      getAllUsers();
+      setShowDialog(false)
+      toast.success('Delete success!')
+    } else {
+      toast.error(message)
+    }
   }
 
   async function handleDeleteMultiItems(optionsChecked) {
@@ -145,7 +130,7 @@ const UserList = () => {
     // }
     dispatch({type: 'OPEN_CONFIRM_DELETE'})
     const res = await userService.multiDelete(optionsChecked.map(e => e.id))
-    if (res.isSuccess) {
+    if (isSuccess) {
       const res = await userService.getAll();
       setUsers(res.data)
       toast.success('Delete success!')
@@ -156,14 +141,13 @@ const UserList = () => {
 
   return (
     <>
-      <div className='flex items-center justify-between'>
+      <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleDelete={handleDelete}/>
+      <Row align='center' justify='between'>
         <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
-
-        {/*<Loading/>*/}
         <Link href='/admin/users/new'>
-          <Button classes='ml-auto mb-4' icon={<i className="fa-solid fa-plus"/>}> New User</Button>
+          <Button classes='ml-auto mb-4' icon={<i className='fa-solid fa-plus'/>}> New User</Button>
         </Link>
-      </div>
+      </Row>
       <Table
         onChangeCheckbox={handleDeleteMultiItems}
         loading={loading}

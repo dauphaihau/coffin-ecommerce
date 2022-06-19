@@ -9,7 +9,6 @@ import Table from "../../core/Table";
 import {Text} from "../../core";
 
 const Dashboard = () => {
-
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const {progress, setProgress} = useUIController();
@@ -59,8 +58,7 @@ const Dashboard = () => {
         <div className='flex items-center'>
           <div className='rounded-lg '>
             <Image
-              // src={`https://i.pravatar.cc/150?u=${row._id}`}
-              src='/images/default/avatar-default.jpeg'
+              src={row.avatar ?? '/images/default/avatar-default.jpeg'}
               classesSize='max-w-9 max-h-9 w-9 h-9'
               classes='rounded-md'
             />

@@ -13,9 +13,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
       // jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
       if (err) {
         res.status(401).send({message: 'Token is not valid'});
-      } else {
-        res.status(200).send(decode)
-      }
+      } else res.send({code: '200', data: decode})
     });
   } else {
     res.status(401).send({message: 'Token is not supplied'});

@@ -12,7 +12,7 @@ import {Button} from "../../../../core/Button";
 import {accountService} from "../../../../services/account";
 import {Text} from "../../../../core";
 import {Row} from "../../../../core/Layout";
-import Dialog from "../../../../core/Modal/Dialog";
+import Dialog from "../../../../core/Dialog/Dialog";
 import {Link} from "../../../../core/Next";
 import {ROLE_OPTIONS} from "../../../../utils/enums";
 
@@ -94,6 +94,7 @@ const LoginRegisterModal = () => {
         await router.push('/admin')
       }
       setUser({...user, ...data.profile})
+      // setUser(data.profile)
       setIsAuthorize(true)
       closeDrawerModal();
     } else {
@@ -135,9 +136,11 @@ const LoginRegisterModal = () => {
             errors={errors}/>
           {
             currentForm !== 'forgotPassword' &&
-            <Input
+
+            // @ts-ignore
+            <Input.Password
               name='password'
-              type='password'
+              // type='password'
               label='Password'
               register={register}
               errors={errors}
@@ -147,7 +150,7 @@ const LoginRegisterModal = () => {
             currentForm === 'login' &&
             <Row justify='between' align='center'>
               <Checkbox name='rememberMe' label='Remember me'/>
-              <Link href='/forgot-password'>
+              <Link href='/account/forgot-password'>
                 <Text as='button' classes="text-sm text-black hover:underline pt-[2px]">Forgot Password?</Text>
               </Link>
             </Row>

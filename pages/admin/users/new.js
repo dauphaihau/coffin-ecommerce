@@ -14,6 +14,7 @@ import {userService} from "../../../services/users";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {ROLE_OPTIONS} from "../../../utils/enums";
 import {capitalize} from "../../../utils/helpers";
+import {otherService} from "../../../services/other";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -53,19 +54,24 @@ const NewUser = () => {
   const {register, handleSubmit, control, formState: {errors}, setError} = useForm(formOptions);
 
   const onSubmit = async (values) => {
-    const formatData = {...values, role: values.role.value ?? values.role}
     setIsBtnLoading(true)
-    const res = await userService.create(formatData)
-    setIsBtnLoading(res.isLoading)
 
-    if (res.isSuccess) {
+    const {avatar} = values;
+    const body = new FormData();
+    body.append("file", avatar);
+    const {data} = await otherService.uploadFile(body)
+    const formatData = {...values, avatar: data, role: values.role.value ?? values.role}
+    const {isLoading, isSuccess, message} = await userService.create(formatData)
+
+    setIsBtnLoading(isLoading)
+    if (isSuccess) {
       router.push('/admin/users')
       toast.success('Create success!')
     } else {
       if (errors) {
         setError('email', {
           type: "server",
-          message: res.message
+          message
         });
       }
     }
@@ -76,7 +82,11 @@ const NewUser = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid md={2} lg={2} gapx={4} classes='w-[57rem] laptop:max-w-[80rem]'>
           <Paper classes='h-fit'>
-            <AvatarInput/>
+            <Controller
+              control={control}
+              name='avatar'
+              render={({field: {onChange}}) => (<AvatarInput name='avatar' onFileChange={(n, v) => onChange(v)}/>)}
+            />
             <Row align='center' justify='between' classes='mt-8'>
               <Col>
                 <Text classes='font-bold text-[0.875rem]'>Set Password</Text>
@@ -97,8 +107,6 @@ const NewUser = () => {
               <Input label='Phone/Mobile' name='phoneNumber' register={register} errors={errors}/>
             </Grid>
             <Input label='Email *' name='email' register={register} errors={errors}/>
-            {/*<Grid md={1} lg={2} gapx={4}>*/}
-            {/*</Grid>*/}
             <Controller
               control={control}
               name='role'

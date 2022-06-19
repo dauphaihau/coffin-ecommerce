@@ -74,7 +74,7 @@ const ResetPassword = () => {
           {formType[currentForm].textButton}
         </Button>
       </Col>
-      <Link href='/' classes={currentForm === 'resetPassword' ? 'hidden' : 'block'}>
+      <Link href='/pages' classes={currentForm === 'resetPassword' ? 'hidden' : 'block'}>
         <Button
           type="submit" width='full' size='lg'
           isLoading={isBtnLoading}>

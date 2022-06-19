@@ -22,48 +22,42 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
 handler.use(rolesCanUpdate);
 handler.put(async (req: NextApiRequest, res: NextApiResponse) => {
-  const {email, name, status, address, phone, role} = req.body
+  const {email, name, status, avatar, address, phone, role} = req.body
   try {
     await db.connect();
     const user = await User.findById(req.query.id);
-    if (user) {
-      user.name = name;
-      user.address = address;
-      user.email = email;
-      user.phone = phone;
-      user.status = status;
-      user.role = role;
-      await user.save();
+    if (!user) res.status(404).send({message: 'User Not Found'});
 
-      if (req.body.sendResetPasswordEmail) {
-        console.log('run sendResetPasswordEmail ')
-        // let user = await User.findOne({email});
-        // if (!user) res.send({
-        //   status: '401',
-        //   message: 'User does not exists! '
-        // });
+    user.name = name;
+    user.address = address;
+    user.email = email;
+    user.avatar = avatar;
+    user.phone = phone;
+    user.status = status;
+    user.role = role;
+    await user.save();
 
-        let resetToken = crypto.randomBytes(32).toString('hex');
-        const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
-
-        await sendResetPasswordEmail({toUser: user, token: hash});
-
-        await new Token({
-          userId: user._id,
-          token: hash,
-          createdAt: Date.now(),
-        }).save();
-      }
-
-      await db.disconnect();
-      return res.send({
-        status: '200',
-        message: 'updated user successfully'
+    if (req.body.sendResetPasswordEmail) {
+      let user = await User.findOne({email});
+      if (!user) res.send({
+        status: '401',
+        message: 'User does not exists! '
       });
-    } else {
-      await db.disconnect();
-      res.status(404).send({message: 'User Not Found'});
+
+      let resetToken = crypto.randomBytes(32).toString('hex');
+      const hash = await bcrypt.hash(resetToken, Number(bcryptSalt));
+      await sendResetPasswordEmail({toUser: user, token: hash});
+      await new Token({
+        userId: user._id,
+        token: hash,
+        createdAt: Date.now(),
+      }).save();
     }
+    await db.disconnect();
+    return res.send({
+      status: '200',
+      message: 'updated user successfully'
+    });
   } catch (error) {
     console.log('error', error)
     return res.status(422).send('Ooops, something went wrong!');
@@ -74,14 +68,10 @@ handler.use(rolesCanDelete)
 handler.delete(async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
   const user = await User.findById(req.query.id);
-  if (user) {
-    await user.remove();
-    await db.disconnect();
-    res.send({message: 'User Deleted'});
-  } else {
-    await db.disconnect();
-    res.status(404).send({message: 'User Not Found'});
-  }
+  if (!user) res.status(404).send({message: 'User Not Found'});
+  await user.remove();
+  await db.disconnect();
+  res.send({code: '200', message: 'User Deleted'});
 });
 
 export default handler;

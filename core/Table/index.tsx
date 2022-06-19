@@ -1,6 +1,6 @@
 import Pagination from "./Pagination";
-import {ReactNode, useMemo, useRef, useState} from "react";
-import {sortRows, filterRows, paginateRows, isEmpty} from "../../utils/helpers";
+import {ReactNode, useMemo, useState} from "react";
+import {filterRows, isEmpty, sortRows} from "../../utils/helpers";
 import {Checkbox, Input} from "../Input";
 import TableRow from './TableRow';
 
@@ -97,14 +97,18 @@ const Table = (props: PropsTable) => {
 
   const handleCheckAllBox = () => {
     if (rowsChecked.length > 0) {
-      const result = rowsChecked.findIndex(e => e.checked === true) !== -1
       // console.log('result', result)
-      if (result) {
-        return true
-      } else {
-        return false
-      }
+      return rowsChecked.findIndex(e => e.checked === true) !== -1;
     }
+    // if (rowsChecked.length > 0) {
+    //   const result = rowsChecked.findIndex(e => e.checked === true) !== -1
+    //   // console.log('result', result)
+    //   if (result) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // }
   }
 
   // const handleCheckbox = (select) => {

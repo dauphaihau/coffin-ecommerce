@@ -1,21 +1,21 @@
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useForm, Controller} from "react-hook-form";
-import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
-import {toast} from "react-hot-toast";
-import * as Yup from "yup";
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useForm, Controller} from 'react-hook-form';
+import {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
+import {toast} from 'react-hot-toast';
+import * as Yup from 'yup';
 
-import {Grid} from "@core/Layout";
-import {Input, Select, Switch, AvatarInput} from "@core/Input";
-import {Button} from "@core/Button";
-import {userService} from "@services/users";
-// import {useAuth} from "@context/authContext";
-import {Paper, Text} from "@core";
-import {Helmet} from "../../../layouts/admin/common/Helmet";
-import {Col, Row} from "../../../core/Layout";
-import {Link} from "../../../core/Next";
-import {ROLE_OPTIONS, USER_STATUS} from "../../../utils/enums";
-import {capitalize} from "../../../utils/helpers";
+import {Grid} from '@core/Layout';
+import {Input, Select, Switch, AvatarInput} from '@core/Input';
+import {Button} from '@core/Button';
+import {userService} from '@services/users';
+import {Paper, Text} from '@core';
+import {Helmet} from '../../../layouts/admin/common/Helmet';
+import {Col, Row} from '../../../core/Layout';
+import {Link} from '../../../core/Next';
+import {ROLE_OPTIONS, USER_STATUS} from '../../../utils/enums';
+import {capitalize} from '../../../utils/helpers';
+import {otherService} from '../../../services/other';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -37,8 +37,8 @@ const handleRole = (role) => {
 
 const UserEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
+  // const [isDisableBtn, setIsDisableBtn] = useState(true)
   const router = useRouter();
-  // const {user: userInfo} = useAuth();
   const [statusBadgeLock, setStatusBadgeLock] = useState()
   const [user, setUser] = useState()
 
@@ -48,17 +48,16 @@ const UserEdit = () => {
   }, [router.isReady])
 
   const loadInit = async () => {
-    const {id} = router.query;
-    const {data} = await userService.detail(id);
+    const {data} = await userService.detail(router.query.id);
     setUser(data)
     setStatusBadgeLock(data.status)
     // setIsLocked(data.status)
   }
 
   const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "/admin/users", name: "Users"},
-    {path: "", name: user?.name, lastLink: true}
+    {path: '/admin', name: 'Dashboard', firstLink: true},
+    {path: '/admin/users', name: 'Users'},
+    {path: '', name: user?.name, lastLink: true}
   ];
 
   if (user) {
@@ -68,31 +67,33 @@ const UserEdit = () => {
   const {register, handleSubmit, reset, formState: {errors}, setError, control} = useForm(formOptions);
 
   useEffect(() => {
-    if (user) {
-      reset(user)
-    }
+    if (user) reset(user)
   }, [user, reset])
 
   const onSubmit = async (values) => {
-    console.log('values', values)
-    const formatForm = {
-      ...values, role: values.role.value ?? values.role
-    }
     setIsBtnLoading(true)
-    const res = await userService.update(formatForm)
-    setIsBtnLoading(res.isLoading)
+    let formatData = {...values, role: values.role.value ?? values.role}
+    const {avatar} = values;
+    if (avatar !== user?.avatar) {
+      const body = new FormData();
+      body.append('file', avatar);
+      const {data} = await otherService.uploadFile(body)
+      formatData = {...formatData, avatar: data}
+    }
+    const {isLoading, isSuccess, message} = await userService.update(formatData)
 
-    if (res.isSuccess) {
+    setIsBtnLoading(isLoading)
+    if (isSuccess) {
       router.push('/admin/users')
       toast.success('Update success!')
     } else {
-      if (res.message === 'you are not authorized') {
-        return toast.error(res.message)
+      if (message === 'you are not authorized') {
+        return toast.error(message)
       }
       if (errors) {
         setError('email', {
-          type: "server",
-          message: res.message
+          type: 'server',
+          message
         });
       }
     }
@@ -102,22 +103,24 @@ const UserEdit = () => {
     <section className='w-2/3'>
       <Helmet title='Edit user' dataBreadcrumb={dataBreadcrumb}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/*<Grid md={2} lg={2} gapx={4}>*/}
-          {/*  <Input label='Last Name *' name='lastName' register={register} errors={errors}/>*/}
-          {/*</Grid>*/}
-
           <Grid md={2} lg={2} gapx={4} classes='w-[57rem] laptop:max-w-[80rem]'>
             <Paper>
               <div className='text-right mb-6'>
                 {statusBadgeLock === USER_STATUS.LOCKED ?
-                  <Text span classes="badge-danger">Locked</Text>
-                  : <Text span classes="badge-green">Active</Text>
+                  <Text span classes='badge-danger'>Locked</Text>
+                  : <Text span classes='badge-green'>Active</Text>
                 }
               </div>
+              {/*<Col justify='center'  classes='mb-4'>*/}
               <div className='flex justify-center flex-col mb-4'>
                 <div className='mb-4 bg-transparent rounded-full'>
-                  {/*<div className='mb-4 bg-gray-500 rounded-full py-14 px-16 w-fit'>*/}
-                  <AvatarInput/>
+                  <Controller
+                    control={control}
+                    name='avatar'
+                    render={({field: {onChange}}) => (<AvatarInput
+                      defaultValue={user?.avatar}
+                      name='avatar' onFileChange={(n, v) => onChange(v)}/>)}
+                  />
                 </div>
               </div>
               <Row align='center' justify='between' classes='mb-4'>
@@ -176,7 +179,13 @@ const UserEdit = () => {
                 <Link href='/admin/users'>
                   <Button light shadow type='button'>Back</Button>
                 </Link>
-                <Button shadow type='submit' isLoading={isBtnLoading}>Save Changes</Button>
+                <Button
+                  shadow type='submit'
+                  // disabled={isDisableBtn}
+                  isLoading={isBtnLoading}
+                >
+                  Save Changes
+                </Button>
               </Row>
             </Paper>
           </Grid>

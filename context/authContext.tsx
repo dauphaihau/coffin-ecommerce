@@ -18,6 +18,7 @@ interface User {
   exp: number,
   iat: number,
   name: string,
+  avatar: string,
   numberAllOfItemsInCart: number,
   role: string
 }

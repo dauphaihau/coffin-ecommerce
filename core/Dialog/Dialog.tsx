@@ -16,7 +16,7 @@ interface Props {
 export default function CustomDialog(props: Props) {
   const {
     children,
-    isOpen = true,
+    isOpen = false,
     noPadding, width, nonDarkMode,
     closeDialog = () => {},
     preventClose,

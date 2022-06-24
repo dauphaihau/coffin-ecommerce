@@ -1,17 +1,21 @@
 import {Toaster} from "react-hot-toast";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import dynamic from "next/dynamic";
 
 import {useUIController} from "../../../context/UIControllerContext";
 import Navbar from "./Navbar/Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
-import ChatBox from "./ChatBox";
+
+// import ChatBox from "./ChatBox";
+const ChatBox = dynamic(() => import('./ChatBox'), { ssr: false });
 import BannerHomeCard from "./BannerHomeCard";
 import AllDrawer from "./Drawer";
 import Backdrop from "../../../core/Navigation/Drawer/Backdrop";
 import AllDialog from "./Dialog";
-import {Container} from "../../../core/Layout";
+import {Box, Container} from "../../../core/Layout";
+import SubscribeDialog from "./Dialog/SubscribeDialog";
 
 export const MainLayout = ({children, categories}) => {
   const [showBanner, setShowBanner] = useState(false)
@@ -49,6 +53,7 @@ export const MainLayout = ({children, categories}) => {
   return (
     <>
       <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
+      {/*<SubscribeDialog/>*/}
       <AllDialog/>
       <AllDrawer/>
       <ChatBox/>
@@ -56,7 +61,7 @@ export const MainLayout = ({children, categories}) => {
       <Navbar categories={categories}/>
       <BannerHomeCard isDisplay={showBanner}/>
       <Container classes='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
-        <main className={`pt-28 ${accountLayout && 'flex items-center h-screen'}`}>{children}</main>
+        <Box main classes={`pt-28 ${accountLayout && 'flex items-center h-screen'}`}>{children}</Box>
         <Contact/>
         <Footer/>
       </Container>

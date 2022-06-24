@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
-import {userService} from "../../services/users";
-import {formatPrice} from "../../utils/helpers";
-import {useUIController} from "../../context/UIControllerContext";
-import {Grid, Row} from "../../core/Layout";
-import Image from "../../core/Next/Image";
-import {Helmet} from "../../layouts/admin/common/Helmet";
-import Table from "../../core/Table";
-import {Text} from "../../core";
+import {useEffect, useState} from 'react';
+import {userService} from '../../services/users';
+import {formatPrice} from '../../utils/helpers';
+import {useUIController} from '../../context/UIControllerContext';
+import {Box, Col, Grid, Row} from '../../core/Layout';
+import Image from '../../core/Next/Image';
+import {Helmet} from '../../layouts/admin/common/Helmet';
+import Table from '../../core/Table';
+import {Text} from '../../core';
 
 const Dashboard = () => {
   const [users, setUsers] = useState([])
@@ -27,23 +27,23 @@ const Dashboard = () => {
   }, [])
 
   const dataBreadcrumb = [
-    {path: "/admin", name: "Dashboard", firstLink: true},
-    {path: "", name: 'default', lastLink: true}
+    {path: '/admin', name: 'Dashboard', firstLink: true},
+    {path: '', name: 'default', lastLink: true}
   ];
 
   const data = [
     {
-      title: "Sales",
+      title: 'Sales',
       number: '$230,220',
       percentage: '+11%',
     },
     {
-      title: "Customers",
+      title: 'Customers',
       number: '3.200',
       percentage: '+12%',
     },
     {
-      title: "Avg. Revenue",
+      title: 'Avg. Revenue',
       number: '$1.200',
       percentage: '+$213',
     },
@@ -55,19 +55,19 @@ const Dashboard = () => {
     {
       id: 'Seller', title: 'Name',
       render: (row) => (
-        <div className='flex items-center'>
-          <div className='rounded-lg '>
+        <Row classes='flex items-center'>
+          <Box classes='rounded-lg '>
             <Image
               src={row.avatar ?? '/images/default/avatar-default.jpeg'}
               classesSize='max-w-9 max-h-9 w-9 h-9'
               classes='rounded-md'
             />
-          </div>
-          <div className=''>
-            <p className='ml-4 text-sm font-bold'>{row.name}</p>
-            <p className='ml-4 text-sm text-gray-500'>{row.email}</p>
-          </div>
-        </div>
+          </Box>
+          <Box>
+            <Text weight='bold' classes='ml-4 text-sm'>{row.name}</Text>
+            <Text classes='ml-4 text-sm text-gray-500'>{row.email}</Text>
+          </Box>
+        </Row>
       )
     },
     {id: 'product', title: 'Product', render: () => <>{products[Math.floor(Math.random() * products.length)]}</>},
@@ -80,18 +80,20 @@ const Dashboard = () => {
     <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
       <Grid sx={3} lg={3} gap={4}>
         {data.map((e, id) => (
-          <div key={id} className="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
-            <div className='h-full'>
+          <Box key={id} classes="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
+            {/*<Col key={id} justify='between' align='center' classes='w-full bg-white p-4 rounded-xl shadow-xl'>*/}
+            <Box classes='h-full'>
               <Row justify='between'>
-                <Text classes='text-gray-500 font-bold text-sm'>{e.title}</Text>
+                <Text weight='bold' classes='text-gray-500 text-sm'>{e.title}</Text>
                 <Text classes=' text-[#8592a9] text-[13px]'>6 May - 7 May</Text>
               </Row>
               <Text weight='semibold' classes='text-xl text-gray-700 my-1'>{e.number} </Text>
               <Text classes='text-[#8592a9] text-sm'>
                 <Text weight='bold' span classes='text-[#96d245] text-sm mr-1'>{e.percentage}</Text>since last month
               </Text>
-            </div>
-          </div>
+            </Box>
+            {/*</Col>*/}
+          </Box>
         ))}
       </Grid>
       <Text sx='2xl' weight='bold' classes='mt-6 mb-3'>Best Salesman</Text>

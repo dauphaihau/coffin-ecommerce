@@ -8,9 +8,10 @@ import {useUIController} from "../../context/UIControllerContext";
 import {Button} from "../../core/Button";
 import {Filters, ProductListView, Sorter} from "../../layouts/main/pages/products";
 import {Text} from "../../core";
-import {Grid, Row} from "../../core/Layout";
+import {Box, Grid, Row} from "../../core/Layout";
 import {uiControllerActionsType} from "../../store/reducers/uiControllerReducer";
 import Product from "../../layouts/main/common/Product";
+import {CarouselBanner} from '../../layouts/main/pages/home';
 
 const ProductsPage = ({categories = []}) => {
 
@@ -75,9 +76,10 @@ const ProductsPage = ({categories = []}) => {
           <meta name="description" content='Coffin ECommerce - All categories'/>
           <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
         </Head>
+        <CarouselBanner/>
         <Grid sx={5} classes='min-h-full'>
           <Filters categories={categories} quantityProd={products.length} launchSticky={undefined}/>
-          <div className="w-full col-span-4">
+          <Box classes="w-full col-span-4">
             <Row justify='between' classes="mb-6">
               <Text h1 classes="text-3xl laptop:text-xl font-light">{products.length} results found</Text>
               <Sorter/>
@@ -94,7 +96,7 @@ const ProductsPage = ({categories = []}) => {
                 }
               </>
             }
-          </div>
+          </Box>
         </Grid>
       </section>
       {/*Mobile - Ipad version*/}

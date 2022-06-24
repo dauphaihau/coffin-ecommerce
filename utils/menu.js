@@ -75,6 +75,12 @@ export const MENU = {
       ],
     },
     {
+      title: 'Chat',
+      href: "/admin/chat-app",
+      id: 'chats',
+      icon: "fa-solid fa-comment-dots"
+    },
+    {
       title: "Posts",
       href: "/admin/posts",
       id: 'posts',
@@ -103,12 +109,6 @@ export const MENU = {
       href: "/admin/posts",
       id: 'posts',
       icon: "fa-solid fa-clipboard"
-    },
-    {
-      title: 'Chat',
-      href: "/admin/posts",
-      id: 'posts',
-      icon: "fa-solid fa-comment-dots"
     },
   ],
 };

@@ -18,17 +18,18 @@ import {ROLE_OPTIONS} from "../../../../utils/enums";
 
 const formType = {
   login: {
-    title: 'Login',
+    title: 'Welcome back',
+    // title: 'Log in',
     message: '',
-    textButton: 'Login to your profile',
-    textFooter: 'Don\'t have an profile?',
+    textButton: 'Login to your account',
+    textFooter: 'Don\'t have an account?',
     linkTextFooter: 'Create one'
   },
   register: {
-    title: 'Register',
+    title: 'Create account',
     message: '',
-    textButton: 'Register',
-    textFooter: 'Already have an profile?',
+    textButton: 'Sign up',
+    textFooter: 'Already have an account?',
     linkTextFooter: 'Login'
   },
 }
@@ -121,7 +122,7 @@ const LoginRegisterModal = () => {
         </Row>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8"
+          className="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8 subscribe-letter-bg"
         >
           <Text noDarkMode h1 sx='xl' weight='medium' color='gray-900'>
             {formType[currentForm].title}

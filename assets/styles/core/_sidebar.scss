@@ -2,29 +2,54 @@
   //@apply hidden fixed overflow-y-auto laptop:block
   //w-[15%] h-[97%] m-4 shadow-2xl rounded-2xl;
 
-  @apply hidden fixed ipad:block w-[16rem] h-[97%] m-4 shadow-2xl rounded-2xl;
+  @apply hidden fixed ipad:block w-[16rem] h-[97%] m-4 shadow-lg rounded-2xl;
 
   &-inner {
     @apply overflow-y-auto h-full py-4 px-3 bg-white
     rounded-2xl ;
 
-  }
+    .body {
+      @apply space-y-2;
 
-}
+      .item {
+        @apply mx-3 p-[10px] hover:bg-gray-custom-50 animate rounded-lg;
 
-.sidebar-link {
-  &__icon {
-    @apply drop-shadow rounded-lg text-center;
-    i {
-      @apply p-2 bg-gray-custom-52 block rounded-lg;
+        .infoItem {
+          &__icon {
+            @apply drop-shadow rounded-lg text-center;
+            i {
+              @apply p-2 bg-gray-custom-52 block rounded-lg;
+            }
+          }
+
+          &__title {
+            @apply text-sm ml-3 text-gray-custom-501 animate
+            dark:text-gray-custom-500 dark:hover:text-gray-custom-503
+            hover:text-gray-600;
+          }
+        }
+      }
     }
+
+
   }
 
-  &__title {
-    @apply text-sm ml-3 text-gray-custom-501 animate
-    dark:text-gray-custom-500 dark:hover:text-gray-custom-503
-    hover:text-gray-600;
+  li > ul {
+    transform: translatex(100%) scale(0)
   }
+
+  li:hover > ul {
+    transform: translatex(101%) scale(1)
+  }
+
+  li > button svg {
+    transform: rotate(-90deg)
+  }
+
+  li:hover > button svg {
+    transform: rotate(-270deg)
+  }
+
 }
 
 .sidebar-suvLink {

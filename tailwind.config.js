@@ -203,6 +203,13 @@ module.exports = {
           400: '#5C607B',
         },
       },
+      black: {
+        'custom-900': '#1f2023',
+        'custom-901': '#111111',
+        'custom-902': '#151515',
+        'custom-903': '#242424',
+        'custom-904': '#2b2b2b',
+      },
       lineHeight: {
         'large': '54px'
       }
@@ -333,6 +340,7 @@ module.exports = {
       'gradient-to-bl': 'linear-gradient(to bottom left, var(--tw-gradient-stops))',
       'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
       'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
+      'subscribe-letter-bg': "url('/public/images/newsletter-bg.png')",
     },
     backgroundOpacity: ({theme}) => theme('opacity'),
     backgroundPosition: {

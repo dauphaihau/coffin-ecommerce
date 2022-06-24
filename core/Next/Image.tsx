@@ -1,4 +1,5 @@
 import NextImage from "next/image";
+import {Box} from "../Layout";
 
 interface Image {
   width?: number,
@@ -7,22 +8,31 @@ interface Image {
   alt?: string,
   classes?: string,
   classesSize?: string,
+  normalTag?: boolean,
 }
 
 const Image = (props: Image) => {
-  const {classesSize, width, height, src, classes, alt, ...others} = props;
+  const {classesSize, width, normalTag, height, src, classes, alt, ...others} = props;
 
   return (
-    <div className={`relative ${classesSize}`}>
-      <NextImage
-        src={src}
-        className={classes}
-        layout='fill'
-        objectFit='contain'
-        alt={alt}
-        {...others}
-      />
-    </div>
+    <Box classes={`relative ${classesSize}`}>
+      {
+        normalTag ?
+          <img
+            className={classes}
+            src={src}
+            alt={alt}
+          /> :
+          <NextImage
+            src={src}
+            className={classes}
+            layout='fill'
+            objectFit='contain'
+            alt={alt}
+            {...others}
+          />
+      }
+    </Box>
   );
 }
 

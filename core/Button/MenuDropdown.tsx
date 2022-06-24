@@ -7,7 +7,7 @@ interface MenuDropdownProps {
     label: string,
     value: string | number,
     href: string,
-    feature: () => {},
+    feature: () => void,
     element: React.ReactNode,
   }[],
   trigger?: React.ReactNode

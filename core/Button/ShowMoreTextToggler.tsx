@@ -1,7 +1,6 @@
 import {useMemo, useState} from "react";
 import Text from "../../core/Text";
 
-
 interface ShowMoreTextTogglerProps {
   text: string,
   classes: string,

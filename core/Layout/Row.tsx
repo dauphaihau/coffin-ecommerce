@@ -6,7 +6,7 @@ interface Props {
   // lg?: number,
   gap?: number,
   justify?: 'center' | 'between' | 'around' | 'start' | 'end',
-  align?: 'center' | 'between' | 'around',
+  align?: 'center' | 'between' | 'around' | 'start' | 'end',
   content?: 'center' | 'between' | 'around',
   wrap?: 'wrap' | 'reverse' | 'around',
   classes?: string,

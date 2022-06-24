@@ -1,7 +1,7 @@
 import {Dialog} from '@headlessui/react'
 import {Transition} from '@headlessui/react'
 import {Fragment, ReactNode} from 'react'
-import {Row} from "../Layout";
+import {Box, Row} from "../Layout";
 
 interface Props {
   isOpen: boolean,
@@ -39,8 +39,7 @@ export default function CustomDialog(props: Props) {
         >
           <div className="fixed inset-0 bg-black bg-opacity-25"/>
         </Transition.Child>
-
-        <div className="fixed inset-0 overflow-y-auto">
+        <Box classes="fixed inset-0 overflow-y-auto">
           <Row
             align='center' justify='center'
             classes="min-h-full p-4 text-center">
@@ -58,12 +57,14 @@ export default function CustomDialog(props: Props) {
                 className={`dialog-content
                   ${noPadding ? 'p-0' : 'p-8'}
                   ${nonDarkMode && 'dialog-content--nonDarkMode'}
+                  
+                    gradient-to-tl
                   `}>
                 {children}
               </Dialog.Panel>
             </Transition.Child>
           </Row>
-        </div>
+        </Box>
       </Dialog>
     </Transition>
   )

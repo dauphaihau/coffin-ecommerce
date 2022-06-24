@@ -1,19 +1,93 @@
 const CarouselBanner = () => {
+
+  // const items = [
+  //   {
+  //     position: 0,
+  //     el: typeof window !== 'undefined' && document.getElementById('carousel-item-1')
+  //   },
+  //   // {
+  //   //   position: 1,
+  //   //   el: document.getElementById('carousel-item-2')
+  //   // },
+  //   // {
+  //   //   position: 2,
+  //   //   el: document.getElementById('carousel-item-3')
+  //   // },
+  //   // {
+  //   //   position: 3,
+  //   //   el: document.getElementById('carousel-item-4')
+  //   // },
+  // ];
+  //
+  // const options = {
+  //   activeItemPosition: 1,
+  //   interval: 3000,
+  //
+  //   indicators: {
+  //     activeClasses: 'bg-white dark:bg-gray-800',
+  //     inactiveClasses: 'bg-white/50 dark:bg-gray-800/50 hover:bg-white dark:hover:bg-gray-800',
+  //     items: [
+  //       {
+  //         position: 0,
+  //         el: typeof window !== 'undefined' && document.getElementById('carousel-indicator-1')
+  //       },
+  //       // {
+  //       //   position: 1,
+  //       //   el: document.getElementById('carousel-indicator-2')
+  //       // },
+  //       // {
+  //       //   position: 2,
+  //       //   el: document.getElementById('carousel-indicator-3')
+  //       // },
+  //       // {
+  //       //   position: 3,
+  //       //   el: document.getElementById('carousel-indicator-4')
+  //       // },
+  //     ]
+  //   },
+  //
+  //   // callback functions
+  //   onNext: () => {
+  //     console.log('next slider item is shown');
+  //   },
+  //   onPrev: () => {
+  //     console.log('previous slider item is shown');
+  //   },
+  //   onChange: () => {
+  //     console.log('new slider item has been shown');
+  //   }
+  // };
+  //
+  // let carousel;
+  // if (typeof window !== 'undefined') {
+  //   carousel =  new Carousel(items, options);
+  // }
+  //
+  // console.log('carousel-default-value', carousel.defaultValue)
+
+
   return (
     <div id="default-carousel" className="relative my-20 " data-carousel="static">
 
       <div className="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
-        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20" data-carousel-item="0">
-            <span className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
-          <img src="/images/banners/contemporary-banner.png" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
+        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-0 z-20"
+             data-carousel-item="0">
+          <span
+            className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800">First Slide</span>
+          <img src="/images/banners/contemporary-banner.png"
+               className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
         </div>
 
-        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-full z-10" data-carousel-item="1">
-          <img src="/images/banners/checkout.jpg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
+        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform translate-x-full z-10"
+             data-carousel-item="1">
+          <img src="/images/banners/checkout.jpg"
+               className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
         </div>
 
-        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform -translate-x-full z-10" data-carousel-item="">
-          <img src="/images/banners/contemporary-banner.png" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
+        <div className="duration-700 ease-in-out absolute inset-0 transition-all transform -translate-x-full z-10"
+             data-carousel-item="2">
+          <img src="/images/banners/contemporary-banner.png"
+               className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."/>
         </div>
       </div>
 
@@ -31,7 +105,7 @@ const CarouselBanner = () => {
       <button
         type="button"
         className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-        data-carousel-prev="2">
+        data-carousel-prev="1">
             <span
               className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 group-hover:bg-white/50
                 group-focus:outline-none">
@@ -46,7 +120,7 @@ const CarouselBanner = () => {
       <button
         type="button"
         className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-        data-carousel-next
+        data-carousel-next="2"
       >
           <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30
              group-hover:bg-white/50 group-focus:outline-none">

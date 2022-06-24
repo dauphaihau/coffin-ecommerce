@@ -1,0 +1,103 @@
+.chat-app {
+  @apply dark:bg-gray-custom-901 rounded-2xl h-full bg-white ;
+
+  .left {
+    @apply border-r border-gray-300 lg:col-span-2;
+
+    .customer-list {
+      @apply overflow-auto h-[32rem];
+    }
+  }
+
+  .right {
+    @apply hidden lg:col-span-4 lg:block;
+
+    .head {
+      @apply relative p-3 border-b border-gray-300;
+    }
+    .body {
+      @apply relative w-full p-6 overflow-y-auto h-[40rem];
+
+      //@apply mt-2 h-[335px]
+      //overflow-y-scroll pb-6 px-2;
+
+      .me {
+        @apply max-w-fit ml-auto break-all mt-2 mb-1 px-[12px] py-[6px] bg-[#606060] rounded-2xl text-white text-left;
+      }
+
+      .other {
+        &__img {
+
+        }
+
+        &__message {
+          @apply w-max  break-all mt-2  ml-2 float-none bg-[#e4e6ea]  rounded-2xl px-[12px] py-[6px];
+        }
+
+      }
+
+    }
+  }
+
+  &__enabled {
+    //fixed bottom-[4%] right-[3%] z-[300] flex flex-col h-2/4 w-1/5 bg-white rounded-xl shadow-2xl
+
+    //@apply fixed bottom-0 right-[3%] z-[300] flex flex-col max-h-[53%]
+    @apply fixed bottom-0 right-[3%] z-[300] flex flex-col max-h-[455px]
+    bg-white rounded-t-xl  shadow-2xl;
+
+    .header {
+      @apply px-[12px] py-[8px] border-t-black border-b shadow rounded-tl-xl rounded-tr-xl;
+      .bot {
+        @apply relative mr-3;
+
+        &__img {
+          @apply h-10 w-10 rounded-full;
+        }
+
+        &__statusIcon {
+          @apply absolute  bottom-[2px] right-0 text-green-500 text-[9px];
+        }
+
+      }
+    }
+
+    .body {
+      //flex-col-reverse
+      @apply mt-2 h-[335px]
+      overflow-y-scroll pb-6 px-2;
+
+      .customer {
+        @apply max-w-[14.6rem] ml-auto break-all mt-2 mb-1 px-[12px] py-[6px] bg-[#606060] rounded-2xl text-white text-left;
+      }
+
+      .bot {
+        &__img {
+
+        }
+
+        &__message {
+          @apply w-max  break-all mt-2  ml-2 float-none bg-[#e4e6ea]  rounded-2xl px-[12px] py-[6px];
+        }
+
+      }
+    }
+
+    .footer {
+      @apply bottom-0 my-2 w-full px-2;
+
+      .form {
+        @apply ml-2 px-2 flex flex-row  items-center w-full bg-[#f0f2f5] border rounded-3xl h-[38px];
+
+        .input {
+          @apply border bg-[#f0f2f5] focus:ring-0 focus:border-none rounded-2xl  border-transparent
+          focus:outline-none h-[36px] text-sm flex items-center w-[200px];
+        }
+
+        .submit-btn {
+          @apply focus:outline-none flex items-center justify-center w-8
+        }
+      }
+    }
+  }
+}

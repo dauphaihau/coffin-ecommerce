@@ -10,6 +10,10 @@
 @import "core/navbar";
 @import "core/sidebar";
 @import "core/badge";
+
+@import "main/footer";
+@import "main/chatbox";
+@import "admin/chat-app";
 @tailwind components;
 
 @tailwind utilities;

@@ -1,0 +1,57 @@
+.footer-main {
+  @apply mt-12;
+  &__links {
+    @apply py-8 py-12;
+
+    .wrapper-topics {
+      @apply ipad:gap-x-24 laptop:gap-x-16 container;
+
+      .topic {
+        @apply mb-8 ipad:mt-0;
+
+        &__title {
+          @apply text-sm laptop:text-lg font-bold mb-5;
+        }
+
+        &__links {
+          @apply list-none;
+
+          .link {
+            @apply mb-3 text-xs;
+
+            .icon-logo {
+              @apply text-sm  mr-2;
+            }
+
+            .css-Link-component {
+              @apply border-b border-solid border-transparent hover:text-black
+              laptop:text-sm
+              text-xs text-gray-500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-main__certification {
+    @apply border-solid border-t border-gray-300 py-5 ipad:flex-row ipad:px-0;
+
+    .copyright {
+      @apply appearance-none block text-gray-700 text-xs laptop:text-sm text-center ipad:pb-0;
+    }
+
+    .banks {
+      @apply justify-end m-0 flex flex-1 flex hidden ipad:block;
+
+      .wrapper-bank-list {
+        @apply ipad:flex laptop:flex-wrap laptop:justify-end items-center
+        mb-1 md:mb-0 mx-auto md:mx-0;
+
+        .bank {
+          @apply mb-2 md:mb-0 transition hover:opacity-80 ml-8
+        }
+      }
+    }
+  }
+}

@@ -71,8 +71,6 @@ export const accountService = {
     }
   },
   changePassword: async (values) => {
-
-    // const {password} = values
     const modifiedValues = {
       ...values,
       password: encryptText(values.password, config.cryptoKey),

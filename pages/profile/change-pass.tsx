@@ -4,7 +4,7 @@ import {useState} from "react";
 import {toast} from "react-hot-toast";
 import {yupResolver} from "@hookform/resolvers/yup";
 
-import {useAuth} from "../../context/authContext";
+import {useAuth, User} from "../../context/authContext";
 import banner from "../../public/images/banners/contemporary-banner.png";
 import ProfileSidebar from "../../layouts/main/pages/profile/ProfileSidebar";
 import {Input} from "../../core/Input";
@@ -24,14 +24,16 @@ const validationSchema = Yup.object().shape({
 });
 const formOptions = {resolver: yupResolver(validationSchema)};
 
-
 const ChangePass = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false)
-  const {user} = useAuth();
+  // @ts-ignore
+  const {user}: User = useAuth();
   const {register, handleSubmit, reset, formState, setError} = useForm(formOptions);
   const {errors} = formState;
+  console.log('user', user)
 
   const onSubmit = async (values) => {
+    delete values.confirmPassword
     const formatData = {...values, email: user.email}
 
     setIsBtnLoading(true)

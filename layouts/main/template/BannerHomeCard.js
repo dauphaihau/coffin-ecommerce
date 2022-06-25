@@ -21,8 +21,8 @@ const BannerHomeCard = ({isDisplay}) => {
           backgroundAttachment: 'fixed',
         }}
       >
-        <p className='absolute ipad:top-[34%] laptop:top-[39%]
-             left-[9%] ipad:text-[45px] laptop:text-[72px] w-[30%]
+        <p className='absolute ipad:top-[34%] laptop:top-[33%]
+             left-[11%] ipad:text-[45px] laptop:text-[72px] w-[30%]
              text-white font-bold z-20 laptop:leading-[76px]'>
           Dignity and compassion guaranteed.
         </p>

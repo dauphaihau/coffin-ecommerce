@@ -8,6 +8,7 @@ interface Props {
   justify?: 'center' | 'between' | 'around',
   align?: 'center' | 'between' | 'around',
   content?: 'center' | 'between' | 'around',
+  self?: 'center' | 'start' | 'end',
   wrap?: 'wrap' | 'reverse' | 'around',
   classes?: string,
   children?: ReactNode,
@@ -15,17 +16,17 @@ interface Props {
 
 const Col = (props: Props) => {
 
-  const {children, classes, gap, justify, align = ''} = props
+  const {children, classes, self, gap, justify, align = ''} = props
 
   // flex-${direction?.sx ?? 'row'}
   // ipad:flex-${direction?.md ?? 'row'}
   // laptop:flex-${direction?.lg ?? 'row'}
   return (
     <div
-      className={`
-      flex flex-col
+      className={`flex flex-col
           ${justify ? `justify-${justify}` : `justify-start`}
           ${align ? `items-${align}` : `items-start`}
+          ${self ? `self-${self}` : `self-start`}
            gap-${gap}
            ${classes}
         `}>

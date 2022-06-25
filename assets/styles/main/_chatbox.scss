@@ -36,7 +36,7 @@
 
     .body {
       //flex-col-reverse
-      @apply mt-2 h-[335px]
+      @apply mt-2 h-[335px] w-full
       overflow-y-scroll pb-6 px-2;
 
       .customer {

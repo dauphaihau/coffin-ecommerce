@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import {fetchInventory} from "../utils/provider/inventoryProvider";
 import {CarouselBanner, FlashSale, HomeBannerCard, MemberServices} from "../layouts/main/pages/home";
+import About from "../layouts/main/pages/home/About";
 
 const Home = ({inventoryData = []}) => {
 
@@ -13,7 +14,8 @@ const Home = ({inventoryData = []}) => {
       </Head>
       <HomeBannerCard link={inventoryData[13]} data={inventoryData[13]}/>
       <FlashSale inventoryData={inventoryData}/>
-      <CarouselBanner/>
+      <About/>
+      {/*<CarouselBanner/>*/}
       <MemberServices/>
     </>
   )

@@ -17,6 +17,7 @@ interface BoxProps {
   form?: boolean,
   section?: boolean,
   aside?: boolean,
+  blockquote?: boolean,
 }
 
 const Box = forwardRef((props: BoxProps, ref: any) => {
@@ -24,7 +25,7 @@ const Box = forwardRef((props: BoxProps, ref: any) => {
   const {
     children, classes,
     // gap, justify, align = '',
-    footer, nav, header, main, form, section, aside,
+    footer, nav, header, main, form, section, aside, blockquote,
     ...others
   } = props
 
@@ -34,6 +35,7 @@ const Box = forwardRef((props: BoxProps, ref: any) => {
   if (main) return <main ref={ref} className={classes} {...others}>{children}</main>
   if (form) return <form ref={ref} className={classes} {...others}>{children}</form>
   if (aside) return <aside ref={ref} className={classes} {...others}>{children}</aside>
+  if (blockquote) return <blockquote ref={ref} className={classes} {...others}>{children}</blockquote>
   return (<div ref={ref} className={classes} {...others}>{children}</div>);
 })
 

@@ -49,7 +49,7 @@ const ProductCard = (props) => {
           >
             <Image normalTag
                    src={imageSrc} alt={title}
-                   classes={`w-[15rem] m-auto ${full && '!w-[70%] h-[40rem]'} `}
+                   classes={`w-[15rem] m-auto ${full && '!w-[70%] h-[42rem] desktop:h-[40rem]'} `}
             />
             {/*{*/}
             {/*  imageHover ?*/}

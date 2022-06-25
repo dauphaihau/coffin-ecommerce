@@ -11,7 +11,7 @@ import {Checkbox, Input} from "../../../../core/Input";
 import {Button} from "../../../../core/Button";
 import {accountService} from "../../../../services/account";
 import {Text} from "../../../../core";
-import {Row} from "../../../../core/Layout";
+import {Box, Row} from "../../../../core/Layout";
 import Dialog from "../../../../core/Dialog/Dialog";
 import {Link} from "../../../../core/Next";
 import {ROLE_OPTIONS} from "../../../../utils/enums";
@@ -47,7 +47,7 @@ const validationSchema = Yup.object().shape({
 const formOptions = {
   resolver: yupResolver(validationSchema),
   defaultValues: {
-    email: 'customer@email.com',
+    email: 'customer11@email.com',
     password: '111111'
   }
 };
@@ -73,7 +73,7 @@ const LoginRegisterModal = () => {
 
   useEffect(() => {
     if (currentForm === 'login') {
-      setValue('email', 'customer@email.com')
+      setValue('email', 'customer11@email.com')
       setValue('password', '111111')
     } else {
       setValue('email', '')
@@ -113,14 +113,16 @@ const LoginRegisterModal = () => {
       nonDarkMode
       isOpen={openLoginRegisterModal}
       closeDialog={closeDrawerModal}
-      width={390}
+      // width={390}
+      // style={{width: 390}}
+      classes='w-[390px]'
       noPadding
     >
       <Dialog.Content>
         <Row justify='end' classes="p-2 mb-[-44px]">
           <XIcon className='btn-icon' onClick={() => closeDrawerModal()}/>
         </Row>
-        <form
+        <Box form
           onSubmit={handleSubmit(onSubmit)}
           className="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8 subscribe-letter-bg"
         >
@@ -134,7 +136,8 @@ const LoginRegisterModal = () => {
             type='email'
             label='Email'
             register={register}
-            errors={errors}/>
+            errors={errors}
+          />
           {
             currentForm !== 'forgotPassword' &&
 
@@ -179,7 +182,7 @@ const LoginRegisterModal = () => {
               </Text>
             </Row>
           }
-        </form>
+        </Box>
       </Dialog.Content>
     </Dialog>
   );

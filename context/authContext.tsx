@@ -6,13 +6,13 @@ import {hashMD5} from "../utils/helpers";
 import config from "../config.json";
 
 export interface AuthState {
-  user: object,
-  setUser: (prevState) => void,
-  isAuthorize: boolean,
-  setIsAuthorize: (prevState: boolean) => void,
+  user?: object,
+  setUser?: (prevState) => void,
+  isAuthorize?: boolean,
+  setIsAuthorize?: (prevState: boolean) => void,
 }
 
-interface User {
+export interface User {
   _id: string,
   email: string,
   exp: number,

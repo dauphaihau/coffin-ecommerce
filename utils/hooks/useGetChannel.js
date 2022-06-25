@@ -1,7 +1,7 @@
 import Ably from "ably/promises";
 import {useEffect} from 'react'
 
-const ably = new Ably.Realtime.Promise({authUrl: '/api/retriveHistory'});
+const ably = new Ably.Realtime.Promise({authUrl: '/api/chat/retriveHistory'});
 
 export function useGetChannel(channelName = 'coffin', callbackOnMessage) {
   const channel = ably.channels.get(channelName);

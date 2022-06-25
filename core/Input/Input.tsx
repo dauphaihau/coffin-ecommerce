@@ -1,4 +1,14 @@
-import {ChangeEvent, FC, forwardRef, InputHTMLAttributes, ReactNode, useEffect, useState} from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  FC,
+  forwardRef,
+  InputHTMLAttributes,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react";
 import Text from "../Text";
 import {FieldErrors} from "react-hook-form";
 import {isEmpty} from "../../utils/helpers";
@@ -27,8 +37,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const {
       type = 'text',
       label, name = '',
-      register = () => {},
-      onChange = () => {},
+      register = () => {
+      },
+      onChange = () => {
+      },
       errors, clearable,
       defaultValue,
       className, classes, placeholder,
@@ -37,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     } = props;
 
     const [value, setValue] = useState<string | null>('')
+    // const [value, setValue] = useState<string | Dispatch<SetStateAction<string>>>('')
 
     // @ts-ignore
     useEffect(() => setValue(defaultValue), [defaultValue]);
@@ -74,7 +87,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             name={name}
             onChange={onChange}
             {...register(name)}
-            className={`peer p-4 ${className} ${classes}
+            className={`peer p-4 
+            ${className}
+            ${classes}
            ${contentLeft && '!pl-7'}
           `}
             placeholder={placeholder}

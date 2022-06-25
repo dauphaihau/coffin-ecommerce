@@ -1,6 +1,6 @@
 import Text from "../../../../core/Text";
 import {Button, QuantityPicker, ShowMoreTextToggler} from "../../../../core/Button";
-import {Col, Row} from "../../../../core/Layout";
+import {Box, Col, Row} from "../../../../core/Layout";
 import {Image} from "../../../../core";
 
 interface ProductProps {
@@ -18,19 +18,19 @@ interface ProductProps {
   increment: () => {},
 }
 
- const ProductInfo = (props: ProductProps) => {
+const ProductInfo = (props: ProductProps) => {
   const {product, decrement, addItemToCart, numberOfItems, increment} = props;
   const {name, description, salePrice, price, image} = product;
 
   return (
     <Col classes="py-12 ipad:flex-row w-full my-0 mx-auto">
       {/*<Col classes="w-full ipad:w-1/2 h-120 flex py-16 p-10 flex-center flex-1">*/}
-      <div className="w-full ipad:w-1/2 h-120 flex  py-16 p-10 flex-center flex-1">
+      <Box classes="w-full ipad:w-1/2 h-120 flex  py-16 p-10 flex-center flex-1">
         <Image
           src={image} alt='product'
           classesSize=' w-[300px] laptop:w-[500px] h-[300px] laptop:h-[500px]'
         />
-      </div>
+      </Box>
       <Col classes="pt-2 px-0 ipad:pl-10 pb-8 w-full ipad:w-1/2">
         <Text h1 sx='2xl' md='2xl' lg='4xl' weight='light' classes='mt-2 mb-3.5'>{name}</Text>
         <Row align='center' classes="sm:items-center sm:flex mb-2">
@@ -79,7 +79,7 @@ interface ProductProps {
             )
           }
         </Text>
-        <div className="my-6">
+        <Box classes="my-6">
           <QuantityPicker
             theme='white'
             bordered
@@ -88,7 +88,7 @@ interface ProductProps {
             numberOfItems={numberOfItems}
           />
           {/*<Text  classes='mt-3'>Available: {quantity}</Text>*/}
-        </div>
+        </Box>
         <Button size='lg' onClick={() => addItemToCart(product)}>Add to Cart</Button>
       </Col>
     </Col>

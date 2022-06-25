@@ -27,7 +27,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['i.pravatar.cc']
+    domains: ['i.pravatar.cc', 'coffins-direct.co.uk']
   }
 }
 

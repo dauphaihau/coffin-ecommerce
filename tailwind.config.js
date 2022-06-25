@@ -192,6 +192,7 @@ module.exports = {
           'custom-501': '#7e8a88',
           'custom-503': '#5d5d5d',
           'custom-502': '#333333',
+          'custom-504': '#333333',
           'custom-900': '#1f2023',
           'custom-901': '#111111',
           'custom-902': '#151515',
@@ -330,7 +331,7 @@ module.exports = {
     backdropSaturate: ({theme}) => theme('saturate'),
     backdropSepia: ({theme}) => theme('sepia'),
     backgroundColor: ({theme}) => theme('colors'),
-    backgroundImage: {
+    backgroundImage: theme => ({
       none: 'none',
       'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
       'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
@@ -340,8 +341,21 @@ module.exports = {
       'gradient-to-bl': 'linear-gradient(to bottom left, var(--tw-gradient-stops))',
       'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
       'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
-      'subscribe-letter-bg': "url('/public/images/newsletter-bg.png')",
-    },
+      'subscribe-letter-bg': "url('../images/newsletter-bg.png')",
+    }),
+
+    // backgroundImage: {
+    //   none: 'none',
+    //   'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
+    //   'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
+    //   'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
+    //   'gradient-to-br': 'linear-gradient(to bottom right, var(--tw-gradient-stops))',
+    //   'gradient-to-b': 'linear-gradient(to bottom, var(--tw-gradient-stops))',
+    //   'gradient-to-bl': 'linear-gradient(to bottom left, var(--tw-gradient-stops))',
+    //   'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
+    //   'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
+    //   // 'subscribe-letter-bg': "url('/public/images/newsletter-bg.png')",
+    // },
     backgroundOpacity: ({theme}) => theme('opacity'),
     backgroundPosition: {
       bottom: 'bottom',

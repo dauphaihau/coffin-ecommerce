@@ -53,7 +53,7 @@ export const MainLayout = ({children, categories}) => {
   return (
     <>
       <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
-      {/*<SubscribeDialog/>*/}
+      <SubscribeDialog/>
       <AllDialog/>
       <AllDrawer/>
       <ChatBox/>

@@ -1,9 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import nc from 'next-connect';
-
-const bcrypt = require('bcryptjs');
-const CryptoJS = require("crypto-js");
-
 import User from '../../../server/models/User';
 import db from "../../../server/db/db";
 import {signToken} from '../../../server/middlewares/auth';
@@ -24,7 +20,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     res.json(
       {
         code: '200',
-        message: 'You have been successfully logged in',
+        message: 'OK',
         data: {
           auth: {
             token,
@@ -33,6 +29,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
           },
           profile: {
             name: user.name,
+            email: user.email,
             avatar: user.avatar,
             role: user.role,
             status: user.status,

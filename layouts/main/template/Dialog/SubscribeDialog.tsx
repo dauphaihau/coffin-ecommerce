@@ -1,17 +1,15 @@
-import Dialog from "../../../../core/Dialog/Dialog";
-import {Text} from "../../../../core";
-import {Row} from "../../../../core/Layout";
-import {Button} from "../../../../core/Button";
-import {destroyCookie} from "nookies";
-import {hashMD5} from "../../../../utils/helpers";
-import config from "../../../../config.json";
-import {useRouter} from "next/router";
-import {useAuth} from "../../../../context/authContext";
-import {useEffect, useState} from "react";
-import {XIcon} from "@heroicons/react/solid";
+import {useEffect, useState} from 'react';
 
-const SubscribeDialog = (props) => {
+import Dialog from '../../../../core/Dialog/Dialog';
+import {Text} from '../../../../core';
+import {Box, Col, Grid} from '../../../../core/Layout';
+import {Button} from '../../../../core/Button';
+import {XIcon} from '@heroicons/react/solid';
+import bg from '../../../../public/images/newsletter-bg.png';
+import Image from "../../../../core/Next/Image";
+import {Input} from "../../../../core/Input";
 
+const SubscribeDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -19,40 +17,42 @@ const SubscribeDialog = (props) => {
   }, [])
 
   return (
-    <Dialog isOpen={isOpen}>
-      {/*<Dialog.Title title='Confirm delete'/>*/}
+    <Dialog
+      isOpen={isOpen}
+      closeDialog={async () => setIsOpen(false)}
+      // width={700} height={365}
+      classes=' w-[700px] h-[365px]'
+      style={{
+        backgroundImage: `url(${bg.src})`,
+      }}
+    >
       <Dialog.Content>
-
-        <Row justify='end' classes="p-2 mb-[-44px]">
-          <XIcon className='btn-icon' onClick={() => setIsOpen(false)}/>
-        </Row>
-        <form
-          // onSubmit={handleSubmit(onSubmit)}
-          className=" px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8"
-        >
-          <Button
-            type="submit" width='full'
-            // classes={currentForm === 'forgotPassword' && '!mt-[5px]'}
-            size='lg'
-          >
-            Subscribe
-          </Button>
-        </form>
-
-
-
-        {/*<Text classes="text-sm text-gray-500 mt-2">*/}
-        {/*  Are you sure you want to delete ? <br/> By doing this, you will not be able to recover the data.*/}
-        {/*</Text>*/}
-        {/*<Row classes='mt-4' justify='end'>*/}
-        {/*  <Button light onClick={() => setIsOpen(false)}>*/}
-        {/*    Cancel*/}
-        {/*  </Button>*/}
-        {/*  /!*<Button variant='warning' shadow onClick={() => handleDelete()}>*!/*/}
-        {/*  /!*  Delete*!/*/}
-        {/*  /!*</Button>*!/*/}
-        {/*</Row>*/}
-
+        <Box classes='relative'>
+          <XIcon
+            className='btn-icon hover:bg-white absolute top-[-30.7px] right-[-26.5px]'
+            onClick={() => setIsOpen(false)}
+          />
+          <Grid sx={2} gapx={8}>
+            <Image
+              normalTag
+              classes='h-[19rem] w-full rounded-lg'
+              // classes='h-auto w-full rounded-lg'
+              src='/images/noah.jpg'
+            />
+            <Col classes='text-center' self='center'>
+              <Text h1 weight='bold' sx='lg' classes='mx-auto text-[22px]'>Subscribe Newsletter</Text>
+              <Text sx='sm' weight='light' classes='my-3'>Subscribe the Drop store to get in touch and get the
+                future update. </Text>
+              <Input name='email' type='email' placeholder='Email Address'/>
+              <Button
+                type="submit" width='full'
+                size='lg'
+              >
+                SUBSCRIBE
+              </Button>
+            </Col>
+          </Grid>
+        </Box>
       </Dialog.Content>
     </Dialog>
   );

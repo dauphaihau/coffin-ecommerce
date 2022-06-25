@@ -56,7 +56,7 @@ function Select<Type extends OptionValue>(props: SelectProps<Type>) {
               className={`form-select-input__btn
                ${classesBtn}
                ${borderLight && 'border-none shadow-none focus:ring-0 focus:border-gray-200'}
-               ${size === 'medium' ? 'py-[13px]' : 'py-2'}`}>
+               ${size === 'medium' ? 'py-[10px]' : 'py-2'}`}>
               <span className="flex items-center">
                 <span className="block truncate">{selected.label}</span>
               </span>

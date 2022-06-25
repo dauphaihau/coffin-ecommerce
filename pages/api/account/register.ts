@@ -29,7 +29,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     res.send(
       {
         code: '200',
-        message: 'You have been successfully logged in',
+        message: 'OK',
         data: {
           auth: {
             token,
@@ -38,6 +38,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
           },
           profile: {
             name: user.name,
+            email: user.email,
             role: user.role,
             status: USER_STATUS.ACTIVE
           }

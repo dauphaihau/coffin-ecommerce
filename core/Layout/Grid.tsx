@@ -7,7 +7,8 @@ enum COL {
   THIRD = 3,
   FOUR = 4,
   FIVE = 5,
-  SIX = 6
+  SIX = 6,
+  SEVEN = 7
 }
 
 enum GAP {
@@ -25,6 +26,7 @@ const COL_SX_MAPS: Record<COL, string> = {
   [COL.FOUR]: 'grid-cols-4',
   [COL.FIVE]: 'grid-cols-5',
   [COL.SIX]: 'grid-cols-6',
+  [COL.SEVEN]: 'grid-cols-7',
 };
 const COL_MD_MAPS: Record<COL, string> = {
   [COL.FIRST]: 'ipad:grid-cols-1',
@@ -33,6 +35,7 @@ const COL_MD_MAPS: Record<COL, string> = {
   [COL.FOUR]: 'ipad:grid-cols-4',
   [COL.FIVE]: 'ipad:grid-cols-5',
   [COL.SIX]: 'ipad:grid-cols-6',
+  [COL.SEVEN]: 'ipad:grid-cols-7',
 };
 const COL_LG_MAPS: Record<COL, string> = {
   [COL.FIRST]: 'laptop:grid-cols-1',
@@ -41,6 +44,7 @@ const COL_LG_MAPS: Record<COL, string> = {
   [COL.FOUR]: 'laptop:grid-cols-4',
   [COL.FIVE]: 'laptop:grid-cols-5',
   [COL.SIX]: 'laptop:grid-cols-6',
+  [COL.SEVEN]: 'laptop:grid-cols-7',
 };
 const COL_XL_MAPS: Record<COL, string> = {
   [COL.FIRST]: 'desktop:grid-cols-1',
@@ -49,6 +53,7 @@ const COL_XL_MAPS: Record<COL, string> = {
   [COL.FOUR]: 'desktop:grid-cols-4',
   [COL.FIVE]: 'desktop:grid-cols-5',
   [COL.SIX]: 'desktop:grid-cols-6',
+  [COL.SEVEN]: 'desktop:grid-cols-7',
 };
 const GAP_MAPS: Record<GAP, string> = {
   [GAP.FIRST]: 'gap-1',

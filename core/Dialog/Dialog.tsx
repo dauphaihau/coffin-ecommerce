@@ -2,23 +2,30 @@ import {Dialog} from '@headlessui/react'
 import {Transition} from '@headlessui/react'
 import {Fragment, ReactNode} from 'react'
 import {Box, Row} from "../Layout";
+import bg from "../../public/images/newsletter-bg.png";
 
 interface Props {
   isOpen: boolean,
   children: ReactNode,
   width?: number,
+  height?: number,
   noPadding?: boolean,
   nonDarkMode?: boolean,
   preventClose?: boolean,
+  style?: object,
+  classes?: string,
   closeDialog?: () => {}
 }
 
 export default function CustomDialog(props: Props) {
   const {
-    children,
+    children, style,
     isOpen = false,
-    noPadding, width, nonDarkMode,
-    closeDialog = () => {},
+    noPadding, width, height,
+    nonDarkMode,
+    classes,
+    closeDialog = () => {
+    },
     preventClose,
   } = props;
 
@@ -53,13 +60,14 @@ export default function CustomDialog(props: Props) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                style={{width: width ?? '100%'}}
-                className={`dialog-content
+                style={style}
+                className={`dialog-content gradient-to-tl
                   ${noPadding ? 'p-0' : 'p-8'}
                   ${nonDarkMode && 'dialog-content--nonDarkMode'}
-                  
-                    gradient-to-tl
+                  ${classes}
                   `}>
+                {/*${width ? `w-[${width}px]` : 'w-full'}*/}
+                {/*${height ? `h-[${height}px]` : ''}*/}
                 {children}
               </Dialog.Panel>
             </Transition.Child>

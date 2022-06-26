@@ -8,20 +8,12 @@ const handler = nc();
 handler.use(isAuth, rolesCanView);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-
   const {query} = req;
-
   await db.connect();
-  console.log('query', query)
-
   const limit = Number(query.limit)
   const skip = Number(query.skip)
-  console.log('limit', limit)
-
   const total = await Product.countDocuments();
-  const products = await Product.find({})
-    .limit(limit)
-    .skip(skip);
+  const products = await Product.find({}).limit(limit).skip(skip);
   // const products = await Product.find({},
   //   null,
   //   {sort: {field: 'descending'}},
@@ -29,15 +21,11 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   //     console.log('err', err)
   //   }
   // );
-
-  console.log('products', products)
   await db.disconnect();
-
-  const data = {
+  res.send({
     list: products,
     total
-  }
-  res.send(data);
+  });
 });
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {

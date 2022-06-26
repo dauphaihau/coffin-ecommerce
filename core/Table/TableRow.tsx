@@ -13,27 +13,16 @@ const TableRow = (props) => {
   const inputRef = useRef(null);
   const [checked, setChecked] = useState(false)
 
-  const handleChange = (select) => {
-    const temp = [...rowsChecked]
-    const status = select.target.checked
-    const idSelect = select.target.value
+  const handleChange = (selected) => {
+    const status = selected.target.checked
+    const idSelected = selected.target.value
 
     if (!status) {
-      const result = temp.filter(e => e.id !== idSelect)
+      const result = rowsChecked.filter(o => o !== idSelected)
       setRowsChecked(result)
-    } else {
-      setRowsChecked([...temp,
-        {
-          id: idSelect,
-          checked: status
-        }
-      ])
-    }
+    } else setRowsChecked([...rowsChecked, idSelected])
   }
 
-  // console.log('current-page', currentPage)
-  // console.log('quantity-rows', quantityRows)
-  // console.log('rows-per-page', rowsPerPage)
   const emptyRows = currentPage > 0 ? Math.max(0, (1 + currentPage) * rowsPerPage - quantityRows) : 0;
   // console.log('empty-rows', emptyRows)
 
@@ -58,7 +47,7 @@ const TableRow = (props) => {
                           <Checkbox
                             ref={inputRef}
                             name={row._id}
-                            // defaultChecked={checked}
+                            defaultChecked={rowsChecked.includes(row._id)}
                             // defaultChecked={itemsSelected.length === 0 ? false : true}
                             onChange={handleChange} value={row._id}/>
                         </td>

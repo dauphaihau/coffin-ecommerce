@@ -89,11 +89,6 @@ const ChatBox = () => {
         {/*  classes='w-max ml-auto break-all mb-1 px-[12px] py-[8px] rounded-tr-md bg-[#606060] rounded-2xl text-white text-left '>*/}
         {/*  ....*/}
         {/*</Box>*/}
-
-
-        {/*<Box classes='customer'>*/}
-        {/*All my loved ones are dead, so can you bring me into my casket?*/}
-
         <Row align='center' classes='bot'>
           <img
             className='h-6 w-6 block rounded-full '
@@ -105,20 +100,7 @@ const ChatBox = () => {
           </Box>
         </Row>
         {messages}
-        {/*</Box>*/}
-
-        {/*<div ref={(element) => { messageEnd = element; }}></div>*/}
-
-        {/*<Row align='center' classes='bot'>*/}
-        {/*  <img*/}
-        {/*    className='h-6 w-6 block rounded-full '*/}
-        {/*    src='/images/bot.png'*/}
-        {/*    alt='profile'*/}
-        {/*  />*/}
-        {/*  <Box classes='bot__message other'>*/}
-        {/*    Sorry, I'm just a bot*/}
-        {/*  </Box>*/}
-        {/*</Row>*/}
+        <Box ref={(element) => messageEnd = element}></Box>
       </Col>
     )
   }

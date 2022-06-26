@@ -14,7 +14,7 @@ import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../core/Input"
 import {TagOpts} from "../../../assets/data/options";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Link, Paper} from "../../../core";
-import {Col, Row} from "../../../core/Layout";
+import {Box, Col, Row} from "../../../core/Layout";
 
 const ProductEdit = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
@@ -110,8 +110,8 @@ const ProductEdit = () => {
 
   return (
     <Helmet title='Make the changes below' dataBreadcrumb={dataBreadcrumb}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4} classes='pb-4 laptop:max-w-[75%]'>
+      <Box form onSubmit={handleSubmit(onSubmit)}>
+        <Grid md={2} lg={2} gapx={4} classes='pb-4 desktop:max-w-[75%]'>
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors}/>
@@ -225,7 +225,7 @@ const ProductEdit = () => {
             <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Save Changes</Button>
           </Row>
         </Grid>
-      </form>
+      </Box>
     </Helmet>
   );
 }

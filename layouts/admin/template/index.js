@@ -15,7 +15,7 @@ const AdminLayout = ({children}) => {
   const {progress, setProgress} = useUIController();
   const [minimizeSidebar, setMinimizeSidebar] = useState(false)
   const [hoverRef, isHovered] = useHover()
-  console.log('is-hovered', isHovered)
+  // console.log('is-hovered', isHovered)
 
   return (
     <>

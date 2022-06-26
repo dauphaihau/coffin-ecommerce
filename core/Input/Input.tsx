@@ -102,7 +102,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   })
 
 const Password = (props) => {
-
   const {
     type = 'password',
     label, name = '',

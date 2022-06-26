@@ -9,12 +9,10 @@ const handler = nc();
 // handler.use(isAuth, rolesCanDelete);
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
-
-  console.log('req-body', req.body)
   Product.deleteMany({_id: {$in: req.body}}, (err) => {
       if (err) return res.send("Error while deleting " + err.message);
       // res.send("Some useful message here...");
-      res.send({message: 'Products Deleted'});
+      res.send({status: '200', message: 'Products Deleted'});
     }
   );
   await db.disconnect();

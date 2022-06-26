@@ -16,32 +16,35 @@ import {capitalize, isNil} from '../../../utils/helpers';
 import {ROLE_OPTIONS, USER_STATUS} from '../../../utils/enums';
 import ConfirmDeleteDialog from "../../../layouts/admin/template/Dialog/ConfirmDelete";
 
-
 const dataBreadcrumb = [
   {path: '/admin', name: 'Dashboard', firstLink: true},
   {path: '/admin/users', name: 'Users'},
   {path: '', name: 'List', lastLink: true}
 ];
 
+const rowsPerPage = [5, 15, 25]
 
 const UserList = () => {
   const router = useRouter();
-  const {progress, dispatch, setProgress} = useUIController();
+  const {progress, setProgress} = useUIController();
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [showDialog, setShowDialog] = useState(false)
   const [idUser, setIdUser] = useState()
+  const [params, setParams] = useState({
+    skip: 0, limit: rowsPerPage[0]
+  })
 
   const getAllUsers = useCallback(
     async () => {
       setProgress(progress + 30)
-      const res = await userService.getAll();
+      const res = await userService.getAll(params);
       if (res) {
         setProgress(100)
         setUsers(res.data)
         setLoading(false)
       }
-    }, []
+    }, [params]
   )
 
   useEffect(() => {
@@ -57,7 +60,12 @@ const UserList = () => {
             <img src={row.avatar ?? '/images/default/avatar-default.jpeg'} className='h-9 w-9 rounded-md '
                  alt='avatar'/>
           </div>
-          <Text weight='bold' sx='sm' classes='ml-4'>{row.name}</Text>
+          <Text weight='bold' sx='sm' classes='ml-4 desktop:hidden'>
+            {row.name.length > 9 ? row.name.substring(0, 9) + '...' : row.name}
+          </Text>
+          <Text weight='bold' sx='sm' classes='ml-4 hidden desktop:block'>
+            {row.name}
+          </Text>
         </Row>
       )
     },
@@ -91,7 +99,7 @@ const UserList = () => {
             // {
             //   label: 'Lock',
             //   element: <i className='fa-solid fa-lock'/>,
-            //   // feature: () => handleDelete(row._id)
+            //   // feature: () => handleRequest(row._id)
             // },
             {
               label: 'Edit',
@@ -112,50 +120,35 @@ const UserList = () => {
     },
   ];
 
-
-  async function handleDelete() {
-    const {isSuccess} = await userService.delete(idUser)
-    if (isSuccess) {
-      getAllUsers();
-      setShowDialog(false)
-      toast.success('Delete success!')
-    } else {
+  async function handleRequest() {
+    const {isSuccess, message} = await userService.delete(idUser)
+    if (!isSuccess) {
       toast.error(message)
+      return
     }
+    getAllUsers();
+    setShowDialog(false)
+    toast.success('Delete success!')
   }
 
-  async function handleDeleteMultiItems(optionsChecked) {
-    // if (!window.confirm('Are you sure?')) {
-    //   return;
-    // }
-    dispatch({type: 'OPEN_CONFIRM_DELETE'})
-    const res = await userService.multiDelete(optionsChecked.map(e => e.id))
-    if (isSuccess) {
-      const res = await userService.getAll();
-      setUsers(res.data)
-      toast.success('Delete success!')
-    } else {
-      toast.error(res.message)
-    }
+  const handleOnChangeTable = (values) => {
+    setParams({...params, skip: values.skip})
   }
 
   return (
     <>
-      <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleDelete={handleDelete}/>
+      <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleRequest={handleRequest}/>
       <Row align='center' justify='between'>
         <Helmet title='List User' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='/admin/users/new'>
-          <Button classes='ml-auto mb-4' icon={<i className='fa-solid fa-plus'/>}> New User</Button>
+          <Button classes='ml-auto mb-4' icon={<Text i classes='fa-solid fa-plus'/>}> New User</Button>
         </Link>
       </Row>
       <Table
-        onChangeCheckbox={handleDeleteMultiItems}
         loading={loading}
-        // checkboxSelection
         columns={columns}
-        // rowsPerPage={5}
-        // rowsPerPageOptions={[5, 10, 25]}
-        rowsPerPageOptions={[3, 5, 25]}
+        onChange={handleOnChangeTable}
+        rowsPerPageOptions={rowsPerPage}
         totalRows={users?.total}
         rows={users?.list}
       />

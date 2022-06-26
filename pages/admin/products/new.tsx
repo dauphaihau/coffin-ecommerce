@@ -104,7 +104,7 @@ const NewProduct = () => {
   return (
     <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid md={2} lg={2} gapx={4} classes='pb-4 laptop:max-w-[75%]'>
+        <Grid md={2} lg={2} gapx={4} classes='pb-4 desktop:max-w-[75%]'>
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
               <Input label='Product Name *' name='name' register={register} errors={errors} clearable/>
@@ -185,7 +185,7 @@ const NewProduct = () => {
               {/*</Grid>*/}
               {/*<Checkbox label='Save this information for next time'/>*/}
             </Paper>
-            <Paper classes='w-1/2'>
+            <Paper>
               <Grid md={1} lg={2} gapx={4}>
                 <Input
                   label='Price *' name='price'

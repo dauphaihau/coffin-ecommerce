@@ -1,5 +1,4 @@
 import {useRouter} from "next/router";
-import moment from "moment";
 import {toast} from "react-hot-toast";
 import {useCallback, useEffect, useState} from "react";
 
@@ -8,11 +7,12 @@ import {formatPrice} from "@utils/helpers";
 import {useUIController} from "@context/UIControllerContext";
 import {Button} from "../../../core/Button";
 import {MenuDropdown} from "../../../core/Navigation";
-import {Checkbox} from "../../../core/Input";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Link} from "../../../core/Next";
 import {Row} from "../../../core/Layout";
 import Table from "../../../core/Table";
+import ConfirmDeleteDialog from "../../../layouts/admin/template/Dialog/ConfirmDelete";
+import {Text} from "../../../core";
 
 
 const dataBreadcrumb = [
@@ -21,52 +21,75 @@ const dataBreadcrumb = [
   {path: "", name: "List", lastLink: true}
 ];
 
+const handleQuantity = (quantity) => {
+  if (quantity === 0) {
+    return <span className='badge-danger'>Out Of Stock</span>
+  }
+  if (quantity < 0 || quantity <= 100) {
+    return <span className='badge-warning'>Low Stock</span>
+  } else {
+    return <span className='badge-green'>In Stock</span>
+  }
+}
+
+const rowsPerPage = [5, 15, 25]
+
 const ProductList = () => {
   const router = useRouter();
+  const [ui, setUi] = useState({
+    products: [],
+    loading: true,
+    showDialog: false,
+    idUser: '',
+    deleteType: 'single',
+  })
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showDialog, setShowDialog] = useState(false)
+  const [idUser, setIdUser] = useState()
+  const [deleteType, setDeleteType] = useState('single')
+  const [optCheckbox, setOptCheckbox] = useState([])
+  const [resetCheckbox, setResetCheckbox] = useState(false)
   const [params, setParams] = useState({
-    skip: 0, limit: 3
+    skip: 0, limit: rowsPerPage[0]
   })
-  const {progress, setProgress} = useUIController();
 
+  const {progress, setProgress} = useUIController();
 
   const getAllProducts = useCallback(
     async () => {
       setProgress(progress + 30)
-      // const res = await productService.getAll(params);
-      const res = await productService.getAll();
-      if (res) {
+      const {isSuccess, data} = await productService.getAll(params);
+      if (isSuccess) {
         setProgress(100)
-        setProducts(res.data)
+        setProducts(data)
         setLoading(false)
       }
-    }, []
+    }, [params]
   )
+
   useEffect(() => {
     getAllProducts();
   }, [getAllProducts])
 
-  const handleQuantity = (quantity) => {
-    if (quantity === 0) {
-      return <span className='badge-danger'>Out Of Stock</span>
-    }
-    if (quantity < 0 || quantity <= 100) {
-      return <span className='badge-warning'>Low Stock</span>
-    } else {
-      return <span className='badge-green'>In Stock</span>
-    }
-  }
-
   const columns = [
     {
       id: 'name', title: 'Product',
-      render: (row) => <p className='text-sm font-bold'>{row.name}</p>
+      render: (row) => (
+        <>
+          <Text weight='bold' classes='text-sm desktop:hidden '>
+            {row.name.length > 15 ? row.name.substring(0, 15) + '...' : row.name}
+          </Text>
+          <Text weight='bold' sx='sm' classes='ml-4 hidden desktop:block'>
+            {row.name}
+          </Text>
+        </>
+      )
     },
     {id: 'category', title: 'Category'},
     {id: 'price', title: 'Price', render: (row) => <>{formatPrice(row.price)}</>},
     {id: 'sku', title: 'SKU'},
-    {id: 'quantity', title: 'quantity'},
+    {id: 'quantity', title: 'quantity', align: 'center'},
     // {id: 'brand', title: 'Brand'},
     // {
     //   id: 'status', title: 'Status',
@@ -86,7 +109,10 @@ const ProductList = () => {
             {
               label: 'Delete',
               element: <i className="fa-solid fa-trash-can"/>,
-              feature: () => handleDelete(row._id)
+              feature: () => {
+                setShowDialog(true)
+                setIdUser(row._id);
+              }
             },
           ]}
         />
@@ -94,44 +120,32 @@ const ProductList = () => {
     },
   ];
 
-
-  async function handleDelete(id) {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
-    const res = await productService.delete(id)
-    if (res.isSuccess) {
-      const res = await productService.getAll();
-      setProducts(res.data)
-      toast.success('Delete success!')
-    } else {
-      toast.error(res.message)
-    }
+  async function handleDeleteMultiItems(optionsChecked) {
+    setOptCheckbox(optionsChecked)
+    setShowDialog(true);
+    setDeleteType('multi')
   }
 
-  async function handleDeleteMultiItems(optionsChecked) {
-    if (!window.confirm('Are you sure?')) {
-      return;
-    }
-    const res = await productService.multiDelete(optionsChecked.map(e => e.id))
-    if (res.isSuccess) {
-      const res = await productService.getAll();
-      setProducts(res.data)
-      toast.success('Delete success!')
-    } else {
-      toast.error(res.message)
-    }
+  async function handleRequest() {
+    let res;
+    if (deleteType === 'single') {
+      res = await productService.delete(idUser);
+    } else res = await productService.multiDelete(optCheckbox);
+
+    if (!res.isSuccess) return toast.error(res.message);
+    getAllProducts();
+    setResetCheckbox(true)
+    setShowDialog(false)
+    toast.success('Delete success!')
   }
 
   const handleOnChangeTable = (values) => {
-    setParams({...params, ...values})
+    setParams({...params, skip: values.skip})
   }
-
-  // console.log('products', products)
-  // console.log('params', params)
 
   return (
     <>
+      <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleRequest={handleRequest}/>
       <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
         <Link href='/admin/products/new'>
@@ -139,16 +153,13 @@ const ProductList = () => {
         </Link>
       </Row>
       <Table
-        searchInputSelection
+        // searchInputSelection
         checkboxSelection
-        // onChange={(values) => setParams(values)}
         onChange={handleOnChangeTable}
-        // onChange={setParams}
-        onChangeSelected={handleDeleteMultiItems}
+        onChangeCheckbox={handleDeleteMultiItems}
+        resetSelectCheckbox={resetCheckbox}
         loading={loading}
-        // rowsPerPage={3}
-        rowsPerPageOptions={[3, 5, 25]}
-        // rowsPerPageOptions={[3, 4, 5]}
+        rowsPerPageOptions={rowsPerPage}
         totalRows={products?.total}
         columns={columns}
         rows={products?.list}

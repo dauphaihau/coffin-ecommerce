@@ -2,9 +2,13 @@ import axios from "axios";
 import {getHeaders} from "../utils/helpers";
 
 export const userService = {
-  getAll: async () => {
+  getAll: async (params) => {
     try {
-      const res = await axios.get("/api/admin/users", getHeaders())
+      // const res = await axios.get("/api/admin/users", getHeaders())
+      const res = await axios.get("/api/admin/users", {
+        ...getHeaders(),
+        params,
+      })
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {
@@ -30,7 +34,7 @@ export const userService = {
 
   create: async (data) => {
     try {
-      const res = await axios.post("/api/admin/users", data, getHeaders())
+      await axios.post("/api/admin/users", data, getHeaders())
       return {isLoading: false, isSuccess: true};
     } catch ({response}) {
       return {

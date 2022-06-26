@@ -46,7 +46,6 @@ const handleRole = (role) => {
   return options.filter(({value}) => role !== ROLE_OPTIONS.ADMIN ? value !== ROLE_OPTIONS.ADMIN : value)
 }
 
-
 const NewUser = () => {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const {user} = useAuth();
@@ -55,12 +54,14 @@ const NewUser = () => {
 
   const onSubmit = async (values) => {
     setIsBtnLoading(true)
-
-    const {avatar} = values;
-    const body = new FormData();
-    body.append("file", avatar);
-    const {data} = await otherService.uploadFile(body)
-    const formatData = {...values, avatar: data, role: values.role.value ?? values.role}
+    let formatData = values;
+    if (formatData.avatar) {
+      const body = new FormData();
+      body.append("file", formatData.avatar);
+      const {data} = await otherService.uploadFile(body)
+      formatData = {...formatData, avatar: data}
+    }
+    formatData = {...formatData, role: values.role.value ?? values.role}
     const {isLoading, isSuccess, message} = await userService.create(formatData)
 
     setIsBtnLoading(isLoading)

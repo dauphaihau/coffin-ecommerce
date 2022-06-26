@@ -3,14 +3,8 @@ import {getHeaders} from "../utils/helpers";
 
 export const productService = {
   getAll: async (params) => {
-    // const params = {
-    //   skip: 0,
-    //   limit: 3,
-    // }
-    console.log('req params', params)
     try {
-      // const res = await axios.get("/api/admin/products", getHeaders())
-      const res = await axios.get("/api/admin/products",  {
+      const res = await axios.get("/api/admin/products", {
         ...getHeaders(),
         params,
       })
@@ -23,7 +17,6 @@ export const productService = {
       };
     }
   },
-
   detail: async (id) => {
     try {
       const res = await axios.get(`/api/admin/products/${id}`, getHeaders())
@@ -36,7 +29,6 @@ export const productService = {
       };
     }
   },
-
   create: async (data) => {
     try {
       await axios.post("/api/admin/products", data, getHeaders())
@@ -49,7 +41,6 @@ export const productService = {
       };
     }
   },
-
   update: async (values) => {
     const {_id} = values
     try {
@@ -64,7 +55,6 @@ export const productService = {
     }
 
   },
-
   delete: async (_id) => {
     try {
       await axios.delete(`/api/admin/products/${_id}`, getHeaders())
@@ -77,7 +67,6 @@ export const productService = {
       };
     }
   },
-
   multiDelete: async (idsArray) => {
     try {
       await axios.post(`/api/admin/products/multiDelete`, idsArray, getHeaders())

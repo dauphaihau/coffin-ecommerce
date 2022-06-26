@@ -12,18 +12,18 @@ interface AutocompleteProps {
   label?: string,
   onChange: (event: { name: string; id: string }[]) => void;
   options: Array<{
-    name: string,
-    id: string | number
+    label: string,
+    value: string | number
   }>
 }
 
 type Result = {
-  name: string,
-  id: string
+  label: string,
+  value: string
 }[]
 
 export default function CustomAutocomplete(props: AutocompleteProps) {
-  const {label, onChange, options = [{id: '', name: '',}], value} = props;
+  const {label, onChange, options = [{value: '', label: ''}], value} = props;
   const [selected, setSelected] = useState(options[0])
   const [query, setQuery] = useState('')
   // @ts-ignore
@@ -35,11 +35,13 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
     }
   }, [value])
 
+  console.log('options', options)
+
   const filteredOptions =
     query === ''
       ? options
       : options.filter((option) =>
-        option.name
+        option.label
           .toLowerCase()
           .replace(/\s+/g, '')
           .includes(query.toLowerCase().replace(/\s+/g, ''))
@@ -67,7 +69,7 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
             focus-visible:ring-offset-2 sm:text-sm overflow-hidden">
             <Combobox.Input
               className="w-full border-none border-gray-300 focus:ring-0 py-[13px] pl-3 pr-10 text-sm text-gray-900"
-              // displayValue={(option) => option.name}
+              // displayValue={(option) => option.label}
               placeholder='Search ...'
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -94,7 +96,7 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
               ) : (
                 filteredOptions.map((option) => (
                   <Combobox.Option
-                    key={option.id}
+                    key={option.value}
                     className={({active}) =>
                       `cursor-default select-none relative py-2 pl-10 pr-4 ${
                         active ? 'text-gray-700 bg-light-200' : 'text-black'
@@ -109,7 +111,7 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {option.name}
+                          {option.label}
                         </span>
                         {selected ? (
                           <span
@@ -132,14 +134,14 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
       {arrResult.length > 0 ? (
         <div className='mt-3 border rounded-lg p-2 flex flex-wrap gap-2'>
           {
-            arrResult?.map((tag, id) => (
-              <div className='py-1 px-2 bg-[#edeff1] rounded-2xl w-fit' key={id}>
-                {tag.name}
+            arrResult?.map((tag, idx) => (
+              <div className='py-1 px-2 bg-[#edeff1] rounded-2xl w-fit' key={idx}>
+                {tag.label}
                 <i
                   className="fa-solid fa-circle-xmark text-base text-[#b9bcc0] animate
                                               hover:text-gray-500 cursor-pointer !opacity-1 ml-2 "
                   onClick={() => {
-                    const filtered = arrResult.filter(e => e.id !== tag.id);
+                    const filtered = arrResult.filter(o => o.value !== tag.value);
                     setArrResult(filtered);
                     onChange(filtered)
                   }}

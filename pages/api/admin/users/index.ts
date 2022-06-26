@@ -16,14 +16,15 @@ const handler = nc();
 handler.use(isAuth, rolesCanView);
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   await db.connect();
+  const limit = Number(req.query.limit)
+  const skip = Number(req.query.skip)
   const total = await User.countDocuments();
-  const users = await User.find({});
+  const users = await User.find({}).limit(limit).skip(skip);
   await db.disconnect();
-  const data = {
+  res.send({
     list: users,
     total
-  }
-  res.send(data);
+  });
 });
 
 handler.use(rolesCanCreate);

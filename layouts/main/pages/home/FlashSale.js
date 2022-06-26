@@ -70,6 +70,7 @@ const FlashSale = ({inventoryData}) => {
               salePrice={inventoryData[10].salePrice}
             />
           </Grid>
+
         </div>
       </Grid>
     </section>

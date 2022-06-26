@@ -4,7 +4,7 @@ import {Row} from "../../../../core/Layout";
 import {Text} from "../../../../core";
 
 const ConfirmDeleteDialog = (props) => {
-  const {handleDelete, defaultStatus, setShowDialog} = props;
+  const {handleRequest, defaultStatus, setShowDialog} = props;
   return (
     <Dialog isOpen={defaultStatus}>
       <Dialog.Title title='Confirm delete'/>
@@ -16,7 +16,7 @@ const ConfirmDeleteDialog = (props) => {
           <Button light onClick={() => setShowDialog(false)}>
             Cancel
           </Button>
-          <Button variant='warning' shadow onClick={() => handleDelete()}>
+          <Button variant='warning' shadow onClick={() => handleRequest()}>
             Delete
           </Button>
         </Row>

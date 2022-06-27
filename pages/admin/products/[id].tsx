@@ -34,7 +34,7 @@ const ProductEdit = () => {
   const dataBreadcrumb = [
     {path: "/admin", name: "Dashboard", firstLink: true},
     {path: "/admin/products", name: "Products"},
-    {path: "", name: product?.name, lastLink: true}
+    {path: "", name: product?.name , lastLink: true}
   ];
 
   const validationSchema = Yup.object().shape({

@@ -1,7 +1,7 @@
 import nc from 'next-connect';
 import Product from '../../../../server/models/Product';
 import {NextApiRequest, NextApiResponse} from "next";
-import {isAuth, rolesCanDelete, rolesCanView} from "../../../../server/middlewares/auth";
+import {isAuth, rolesCanView} from "../../../../server/middlewares/auth";
 import db from "../../../../server/db/db";
 
 const handler = nc();

@@ -1,8 +1,9 @@
 .menu {
   @apply relative inline-block text-left;
   .menu-dropdown {
+    //px-4 py-2
     @apply inline-flex w-full justify-center rounded-md
-    px-4 py-2 text-sm font-medium text-black
+    text-sm font-medium text-black
     animate focus-visible:ring-2 focus-visible:ring-white
     focus-visible:ring-opacity-75;
   }

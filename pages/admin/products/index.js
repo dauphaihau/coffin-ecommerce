@@ -1,24 +1,34 @@
-import {useRouter} from "next/router";
-import {toast} from "react-hot-toast";
-import {useCallback, useEffect, useState} from "react";
+import {useRouter} from 'next/router';
+import {toast} from 'react-hot-toast';
+import {useCallback, useEffect, useState} from 'react';
 
-import {productService} from "@services/products";
-import {formatPrice} from "@utils/helpers";
-import {useUIController} from "@context/UIControllerContext";
-import {Button} from "../../../core/Button";
-import {MenuDropdown} from "../../../core/Navigation";
-import {Helmet} from "../../../layouts/admin/common/Helmet";
-import {Link} from "../../../core/Next";
-import {Row} from "../../../core/Layout";
-import Table from "../../../core/Table";
-import ConfirmDeleteDialog from "../../../layouts/admin/template/Dialog/ConfirmDelete";
-import {Text} from "../../../core";
+import {productService} from '@services/products';
+import {formatPrice} from '@utils/helpers';
+import {useUIController} from '@context/UIControllerContext';
+import {Button} from '../../../core/Button';
+import {MenuDropdown} from '../../../core/Navigation';
+import {Helmet} from '../../../layouts/admin/common/Helmet';
+import {Link} from '../../../core/Next';
+import {Box, Grid, Row} from '../../../core/Layout';
+import Table from '../../../core/Table';
+import ConfirmDeleteDialog from '../../../layouts/admin/template/Dialog/ConfirmDelete';
+import {Text} from '../../../core';
+import {Controller, useForm} from 'react-hook-form';
+import {
+  orderByOpts,
+  productBrandOptions,
+  productCategoriesOptions,
+  productColorOptions,
+  productTagsOptions, searchByOptsProducts
+} from '../../../assets/data/options';
+import {Input, InputExcelFile, Select} from '../../../core/Input';
+import {uiControllerActionsType} from '../../../store/reducers/uiControllerReducer';
 
 
 const dataBreadcrumb = [
-  {path: "/admin", name: "Dashboard", firstLink: true},
-  {path: "/admin/products", name: "Products"},
-  {path: "", name: "List", lastLink: true}
+  {path: '/admin', name: 'Dashboard', firstLink: true},
+  {path: '/admin/products', name: 'Products'},
+  {path: '', name: 'List', lastLink: true}
 ];
 
 const handleQuantity = (quantity) => {
@@ -36,13 +46,6 @@ const rowsPerPage = [5, 15, 25]
 
 const ProductList = () => {
   const router = useRouter();
-  const [ui, setUi] = useState({
-    products: [],
-    loading: true,
-    showDialog: false,
-    idUser: '',
-    deleteType: 'single',
-  })
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [showDialog, setShowDialog] = useState(false)
@@ -56,9 +59,19 @@ const ProductList = () => {
 
   const {progress, setProgress} = useUIController();
 
+  const formOptions = {
+    defaultValues: {
+      orderBy: orderByOpts[0],
+      searchBy: searchByOptsProducts[0],
+    }
+  };
+  const {register, handleSubmit, control, formState} = useForm(formOptions);
+  const {errors} = formState;
+
   const getAllProducts = useCallback(
     async () => {
       setProgress(progress + 30)
+      console.log('params', params)
       const {isSuccess, data} = await productService.getAll(params);
       if (isSuccess) {
         setProgress(100)
@@ -103,12 +116,12 @@ const ProductList = () => {
           options={[
             {
               label: 'Edit',
-              element: <i className="fa-solid fa-pen"/>,
+              element: <i className='fa-solid fa-pen'/>,
               href: `${router.pathname}/${row._id}`
             },
             {
               label: 'Delete',
-              element: <i className="fa-solid fa-trash-can"/>,
+              element: <i className='fa-solid fa-trash-can'/>,
               feature: () => {
                 setShowDialog(true)
                 setIdUser(row._id);
@@ -139,21 +152,69 @@ const ProductList = () => {
     toast.success('Delete success!')
   }
 
-  const handleOnChangeTable = (values) => {
-    setParams({...params, skip: values.skip})
+  const handleOnChangeTable = ({skip, limit}) => {
+    setParams({skip, limit})
+    // setParams({...params, skip: values.skip, limit: values.limit})
   }
+
+  const handleImportExcelFile = (values) => {
+    console.log('values', values)
+  }
+
+  console.log('params', params)
 
   return (
     <>
       <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleRequest={handleRequest}/>
+      {/*<Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>*/}
       <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
-        <Link href='/admin/products/new'>
-          <Button classes='ml-auto mb-4' icon={<i className="fa-solid fa-plus"/>}> New Product</Button>
-        </Link>
+        {/*<Grid sx={2} gapx={4}>*/}
+        {/*  <Controller*/}
+        {/*    control={control}*/}
+        {/*    name='searchBy'*/}
+        {/*    render={({field: {onChange, onBlur, value, ref}}) => (*/}
+        {/*      <Select*/}
+        {/*        size='medium'*/}
+        {/*        label='Search by'*/}
+        {/*        options={searchByOptsProducts}*/}
+        {/*        onChange={onChange}*/}
+        {/*      />*/}
+        {/*    )}*/}
+        {/*  />*/}
+        {/*  <Input*/}
+        {/*    label='Text search' name='searchValue'*/}
+        {/*    register={register} errors={errors} placeholder='712834657911'*/}
+        {/*    classesSpace='mb-0'*/}
+        {/*  />*/}
+        {/*</Grid>*/}
+        <Row gap={4}>
+          <Button classes='ml-auto' disabled icon={
+            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 inline' fill='none' viewBox='0 0 24 24'
+                 stroke='currentColor' strokeWidth={2}>
+              <path strokeLinecap='round' strokeLinejoin='round'
+                    d='M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z'/>
+            </svg>
+          }> Column</Button>
+          <Button classes='ml-auto' disabled icon={<i className='fa-solid fa-sliders '/>}> Filter</Button>
+          <MenuDropdown
+            trigger={<Button classes='ml-auto'> Import/Export</Button>}
+            options={[
+              {label: 'Import', element: <i className='fa-solid fa-upload'/>},
+              {
+                label: 'Export',
+                element: <i className='fa-solid fa-download'/>,
+                feature: () => <InputExcelFile onChange={handleImportExcelFile}/>
+              },
+            ]}
+          />
+          <Link href='/admin/products/new'>
+            <Button classes='ml-auto mb-4' icon={<i className='fa-solid fa-plus'/>}> New Product</Button>
+          </Link>
+        </Row>
       </Row>
       <Table
-        // searchInputSelection
+        // searchInputSelectionf
         checkboxSelection
         onChange={handleOnChangeTable}
         onChangeCheckbox={handleDeleteMultiItems}

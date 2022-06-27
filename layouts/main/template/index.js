@@ -4,12 +4,12 @@ import {useEffect, useState} from "react";
 import dynamic from "next/dynamic";
 
 import {useUIController} from "../../../context/UIControllerContext";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./Navbar";
 import Contact from "./Contact";
 import Footer from "./Footer";
 
 // import ChatBox from "./ChatBox";
-const ChatBox = dynamic(() => import('./ChatBox'), { ssr: false });
+const ChatBox = dynamic(() => import('./ChatBox'), {ssr: false});
 import BannerHomeCard from "./BannerHomeCard";
 import AllDrawer from "./Drawer";
 import Backdrop from "../../../core/Navigation/Drawer/Backdrop";
@@ -55,7 +55,7 @@ export const MainLayout = ({children, categories}) => {
       <Toaster position={isMobileScreen ? 'top-center' : 'bottom-right'} reverseOrder={false}/>
       <SubscribeDialog/>
       <AllDialog/>
-      <AllDraWEr/>
+      <AllDrawer/>
       <ChatBox/>
       <Backdrop/>
       <Navbar categories={categories}/>

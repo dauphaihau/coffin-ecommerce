@@ -36,9 +36,10 @@
       lg:overflow-x-visible;
 
       tr {
-        @apply bg-white dark:bg-black;
+        @apply bg-white dark:bg-black ;
+        //@apply bg-white dark:bg-black hover:bg-gray-custom-50 hover:rounded-2xl;
         td {
-          @apply py-4 px-6 text-sm  text-gray-900
+          @apply py-4 px-6 text-sm text-gray-900
 
           whitespace-nowrap dark:text-white;
         }

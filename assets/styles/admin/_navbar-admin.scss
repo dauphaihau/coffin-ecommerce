@@ -1,0 +1,78 @@
+.navbar-admin {
+  @apply fixed border-gray-200 laptop:w-[73.8%] desktop:w-4/5
+  bg-transparent monitor:w-[86.5%] z-30 pb-4;
+
+  &--mod {
+    @apply shadow-2xl bg-clip-padding backdrop-filter backdrop-blur-xl
+    bg-opacity-60 border  p-4 animate rounded-2xl
+  }
+
+  &--resizeWidth {
+    @apply laptop:w-[85.5%] monitor:w-[93.7%];
+  }
+
+  .left-side {
+    .search-form {
+      @apply hidden relative mr-3 md:mr-0 md:block;
+      &__icon {
+        @apply absolute inset-y-0 left-0 pl-3 pointer-events-none;
+      }
+
+      &__input {
+        @apply block p-2 pl-10 w-full text-gray-900
+        rounded-lg border border-gray-300 sm:text-sm
+        focus:ring-black focus:border-black
+        dark:bg-black dark:border-gray-custom-502 dark:placeholder-gray-custom-503
+        dark:text-white dark:focus:ring-black dark:focus:border-black;
+      }
+    }
+  }
+
+  .right-side {
+    @apply hidden w-full md:block md:w-auto;
+
+    .profile {
+      @apply flex items-center ;
+
+      &__notification {
+        @apply flex items-center;
+        i {
+          @apply cursor-pointer mr-8 text-xl
+          text-[#7e8188] hover:text-gray-600 animate;
+        }
+      }
+
+      &__info {
+        @apply flex cursor-pointer border-l pl-6;
+        div {
+          @apply flex flex-col;
+          p:nth-child(1) {
+            @apply font-black text-black dark:text-white
+          }
+
+          p:nth-child(2) {
+            @apply text-[#808080] text-[0.7rem] ;
+          }
+        }
+      }
+
+      //&__profile {
+      //  @apply mt-8 relative z-10 transition-all duration-300 ease-in-out ;
+      //  div {
+      //    @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg
+      //    dark:bg-gray-custom-904
+      //    rounded-md bg-white shadow-2xl;
+      //    a {
+      //      @apply block px-4 py-2 text-sm leading-5
+      //      text-black hover:bg-gray-custom-50
+      //      dark:text-white dark:hover:bg-gray-custom-503
+      //      focus:outline-none focus:bg-gray-100
+      //      transition duration-150 ease-in-out;
+      //    }
+      //  }
+      //}
+    }
+  }
+
+}
+

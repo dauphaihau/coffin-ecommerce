@@ -1,6 +1,6 @@
-import {useRef, useState} from "react";
-import {Checkbox} from "../Input";
-import {Loading} from "../Loading";
+import {useRef, useState} from 'react';
+import {Checkbox} from '../Input';
+import {Loading} from '../Loading';
 
 const TableRow = (props) => {
   const {
@@ -30,8 +30,8 @@ const TableRow = (props) => {
     <>
       {
         loading ? (<tr>
-           <td colSpan={columns.length} className="text-center">
-              {/*<div className="spinner-border spinner-border-lg align-center"/>*/}
+           <td colSpan={columns.length} className='text-center'>
+              {/*<div className='spinner-border spinner-border-lg align-center'/>*/}
              <Loading/>
            </td>
         </tr>
@@ -48,7 +48,6 @@ const TableRow = (props) => {
                             ref={inputRef}
                             name={row._id}
                             defaultChecked={rowsChecked.includes(row._id)}
-                            // defaultChecked={itemsSelected.length === 0 ? false : true}
                             onChange={handleChange} value={row._id}/>
                         </td>
                       )
@@ -72,8 +71,8 @@ const TableRow = (props) => {
             )
           ) : (
             <tr>
-          <td colSpan={columns.length} className="text-center">
-              <div className="p-2">Item/data not found or data not existing</div>
+          <td colSpan={columns.length} className='text-center'>
+              <div className='p-2'>Item/data not found or data not existing</div>
           </td>
         </tr>
           )

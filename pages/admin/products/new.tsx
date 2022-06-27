@@ -181,9 +181,6 @@ const NewProduct = () => {
                   )}
                 />
               </Grid>
-              {/*<Grid md={1} lg={2} gapx={4}>*/}
-              {/*</Grid>*/}
-              {/*<Checkbox label='Save this information for next time'/>*/}
             </Paper>
             <Paper>
               <Grid md={1} lg={2} gapx={4}>
@@ -208,7 +205,7 @@ const NewProduct = () => {
             </Paper>
           </Col>
           <Row classes='mt-4'>
-            <Link href='/admin/users'>
+            <Link href='/admin/products'>
               <Button light shadow type='button'>Back</Button>
             </Link>
             <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Create</Button>

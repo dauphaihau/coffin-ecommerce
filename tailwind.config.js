@@ -11,6 +11,10 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      backdropFilter:{
+        'none': 'none',
+        'blur': 'blur(20px)',
+      },
       spacing: {
         4: '1rem',
         "72": "18rem",
@@ -1150,5 +1154,7 @@ module.exports = {
       50: '50',
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-filters'),
+  ],
 }

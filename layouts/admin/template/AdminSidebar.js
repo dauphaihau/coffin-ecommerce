@@ -59,7 +59,6 @@ const Menu = ({link, handleActive, minimizeSidebar, isHovered}) => {
 
   if (!link) return null;
 
-
   return (
     <List.Item classes='item'>
       <Box classes='cursor-pointer' onClick={() => setActive(!active)}>
@@ -119,7 +118,8 @@ const AdminSidebar = ({minimizeSidebar, isHovered, hoverRef}) => {
   return (
     <Box
       aside ref={hoverRef} aria-label='Sidebar'
-      classes={`sidebar animate ${minimizeSidebar && 'w-[6.5rem]'} ${minimizeSidebar && isHovered && 'w-[16rem]'} `}
+      classes={`sidebar animate ${minimizeSidebar && 'w-[6.5rem]'} 
+      ${minimizeSidebar && isHovered && 'w-[16rem]'} `}
     >
       {/*<Box aside classes={`sidebar ${minimizeSidebar && 'w-[6.5rem]'} `} aria-label='Sidebar'>*/}
       {/*<div ref={hoverRef}>{isHovered ? 'hovered' : 'nope️'}</div>*/}

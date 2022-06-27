@@ -8,5 +8,6 @@ export { default as Autocomplete} from './Autocomplete'
 export { default as ImageInput} from './ImageInput'
 export { default as AvatarInput} from './AvatarInput'
 export { default as TextEditor} from './TextEditor'
+export { default as InputExcelFile} from './InputExcelFile'
 
 

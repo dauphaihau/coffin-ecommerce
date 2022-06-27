@@ -89,7 +89,34 @@ const rowsPerPageOpts = [
 ]
 
 
+const orderByOpts = [
+  {
+    label: 'Ascend',
+    value: 'asc',
+  },
+  {
+    label: 'Descend',
+    value: 'desc',
+  },
+];
+const searchByOptsProducts = [
+  {
+    label: 'Name',
+    value: 'name',
+  },
+  {
+    label: 'SKU',
+    value: 'sku',
+  },
+  {
+    label: 'Price',
+    value: 'price',
+  },
+];
+
+
 export {
+  orderByOpts, searchByOptsProducts,
   productCategoriesOptions, productBrandOptions, productColorOptions,
   productTagsOptions,
   sortOpts, deliveryOpts,

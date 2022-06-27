@@ -7,13 +7,14 @@
 @import "core/button";
 @import "core/drawer";
 @import "core/stepper";
-@import "core/navbar";
 @import "core/sidebar";
 @import "core/badge";
 
+@import "main/navbar-homepage";
 @import "main/footer";
 @import "main/chatbox";
 @import "admin/chat-app";
+@import "admin/navbar-admin";
 @tailwind components;
 
 @tailwind utilities;

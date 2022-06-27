@@ -1,9 +1,9 @@
-import Pagination from "./Pagination";
-import {ReactNode, useEffect, useMemo, useState} from "react";
-import {filterRows, isEmpty, sortRows} from "../../utils/helpers";
-import {Checkbox, Input} from "../Input";
+import Pagination from './Pagination';
+import {ReactNode, useEffect, useMemo, useState} from 'react';
+import {filterRows, isEmpty, sortRows} from '../../utils/helpers';
+import {Checkbox, Input} from '../Input';
 import TableRow from './TableRow';
-import {Text} from "../index";
+import {Text} from '../index';
 
 interface PropsTable {
   fitContent?: boolean,
@@ -50,7 +50,7 @@ const Table = (props: PropsTable) => {
   const [filters, setFilters] = useState({})
   const [sort, setSort] = useState({order: 'asc', orderBy: 'id'})
   const [rowsChecked, setRowsChecked] = useState([])
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     if (resetSelectCheckbox) setRowsChecked([])
@@ -64,33 +64,27 @@ const Table = (props: PropsTable) => {
     let fromTemp = Math.ceil((newPage - 1) * rowsPerPage)
     setCurrentPage(newPage);
     // query.setFrom(fromTemp)
-    onChange({skip: fromTemp})
+    onChange({skip: fromTemp, limit: rowsPerPage})
   };
 
-  const handleRowsPerPageChange = (value) => {
-    // console.log('value', value)
-    const limit = value
+  const handleRowsPerPageChange = (limit) => {
+    console.log('limit', limit)
     setRowsPerPage(limit);
-    // query.setFrom(0)
-    // query.setLimit(limit)
     onChange({skip: 0, limit})
     setCurrentPage(1);
   };
 
   const handleSearch = (searchValue) => {
     setSearchInput(searchValue);
-    if (searchInput !== "") {
+    if (searchInput !== '') {
       const filteredData = sortedRows.filter((item) => {
         return Object.values(item.name)
-          .join("")
+          .join('')
           .toLowerCase()
           .includes(searchInput.toLowerCase());
       });
       setFilters(filteredData);
-    } else {
-      setFilters(rows);
-      // setFilters(currentRows);
-    }
+    } else setFilters(rows);
   }
 
   const handleSort = (id) => {
@@ -102,9 +96,7 @@ const Table = (props: PropsTable) => {
   }
 
   const handleCheckAllBox = (values) => {
-
     const status = values.target.checked
-
     const currentIds = rows.map(o => o._id)
     if (!status) {
       const a = rowsChecked.filter(id1 => !rows.some(({_id: id2}) => id2 !== id1));
@@ -122,9 +114,7 @@ const Table = (props: PropsTable) => {
                     classes='checked:bg-none'
                     name='idsRow'
                     defaultChecked={rowsChecked.length > 0}
-                    // defaultChecked={}
                     onChange={handleCheckAllBox}
-                    // onChange={handleCheckbox}
                   />
                 </th>
               }
@@ -132,9 +122,9 @@ const Table = (props: PropsTable) => {
                 const sortIcon = () => {
                   if (column.id === sort.orderBy) {
                     if (sort.order === 'asc') {
-                      return <i className="fa-solid fa-chevron-up"/>
+                      return <i className='fa-solid fa-chevron-up'/>
                     }
-                    return <i className="fa-solid fa-chevron-down"/>
+                    return <i className='fa-solid fa-chevron-down'/>
                   }
                 }
                 return (
@@ -144,8 +134,9 @@ const Table = (props: PropsTable) => {
                     {
                       column.id === 'actions' ?
                         rowsChecked.length > 0 ?
-                          <Text i classes="fa-solid fa-trash-can text-xs"
-                                onClick={() => onChangeCheckbox(rowsChecked)}
+                          <Text
+                            i classes='fa-solid fa-trash-can text-xs'
+                            onClick={() => onChangeCheckbox(rowsChecked)}
                           />
                           : ''
                         :
@@ -160,10 +151,8 @@ const Table = (props: PropsTable) => {
     )
   }
 
-  console.log('rows-checked', rowsChecked)
-
   return (
-    <section className="table-container">
+    <section className='table-container'>
       <div className={`table-wrapper ${res.fitContent && 'w-fit'}`}>
         {searchInputSelection &&
           <div className='w-1/4'>
@@ -173,7 +162,7 @@ const Table = (props: PropsTable) => {
             />
           </div>
         }
-        <table className="table ">
+        <table className='table '>
           {TableColumn()}
           <tbody>
             <TableRow
@@ -185,29 +174,23 @@ const Table = (props: PropsTable) => {
               setRowsChecked={setRowsChecked}
               rowsChecked={rowsChecked}
               columns={columns}
-              rows={rows}
-              // rows={currentRows}
-              // rows={!isEmpty(filters) ? filters : currentRows}
+              // rows={rows}
+              rows={!isEmpty(filters) ? filters : rows}
             />
           </tbody>
         </table>
       </div>
-      {/*{hidePagination || currentRows.length === 0*/}
       {hidePagination || rows.length === 0
         ? ''
         : <Pagination
           checkboxSelection={checkboxSelection}
           rowsPerPageOptions={rowsPerPageOptions}
           setRowsPerPage={handleRowsPerPageChange}
-          // setRowsPerPage={setRowsPerPage}
           rowsPerPageFromProps={rowsPerPageFromProps}
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           rowsChecked={rowsChecked.length}
-
-          // totalNumberOfRows={rows.length}
           quantityRows={totalRows}
-          // quantityRows={rows.length}
           // onPageChange={page => setCurrentPage(page)}
           onPageChange={handleChangePage}
         />

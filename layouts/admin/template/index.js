@@ -1,15 +1,15 @@
-import {Toaster} from "react-hot-toast";
-import LoadingBar from "react-top-loading-bar";
+import {Toaster} from 'react-hot-toast';
+import LoadingBar from 'react-top-loading-bar';
 
-import {useUIController} from "../../../context/UIControllerContext";
-import {Box, Col, Container} from "../../../core/Layout";
-import Navbar from "./Navbar";
-// import Sidebar from "./AdminSidebarTest";
-import Sidebar from "./AdminSidebar";
+import {useUIController} from '../../../context/UIControllerContext';
+import {Box, Col, Container} from '../../../core/Layout';
+import Navbar from './Navbar';
+// import Sidebar from './AdminSidebarTest';
+import Sidebar from './AdminSidebar';
 
-import Footer from "./Footer";
-import {useState} from "react";
-import useHover from "../../../utils/hooks/useHover";
+import Footer from './Footer';
+import {useEffect, useState} from 'react';
+import useHover from '../../../utils/hooks/useHover';
 
 const AdminLayout = ({children}) => {
   const {progress, setProgress} = useUIController();
@@ -17,11 +17,15 @@ const AdminLayout = ({children}) => {
   const [hoverRef, isHovered] = useHover()
   // console.log('is-hovered', isHovered)
 
+  useEffect(() => {
+    document.querySelector('body').classList.add('dark:bg-gray-custom-903', 'bg-gray-custom-498')
+  });
+
   return (
     <>
-      <LoadingBar color="#000000" progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
-      <Toaster position="top-right" reverseOrder={false}/>
-      <Container display='flex' classes='bg-[#f8f9fa] dark:bg-gray-custom-903 h-screen'>
+      <LoadingBar color='#000000' progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
+      <Toaster position='top-right' reverseOrder={false}/>
+      <Container display='flex' classes=' h-screen'>
         <Sidebar
           hoverRef={hoverRef}
           isHovered={isHovered}

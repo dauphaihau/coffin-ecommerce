@@ -1,16 +1,20 @@
 .form-textarea-input {
   @apply mb-3;
   label {
-    @apply inline-block mb-2 text-gray-700;
+    @apply inline-block mb-2 text-gray-700 dark:text-white;;
   }
 
   textarea {
     @apply resize-none block w-full px-3 py-1.5 pt-4 pl-4 text-base font-normal
-    text-black bg-white bg-clip-padding border border-solid border-black rounded
-    focus:ring-black
-    transition duration-200 ease-in-out m-0 focus:text-black focus:bg-white
-    focus:border-black focus:outline-none placeholder-gray-500 text-sm font-light
-    border-gray-300 appearance-none
+    border-gray-300 appearance-none animate
+    text-black bg-white bg-clip-padding
+    border border-solid rounded
+    placeholder-gray-500 text-sm font-light
+
+    dark:bg-gray-custom-898 dark:text-white
+    focus:border-black focus:outline-none
+    focus:ring-black dark:focus:border-0 dark:focus:right-0
+    hover:border-black
   }
 }
 

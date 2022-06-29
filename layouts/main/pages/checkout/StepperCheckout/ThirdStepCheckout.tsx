@@ -1,11 +1,11 @@
-import {toast} from "react-hot-toast";
-import {Text} from "../../../../../core";
-import RadioGroupCustom from "../../../../../core/Input/RadioGroup";
-import {deliveryOpts, paymentOpts} from "../../../../../assets/data/options";
-import {Button} from "../../../../../core/Button";
-import {Grid, Row} from "../../../../../core/Layout";
-import {useAuth} from "../../../../../context/authContext";
-import {formatPrice} from "../../../../../utils/helpers";
+import {toast} from 'react-hot-toast';
+import {Text} from '../../../../../core';
+import RadioGroupCustom from '../../../../../core/Input/RadioGroup';
+import {deliveryOpts, paymentOpts} from '../../../../../assets/data/options';
+import {Button} from '../../../../../core/Button';
+import {Box, Grid, Row} from '../../../../../core/Layout';
+import {useAuth} from '../../../../../context/authContext';
+import {formatPrice} from '../../../../../utils/helpers';
 
 const ThirdStepCheckout = (props) => {
   // const [orderCompleted, setOrderCompleted] = useState(false)
@@ -32,34 +32,34 @@ const ThirdStepCheckout = (props) => {
 
   return (
     <Grid lg={6} gapx={8}>
-      <div className='col-span-2 ipad:col-span-4'>
-        <div className='p-6 shadow border rounded-xl mb-6 w-full'>
+      <Box classes='col-span-2 ipad:col-span-4'>
+        <Box classes='p-6 shadow border rounded-xl mb-6 w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Delivery options</Text>
           <RadioGroupCustom
             options={deliveryOpts}
             onChange={(e) => updateCart({delivery: e.value})}
           />
-        </div>
-        <div className='p-6 shadow border rounded-xl w-full'>
+        </Box>
+        <Box classes='p-6 shadow border rounded-xl w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Payment options</Text>
           <RadioGroupCustom
             directionClasses='flex-col ipad:flex-row'
             options={paymentOpts}
             onChange={(e) => updateCart({payment: e.value})}
           />
-        </div>
+        </Box>
         <Button light classes='font-bold px-0 mt-4' onClick={() => setSteps(2)}>
-          <i className="fa-solid fa-angle-left mr-4"/>Back
+          <i className='fa-solid fa-angle-left mr-4'/>Back
         </Button>
-      </div>
-      <div className='col-span-2'>
-        <div className='p-6 shadow-xl border rounded-xl mb-6 w-full'>
+      </Box>
+      <Box classes='col-span-2'>
+        <Box classes='p-6 shadow-xl border rounded-xl mb-6 w-full'>
           <Text weight='bold' sx='xl' classes='mb-3'>Billing Address</Text>
           <Text classes='mb-2' weight='bold'>Sir Tran</Text>
           <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
           <Text color='gray-500'>365-374-4961</Text>
-        </div>
-        <div className='border border-gray-custom-50 shadow-2xl p-6 rounded-xl w-full font-light'>
+        </Box>
+        <Box classes='border border-gray-custom-50 shadow-2xl p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
           <Row justify='between' classes='py-2'>
             <Text>{formatPrice(user.delivery === 'fastDelivery' ? user.priceTotal + 2 : user.priceTotal)}</Text>
@@ -74,13 +74,13 @@ const ThirdStepCheckout = (props) => {
           </Row>
           <Row justify='between' classes='py-4 border-t'>
             <Text weight='bold'>Total</Text>
-            <div className='text-right font-light'>
+            <Box classes='text-right font-light'>
               <Text
                 weight='bold'>{formatPrice(user.delivery === 'fastDelivery' ? user.priceTotal + 2 : user.priceTotal)}</Text>
               <Text sx='sm'>(VAT included if applicable)</Text>
-            </div>
+            </Box>
           </Row>
-        </div>
+        </Box>
         {
           user.payment === 'cash'
             ? <Button
@@ -92,13 +92,15 @@ const ThirdStepCheckout = (props) => {
                   window.location.href = '/'
                 }, 4000)
               }}>Complete Order</Button>
-            : <form action="/api/checkout_sessions" method="POST">
+            : <form action='/api/checkout_sessions' method='POST'>
               <section>
-                <Button classes='mt-4 font-bold' width='full' shadow size='lg'>Complete Order</Button>
+                <Button
+                  type='submit'
+                  classes='mt-4 font-bold' width='full' shadow size='lg'>Complete Order</Button>
               </section>
             </form>
         }
-      </div>
+      </Box>
     </Grid>
   );
 }

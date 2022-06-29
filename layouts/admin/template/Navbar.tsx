@@ -10,24 +10,29 @@ import {MenuDropdown} from '../../../core/Navigation';
 import ConfirmLogoutDialog from "./Dialog/ConfirmLogout";
 import {MenuIcon, SearchIcon} from "@heroicons/react/solid";
 import useScrollPosition from "../../../utils/hooks/useScrollPosition";
+import {useDarkMode} from "usehooks-ts";
 
 const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
   const router = useRouter();
   const {user} = useAuth();
   const [showDialog, setShowDialog] = useState(false)
   const scrollPositionY = useScrollPosition();
+  const {isDarkMode} = useDarkMode()
 
   return (
     <>
       <ConfirmLogoutDialog defaultStatus={showDialog} setShowDialog={setShowDialog}/>
       <Box nav classes={`navbar-admin
         ${scrollPositionY > 15 && 'navbar-admin--mod'}
+        ${isDarkMode ? 'backdrop-blur-sm' : 'backdrop-blur-lg'}
         ${minimizeSidebar && 'navbar-admin--resizeWidth'}
       `}>
         <Row wrap='wrap' justify='between' align='center'>
           <Row classes='left-side'>
             <MenuIcon
-              className='btn-icon w-10 h-10 mr-4 text-gray-600'
+              className='btn-icon w-10 h-10 mr-4 text-gray-600 dark:text-gray-custom-507 dark:hover:bg-gray-custom-508
+              dark:hover:text-white
+              '
               onClick={() => setMinimizeSidebar(!minimizeSidebar)}
             />
             <Box classes='search-form'>

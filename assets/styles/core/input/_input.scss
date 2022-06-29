@@ -27,11 +27,14 @@
     py-2 px-4 md:px-5 w-full appearance-none
     text-xs lg:text-sm  rounded-md
     transition duration-200 ease-in-out
-    bg-white border-gray-300 h-[42px] placeholder-gray-500
+    border-gray-300 h-[42px] placeholder-gray-500
+    bg-white
+    dark:bg-gray-custom-898
+    dark:border-0 dark:text-white
   }
 
   label {
-    @apply block text-base text-gray-700;
+    @apply block text-base text-gray-700 dark:text-white;
   }
 }
 

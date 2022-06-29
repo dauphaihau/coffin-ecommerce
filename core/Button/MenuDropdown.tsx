@@ -51,9 +51,9 @@ const MenuDropdownCustom = forwardRef((props: MenuDropdownProps, ref) => {
                     <button
                       onClick={item.feature ? () => item.feature() : () => {
                       }}
-                      className={`${
-                        active ? 'text-gray-700 bg-light-200' : 'text-black'
-                      } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                      className={`menu-items__item group
+                      ${active ? 'text-gray-700 bg-light-200' : 'text-black'}
+                       `}
                     >
                       <div className='text-base ml-2 mr-4'>
                         {item.element}

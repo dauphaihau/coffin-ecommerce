@@ -6,32 +6,38 @@
 
   &-inner {
     @apply overflow-y-auto h-full py-4 px-3 bg-white
-    rounded-2xl ;
+    rounded-2xl;
 
     .body {
       @apply space-y-2;
 
       .item {
-        @apply mx-3 p-[10px] hover:bg-gray-custom-50 animate rounded-lg;
+        //hover:bg-gray-custom-50
+        @apply mx-3 p-[10px]
+        animate rounded-lg
+        hover:bg-gray-custom-50
+        dark:hover:bg-gray-custom-507
+        dark:hover:text-white
+        ;
 
         .infoItem {
           &__icon {
             @apply drop-shadow rounded-lg text-center;
             i {
-              @apply p-2 bg-gray-custom-52 block rounded-lg;
+              @apply p-2 bg-gray-custom-52 block rounded-lg dark:text-black;
             }
           }
 
           &__title {
+
+            //dark:text-gray-custom-500 dark:hover:text-gray-custom-503
             @apply text-sm ml-3 text-gray-custom-501 animate
-            dark:text-gray-custom-500 dark:hover:text-gray-custom-503
+            dark:text-gray-custom-500 dark:hover:text-white
             hover:text-gray-600;
           }
         }
       }
     }
-
-
   }
 
   li > ul {
@@ -55,7 +61,8 @@
 .sidebar-suvLink {
   @apply block px-[6px] mt-4;
   &__icon {
-    @apply text-[6px] mr-[27px] text-gray-custom-501 ml-[0.4rem];
+    @apply text-[6px] mr-[27px] text-gray-custom-501 ml-[0.4rem]
+    ;
   }
 
   &__icon--active {

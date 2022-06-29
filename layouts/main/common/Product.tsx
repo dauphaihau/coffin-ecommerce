@@ -5,6 +5,7 @@ import {useEffect, useRef} from "react";
 import dynamic from "next/dynamic";
 import { Link } from "../../../core/Next";
 import {DENOMINATION} from "../../../utils/enums";
+import {Box} from "../../../core/Layout";
 const HoverEffect = dynamic(() => import('hover-effect'), {ssr: false});
 
 interface ProductProps {
@@ -38,10 +39,10 @@ const Product = (props: ProductProps) => {
   }, [container]);
 
   return (
-    <div className="w-100">
+    <Box classes="w-100">
       <Link href={link}>
-        <div className="h-[11rem] laptop:h-72 flex justify-center items-center rounded-lg bg-light hover:bg-light-200">
-          <div className="flex flex-column justify-center items-center"
+        <Box classes="h-[11rem] laptop:h-72 flex justify-center items-center rounded-lg bg-light hover:bg-light-200">
+          <Box classes="flex flex-column justify-center items-center"
             // ref={container}
           >
             {
@@ -56,16 +57,16 @@ const Product = (props: ProductProps) => {
             }
 
             {/*<img alt={title} src={imageSrc} className="w-3/5"/>*/}
-            <div className='my-div'></div>
-          </div>
-        </div>
+            <Box classes='my-div'></Box>
+          </Box>
+        </Box>
       </Link>
-      <div>
+      <Box>
         <p className="m-4 text-center text-sm laptop:text-base font-semibold mb-1">{title}</p>
         <p
           className="text-sm laptop:text-lg text-center text-gray-700 mb-4">{`${DENOMINATION}${price.toLocaleString()}`}</p>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 export default Product

@@ -3,6 +3,7 @@ import FirstStepCheckout from "./FirstStepCheckout";
 import SecondStepCheckout from "./SecondStepCheckout";
 import ThirdStepCheckout from "./ThirdStepCheckout";
 import Stepper from "../../../../../core/Navigation/Stepper";
+import {Box} from "../../../../../core/Layout";
 
 const Index = ({context}) => {
   const {step} = context
@@ -33,7 +34,8 @@ const Index = ({context}) => {
       setCurrentStep(currentStepContent[0]);
     };
     handleStepClick(step)
-    return () => {}
+    return () => {
+    }
   }, [step])
 
   return (
@@ -41,9 +43,7 @@ const Index = ({context}) => {
       <Stepper>
         <Stepper.StepLabels labels={stepsContent} step={step}/>
       </Stepper>
-      <div>
-        {currentStep.content().type(context)}
-      </div>
+      <Box>{currentStep.content().type(context)}</Box>
     </>
   );
 }

@@ -24,7 +24,7 @@ function CustomerNav() {
           {
             user?.numberAllOfItemsInCart > Number(0) && (
               <Box classes='absolute inset-0 left-4 bg-black w-[60%] rounded-2xl h-5 text-[13px]'>
-                <Text span color='white' className='text-[10px]'>{user.numberAllOfItemsInCart}</Text>
+                <Text span color='white' classes='text-[10px]'>{user.numberAllOfItemsInCart}</Text>
               </Box>
             )
           }

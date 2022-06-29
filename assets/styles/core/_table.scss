@@ -1,9 +1,14 @@
 .table-container {
   @apply min-w-full w-[5px]
   rounded-lg p-4 laptop:drop-shadow-xl
-  rounded-[19px] bg-white dark:bg-black
+  rounded-[19px]
+  bg-white
+  dark:bg-gray-custom-901
 
-  border-gray-custom-500 border-[0.4px] laptop:border-gray-custom-50;
+  border-gray-custom-500 border-[0.4px]
+  dark:border-0
+
+  laptop:border-gray-custom-50;
 }
 
 .table-wrapper {
@@ -13,13 +18,16 @@
     @apply min-w-full ;
 
     thead {
-      @apply sticky top-0;
+      //@apply sticky top-0;
+      @apply top-0;
       th {
         @apply
         bg-gray-custom-50 dark:border-gray-custom-901
         py-3 px-6 text-xs font-medium tracking-wider
         hover:bg-gray-custom-hover animate cursor-pointer
-        text-gray-700 uppercase dark:text-gray-400;
+        text-gray-700 uppercase
+        dark:bg-gray-custom-901
+        dark:text-gray-custom-906;
       }
 
       th:first-child {
@@ -36,11 +44,11 @@
       lg:overflow-x-visible;
 
       tr {
-        @apply bg-white dark:bg-black ;
+        @apply bg-white dark:bg-gray-custom-901 ;
+        //@apply bg-white dark:bg-black ;
         //@apply bg-white dark:bg-black hover:bg-gray-custom-50 hover:rounded-2xl;
         td {
           @apply py-4 px-6 text-sm text-gray-900
-
           whitespace-nowrap dark:text-white;
         }
       }

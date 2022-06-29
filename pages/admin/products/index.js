@@ -1,6 +1,7 @@
 import {useRouter} from 'next/router';
 import {toast} from 'react-hot-toast';
 import {useCallback, useEffect, useState} from 'react';
+// import * as XLSX from 'xlsx';
 
 import {productService} from '@services/products';
 import {formatPrice} from '@utils/helpers';
@@ -23,6 +24,10 @@ import {
 } from '../../../assets/data/options';
 import {Input, InputExcelFile, Select} from '../../../core/Input';
 import {uiControllerActionsType} from '../../../store/reducers/uiControllerReducer';
+import {ServerIcon} from '@heroicons/react/outline';
+import FiltersDialog from '../../../layouts/admin/template/Dialog/Filters';
+import CustomizeColumn from '../../../layouts/admin/template/Dialog/CustomizeColumn';
+import CustomizeColumnDialog from '../../../layouts/admin/template/Dialog/CustomizeColumn';
 
 
 const dataBreadcrumb = [
@@ -49,6 +54,8 @@ const ProductList = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [showDialog, setShowDialog] = useState(false)
+  const [showFilterDialog, setShowFilterDialog] = useState(false)
+  const [showColumnDialog, setShowColumnDialog] = useState(false)
   const [idUser, setIdUser] = useState()
   const [deleteType, setDeleteType] = useState('single')
   const [optCheckbox, setOptCheckbox] = useState([])
@@ -157,54 +164,44 @@ const ProductList = () => {
     // setParams({...params, skip: values.skip, limit: values.limit})
   }
 
-  const handleImportExcelFile = (values) => {
-    console.log('values', values)
+  const handleImportExportExcelFile = (values) => {
+    // console.log('values', values)
+    // const worksheet = XLSX.utils.json_to_sheet(data);
+    // const workbook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    // //let buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    // //XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+    // XLSX.writeFile(workbook, 'DataSheet.xlsx');
   }
 
   console.log('params', params)
 
   return (
     <>
-      <ConfirmDeleteDialog defaultStatus={showDialog} setShowDialog={setShowDialog} handleRequest={handleRequest}/>
+      <ConfirmDeleteDialog defaultStatus={showDialog} setDialogStatus={setShowDialog} handleRequest={handleRequest}/>
+      <FiltersDialog defaultStatus={showFilterDialog} setDialogStatus={setShowFilterDialog}/>
+      <CustomizeColumnDialog
+        defaultStatus={showColumnDialog}
+        setDialogStatus={setShowColumnDialog}
+        columns={columns}
+      />
       {/*<Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>*/}
       <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
-        {/*<Grid sx={2} gapx={4}>*/}
-        {/*  <Controller*/}
-        {/*    control={control}*/}
-        {/*    name='searchBy'*/}
-        {/*    render={({field: {onChange, onBlur, value, ref}}) => (*/}
-        {/*      <Select*/}
-        {/*        size='medium'*/}
-        {/*        label='Search by'*/}
-        {/*        options={searchByOptsProducts}*/}
-        {/*        onChange={onChange}*/}
-        {/*      />*/}
-        {/*    )}*/}
-        {/*  />*/}
-        {/*  <Input*/}
-        {/*    label='Text search' name='searchValue'*/}
-        {/*    register={register} errors={errors} placeholder='712834657911'*/}
-        {/*    classesSpace='mb-0'*/}
-        {/*  />*/}
-        {/*</Grid>*/}
         <Row gap={4}>
-          <Button classes='ml-auto' disabled icon={
-            <svg xmlns='http://www.w3.org/2000/svg' className='h-4 w-4 inline' fill='none' viewBox='0 0 24 24'
-                 stroke='currentColor' strokeWidth={2}>
-              <path strokeLinecap='round' strokeLinejoin='round'
-                    d='M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z'/>
-            </svg>
-          }> Column</Button>
-          <Button classes='ml-auto' disabled icon={<i className='fa-solid fa-sliders '/>}> Filter</Button>
+          <Button classes='ml-auto' onClick={() => setShowColumnDialog(true)}
+                  icon={<ServerIcon className='h-4 w-4 inline'/>}> Column</Button>
+          <Button classes='ml-auto' onClick={() => setShowFilterDialog(true)}
+                  icon={<Text i classes='fa-solid fa-sliders '/>}> Filter</Button>
           <MenuDropdown
-            trigger={<Button classes='ml-auto'> Import/Export</Button>}
+            trigger={<Button classes='ml-auto' disabled> Import/Export</Button>}
             options={[
               {label: 'Import', element: <i className='fa-solid fa-upload'/>},
               {
                 label: 'Export',
                 element: <i className='fa-solid fa-download'/>,
-                feature: () => <InputExcelFile onChange={handleImportExcelFile}/>
+                feature: () => handleImportExportExcelFile()
+                // feature: () => <InputExcelFile onChange={handleImportExcelFile}/>
               },
             ]}
           />

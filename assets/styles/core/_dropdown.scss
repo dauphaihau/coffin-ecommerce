@@ -18,8 +18,16 @@
   .menu-items {
     @apply focus:outline-none absolute z-30
     right-0 mt-2 w-36 origin-top-right divide-y
-    divide-gray-100 rounded-md bg-white dark:bg-gray-custom-900
+    divide-gray-100 rounded-md bg-white
+    dark:bg-gray-custom-901
     shadow-lg ring-1 ring-black ring-opacity-5;
+
+    &__item {
+      @apply  flex w-full items-center rounded-md p-2 animate-2 text-sm
+      dark:text-gray-custom-500
+      dark:hover:text-white dark:hover:bg-gray-custom-504
+      ;
+    }
   }
 }
 

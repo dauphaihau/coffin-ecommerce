@@ -10,11 +10,11 @@ const Paper = (props: Paper) => {
   const {children, noPadding, classes} = props;
   return (
     <div className={`
-    bg-white rounded-lg shadow-lg
+    bg-white dark:bg-gray-custom-901 rounded-lg shadow-lg
     ${noPadding ? '' : 'p-6'}
     ${classes}
     `}>
-     {children}
+      {children}
     </div>
   );
 }

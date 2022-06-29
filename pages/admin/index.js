@@ -80,7 +80,7 @@ const Dashboard = () => {
     <Helmet title='General Statistics' dataBreadcrumb={dataBreadcrumb}>
       <Grid sx={3} lg={3} gap={4}>
         {data.map((e, id) => (
-          <Box key={id} classes="w-full bg-white p-4 flex-col justify-between items-center rounded-xl shadow-xl">
+          <Box key={id} classes="w-full bg-white dark:bg-gray-custom-901 p-4 flex-col justify-between items-center rounded-xl shadow-xl">
             {/*<Col key={id} justify='between' align='center' classes='w-full bg-white p-4 rounded-xl shadow-xl'>*/}
             <Box classes='h-full'>
               <Row justify='between'>

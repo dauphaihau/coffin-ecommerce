@@ -1,4 +1,4 @@
-import {Divider, Paper, Text} from '../../../core';
+import {Divider, Image, Paper, Text} from '../../../core';
 import {useRouter} from 'next/router';
 import {useEffect, useState} from 'react';
 import {MENU} from '../../../utils/menu';
@@ -6,6 +6,7 @@ import {Box, List, Row} from '../../../core/Layout';
 import {isDarkMode, isNil} from '../../../utils/helpers';
 import {Transition} from '@headlessui/react'
 import {Link} from '../../../core/Next';
+import {useDarkMode} from "usehooks-ts";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
   // const router = useRouter();
@@ -65,7 +66,7 @@ const Menu = ({link, handleActive, minimizeSidebar, isHovered}) => {
         <Row justify='between' align='center' classes='w-full'>
           <Row align='center'>
             <Box classes='drop-shadow rounded-lg'>
-              <Text i classes={`${link.icon}  p-2 bg-gray-custom-52 rounded-lg`}/>
+              <Text i classes={`${link.icon} dark:text-black p-2 bg-gray-custom-52 rounded-lg`}/>
             </Box>
 
             {
@@ -73,7 +74,7 @@ const Menu = ({link, handleActive, minimizeSidebar, isHovered}) => {
               <Text
                 span classes={
                 `text-sm ml-3 text-gray-custom-501 transition-all duration-300 ease-in-out hover:text-gray-600
-               ${handleActive(link) && '!text-gray-600'} 
+               ${handleActive(link) && 'dark:text-white'} 
                      `}
               >{link.title}</Text>
             }
@@ -114,6 +115,7 @@ const AdminSidebar = ({minimizeSidebar, isHovered, hoverRef}) => {
   const router = useRouter();
   // const [subLinks, setSubLinks] = useState()
   const handleActive = (link) => router.pathname === link.href
+  const {isDarkMode} = useDarkMode()
 
   return (
     <Box
@@ -126,11 +128,12 @@ const AdminSidebar = ({minimizeSidebar, isHovered, hoverRef}) => {
       <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901 rounded-2xl'>
         <Row justify='center' classes='header'>
           <Link href='/'>
-            <img
-              src='/images/logo.png'
-              // src={`/images/logo${isDarkMode() ? '-dark' : ''}.png`}
+            <Image normalTag
+              // src='/images/logo.png'
+              src={isDarkMode ? '/images/logo-dark.png': '/images/logo.png'}
+              // src={`/images/logo${isDarkMode ? '-dark' : ''}.png`}
               alt='logo'
-              className={`ipad:h-[55px] ${minimizeSidebar && 'ipad:h-[40px]'} ${isHovered ? '!ipad:h-[55px]' : ''} `}
+              classes={`ipad:h-[55px] ${minimizeSidebar && 'ipad:h-[40px]'} ${isHovered ? '!ipad:h-[55px]' : ''} `}
             />
           </Link>
         </Row>

@@ -6,7 +6,7 @@ import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import {useState} from "react";
-import {Col, Row} from "../../core/Layout";
+import {Box, Col, Row} from "../../core/Layout";
 import {useUIController} from "../../context/UIControllerContext";
 
 const formType = {
@@ -27,7 +27,6 @@ const formType = {
 }
 
 const ForgotPassword = () => {
-
   // @ts-ignore
   const {dispatch} = useUIController();
   const [isBtnLoading, setIsBtnLoading] = useState(false)
@@ -47,7 +46,6 @@ const ForgotPassword = () => {
     setEmail(email)
     const {isLoading, status} = await accountService.forgotPassword({email})
     setIsBtnLoading(isLoading)
-    console.log('status', status)
     if (Number(status) === 401) {
       setError('email', {
         type: 'server',
@@ -59,16 +57,14 @@ const ForgotPassword = () => {
   }
 
   return (
-    <form
+    <Box form
       onSubmit={handleSubmit(onSubmit)}
-      className="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8 mx-auto max-w-md"
+      classes="px-6 pb-4 space-y-6 pt-4 lg:px-8 pb-6 xl:pb-8 mx-auto max-w-md"
     >
       <Text noDarkMode h1 sx='xl' weight='medium' color='gray-900'>
         {formType[currentForm].title}
       </Text>
-      <Text>
-        {formType[currentForm].message(email)}
-      </Text>
+      <Text>{formType[currentForm].message(email)}</Text>
       <Col classes={currentForm === 'emailSent' ? 'hidden' : 'block'}>
         <Input
           name='email'
@@ -79,12 +75,12 @@ const ForgotPassword = () => {
         />
         <Button
           type="submit" width='full'
-           size='lg'
+          size='lg'
           isLoading={isBtnLoading}>
           {formType[currentForm].textButton}
         </Button>
       </Col>
-      <Link href='/pages' classes={currentForm === 'forgotPassword' ? 'hidden' : 'block'}>
+      <Link href='/' classes={currentForm === 'forgotPassword' ? 'hidden' : 'block'}>
         <Button
           type="submit" width='full'
           classes='mt-5' size='lg'
@@ -104,7 +100,7 @@ const ForgotPassword = () => {
           {formType[currentForm].linkTextFooter}
         </Text>
       </Row>
-    </form>
+    </Box>
   );
 }
 

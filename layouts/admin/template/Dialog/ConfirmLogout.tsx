@@ -29,6 +29,7 @@ const ConfirmLogoutDialog = (props) => {
   return (
     <Dialog
       classes='w-[400px]'
+      closeDialog={() => setShowDialog(false)}
       isOpen={defaultStatus}>
       <Dialog.Title title='Close this app?'/>
       <Dialog.Content>

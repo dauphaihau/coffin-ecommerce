@@ -1,12 +1,14 @@
 import axios from "axios";
-import {getHeaders} from "../utils/helpers";
+import {getHeaders, omitFieldNullish} from "../utils/helpers";
 
 export const productService = {
   getAll: async (params) => {
+    // console.log('params', params)
+    // console.log('omit-field-nullish-params-', omitFieldNullish(params))
     try {
       const res = await axios.get("/api/admin/products", {
-        ...getHeaders(),
-        params,
+        // ...getHeaders(), params,
+        ...getHeaders(), params: omitFieldNullish(params),
       })
       return {data: res.data, isLoading: false, isSuccess: true};
     } catch ({response}) {

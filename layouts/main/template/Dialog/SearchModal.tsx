@@ -29,6 +29,7 @@ const SearchModal = () => {
   }, [openSearchModal])
 
   const searchItems = (searchValue) => {
+    console.log('search-value', searchValue)
     setSearchInput(searchValue);
     if (searchInput !== "") {
       const filteredData = inventory.filter((item) => {
@@ -53,17 +54,24 @@ const SearchModal = () => {
       <Input
         name='search'
         ref={inputRef}
-        defaultValue=''
-        onChange={(e) => searchItems(e.target.value)}
-        classes='!pl-[3.5rem] h-[60px] '
+        // defaultValue=''
+        // onChange={(n, v) => console.log('abc')}
+        onChange={(n, v) => searchItems(v)}
+        classes='!pl-[3rem] h-[60px] '
+        clearable
+        clas
+
+        contentLeft={
+            <i className="fa-solid fa-magnifying-glass text-xl"/>
+        }
       />
-      <div className="absolute top-[11px] left-[18px]">
-        <i className="fa-solid fa-magnifying-glass text-xl"/>
-      </div>
-      <div className="absolute top-[12px] right-[14px] text-gray-500 hover:text-black cursor-pointer"
-           onClick={() => setFilteredResults([])}>
-        <i className='fa-solid fa-x text-base mr-3 '/>
-      </div>
+      {/*<div className="absolute top-[11px] left-[18px]">*/}
+      {/*  <i className="fa-solid fa-magnifying-glass text-xl"/>*/}
+      {/*</div>*/}
+      {/*<div className="absolute top-[12px] right-[14px] text-gray-500 hover:text-black cursor-pointer"*/}
+      {/*     onClick={() => setFilteredResults([])}>*/}
+      {/*  <i className='fa-solid fa-x text-base mr-3 '/>*/}
+      {/*</div>*/}
       {
         filteredResults.length !== 0 &&
         <Col classes="h-auto

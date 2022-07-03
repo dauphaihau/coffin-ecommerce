@@ -1,40 +1,38 @@
 .form-input {
-  @apply relative;
-
   @apply mb-4 w-full;
+  .input {
+    @apply relative w-full;
 
-  &__contentLeft {
-    @apply absolute inset-y-0 left-[12px] flex items-center text-gray-600;
-  }
-
-  &__contentRight {
-    @apply absolute inset-y-0 right-[12px] flex items-center text-gray-600;
-
-    .clear-icon {
-      @apply h-6 w-6 animate text-gray-custom-500
-      hover:text-gray-custom-900 dark:text-gray-custom-900
-      dark:hover:text-white;
+    &__contentLeft {
+      @apply absolute inset-y-0 left-[12px] flex items-center text-gray-600;
     }
-  }
 
+    &__contentRight {
+      @apply absolute inset-y-0 right-[12px] flex items-center text-gray-600;
 
+      .clear-icon {
+        @apply h-6 w-6 animate text-gray-custom-500
+        hover:text-gray-custom-900 dark:text-gray-custom-900
+        dark:hover:text-white;
+      }
+    }
 
-  input {
-    @apply border border-gray-300 text-gray-900 text-sm rounded-lg
+    label {
+      @apply text-base text-gray-700 dark:text-white;
+    }
+
+    input {
+      @apply border border-gray-300 text-gray-900 text-sm rounded-lg
       hover:border-black
-    focus:ring-black focus:border focus:border-black focus:outline-none
-    w-full p-2.5
-    py-2 px-4 md:px-5 w-full appearance-none
-    text-xs lg:text-sm  rounded-md
-    transition duration-200 ease-in-out
-    border-gray-300 h-[42px] placeholder-gray-500
-    bg-white
-    dark:bg-gray-custom-898
-    dark:border-0 dark:text-white
-  }
-
-  label {
-    @apply block text-base text-gray-700 dark:text-white;
+      focus:ring-black focus:border focus:border-black focus:outline-none
+      w-full appearance-none
+      text-xs lg:text-sm rounded-md
+      transition duration-200 ease-in-out
+      border-gray-300 h-[42px] placeholder-gray-500
+      bg-white
+      dark:bg-gray-custom-898
+      dark:border-0 dark:text-white
+    }
   }
 }
 

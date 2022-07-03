@@ -24,7 +24,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   classes?: string,
   classesSpace?: string,
   register?: (name: string) => void,
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (name, value) => void;
+  // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   clearable?: boolean,
   defaultValue?: string,
   errors?: FieldErrors,
@@ -54,7 +55,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     useEffect(() => setValue(defaultValue), [defaultValue]);
 
-    const handleChange = (e) => {
+    const handleOnChange = (e) => {
       try {
         const val = e.target.value;
         const n = e.target.name;
@@ -66,23 +67,25 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <>
-        <div className={`form-input group ${classesSpace}`}>
-          {label && <label htmlFor={name}>{label}</label>}
+      <div className='form-input'>
+        {label && <label htmlFor={name}>{label}</label>}
+        <div className={`input group ${classesSpace}`}>
           {
-            <Text span classes={`form-input__contentLeft ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+            <Text span classes={`input__contentLeft`}>
+              {/*<Text span classes={`input__contentLeft ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>*/}
               {contentLeft}
             </Text> ?? ''
           }
           {clearable && value?.length > 0 ?
             <button
               type='button' onClick={() => {
-            }} className={`form-input__contentRight animate ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+            }} className={`input__contentRight animate ${isEmpty(errors) ? '' : 'top-[-5px]'} `}>
+              {/*}} className={`input__contentRight animate ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>*/}
               <XCircleIcon className='clear-icon' onClick={() => setValue('')}/>
             </button> : ''
           }
           {
-            <Text span classes={`form-input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+            <Text span classes={`input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
               {contentRight}
             </Text> ?? ''
           }
@@ -94,25 +97,28 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             type={type}
             value={value}
             name={name}
-            // onChange={onChange}
+            onChange={handleOnChange}
             {...register(name, {
-              onChange: (e) => handleChange(e),
+              onChange: (e) => handleOnChange(e),
               onBlur: (e) => {
               },
             })}
-            className={`peer p-4 
-            ${className}
-            ${classes}
-           ${contentLeft && '!pl-7'}
+            // ${className}
+            className={`peer  py-2.5 pr-2.5
+            md:pr-5 
+           ${contentLeft ? 'md:pl-8' : 'md:px-5'}
+           ${classes}
           `}
+            // ${contentLeft && '!pl-7'}
             placeholder={placeholder}
             {...others}
           />
-          {errors && <Text color='red-500' classes="text-[0.9rem] mt-2">{errors[name]?.message}</Text>}
         </div>
-      </>
+        {errors && <Text color='red-500' classes="text-[0.9rem]">{errors[name]?.message}</Text>}
+      </div>
     );
-  })
+  }
+)
 
 const Password = (props) => {
   const {
@@ -120,7 +126,7 @@ const Password = (props) => {
     label, name = '',
     register = () => {
     },
-    onChange = () => {
+    onChange = (name, value) => {
     },
     errors, clearable,
     className, classes, placeholder,
@@ -133,7 +139,7 @@ const Password = (props) => {
   const [typeInput, setTypeInput] = useState(type)
 
   const [value, setValue] = useState<string | null>('')
-  const handleChange = (e) => {
+  const handleOnChange = (e) => {
     try {
       const val = e.target.value;
       const n = e.target.name;
@@ -145,11 +151,11 @@ const Password = (props) => {
   };
 
   return (
-    <>
-      <div className={`form-input group ${classesSpace}`}>
+    <div className='form-input'>
+      <div className={`input group ${classesSpace}`}>
         {label && <label htmlFor={name}>{label}</label>}
         {
-          <Text span classes={`form-input__contentLeft ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+          <Text span classes={`input__contentLeft ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
             {contentLeft}
           </Text> ?? ''
         }
@@ -157,12 +163,12 @@ const Password = (props) => {
           <button
             type='button' onClick={() => {
           }}
-            className={`form-input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+            className={`input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
             <XCircleIcon className='clear-icon' onClick={() => setValue('')}/>
           </button> : ''
         }
         {
-          <Text span classes={`form-input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
+          <Text span classes={`input__contentRight ${isEmpty(errors) ? 'top-[18px]' : 'top-[-5px]'} `}>
             {
               typeInput === 'password' ? (
                 <EyeIcon onClick={() => setTypeInput('text')}
@@ -180,9 +186,9 @@ const Password = (props) => {
           type={typeInput}
           value={value}
           name={name}
-          onChange={onChange}
+          onChange={handleOnChange}
           {...register(name, {
-            onChange: (e) => handleChange(e),
+            onChange: (e) => handleOnChange(e),
             onBlur: (e) => {
             },
           })}
@@ -194,7 +200,7 @@ const Password = (props) => {
         />
         {errors && <Text color='red-500' classes="text-[0.9rem] mt-2">{errors[name]?.message}</Text>}
       </div>
-    </>
+    </div>
   );
 }
 

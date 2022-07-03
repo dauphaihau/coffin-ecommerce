@@ -8,12 +8,16 @@ import {XIcon} from '@heroicons/react/solid';
 import bg from '../../../../public/images/newsletter-bg.png';
 import Image from "../../../../core/Next/Image";
 import {Input} from "../../../../core/Input";
+import {useRouter} from "next/router";
 
 const SubscribeDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => setIsOpen(true), 5000)
+    if (router.pathname === '/') {
+      setTimeout(() => setIsOpen(true), 5000)
+    }
   }, [])
 
   return (
@@ -36,18 +40,13 @@ const SubscribeDialog = () => {
             <Image
               normalTag
               classes='h-[19rem] w-full rounded-lg'
-              // classes='h-auto w-full rounded-lg'
               src='/images/noah.jpg'
             />
             <Col classes='text-center' self='center'>
               <Text h1 weight='bold' sx='lg' classes='mx-auto text-[22px]'>Subscribe Newsletter</Text>
-              <Text sx='sm' weight='light' classes='my-3'>Subscribe the Drop store to get in touch and get the
-                future update. </Text>
+              <Text sx='sm' weight='light' classes='my-3'>Subscribe the Drop store to get in touch and get the future update. </Text>
               <Input name='email' type='email' placeholder='Email Address'/>
-              <Button
-                type="submit" width='full'
-                size='lg'
-              >
+              <Button type="submit" width='full' size='lg'>
                 SUBSCRIBE
               </Button>
             </Col>

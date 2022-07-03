@@ -103,6 +103,12 @@ const isDateString = (value) => {
   return value.match(/^\d{2}-\d{2}-\d{4}$/)
 }
 
+
+const omitFieldNullish = (obj) => {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, value]) => value != null && value !== ''))
+}
+
 const convertDateString = (value) => {
   return value.substr(6, 4) + value.substr(3, 2) + value.substr(0, 2)
 }
@@ -205,5 +211,6 @@ export {
   filterRows,
   isNil,
   isEmpty,
-  isDarkMode
+  isDarkMode,
+  omitFieldNullish,
 }

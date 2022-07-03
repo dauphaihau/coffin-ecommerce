@@ -13,7 +13,7 @@ const TableRow = (props) => {
   const inputRef = useRef(null);
   const [checked, setChecked] = useState(false)
 
-  const handleChange = (selected) => {
+  const handleOnChange = (selected) => {
     const status = selected.target.checked
     const idSelected = selected.target.value
 
@@ -48,7 +48,7 @@ const TableRow = (props) => {
                             ref={inputRef}
                             name={row._id}
                             defaultChecked={rowsChecked.includes(row._id)}
-                            onChange={handleChange} value={row._id}/>
+                            onChange={handleOnChange} value={row._id}/>
                         </td>
                       )
                     }

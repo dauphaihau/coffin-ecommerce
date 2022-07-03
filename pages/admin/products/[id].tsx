@@ -9,9 +9,13 @@ import {Grid} from "@core/Layout";
 import {Button} from "@core/Button";
 import {Select, Checkbox, Textarea, Input} from "@core/Input"
 import {productService} from "@services/products";
-import {brandOpts, categoryOpts, colorOpts} from "@assets/data/options";
 import {Autocomplete, ImageInput, Switch, TextEditor} from "../../../core/Input";
-import {TagOpts} from "../../../assets/data/options";
+import {
+  productBrandOptions,
+  productCategoriesOptions,
+  productColorOptions,
+  productTagsOptions
+} from "../../../assets/data/options";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
 import {Link, Paper} from "../../../core";
 import {Box, Col, Row} from "../../../core/Layout";
@@ -144,7 +148,7 @@ const ProductEdit = () => {
                       size='medium'
                       label='Category *'
                       value={value}
-                      options={categoryOpts}
+                      options={productCategoriesOptions}
                       onChange={onChange}
                     />
                   )}
@@ -157,7 +161,7 @@ const ProductEdit = () => {
                       size='medium'
                       title='Brand *'
                       value={value}
-                      options={brandOpts}
+                      options={productBrandOptions}
                       onChange={onChange}
                     />
                   )}
@@ -170,7 +174,7 @@ const ProductEdit = () => {
                       size='medium'
                       title='Color *'
                       value={value}
-                      options={colorOpts}
+                      options={productColorOptions}
                       onChange={onChange}
                     />
                   )}
@@ -190,7 +194,7 @@ const ProductEdit = () => {
                       name='tag'
                       label='Tags'
                       onChange={onChange}
-                      options={TagOpts}/>
+                      options={productTagsOptions}/>
                   )}
                 />
               </Grid>
@@ -199,13 +203,15 @@ const ProductEdit = () => {
               <Grid md={1} lg={2} gapx={4}>
                 <Input
                   label='Price *' name='price'
-                  register={register} errors={errors}
+                  register={register}
+                  errors={errors}
                   placeholder='00.00'
                   contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
                 <Input
                   label='Sale Price' name='salePrice'
-                  register={register} errors={errors}
+                  register={register}
+                  errors={errors}
                   placeholder='00.00'
                   contentLeft={<i className="fa-solid fa-dollar-sign"/>}
                 />
@@ -219,7 +225,7 @@ const ProductEdit = () => {
             </Paper>
           </Col>
           <Row classes='mt-4'>
-            <Link href='/admin/users'>
+            <Link href='/admin/products'>
               <Button light shadow type='button'>Back</Button>
             </Link>
             <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Save Changes</Button>

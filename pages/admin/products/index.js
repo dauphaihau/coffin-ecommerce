@@ -49,50 +49,10 @@ const handleQuantity = (quantity) => {
 
 const rowsPerPage = [5, 15, 25]
 
-const ProductList = () => {
+
+const getColumnsDefault = ({setIdUser, setShowDialog}) => {
   const router = useRouter();
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [showDialog, setShowDialog] = useState(false)
-  const [showFilterDialog, setShowFilterDialog] = useState(false)
-  const [showColumnDialog, setShowColumnDialog] = useState(false)
-  const [idUser, setIdUser] = useState()
-  const [deleteType, setDeleteType] = useState('single')
-  const [optCheckbox, setOptCheckbox] = useState([])
-  const [resetCheckbox, setResetCheckbox] = useState(false)
-  const [params, setParams] = useState({
-    skip: 0, limit: rowsPerPage[0]
-  })
-
-  const {progress, setProgress} = useUIController();
-
-  const formOptions = {
-    defaultValues: {
-      orderBy: orderByOpts[0],
-      searchBy: searchByOptsProducts[0],
-    }
-  };
-  const {register, handleSubmit, control, formState} = useForm(formOptions);
-  const {errors} = formState;
-
-  const getAllProducts = useCallback(
-    async () => {
-      setProgress(progress + 30)
-      console.log('params', params)
-      const {isSuccess, data} = await productService.getAll(params);
-      if (isSuccess) {
-        setProgress(100)
-        setProducts(data)
-        setLoading(false)
-      }
-    }, [params]
-  )
-
-  useEffect(() => {
-    getAllProducts();
-  }, [getAllProducts])
-
-  const columns = [
+  return [
     {
       id: 'name', title: 'Product',
       render: (row) => (
@@ -138,7 +98,54 @@ const ProductList = () => {
         />
       )
     },
-  ];
+  ]
+};
+
+
+const ProductList = () => {
+  const router = useRouter();
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [showDialog, setShowDialog] = useState(false)
+  const [showFilterDialog, setShowFilterDialog] = useState(false)
+  const [showColumnDialog, setShowColumnDialog] = useState(false)
+  const [idUser, setIdUser] = useState()
+  const [deleteType, setDeleteType] = useState('single')
+  const [optCheckbox, setOptCheckbox] = useState([])
+  const [resetCheckbox, setResetCheckbox] = useState(false)
+  const [columns, setColumns] = useState(getColumnsDefault(setIdUser, setShowDialog))
+  const [params, setParams] = useState({
+    skip: 0, limit: rowsPerPage[0],
+    searchBy: ''
+  })
+
+  const {progress, setProgress} = useUIController();
+
+  const formOptions = {
+    defaultValues: {
+      orderBy: orderByOpts[0],
+      searchBy: searchByOptsProducts[0],
+    }
+  };
+  const {register, handleSubmit, control, formState} = useForm(formOptions);
+  const {errors} = formState;
+
+  const getAllProducts = useCallback(
+    async () => {
+      setProgress(progress + 30)
+      console.log('params', params)
+      const {isSuccess, data} = await productService.getAll(params);
+      if (isSuccess) {
+        setProgress(100)
+        setProducts(data)
+        setLoading(false)
+      }
+    }, [params]
+  )
+
+  useEffect(() => {
+    getAllProducts();
+  }, [getAllProducts])
 
   async function handleDeleteMultiItems(optionsChecked) {
     setOptCheckbox(optionsChecked)
@@ -160,6 +167,7 @@ const ProductList = () => {
   }
 
   const handleOnChangeTable = ({skip, limit}) => {
+    console.log('skip-li', skip, limit)
     setParams({skip, limit})
     // setParams({...params, skip: values.skip, limit: values.limit})
   }
@@ -173,17 +181,35 @@ const ProductList = () => {
     // //XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
     // XLSX.writeFile(workbook, 'DataSheet.xlsx');
   }
+  
+  const handleFilters = (value) => {
+    const {searchBy, searchValue} = value;
+    // console.log('value', value)
+    setParams({...params, searchBy, searchValue})
+    // setParams({...params, searchBy, searchValue})
+    // console.log('params', params)
+  }
+  
+  
 
-  console.log('params', params)
+  // console.log('columns', columns)
 
   return (
     <>
       <ConfirmDeleteDialog defaultStatus={showDialog} setDialogStatus={setShowDialog} handleRequest={handleRequest}/>
-      <FiltersDialog defaultStatus={showFilterDialog} setDialogStatus={setShowFilterDialog}/>
+      <FiltersDialog
+        defaultStatus={showFilterDialog} 
+        setDialogStatus={setShowFilterDialog}
+        onChangeFilter={handleFilters}
+      />
       <CustomizeColumnDialog
+        onSave={(newUpdate) => setColumns(newUpdate)}
         defaultStatus={showColumnDialog}
         setDialogStatus={setShowColumnDialog}
+        columnsDefault={getColumnsDefault(setIdUser, setShowDialog)}
         columns={columns}
+        // columns={columnsDefault}
+        // columns={columnsDefault.slice(0, -1)}
       />
       {/*<Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>*/}
       <Row justify='between' align='center'>

@@ -112,6 +112,10 @@ const searchByOptsProducts = [
     label: 'Price',
     value: 'price',
   },
+  {
+    label: 'Quantity',
+    value: 'quantity',
+  },
 ];
 
 

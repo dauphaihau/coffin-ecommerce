@@ -5,13 +5,24 @@ import {Text} from "../../../../core";
 
 import {Input, Select} from "../../../../core/Input";
 import {searchByOptsProducts} from "../../../../assets/data/options";
+import {useState} from "react";
 
 const FiltersDialog = (props) => {
-  const {handleRequest, defaultStatus, setDialogStatus} = props;
+  const {onChangeFilter, defaultStatus, setDialogStatus} = props;
+  const [state, setState] = useState({
+    searchBy: '',
+    // searchBy: searchByOptsProducts[0].value,
+    searchValue: '',
+  })
 
-  const handleOnchange = (n, v) => {
-    console.log('n', n)
-    console.log('v', v)
+  const handleOnchange = (name, value) => {
+    console.log('name-value', name, value)
+    setState({...state, [name]: value})
+  }
+
+  const handleSave = () => {
+    onChangeFilter(state)
+    setDialogStatus(false)
   }
 
   return (
@@ -40,21 +51,17 @@ const FiltersDialog = (props) => {
           size='medium'
           label='Search by'
           options={searchByOptsProducts}
-          onChange={(e) => handleOnchange('searchBy', e)}
+          onChange={({value}) => handleOnchange('searchBy', value)}
         />
         <Input
           label='Text search' name='searchValue'
-          placeholder='712834657911'
+          onChange={handleOnchange}
           // classesSpace='mb-0'
         />
         {/*</Grid>*/}
         <Row classes='mt-4' justify='end'>
-          <Button light onClick={() => setDialogStatus(false)}>
-            Cancel
-          </Button>
-          <Button shadow>
-            Apply filters
-          </Button>
+          <Button light onClick={() => setDialogStatus(false)}>Cancel</Button>
+          <Button shadow onClick={() => handleSave()}>Apply filters</Button>
         </Row>
       </Dialog.Content>
     </Dialog>

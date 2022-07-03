@@ -1,6 +1,6 @@
 .navbar-admin {
   @apply fixed border-gray-200 laptop:w-[73.8%] desktop:w-4/5
-  bg-transparent monitor:w-[86.5%] z-30 pb-4;
+  bg-transparent monitor:w-[86.5%] z-30;
 
   &--mod {
     @apply shadow-2xl bg-clip-padding backdrop-filter backdrop-blur-xl

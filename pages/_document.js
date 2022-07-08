@@ -14,7 +14,6 @@ class MyDocument extends Document {
           {/*<Script src="https://cdn.quilljs.com/1.3.6/quill.snow.css"></Script>*/}
           {/*<Script src="https://cdn.quilljs.com/1.3.6/quill.js"></Script>*/}
         </Head>
-
         <body>
         <Main/>
         <NextScript/>

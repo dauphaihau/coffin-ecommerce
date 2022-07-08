@@ -29,7 +29,6 @@ import FiltersDialog from '../../../layouts/admin/template/Dialog/Filters';
 import CustomizeColumn from '../../../layouts/admin/template/Dialog/CustomizeColumn';
 import CustomizeColumnDialog from '../../../layouts/admin/template/Dialog/CustomizeColumn';
 
-
 const dataBreadcrumb = [
   {path: '/admin', name: 'Dashboard', firstLink: true},
   {path: '/admin/products', name: 'Products'},
@@ -49,8 +48,7 @@ const handleQuantity = (quantity) => {
 
 const rowsPerPage = [5, 15, 25]
 
-
-const getColumnsDefault = ({setIdUser, setShowDialog}) => {
+const ColumnsDefault = ({setIdUser, setShowDialog}) => {
   const router = useRouter();
   return [
     {
@@ -101,7 +99,6 @@ const getColumnsDefault = ({setIdUser, setShowDialog}) => {
   ]
 };
 
-
 const ProductList = () => {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -112,7 +109,7 @@ const ProductList = () => {
   const [deleteType, setDeleteType] = useState('single')
   const [optCheckbox, setOptCheckbox] = useState([])
   const [resetCheckbox, setResetCheckbox] = useState(false)
-  const [columns, setColumns] = useState(getColumnsDefault(setIdUser, setShowDialog))
+  const [columns, setColumns] = useState(ColumnsDefault(setIdUser, setShowDialog))
   const [params, setParams] = useState({
     skip: 0, limit: rowsPerPage[0],
     searchBy: '', sort: 'name', by: 'asc'

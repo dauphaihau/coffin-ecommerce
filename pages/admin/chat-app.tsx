@@ -130,7 +130,7 @@ const ChatApp = () => {
                 {
                   dataFake.map((o, index) => {
                     if (o.type === 1) {
-                      return <a
+                      return <a key={index}
                         className='flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none'>
                         <img className='object-cover w-10 h-10 rounded-full'
                              src='/images/default/avatar-default.jpeg'
@@ -150,7 +150,7 @@ const ChatApp = () => {
                       </a>
                     }
                     return (
-                      <a
+                      <a key={index}
                         className={`flex items-center px-3 py-2 text-sm transition
                          duration-150 ease-in-out border-b border-gray-300 
                          cursor-pointer  focus:outline-none

@@ -143,6 +143,7 @@ export default function CustomAutocomplete(props: AutocompleteProps) {
                   onClick={() => {
                     const filtered = arrResult.filter(o => o.value !== tag.value);
                     setArrResult(filtered);
+                    // @ts-ignore
                     onChange(filtered)
                   }}
                 />

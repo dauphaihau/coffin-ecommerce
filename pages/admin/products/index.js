@@ -16,7 +16,7 @@ import ConfirmDeleteDialog from '../../../layouts/admin/template/Dialog/ConfirmD
 import {Text} from '../../../core';
 import {Controller, useForm} from 'react-hook-form';
 import {
-  orderByOpts,
+  sortByOpts,
   productBrandOptions,
   productCategoriesOptions,
   productColorOptions,
@@ -103,7 +103,6 @@ const getColumnsDefault = ({setIdUser, setShowDialog}) => {
 
 
 const ProductList = () => {
-  const router = useRouter();
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [showDialog, setShowDialog] = useState(false)
@@ -116,14 +115,14 @@ const ProductList = () => {
   const [columns, setColumns] = useState(getColumnsDefault(setIdUser, setShowDialog))
   const [params, setParams] = useState({
     skip: 0, limit: rowsPerPage[0],
-    searchBy: ''
+    searchBy: '', sort: 'name', by: 'asc'
   })
 
   const {progress, setProgress} = useUIController();
 
   const formOptions = {
     defaultValues: {
-      orderBy: orderByOpts[0],
+      orderBy: sortByOpts[0],
       searchBy: searchByOptsProducts[0],
     }
   };
@@ -168,7 +167,7 @@ const ProductList = () => {
 
   const handleOnChangeTable = ({skip, limit}) => {
     console.log('skip-li', skip, limit)
-    setParams({skip, limit})
+    setParams({...params, skip, limit})
     // setParams({...params, skip: values.skip, limit: values.limit})
   }
 
@@ -181,7 +180,7 @@ const ProductList = () => {
     // //XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
     // XLSX.writeFile(workbook, 'DataSheet.xlsx');
   }
-  
+
   const handleFilters = (value) => {
     const {searchBy, searchValue} = value;
     // console.log('value', value)
@@ -189,8 +188,6 @@ const ProductList = () => {
     // setParams({...params, searchBy, searchValue})
     // console.log('params', params)
   }
-  
-  
 
   // console.log('columns', columns)
 
@@ -198,7 +195,7 @@ const ProductList = () => {
     <>
       <ConfirmDeleteDialog defaultStatus={showDialog} setDialogStatus={setShowDialog} handleRequest={handleRequest}/>
       <FiltersDialog
-        defaultStatus={showFilterDialog} 
+        defaultStatus={showFilterDialog}
         setDialogStatus={setShowFilterDialog}
         onChangeFilter={handleFilters}
       />

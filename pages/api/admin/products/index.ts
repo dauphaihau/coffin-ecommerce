@@ -8,11 +8,19 @@ const handler = nc();
 handler.use(isAuth, rolesCanView);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
-  const {searchBy, limit, skip, searchValue} = req.query;
+  const {
+    searchBy, limit, skip, searchValue,
+    sort, by
+  } = req.query;
 
   let query = {};
+  let sortQuery = {};
   await db.connect();
   const total = await Product.countDocuments();
+
+  if (by !== '' && sort !== '') {
+    sortQuery[sort] = by
+  }
 
   if (searchValue !== '' && searchBy !== '') {
     console.log('req-query', req.query)
@@ -33,11 +41,14 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     // query['searchBy'] = {$gte: req.query.searchValue}
   }
 
-  console.log('query', query)
+  // console.log('query', query)
+  console.log('query', sortQuery)
   // const products = await Product.find(query).limit(limit).skip(skip);
   // const products = await Product.find({}).limit(limit).skip(skip);
   // const products = await Product.find({name: 'Hau Tran'}).limit(limit).skip(skip);
-  const products = await Product.find(query)
+  const products = await Product
+    .find(query)
+    .sort(sortQuery)
     .limit(Number(limit))
     .skip(Number(skip));
   // const products = await Product.find({quantity: 1111}).limit(limit).skip(skip);
@@ -49,13 +60,6 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   //   // ]
   // }).limit(limit).skip(skip);
 
-  // const products = await Product.find({},
-  //   null,
-  //   {sort: {field: 'descending'}},
-  //   function (err, docs) {
-  //     console.log('err', err)
-  //   }
-  // );
   await db.disconnect();
   res.send({
     list: products,

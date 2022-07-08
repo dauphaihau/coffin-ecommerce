@@ -89,7 +89,7 @@ const rowsPerPageOpts = [
 ]
 
 
-const orderByOpts = [
+const sortByOpts = [
   {
     label: 'Ascend',
     value: 'asc',
@@ -120,7 +120,7 @@ const searchByOptsProducts = [
 
 
 export {
-  orderByOpts, searchByOptsProducts,
+  sortByOpts, searchByOptsProducts,
   productCategoriesOptions, productBrandOptions, productColorOptions,
   productTagsOptions,
   sortOpts, deliveryOpts,

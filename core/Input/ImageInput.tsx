@@ -41,6 +41,7 @@ const ImageInput = ({onFileChange, classesSpace}: propsImageInput) => {
         <Box classes='rounded-lg drop-shadow-md bg-gray-50 w-full'>
           <Box classes='m-4'
                ref={wrapperRef}
+            // @ts-ignore
                onDragEnter={onDragEnter}
                onDragLeave={onDragLeave}
                onDrop={onDrop}

@@ -3,12 +3,12 @@ import {createPortal} from 'react-dom';
 
 function createWrapperAndAppendToBody(wrapperId) {
   const wrapperElement = document.createElement('div');
-  wrapperElement.setAttribute("id", wrapperId);
+  wrapperElement.setAttribute('id', wrapperId);
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 }
 
-function Portal({children, wrapperId = "react-portal-wrapper"}) {
+function Portal({children, wrapperId = 'react-portal-wrapper'}) {
   const [wrapperElement, setWrapperElement] = useState(null);
 
   useLayoutEffect(() => {

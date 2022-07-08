@@ -79,8 +79,9 @@ function Select<Type extends OptionValue>(props: SelectProps<Type>) {
                     className={({active}) =>
                       classNames(
                         active ? 'text-gray-700 bg-light-200 dark:hover:bg-gray-custom-502 dark:text-white' : 'text-black dark:text-white',
-                        'cursor-default select-none relative py-2 pl-3 pr-0'
+                        'cursor-default select-none relative py-2 rounded-lg pl-3 pr-0'
                       )
+                        // 'cursor-default select-none relative py-2 pl-3 pr-0'
                     }
                     value={option}
                   >

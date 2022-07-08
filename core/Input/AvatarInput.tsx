@@ -44,7 +44,10 @@ const AvatarInput = ({name, defaultValue, onFileChange, classesSpace}: AvatarInp
     }
 
     // I've kept this example simple by using the first image instead of multiple
+
+    // @ts-ignore
     setSelectedFile(newFile[0])
+    // @ts-ignore
     onFileChange(name, newFile[0]);
   }
 
@@ -52,6 +55,7 @@ const AvatarInput = ({name, defaultValue, onFileChange, classesSpace}: AvatarInp
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
+    // @ts-ignore
     onFileChange(name, updatedList);
   }
 

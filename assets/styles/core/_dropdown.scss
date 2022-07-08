@@ -23,7 +23,7 @@
     shadow-lg ring-1 ring-black ring-opacity-5;
 
     &__item {
-      @apply  flex w-full items-center rounded-md p-2 animate-2 text-sm
+      @apply flex w-full items-center rounded-md p-2 animate-2 text-sm
       dark:text-gray-custom-500
       dark:hover:text-white dark:hover:bg-gray-custom-504
       ;

@@ -16,8 +16,10 @@
 
   &__options {
     @apply absolute z-30 mt-1 w-full bg-white dark:bg-black dark:text-white shadow-lg max-h-56
-    rounded-md py-1 text-base ring-1 ring-black pr-0
+    rounded-md py-1 text-base ring-1 ring-black
+      p-[4px]
     ring-opacity-5 overflow-auto focus:outline-none text-sm;
   }
+    //rounded-md py-1 text-base ring-1 ring-black pr-0
 }
 

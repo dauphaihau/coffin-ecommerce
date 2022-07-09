@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "@hookform/error-message": "^2.0.0",
@@ -21,7 +23,9 @@
     "crypto-js": "^4.1.1",
     "formidable": "^2.0.1",
     "hover-effect": "^1.1.0",
+    "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
+    "kbar": "^0.1.0-beta.36",
     "moment": "^2.29.2",
     "mongoose": "^6.2.10",
     "mv": "^2.1.1",

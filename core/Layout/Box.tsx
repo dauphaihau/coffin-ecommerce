@@ -18,6 +18,8 @@ interface BoxProps {
   section?: boolean,
   aside?: boolean,
   blockquote?: boolean,
+  onClick?: () => void,
+  onSubmit?: (event) => void,
 }
 
 const Box = forwardRef((props: BoxProps, ref: any) => {

@@ -3,8 +3,6 @@ import {getHeaders, omitFieldNullish} from "../utils/helpers";
 
 export const productService = {
   getAll: async (params) => {
-    // console.log('params', params)
-    // console.log('omit-field-nullish-params-', omitFieldNullish(params))
     try {
       const res = await axios.get("/api/admin/products", {
         // ...getHeaders(), params,
@@ -55,7 +53,6 @@ export const productService = {
         message: response?.data.message,
       };
     }
-
   },
   delete: async (_id) => {
     try {

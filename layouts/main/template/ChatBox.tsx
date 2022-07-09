@@ -126,7 +126,7 @@ const ChatBox = () => {
                     src='/images/bot.png'
                     alt='profile'
                   />
-                  <Text i classes='fa-solid fa-circle bot__statusIcon '/>
+                  <Text i classes='fa-solid animate-ping fa-circle bot__statusIcon '/>
                 </Box>
                 <Box>
                   <Text h1 sx='xl' weight='bold' classes='leading-3 pt-2'>Bot</Text>

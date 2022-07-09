@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Elements} from "@stripe/react-stripe-js";
 import {CartProvider, CartContext} from "../../../../../context/cartContext";
 import {Button, QuantityPicker} from "../../../../../core/Button";
-import {Grid, Stack} from "../../../../../core/Layout";
+import {Grid, Row} from "../../../../../core/Layout";
 import {Link, Text, Tooltip} from "../../../../../core";
 import {Input} from "../../../../../core/Input";
 import {useAuth} from "../../../../../context/authContext";
@@ -111,26 +111,26 @@ const FirstStepCheckout = (props) => {
       <div className='ipad:col-span-2 mt-6 ipad:mt-0'>
         <div className='border border-gray-custom-50 shadow-xl p-6 rounded-xl w-full font-light'>
           <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
-          <Stack classes='py-2'>
+          <Row justify='between' classes='py-2'>
             <Text>Sub Total</Text>
             <Text>{formatPrice(total)}</Text>
-          </Stack>
-          <Stack classes='py-2'>
+          </Row>
+          <Row justify='between' classes='py-2'>
             <Text>Discount</Text>
             <Text>{discounted ? '-11%' : '-'}</Text>
-          </Stack>
-          <Stack classes='py-2'>
+          </Row>
+          <Row justify='between' classes='py-2'>
             <Text>Shipping</Text>
             <Text>Free</Text>
-          </Stack>
-          <Stack classes='py-4 border-t'>
+          </Row>
+          <Row justify='between' classes='py-4 border-t'>
             <Text weight='bold'>Total</Text>
             <div className='text-right font-light'>
               {/*<Text weight='bold'>{formatPrice(discounted)}</Text>*/}
               <Text weight='bold'>{formatPrice(!discounted ? total : discounted)}</Text>
               <Text sx='sm'>(VAT included if applicable)</Text>
             </div>
-          </Stack>
+          </Row>
           <div className='relative'>
             <Input name='discounted' defaultValue='DISCOUNT11' classes='!p-6 font-bold'/>
             {

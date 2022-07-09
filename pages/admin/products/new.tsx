@@ -19,7 +19,7 @@ import {
   productTagsOptions,
 } from "../../../assets/data/options";
 import {Helmet} from "../../../layouts/admin/common/Helmet";
-import {Col, Grid, Row} from "../../../core/Layout";
+import {Box, Col, Grid, Row} from "../../../core/Layout";
 import {Paper} from "../../../core";
 import {Link} from "../../../core/Next";
 
@@ -103,7 +103,7 @@ const NewProduct = () => {
 
   return (
     <Helmet title='Create a new product' dataBreadcrumb={dataBreadcrumb}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Box form onSubmit={handleSubmit(onSubmit)}>
         <Grid md={2} lg={2} gapx={4} classes='pb-4 desktop:max-w-[75%]'>
           <Paper classes='mb-6 laptop:mb-0'>
             <Grid md={1} lg={1} gapx={4}>
@@ -211,7 +211,7 @@ const NewProduct = () => {
             <Button shadow type='submit' width='fit' isLoading={isBtnLoading}>Create</Button>
           </Row>
         </Grid>
-      </form>
+      </Box>
     </Helmet>
   );
 }

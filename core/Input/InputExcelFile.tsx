@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-// import XLSX from 'xlsx'
+import XLSX from 'xlsx'
 import {Box} from '../Layout';
 import {Text} from "../index";
 
@@ -52,46 +52,47 @@ const InputExcelFile = (props) => {
     }
   }
 
-  // const handleFile = (file) => {
-  //   const reader = new FileReader();
-  //   const rABS = !!reader.readAsBinaryString;
-  //   reader.onload = e => {
-  //     /* Parse data */
-  //     const bstr = e.target.result;
-  //     const wb = XLSX.read(bstr, {type: rABS ? "binary" : "array"});
-  //     /* Get first worksheet */
-  //     const wsname = wb.SheetNames[0];
-  //     const ws = wb.Sheets[wsname];
-  //     // console.log(rABS, wb);
-  //     /* Convert array of arrays */
-  //     const data = XLSX.utils.sheet_to_json(ws, {header: 1});
-  //     const firstItem = Helper.cloneNewModel(data[0])
-  //     data.shift()
-  //     const parseData = data.map(item => {
-  //       let obj = {}
-  //       firstItem.map((i, key) => {
-  //         obj = {
-  //           ...obj,
-  //           [i]: item[key]
-  //         }
-  //       })
-  //       return obj
-  //     })
-  //     // console.log({ data: data, cols: make_cols(ws["!ref"]) })
-  //     // console.log(parseData)
-  //     /* Update state */
-  //     // this.setState({ data: data, cols: make_cols(ws["!ref"]) });
-  //
-  //     onChange(name, parseData)
-  //   };
-  //   if (rABS) reader.readAsBinaryString(file);
-  //   else reader.readAsArrayBuffer(file);
-  // }
-  //
-  // const handleOnChange = e => {
-  //   const files = e.target.files;
-  //   if (files && files[0]) handleFile(files[0]);
-  // }
+  const handleFile = (file) => {
+    const reader = new FileReader();
+    const rABS = !!reader.readAsBinaryString;
+    reader.onload = e => {
+      /* Parse data */
+      const bstr = e.target.result;
+      const wb = XLSX.read(bstr, {type: rABS ? "binary" : "array"});
+
+      /* Get first worksheet */
+      const wsname = wb.SheetNames[0];
+      const ws = wb.Sheets[wsname];
+
+      /* Convert array of arrays */
+      const data = XLSX.utils.sheet_to_json(ws, {header: 1});
+      const firstItem = Helper.cloneNewModel(data[0])
+      data.shift()
+      const parseData = data.map(item => {
+        let obj = {}
+        firstItem.map((i, key) => {
+          obj = {
+            ...obj,
+            [i]: item[key]
+          }
+        })
+        return obj
+      })
+      // console.log({ data: data, cols: make_cols(ws["!ref"]) })
+      // console.log(parseData)
+      /* Update state */
+      // this.setState({ data: data, cols: make_cols(ws["!ref"]) });
+
+      onChange(name, parseData)
+    };
+    if (rABS) reader.readAsBinaryString(file);
+    else reader.readAsArrayBuffer(file);
+  }
+
+  const handleOnChange = e => {
+    const files = e.target.files;
+    if (files && files[0]) handleFile(files[0]);
+  }
 
   return (
     <Box classes='relative'>
@@ -101,7 +102,7 @@ const InputExcelFile = (props) => {
       {/*  text={text}*/}
       {/*  onClick={onClick}*/}
       {/*/>*/}
-      <Text as='button' span classes='mr-2' onClick={onClick}>
+      <Text as='button' span onClick={onClick}>
         {label}
       </Text>
       <input

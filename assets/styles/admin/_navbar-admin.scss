@@ -17,11 +17,12 @@
       &__icon {
         @apply absolute inset-y-0 left-0 pl-3 pointer-events-none;
       }
+        //focus:ring-black focus:border-black
 
       &__input {
         @apply block p-2 pl-10 w-full text-gray-900
         rounded-lg border border-gray-300 sm:text-sm
-        focus:ring-black focus:border-black
+          ring-0
         dark:bg-black dark:border-gray-custom-502 dark:placeholder-gray-custom-503
         dark:text-white dark:focus:ring-black dark:focus:border-black;
       }

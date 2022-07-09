@@ -2,7 +2,7 @@
 const path = require("path");
 
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   publicRuntimeConfig: {
     NEXT_PUBLIC_MONGODB_URI: process.env.NEXT_PUBLIC_MONGODB_URI,
     NEXT_PUBLIC_JWT_SECRET: process.env.NEXT_PUBLIC_JWT_SECRET,
@@ -22,7 +22,7 @@ const nextConfig = {
     config.resolve.alias["@services"] = path.resolve(__dirname, "services");
     config.resolve.alias["@utils"] = path.resolve(__dirname, "utils");
     config.resolve.alias["@context"] = path.resolve(__dirname, "context");
-    config.resolve.alias["@assets"] = path.resolve(__dirname, "assets");
+    // config.resolve.alias["@assets"] = path.resolve(__dirname, "assets");
     config.resolve.alias["@store"] = path.resolve(__dirname, "store");
     return config;
   },

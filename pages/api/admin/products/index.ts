@@ -22,11 +22,11 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     sortQuery[sort] = by
   }
 
-  if (searchValue !== '' && searchBy !== '') {
-    console.log('req-query', req.query)
+  console.log('req-query', req.query)
+  if (searchValue && searchValue !== '') {
 
     // const searchBy = searchBy
-    console.log('search-by', searchBy)
+    // console.log('search-by', searchBy)
 
     // query = {
     //   $or: [
@@ -37,28 +37,15 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     // }
 
     query[searchBy] = searchValue
-    // query[searchBy] = searchValue
     // query['searchBy'] = {$gte: req.query.searchValue}
   }
 
-  // console.log('query', query)
-  console.log('query', sortQuery)
-  // const products = await Product.find(query).limit(limit).skip(skip);
-  // const products = await Product.find({}).limit(limit).skip(skip);
-  // const products = await Product.find({name: 'Hau Tran'}).limit(limit).skip(skip);
+  console.log('query', query)
   const products = await Product
     .find(query)
     .sort(sortQuery)
     .limit(Number(limit))
     .skip(Number(skip));
-  // const products = await Product.find({quantity: 1111}).limit(limit).skip(skip);
-
-  // const products = await Product.find({
-  //   // $or: [
-  //   //   // {'name': {$gte: query.searchValue}},
-  //   //   {name: query.searchValue}
-  //   // ]
-  // }).limit(limit).skip(skip);
 
   await db.disconnect();
   res.send({

@@ -11,6 +11,8 @@ import ConfirmLogoutDialog from "./Dialog/ConfirmLogout";
 import {MenuIcon, SearchIcon} from "@heroicons/react/solid";
 import useScrollPosition from "../../../utils/hooks/useScrollPosition";
 import {useDarkMode} from "usehooks-ts";
+import {KBarToggleButton} from "./Kbar";
+import {useKBar} from "kbar";
 
 const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
   const router = useRouter();
@@ -18,6 +20,7 @@ const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
   const [showDialog, setShowDialog] = useState(false)
   const scrollPositionY = useScrollPosition();
   const {isDarkMode} = useDarkMode()
+  const {query} = useKBar();
 
   return (
     <>
@@ -35,7 +38,7 @@ const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
               '
               onClick={() => setMinimizeSidebar(!minimizeSidebar)}
             />
-            <Box classes='search-form'>
+            <Box classes='search-form' onClick={() => query.toggle()}>
               <Row align='center' classes='search-form__icon'>
                 <SearchIcon className='w-5 h-5 text-gray-500 dark:text-gray-custom-503'/>
               </Row>
@@ -45,6 +48,7 @@ const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
                 placeholder='Search...'
               />
             </Box>
+            {/*<KBarToggleButton/>*/}
           </Row>
           <Box classes='right-side' id='mobile-menu'>
             <Box classes='profile'>

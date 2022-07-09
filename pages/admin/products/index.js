@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router';
 import {toast} from 'react-hot-toast';
-import {useCallback, useEffect, useState} from 'react';
-// import * as XLSX from 'xlsx';
+import {useCallback, useEffect, useRef, useState} from 'react';
+import * as XLSX from 'xlsx';
 
 import {productService} from '@services/products';
 import {formatPrice} from '@utils/helpers';
@@ -114,6 +114,8 @@ const ProductList = () => {
     skip: 0, limit: rowsPerPage[0],
     searchBy: '', sort: 'name', by: 'asc'
   })
+  const [clickImport, setClickImport] = useState(false)
+  const inputRef = useRef(null)
 
   const {progress, setProgress} = useUIController();
 
@@ -168,14 +170,20 @@ const ProductList = () => {
     // setParams({...params, skip: values.skip, limit: values.limit})
   }
 
-  const handleImportExportExcelFile = (values) => {
-    // console.log('values', values)
-    // const worksheet = XLSX.utils.json_to_sheet(data);
-    // const workbook = XLSX.utils.book_new();
-    // XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    // //let buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-    // //XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
-    // XLSX.writeFile(workbook, 'DataSheet.xlsx');
+  const handleImportExportExcelFile = (type, value) => {
+    switch (type) {
+      case 'import': {
+        console.log('value', value)
+      }
+        break
+      case 'export': {
+        const worksheet = XLSX.utils.json_to_sheet(products.list);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+        XLSX.writeFile(workbook, 'product-list.xlsx');
+      }
+        break
+    }
   }
 
   const handleFilters = (value) => {
@@ -186,22 +194,24 @@ const ProductList = () => {
     // console.log('params', params)
   }
 
-  // console.log('columns', columns)
-
   return (
     <>
-      <ConfirmDeleteDialog defaultStatus={showDialog} setDialogStatus={setShowDialog} handleRequest={handleRequest}/>
+      <ConfirmDeleteDialog
+        defaultStatus={showDialog}
+        setDialogStatus={setShowDialog}
+        handleRequest={handleRequest}
+      />
       <FiltersDialog
         defaultStatus={showFilterDialog}
         setDialogStatus={setShowFilterDialog}
         onChangeFilter={handleFilters}
       />
       <CustomizeColumnDialog
+        columns={columns}
         onSave={(newUpdate) => setColumns(newUpdate)}
         defaultStatus={showColumnDialog}
         setDialogStatus={setShowColumnDialog}
-        columnsDefault={getColumnsDefault(setIdUser, setShowDialog)}
-        columns={columns}
+        columnsDefault={ColumnsDefault(setIdUser, setShowDialog)}
         // columns={columnsDefault}
         // columns={columnsDefault.slice(0, -1)}
       />
@@ -209,29 +219,62 @@ const ProductList = () => {
       <Row justify='between' align='center'>
         <Helmet title='All Products' dataBreadcrumb={dataBreadcrumb}/>
         <Row gap={4}>
-          <Button classes='ml-auto' onClick={() => setShowColumnDialog(true)}
-                  icon={<ServerIcon className='h-4 w-4 inline'/>}> Column</Button>
-          <Button classes='ml-auto' onClick={() => setShowFilterDialog(true)}
-                  icon={<Text i classes='fa-solid fa-sliders '/>}> Filter</Button>
-          <MenuDropdown
-            trigger={<Button classes='ml-auto' disabled> Import/Export</Button>}
-            options={[
-              {label: 'Import', element: <i className='fa-solid fa-upload'/>},
-              {
-                label: 'Export',
-                element: <i className='fa-solid fa-download'/>,
-                feature: () => handleImportExportExcelFile()
-                // feature: () => <InputExcelFile onChange={handleImportExcelFile}/>
-              },
-            ]}
-          />
+          <Button
+            classes='ml-auto'
+            onClick={() => setShowColumnDialog(true)}
+            icon={<ServerIcon className='h-4 w-4 inline'/>}>
+            Column
+          </Button>
+          <Button
+            classes='ml-auto'
+            onClick={() => setShowFilterDialog(true)}
+            icon={<Text i classes='fa-solid fa-sliders '/>}>
+            Filter
+          </Button>
+          {/*<Button >*/}
+          {/*  <InputExcelFile label='Import' onChange={(n, val) => handleImportExportExcelFile('import', val)}/>*/}
+          {/*</Button>*/}
+          <Button icon={<i className='fa-solid fa-download'/>}
+                  onClick={() => handleImportExportExcelFile('export')}>Export</Button>
+
+          {/*<MenuDropdown*/}
+          {/*  trigger={<Button classes='ml-auto'> Import/Export</Button>}*/}
+          {/*  options={[*/}
+          {/*    {*/}
+          {/*      label: <InputExcelFile label='Import' ref={inputRef}/>, element: <i className='fa-solid fa-upload'/>,*/}
+          {/*      // feature: () => inputRef.current.click()*/}
+          {/*    },*/}
+          {/*    // {label: 'Import', element: <i className='fa-solid fa-upload'/>*/}
+          {/*    // , feature: () => <InputExcelFile clickStatus/>*/}
+          {/*    // },*/}
+          {/*    {*/}
+          {/*      label: 'Export',*/}
+          {/*      element: <i className='fa-solid fa-download'/>,*/}
+          {/*      feature: () => handleImportExportExcelFile()*/}
+          {/*      // feature: () => <InputExcelFile onChange={handleImportExcelFile}/>*/}
+          {/*    },*/}
+          {/*  ]}*/}
+          {/*/>*/}
+
+          {/*<Dropdown>*/}
+          {/*  <Dropdown.Trigger>*/}
+          {/*    <Button classes='ml-auto'> Import/Export</Button>*/}
+          {/*  </Dropdown.Trigger>*/}
+          {/*  <Dropdown.Item>*/}
+          {/*    <i className='fa-solid fa-upload'/> Import <InputExcelFile/>*/}
+          {/*  </Dropdown.Item>*/}
+          {/*  <Dropdown.Item>*/}
+          {/*    <i className='fa-solid fa-download'/> Export <InputExcelFile/>*/}
+          {/*  </Dropdown.Item>*/}
+          {/*</Dropdown>*/}
           <Link href='/admin/products/new'>
             <Button classes='ml-auto mb-4' icon={<i className='fa-solid fa-plus'/>}> New Product</Button>
           </Link>
         </Row>
       </Row>
+      {/*<InputExcelFile label='Import' name='import'/>*/}
       <Table
-        // searchInputSelectionf
+        // searchInputSelection
         checkboxSelection
         onChange={handleOnChangeTable}
         onChangeCheckbox={handleDeleteMultiItems}

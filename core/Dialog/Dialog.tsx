@@ -16,7 +16,7 @@ interface Props {
   closeDialog?: () => {}
 }
 
-export default function CustomDialog(props: Props) {
+export default function DialogCustom(props: Props) {
   const {
     children, style,
     isOpen = false,
@@ -87,5 +87,5 @@ const Title = ({title}) => {
 
 const Content = ({children}) => <>{children}</>;
 
-CustomDialog.Title = Title;
-CustomDialog.Content = Content;
+DialogCustom.Title = Title;
+DialogCustom.Content = Content;

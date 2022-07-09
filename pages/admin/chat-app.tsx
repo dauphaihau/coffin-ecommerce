@@ -67,7 +67,7 @@ const ChatApp = () => {
     if (author === 'me') {
       return <Box classes='me' key={index} data-author={author}>{message.data}</Box>;
     }
-    return <Row align='end' classes='other'>
+    return <Row align='end' classes='other' key={index}>
       <img
         className='h-6 w-6 block rounded-full '
         src='/images/default/avatar-default.jpeg'
@@ -126,7 +126,6 @@ const ChatApp = () => {
             {/* customer */}
             <List classes='customer-list'>
               <List.Item>
-
                 {
                   dataFake.map((o, index) => {
                     if (o.type === 1) {

@@ -41,9 +41,8 @@ const MenuDropdownCustom = forwardRef((props: MenuDropdownProps, ref) => {
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items
-          className='menu-items'>
-          <div className='px-1 py-1 '>
+        <Menu.Items className='menu-items'>
+          <div className='p-1'>
             {options.map((item, idx) => (
               <Menu.Item key={idx}>
                 {({active}) => (

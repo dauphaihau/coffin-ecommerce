@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import styled from '@emotion/styled';
 // import { NextUITheme, useTheme } from '@nextui-org/react';
 import {useKBar} from 'kbar';
 import {InputHTMLAttributes, useEffect, useRef} from "react";

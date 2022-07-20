@@ -5,8 +5,7 @@
   @apply hidden fixed ipad:block w-[16rem] h-[97%] m-4 shadow-lg rounded-2xl;
 
   &-inner {
-    @apply overflow-y-auto h-full py-4 px-3 bg-white
-    rounded-2xl;
+    @apply overflow-y-auto h-full py-4 px-3 bg-white rounded-2xl dark:bg-gray-custom-901;
 
     .body {
       @apply space-y-2;

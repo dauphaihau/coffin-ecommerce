@@ -1,6 +1,6 @@
 import React from 'react'
-import {Col} from "../../../../../core/Layout";
-import {Text} from "../../../../../core";
+import { Col } from "../../../../../core/Layout";
+import { Text } from "../../../../../core";
 
 interface numProp {
   num: string | number,

@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
     "@headlessui/react": "^1.6.1",
     "@heroicons/react": "^1.0.6",
     "@hookform/error-message": "^2.0.0",

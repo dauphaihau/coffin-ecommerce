@@ -2,7 +2,7 @@ import {Toaster} from 'react-hot-toast';
 import LoadingBar from 'react-top-loading-bar';
 
 import {useUIController} from '../../../context/UIControllerContext';
-import {Box, Col, Container} from '../../../core/Layout';
+import { Box, Col, Row } from '../../../core/Layout';
 import Navbar from './Navbar';
 // import Sidebar from './AdminSidebarTest';
 import Sidebar from './AdminSidebar';
@@ -47,7 +47,7 @@ const AdminLayout = ({children}) => {
       <Kbar/>
       <LoadingBar color='#000000' progress={progress} onLoaderFinished={() => setProgress(0)} height={2}/>
       <Toaster position='top-right' reverseOrder={false}/>
-      <Container display='flex' classes=' h-screen'>
+      <Row classes='h-screen'>
         <Sidebar
           hoverRef={hoverRef}
           isHovered={isHovered}
@@ -67,7 +67,7 @@ const AdminLayout = ({children}) => {
             {/*<Footer/>*/}
           </Box>
         </Col>
-      </Container>
+      </Row>
     </KBarProvider>
   );
 }

@@ -9,11 +9,13 @@ import {Link} from '../../../core/Next';
 import {useDarkMode} from "usehooks-ts";
 
 const SubMenu = ({open, subLinks, handleActive}) => {
+
   // const router = useRouter();
   // subLinks.map((item) => {
   //   if ([item.link].includes(router.pathname)) open = true;
   //   // if ([item.link, item.link + '/[id]'].includes(router.pathname)) open = true;
   // })
+
   if (!subLinks) return null;
 
   return (
@@ -48,7 +50,6 @@ const SubMenu = ({open, subLinks, handleActive}) => {
 }
 
 const Menu = ({link, handleActive, minimizeSidebar, isHovered}) => {
-
   const router = useRouter();
   const [active, setActive] = useState(false)
 
@@ -90,11 +91,11 @@ const Menu = ({link, handleActive, minimizeSidebar, isHovered}) => {
           </Row>
 
           {!minimizeSidebar &&
-            <Text i classes={
-              ` ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
-            text-[10px] 
-            text-gray-custom-501 transition-all duration-300
-            ease-in-out hover:text-gray-600 block 
+            <Text i classes={`
+             ${!active ? 'fa-solid fa-chevron-down' : 'fa-solid fa-angle-up'}
+                  text-[10px] 
+                  text-gray-custom-501 transition-all duration-300
+                  ease-in-out hover:text-gray-600 block 
          `}/>}
           {minimizeSidebar && isHovered &&
             <Text i classes={
@@ -125,15 +126,15 @@ const AdminSidebar = ({minimizeSidebar, isHovered, hoverRef}) => {
     >
       {/*<Box aside classes={`sidebar ${minimizeSidebar && 'w-[6.5rem]'} `} aria-label='Sidebar'>*/}
       {/*<div ref={hoverRef}>{isHovered ? 'hovered' : 'nope️'}</div>*/}
-      <Paper noPadding classes='sidebar-inner dark:bg-gray-custom-901 rounded-2xl'>
+      <Paper noPadding classes='sidebar-inner'>
         <Row justify='center' classes='header'>
           <Link href='/'>
             <Image normalTag
               // src='/images/logo.png'
-              src={isDarkMode ? '/images/logo-dark.png': '/images/logo.png'}
+                   src={isDarkMode ? '/images/logo-dark.png' : '/images/logo.png'}
               // src={`/images/logo${isDarkMode ? '-dark' : ''}.png`}
-              alt='logo'
-              classes={`ipad:h-[55px] ${minimizeSidebar && 'ipad:h-[40px]'} ${isHovered ? '!ipad:h-[55px]' : ''} `}
+                   alt='logo'
+                   classes={`ipad:h-[55px] ${minimizeSidebar && 'ipad:h-[40px]'} ${isHovered ? '!ipad:h-[55px]' : ''} `}
             />
           </Link>
         </Row>
@@ -168,8 +169,12 @@ const AdminSidebar = ({minimizeSidebar, isHovered, hoverRef}) => {
               </List.Item>
             }
             return (
-              <Menu minimizeSidebar={minimizeSidebar} isHovered={isHovered} link={link} handleActive={handleActive}
-                    key={id}/>)
+              <Menu
+                handleActive={handleActive} key={id}
+                minimizeSidebar={minimizeSidebar}
+                isHovered={isHovered} link={link}
+              />
+            )
           })}
         </List>
       </Paper>

@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import {KBarAnimator, KBarPortal, KBarPositioner, KBarSearch, useKBar, VisualState} from 'kbar';
 
 import {KBarResultCustom} from './Result';

@@ -1,4 +1,47 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
+import { classNames } from "../../utils/helpers";
+
+enum GAP {
+  FIRST = 1,
+  SECOND,
+  THIRD,
+  FOUR,
+  EIGHT = 8,
+}
+
+enum SPACE {
+  START = 'start',
+  END = 'end',
+  CENTER = 'center',
+  BETWEEN = 'between',
+  AROUND = 'around',
+}
+
+const GAP_MAPS: Record<GAP, string> = {
+  [GAP.FIRST]: 'gap-1',
+  [GAP.SECOND]: 'gap-2',
+  [GAP.THIRD]: 'gap-3',
+  [GAP.FOUR]: 'gap-4',
+  [GAP.EIGHT]: 'gap-8',
+};
+
+const JUSTIFY_MAPS: Record<SPACE, string> = {
+  [SPACE.CENTER]: 'justify-center',
+  [SPACE.BETWEEN]: 'justify-between',
+  [SPACE.AROUND]: 'justify-around',
+};
+
+const ALIGN_ITEM_MAPS: Record<SPACE, string> = {
+  [SPACE.CENTER]: 'items-center',
+  [SPACE.BETWEEN]: 'items-between',
+  [SPACE.AROUND]: 'items-around',
+};
+
+const ALIGN_SELF_MAPS: Record<SPACE, string> = {
+  [SPACE.START]: 'self-start',
+  [SPACE.END]: 'self-end',
+  [SPACE.CENTER]: 'self-center',
+};
 
 interface Props {
   // sx?: number,
@@ -15,21 +58,16 @@ interface Props {
 }
 
 const Col = (props: Props) => {
-
   const {children, classes, self, gap, justify, align = ''} = props
-
-  // flex-${direction?.sx ?? 'row'}
-  // ipad:flex-${direction?.md ?? 'row'}
-  // laptop:flex-${direction?.lg ?? 'row'}
   return (
     <div
-      className={`flex flex-col
-          ${justify ? `justify-${justify}` : `justify-start`}
-          ${align ? `items-${align}` : `items-start`}
-          ${self ? `self-${self}` : `self-start`}
-           gap-${gap}
-           ${classes}
-        `}>
+      className={classNames('flex flex-col',
+        GAP_MAPS[gap],
+        JUSTIFY_MAPS[justify],
+        ALIGN_ITEM_MAPS[align],
+        ALIGN_SELF_MAPS[self],
+        classes
+      )}>
       {children}
     </div>
   );

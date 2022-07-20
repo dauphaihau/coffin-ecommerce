@@ -8,11 +8,10 @@ import {ROLE_OPTIONS} from '../../../utils/enums';
 import {capitalize} from '../../../utils/helpers';
 import {MenuDropdown} from '../../../core/Navigation';
 import ConfirmLogoutDialog from "./Dialog/ConfirmLogout";
-import {MenuIcon, SearchIcon} from "@heroicons/react/solid";
+import {MenuIcon} from "@heroicons/react/solid";
 import useScrollPosition from "../../../utils/hooks/useScrollPosition";
 import {useDarkMode} from "usehooks-ts";
 import {KBarToggleButton} from "./Kbar";
-import {useKBar} from "kbar";
 
 const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
   const router = useRouter();
@@ -20,7 +19,6 @@ const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
   const [showDialog, setShowDialog] = useState(false)
   const scrollPositionY = useScrollPosition();
   const {isDarkMode} = useDarkMode()
-  const {query} = useKBar();
 
   return (
     <>
@@ -33,24 +31,12 @@ const NavbarAdmin = ({setMinimizeSidebar, minimizeSidebar}) => {
         <Row wrap='wrap' justify='between' align='center'>
           <Row classes='left-side'>
             <MenuIcon
-              className='btn-icon w-10 h-10 mr-4 text-gray-600 dark:text-gray-custom-507 dark:hover:bg-gray-custom-508
-              dark:hover:text-white
-              '
+              className='btn-icon collapse-sidebar'
               onClick={() => setMinimizeSidebar(!minimizeSidebar)}
             />
-            <Box classes='search-form' onClick={() => query.toggle()}>
-              <Row align='center' classes='search-form__icon'>
-                <SearchIcon className='w-5 h-5 text-gray-500 dark:text-gray-custom-503'/>
-              </Row>
-              <input
-                type='text' id='email-adress-icon'
-                className='search-form__input'
-                placeholder='Search...'
-              />
-            </Box>
-            {/*<KBarToggleButton/>*/}
+            <KBarToggleButton/>
           </Row>
-          <Box classes='right-side' id='mobile-menu'>
+          <Box classes='right-side'>
             <Box classes='profile'>
               <Box classes='profile__notification'>
                 <Text i classes='fa-solid fa-message'/>

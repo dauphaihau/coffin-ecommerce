@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 // import {NextUITheme, useTheme} from '@nextui-org/react';
 import {KBarResults, useMatches} from 'kbar';
 

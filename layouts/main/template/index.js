@@ -14,7 +14,7 @@ import BannerHomeCard from "./BannerHomeCard";
 import AllDrawer from "./Drawer";
 import Backdrop from "../../../core/Navigation/Drawer/Backdrop";
 import AllDialog from "./Dialog";
-import {Box, Container} from "../../../core/Layout";
+import {Box} from "../../../core/Layout";
 import SubscribeDialog from "./Dialog/SubscribeDialog";
 
 export const MainLayout = ({children, categories}) => {
@@ -60,11 +60,11 @@ export const MainLayout = ({children, categories}) => {
       <Backdrop/>
       <Navbar categories={categories}/>
       <BannerHomeCard isDisplay={showBanner}/>
-      <Container classes='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
+      <Box classes='mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16'>
         <Box main classes={`pt-28 ${accountLayout && 'flex items-center h-screen'}`}>{children}</Box>
         <Contact/>
         <Footer/>
-      </Container>
+      </Box>
     </>
   );
 }

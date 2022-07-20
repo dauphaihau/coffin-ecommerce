@@ -4,7 +4,7 @@
 
   &--mod {
     @apply shadow-2xl bg-clip-padding backdrop-filter backdrop-blur-xl
-    bg-opacity-60 p-4 animate rounded-2xl
+    bg-opacity-60 p-4 animate rounded-2xl;
   }
 
   &--resizeWidth {
@@ -12,20 +12,9 @@
   }
 
   .left-side {
-    .search-form {
-      @apply hidden relative mr-3 md:mr-0 md:block;
-      &__icon {
-        @apply absolute inset-y-0 left-0 pl-3 pointer-events-none;
-      }
-        //focus:ring-black focus:border-black
-
-      &__input {
-        @apply block p-2 pl-10 w-full text-gray-900
-        rounded-lg border border-gray-300 sm:text-sm
-          ring-0
-        dark:bg-black dark:border-gray-custom-502 dark:placeholder-gray-custom-503
-        dark:text-white dark:focus:ring-black dark:focus:border-black;
-      }
+    .collapse-sidebar {
+      @apply w-10 h-10 mr-4 text-gray-600 dark:text-gray-custom-507 dark:hover:bg-gray-custom-508
+      dark:hover:text-white;
     }
   }
 
@@ -33,7 +22,7 @@
     @apply hidden w-full md:block md:w-auto;
 
     .profile {
-      @apply flex items-center ;
+      @apply flex items-center;
 
       &__notification {
         @apply flex items-center;
@@ -48,7 +37,7 @@
         div {
           @apply flex flex-col;
           p:nth-child(1) {
-            @apply font-black text-black dark:text-white
+            @apply font-black text-black dark:text-white;
           }
 
           p:nth-child(2) {
@@ -56,24 +45,7 @@
           }
         }
       }
-
-      //&__profile {
-      //  @apply mt-8 relative z-10 transition-all duration-300 ease-in-out ;
-      //  div {
-      //    @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg
-      //    dark:bg-gray-custom-904
-      //    rounded-md bg-white shadow-2xl;
-      //    a {
-      //      @apply block px-4 py-2 text-sm leading-5
-      //      text-black hover:bg-gray-custom-50
-      //      dark:text-white dark:hover:bg-gray-custom-503
-      //      focus:outline-none focus:bg-gray-100
-      //      transition duration-150 ease-in-out;
-      //    }
-      //  }
-      //}
     }
   }
-
 }
 

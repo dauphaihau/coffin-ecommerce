@@ -5,10 +5,10 @@ import {Link} from '../Next';
 interface MenuDropdownProps {
   options: {
     label: string,
-    value: string | number,
-    href: string,
-    feature: () => void,
-    element: React.ReactNode,
+    value?: string | number,
+    href?: string,
+    feature?: () => void,
+    element?: React.ReactNode,
   }[],
   trigger?: React.ReactNode
 }

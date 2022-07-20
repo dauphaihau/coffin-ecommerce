@@ -1,14 +1,4 @@
-/*
-Item :
-alignItems, autoFocus, disabled, selected,
-
-Item.Button
-
-Item.Icon
-
- */
-
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 interface ListProps {
   classes?: string

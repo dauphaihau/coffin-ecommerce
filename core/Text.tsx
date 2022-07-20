@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 import button from "./Button/Button";
 
 enum Transforms {

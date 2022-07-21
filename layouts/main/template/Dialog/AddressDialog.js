@@ -1,15 +1,15 @@
-import * as Yup from "yup";
-import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
+import * as Yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-import {Text} from "../../../../core";
-import {Checkbox, Input, Select} from "../../../../core/Input";
-import {Button} from "../../../../core/Button";
-import {useUIController} from "../../../../context/UIControllerContext";
-import countryOpts from "../../../../assets/data/country.json";
-import {useAuth} from "../../../../context/authContext";
-import {Grid, Row} from "../../../../core/Layout";
-import Dialog from "../../../../core/Dialog/Dialog";
+import { Text } from '../../../../core';
+import { Checkbox, Input, Select } from '../../../../core/Input';
+import { Button } from '../../../../core/Button';
+import { useUIController } from '../../../../context/UIControllerContext';
+import countryOpts from '../../../../assets/data/country.json';
+import { useAuth } from '../../../../context/authContext';
+import { Grid, Row } from '../../../../core/Layout';
+import Dialog from '../../../../core/Dialog/Dialog';
 
 const AddressDialog = () => {
 
@@ -41,11 +41,11 @@ const AddressDialog = () => {
       <Dialog.Content>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          // className="px-6 pb-4 space-y-6 lg:px-8  py-8 xl:pb-8"
+          // className='px-6 pb-4 space-y-6 lg:px-8  py-8 xl:pb-8'
         >
           {/*<Grid md={2} gapx={12} classes='mt-12'>*/}
           <div className=''>
-            <Text h1 sx='xl' weight='bold' classes='mb-8'>Shipping Address</Text>
+            <Text h1 weight='bold' classes='text-xl mb-8'>Shipping Address</Text>
             <Grid md={2} lg={2} gapx={4}>
               <Input label='Full Name *' name='name' register={register} errors={errors}/>
               <Input label='Phone/Mobile *' name='phoneNumber' register={register} errors={errors}/>

@@ -29,18 +29,25 @@ const JUSTIFY_MAPS: Record<SPACE, string> = {
   [SPACE.CENTER]: 'justify-center',
   [SPACE.BETWEEN]: 'justify-between',
   [SPACE.AROUND]: 'justify-around',
+  [SPACE.END]: 'justify-end',
+  [SPACE.START]: 'justify-start',
 };
 
 const ALIGN_ITEM_MAPS: Record<SPACE, string> = {
   [SPACE.CENTER]: 'items-center',
   [SPACE.BETWEEN]: 'items-between',
   [SPACE.AROUND]: 'items-around',
+  [SPACE.END]: 'items-end',
+  [SPACE.START]: 'items-start',
 };
+
 
 const ALIGN_SELF_MAPS: Record<SPACE, string> = {
   [SPACE.START]: 'self-start',
   [SPACE.END]: 'self-end',
   [SPACE.CENTER]: 'self-center',
+  [SPACE.BETWEEN]: '',
+  [SPACE.AROUND]: '',
 };
 
 interface Props {

@@ -18,7 +18,7 @@ const RelatedProduct = (props: RelatedProductProps) => {
 
   return (
     <Col classes='my-10'>
-      <Text sx='lg' md='2xl' weight='bold' classes='ml-2 mb-4'>Related Products</Text>
+      <Text weight='bold' classes='text-lg ipad:text-2xl ml-2 mb-4'>Related Products</Text>
       <Grid gap={4} sx={1} md={2} lg={4}>
         {
           relatedProducts?.filter(p => p.id !== id).map((item, index) => {

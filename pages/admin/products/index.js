@@ -1,20 +1,20 @@
-import {useRouter} from 'next/router';
-import {toast} from 'react-hot-toast';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import * as XLSX from 'xlsx';
 
-import {productService} from '@services/products';
-import {formatPrice} from '@utils/helpers';
-import {useUIController} from '@context/UIControllerContext';
-import {Button} from '../../../core/Button';
-import {MenuDropdown} from '../../../core/Navigation';
-import {Helmet} from '../../../layouts/admin/common/Helmet';
-import {Link} from '../../../core/Next';
-import {Box, Grid, Row} from '../../../core/Layout';
+import { productService } from '@services/products';
+import { formatPrice } from '@utils/helpers';
+import { useUIController } from '@context/UIControllerContext';
+import { Button } from '../../../core/Button';
+import { MenuDropdown } from '../../../core/Navigation';
+import { Helmet } from '../../../layouts/admin/common/Helmet';
+import { Link } from '../../../core/Next';
+import { Box, Grid, Row } from '../../../core/Layout';
 import Table from '../../../core/Table';
 import ConfirmDeleteDialog from '../../../layouts/admin/template/Dialog/ConfirmDelete';
-import {Text} from '../../../core';
-import {Controller, useForm} from 'react-hook-form';
+import { Text } from '../../../core';
+import { Controller, useForm } from 'react-hook-form';
 import {
   sortByOpts,
   productBrandOptions,
@@ -22,9 +22,9 @@ import {
   productColorOptions,
   productTagsOptions, searchByOptsProducts
 } from '../../../assets/data/options';
-import {Input, InputExcelFile, Select} from '../../../core/Input';
-import {uiControllerActionsType} from '../../../store/reducers/uiControllerReducer';
-import {ServerIcon} from '@heroicons/react/outline';
+import { Input, InputExcelFile, Select } from '../../../core/Input';
+import { uiControllerActionsType } from '../../../store/reducers/uiControllerReducer';
+import { ServerIcon } from '@heroicons/react/outline';
 import FiltersDialog from '../../../layouts/admin/template/Dialog/Filters';
 import CustomizeColumn from '../../../layouts/admin/template/Dialog/CustomizeColumn';
 import CustomizeColumnDialog from '../../../layouts/admin/template/Dialog/CustomizeColumn';
@@ -58,7 +58,7 @@ const ColumnsDefault = ({setIdUser, setShowDialog}) => {
           <Text weight='bold' classes='text-sm desktop:hidden '>
             {row.name.length > 15 ? row.name.substring(0, 15) + '...' : row.name}
           </Text>
-          <Text weight='bold' sx='sm' classes='ml-4 hidden desktop:block'>
+          <Text weight='bold' classes='text-sm ml-4 hidden desktop:block'>
             {row.name}
           </Text>
         </>

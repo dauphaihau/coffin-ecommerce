@@ -1,4 +1,4 @@
-import {Link} from "../../../../core";
+import { Link } from "../../../../core";
 import Text from "../../../../core/Text";
 
 const CategoryCard = ({imageSrc, title, subtitle, link}) => {
@@ -9,8 +9,8 @@ const CategoryCard = ({imageSrc, title, subtitle, link}) => {
           <img src={imageSrc} alt={title} className="w-3/5"/>
         </div>
         <div className="mb-8">
-          <Text sx='xl' weight='semibold' classes='mb-1'>{title}</Text>
-          <Text sx='xs' color='gray-700'>{subtitle}</Text>
+          <Text weight='semibold' classes='text-xl mb-1'>{title}</Text>
+          <Text classes='text-xs text-gray-700'>{subtitle}</Text>
         </div>
       </Link>
     </div>

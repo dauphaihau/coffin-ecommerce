@@ -1,13 +1,13 @@
 import Text from '../../../../core/Text';
-import {Box, Col, Grid, Row} from '../../../../core/Layout';
-import {Divider, Image} from '../../../../core';
+import { Box, Col, Grid, Row } from '../../../../core/Layout';
+import { Divider, Image } from '../../../../core';
 import Pagination from '../../../../core/Table/Pagination';
 
 const CustomerReview = () => {
 
   return (
     <Col>
-      <Text sx='lg' md='2xl' weight='bold' classes=' mb-4'>Customer Reviews</Text>
+      <Text weight='text-lg laptop:text-2xl bold' classes=' mb-4'>Customer Reviews</Text>
       <Row align='center'>
         <Text sx='3xl' weight='medium'>3.8<Text span classes='sr-only'> Average review score </Text>
         </Text>
@@ -89,7 +89,8 @@ const CustomerReview = () => {
               </Col>
             </Row>
             <Col classes='laptop:col-span-5 desktop:col-span-6'>
-              <Text sx='lg' lg='2xl' classes='mt-2 text-gray-custom-503 font-base  sm:mt-0'>The best thing money can
+              <Text classes='text-lg laptop:text-2xl mt-2 text-gray-custom-503 font-base  sm:mt-0'>The best thing money
+                can
                 buy!</Text>
               <Text classes='mt-2 text-gray-700'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam
                 possimus
@@ -146,7 +147,8 @@ const CustomerReview = () => {
               </Col>
             </Row>
             <Col classes='laptop:col-span-5 desktop:col-span-6'>
-              <Text sx='lg' lg='2xl' classes='mt-2 text-gray-custom-503 font-base  sm:mt-0'>Not for tall people. Not
+              <Text classes='text-lg laptop:text-2xl mt-2 text-gray-custom-503 font-base  sm:mt-0'>Not for tall people.
+                Not
                 worth the investment</Text>
               <Text classes='mt-2 text-gray-700'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam
                 possimus
@@ -218,7 +220,8 @@ const CustomerReview = () => {
             </Row>
             <Col classes='laptop:col-span-5 desktop:col-span-6'>
               <div className=''></div>
-              <Text sx='lg' lg='2xl' classes='mt-2 text-gray-custom-503 font-base sm:mt-0'>Great quality, and looks
+              <Text classes='text-lg laptop:text-2xl mt-2 text-gray-custom-503 font-base sm:mt-0'>Great quality, and
+                looks
                 great</Text>
               <Text classes='mt-2 text-gray-700'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam
                 possimus
@@ -292,7 +295,8 @@ const CustomerReview = () => {
             </Row>
             <Col classes='laptop:col-span-5 desktop:col-span-6'>
               <div className=''></div>
-              <Text sx='lg' lg='2xl' classes='mt-2 text-gray-custom-503 font-base  sm:mt-0'>High quality, comfy, and
+              <Text classes='text-lg laptop:text-2xl mt-2 text-gray-custom-503  sm:mt-0'>High quality, comfy,
+                and
                 beautiful!</Text>
               <Text classes='mt-2 text-gray-700'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam
                 possimus

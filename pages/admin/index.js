@@ -96,7 +96,7 @@ const Dashboard = () => {
           </Box>
         ))}
       </Grid>
-      <Text sx='2xl' weight='bold' classes='mt-6 mb-3'>Best Salesman</Text>
+      <Text  weight='bold' classes='text-2xl mt-6 mb-3'>Best Salesman</Text>
       <Table
         hidePagination
         rowsPerPage={6}

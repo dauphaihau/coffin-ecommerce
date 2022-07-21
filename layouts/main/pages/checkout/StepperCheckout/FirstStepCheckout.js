@@ -110,7 +110,7 @@ const FirstStepCheckout = (props) => {
       </div>
       <div className='ipad:col-span-2 mt-6 ipad:mt-0'>
         <div className='border border-gray-custom-50 shadow-xl p-6 rounded-xl w-full font-light'>
-          <Text weight='bold' sx='xl' classes='mb-3'>Order Summary</Text>
+          <Text weight='bold' classes='text-xl mb-3'>Order Summary</Text>
           <Row justify='between' classes='py-2'>
             <Text>Sub Total</Text>
             <Text>{formatPrice(total)}</Text>
@@ -128,7 +128,7 @@ const FirstStepCheckout = (props) => {
             <div className='text-right font-light'>
               {/*<Text weight='bold'>{formatPrice(discounted)}</Text>*/}
               <Text weight='bold'>{formatPrice(!discounted ? total : discounted)}</Text>
-              <Text sx='sm'>(VAT included if applicable)</Text>
+              <Text classes='text-sm'>(VAT included if applicable)</Text>
             </div>
           </Row>
           <div className='relative'>

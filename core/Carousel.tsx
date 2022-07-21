@@ -42,6 +42,7 @@ const Carousel = () => {
     }
   }, [currentIndex]);
 
+
   useEffect(() => {
     maxScrollWidth.current = carousel.current
       ? carousel.current.scrollWidth - carousel.current.offsetWidth

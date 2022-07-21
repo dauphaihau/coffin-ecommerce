@@ -1,19 +1,19 @@
 import moment from 'moment/moment';
-import {useRouter} from 'next/router';
-import {toast} from 'react-hot-toast';
-import {useCallback, useEffect, useState} from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
+import { useCallback, useEffect, useState } from 'react';
 
-import {userService} from '@services/users';
-import {useUIController} from '@context/UIControllerContext';
-import {Text} from '../../../core';
-import {Button} from '../../../core/Button';
-import {MenuDropdown} from '../../../core/Navigation';
-import {Helmet} from '../../../layouts/admin/common/Helmet';
+import { userService } from '@services/users';
+import { useUIController } from '@context/UIControllerContext';
+import { Image, Text } from '../../../core';
+import { Button } from '../../../core/Button';
+import { MenuDropdown } from '../../../core/Navigation';
+import { Helmet } from '../../../layouts/admin/common/Helmet';
 import Table from '../../../core/Table';
-import {Row} from '../../../core/Layout';
-import {Link} from '../../../core/Next';
-import {capitalize, isNil} from '../../../utils/helpers';
-import {ROLE_OPTIONS, USER_STATUS} from '../../../utils/enums';
+import { Row } from '../../../core/Layout';
+import { Link } from '../../../core/Next';
+import { capitalize, isNil } from '../../../utils/helpers';
+import { ROLE_OPTIONS, USER_STATUS } from '../../../utils/enums';
 import ConfirmDeleteDialog from "../../../layouts/admin/template/Dialog/ConfirmDelete";
 
 const dataBreadcrumb = [
@@ -57,13 +57,15 @@ const UserList = () => {
       render: (row) => (
         <Row align='center'>
           <div className='rounded-lg '>
-            <img src={row.avatar ?? '/images/default/avatar-default.jpeg'} className='h-9 w-9 rounded-md '
-                 alt='avatar'/>
+            <Image
+              normalTag src={row.avatar ?? '/images/default/avatar-default.jpeg'}
+              classesSize='h-9 w-9' classes='rounded-md' alt='avatar'
+            />
           </div>
-          <Text weight='bold' sx='sm' classes='ml-4 desktop:hidden'>
+          <Text weight='bold' classes='text-sm ml-4 desktop:hidden'>
             {row.name.length > 9 ? row.name.substring(0, 9) + '...' : row.name}
           </Text>
-          <Text weight='bold' sx='sm' classes='ml-4 hidden desktop:block'>
+          <Text weight='bold' classes='text-sm ml-4 hidden desktop:block'>
             {row.name}
           </Text>
         </Row>

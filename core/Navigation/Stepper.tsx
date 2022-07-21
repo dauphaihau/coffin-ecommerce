@@ -1,5 +1,5 @@
-import {Text} from "../index";
-import {ReactNode} from "react";
+import { Text } from "../index";
+import { ReactNode } from "react";
 
 interface PropsStepLabel {
   labels: [{
@@ -33,7 +33,7 @@ const StepLabels = ({labels, step}: PropsStepLabel) => {
                   ? <i className="fa-solid fa-check step-content__icon"/>
                   : <i className="fa-solid fa-circle step-content__icon"/>
                 }
-                <Text sx='sm' classes={`step-content__text 
+                <Text classes={`step-content__text 
                     ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>
@@ -52,8 +52,8 @@ const StepLabels = ({labels, step}: PropsStepLabel) => {
                     ? <i className="fa-solid fa-check step-content__icon"/>
                     : <i className="fa-solid fa-circle step-content__icon"/>
                 }
-                <Text sx='sm'
-                      classes={`step-content__text ${step === item.id ? '!text-black' : ''} `}>
+                <Text
+                  classes={`step-content__text ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>
               </>
@@ -68,7 +68,7 @@ const StepLabels = ({labels, step}: PropsStepLabel) => {
                   ? <i className="fa-solid fa-circle step-content__icon"/>
                   : <i className="fa-solid fa-circle step-content__icon--gray"/>
                 }
-                <Text sx='sm' classes={`step-content__text
+                <Text classes={`step-content__text
                     ${step === item.id ? '!text-black' : ''} `}>
                   {item.heading}
                 </Text>

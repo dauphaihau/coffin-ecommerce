@@ -37,7 +37,7 @@ const ProductFaq = (props: ProductFaqProps) => {
 
   return (
     <Col classes='my-6' justify='center' align='center'>
-      <Text sx='lg' md='2xl' weight='bold' classes='mb-4'>Frequently asked questions</Text>
+      <Text weight='bold' classes='text-lg ipad:text-2xl mb-4'>Frequently asked questions</Text>
       <Disclosure data={data}/>
     </Col>
   )

@@ -1,6 +1,18 @@
-import {useRef, useState} from 'react';
-import {Checkbox} from '../Input';
-import {Loading} from '../Loading';
+import { useRef, useState } from 'react';
+import { Checkbox } from '../Input';
+import { Loading } from '../Loading';
+
+enum TEXT_ALIGN {
+  LEFT = 'start',
+  RIGHT = 'end',
+  CENTER = 'center',
+}
+
+const TEXT_ALIGN_MAPS: Record<TEXT_ALIGN, string> = {
+  [TEXT_ALIGN.CENTER]: 'text-center',
+  [TEXT_ALIGN.RIGHT]: 'text-right',
+  [TEXT_ALIGN.LEFT]: 'text-left',
+};
 
 const TableRow = (props) => {
   const {
@@ -54,16 +66,17 @@ const TableRow = (props) => {
                     }
                     {columns.map((column) => {
                       if (column.render) {
-                        return <td className={`text-${column.align}`} key={column.id}>
+                        return <td className={TEXT_ALIGN_MAPS[column.align]} key={column.id}>
+                          {/*return <td className={`text-${column.align}`} key={column.id}>*/}
                           <div className={`${column.align === 'center' && 'flex-center'}`}>
                             {column.render(row, index + 1)}
                           </div>
                         </td>
                       }
                       if (column.key) {
-                        return <td className={`text-${column.align}`} key={column.id}>{index + 1}</td>
+                        return <td className={TEXT_ALIGN_MAPS[column.align]} key={column.id}>{index + 1}</td>
                       }
-                      return <td className={`text-${column.align}`} key={column.id}>{row[column.id]}</td>
+                      return <td className={TEXT_ALIGN_MAPS[column.align]} key={column.id}>{row[column.id]}</td>
                     })}
                   </tr>
                 )

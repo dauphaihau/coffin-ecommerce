@@ -114,7 +114,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...others}
           />
         </div>
-        {errors && <Text color='red-500' classes="text-[0.9rem]">{errors[name]?.message}</Text>}
+        {errors && <Text classes="text-red-500 text-[0.9rem]">{errors[name]?.message}</Text>}
       </div>
     );
   }
@@ -198,7 +198,7 @@ const Password = (props) => {
           placeholder={placeholder}
           {...others}
         />
-        {errors && <Text color='red-500' classes="text-[0.9rem] mt-2">{errors[name]?.message}</Text>}
+        {errors && <Text classes="text-red-500 text-[0.9rem] mt-2">{errors[name]?.message}</Text>}
       </div>
     </div>
   );

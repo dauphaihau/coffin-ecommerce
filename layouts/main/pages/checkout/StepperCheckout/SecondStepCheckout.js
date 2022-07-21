@@ -1,9 +1,9 @@
-import {useAuth} from "../../../../../context/authContext";
-import {useUIController} from "../../../../../context/UIControllerContext";
-import {Button} from "../../../../../core/Button";
-import {Box, Col, Grid, Row} from "../../../../../core/Layout";
-import {Text} from "../../../../../core";
-import {formatPrice} from "../../../../../utils/helpers";
+import { useAuth } from "../../../../../context/authContext";
+import { useUIController } from "../../../../../context/UIControllerContext";
+import { Button } from "../../../../../core/Button";
+import { Box, Col, Grid, Row } from "../../../../../core/Layout";
+import { Text } from "../../../../../core";
+import { formatPrice } from "../../../../../utils/helpers";
 
 const SecondStepCheckout = (props) => {
   const {dispatch} = useUIController()
@@ -24,24 +24,24 @@ const SecondStepCheckout = (props) => {
           <Col>
             <Box classes='p-6 shadow-lg border border-gray-100 rounded-xl mb-6 w-full '>
               <Box classes='mb-2 '>
-                <Text span lg='base' color='gray-800' weight='bold'>Sir Tran</Text>
-                <Text span color='gray-500' classes='ml-1 mr-2 text-sm'>(Home) </Text>
+                <Text span classes='laptop:text-base text-gray-800' weight='bold'>Sir Tran</Text>
+                <Text span classes='ml-1 mr-2 text-sm text-gray-500'>(Home) </Text>
                 <Text span classes='badge-gray'>Default</Text>
               </Box>
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
-              <Col classes='justify-between gap-2 ipad:gap-0 flex-col ipad:flex-row'>
-                <Text color='gray-500'>365-374-4961</Text>
+              <Col justify='between' gap={2} classes='ipad:gap-0 flex-col ipad:flex-row'>
+                <Text classes='text-gray-500'>365-374-4961</Text>
                 <Button size='sm' onClick={() => setSteps(3)}>Deliver to this Address</Button>
               </Col>
             </Box>
             <Box classes='p-6 shadow-lg border border-gray-100 rounded-xl mb-6 w-full'>
               <Box classes='mb-2'>
-                <Text span lg='base' color='gray-800' weight='bold'>Death man</Text>
-                <Text span color='gray-500' classes='ml-1 mr-2 text-sm'>(Official)</Text>
+                <Text span classes='laptop:text-base text-gray-800' weight='bold'>Death man</Text>
+                <Text span classes='ml-1 mr-2 text-sm text-gray-500'>(Official)</Text>
               </Box>
               <Text classes='mb-2'>19034 Verna Unions Apt. 164 - Honolulu, RI / 87535</Text>
-              <Col classes='justify-between gap-2 ipad:gap-0 flex-col ipad:flex-row'>
-                <Text color='gray-500'>365-374-4961</Text>
+              <Col justify='between' gap={2} classes='ipad:gap-0 flex-col ipad:flex-row'>
+                <Text classes='text-gray-500'>365-374-4961</Text>
                 <Button size='sm' onClick={() => setSteps(3)}>Deliver to this Address</Button>
               </Col>
             </Box>
@@ -78,7 +78,7 @@ const SecondStepCheckout = (props) => {
             <Text weight='bold'>Total</Text>
             <Box classes='text-right font-light'>
               <Text weight='bold'>{formatPrice(user.priceTotal)}</Text>
-              <Text sx='sm'>(VAT included if applicable)</Text>
+              <Text classes='text-sm'>(VAT included if applicable)</Text>
             </Box>
           </Row>
         </Box>

@@ -1,20 +1,20 @@
-import {useState} from "react";
-import {Controller, useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useRouter} from "next/router";
-import {toast} from "react-hot-toast";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import * as Yup from "yup";
 
-import {useAuth} from "../../../context/authContext";
-import {AvatarInput, Input, Select, Switch} from "../../../core/Input";
-import {Col, Grid, Row} from "../../../core/Layout";
-import {Link, Paper, Text} from "../../../core";
-import {Button} from "../../../core/Button";
-import {userService} from "../../../services/users";
-import {Helmet} from "../../../layouts/admin/common/Helmet";
-import {ROLE_OPTIONS} from "../../../utils/enums";
-import {capitalize} from "../../../utils/helpers";
-import {otherService} from "../../../services/other";
+import { useAuth } from "../../../context/authContext";
+import { AvatarInput, Input, Select, Switch } from "../../../core/Input";
+import { Col, Grid, Row } from "../../../core/Layout";
+import { Link, Paper, Text } from "../../../core";
+import { Button } from "../../../core/Button";
+import { userService } from "../../../services/users";
+import { Helmet } from "../../../layouts/admin/common/Helmet";
+import { ROLE_OPTIONS } from "../../../utils/enums";
+import { capitalize } from "../../../utils/helpers";
+import { otherService } from "../../../services/other";
 
 const dataBreadcrumb = [
   {path: "/admin", name: "Dashboard", firstLink: true},
@@ -90,9 +90,10 @@ const NewUser = () => {
             />
             <Row align='center' justify='between' classes='mt-8'>
               <Col>
-                <Text classes='font-bold text-[0.875rem]'>Set Password</Text>
-                <Text classes='text-gray-500 text-[0.875rem] w-4/5'>Disabling this will automatically send the user a
-                  set password email</Text>
+                <Text weight='bold' classes='text-[0.875rem]'>Set Password</Text>
+                <Text classes='text-gray-500 text-[0.875rem] w-4/5'>
+                  Disabling this will automatically send the user a set password email
+                </Text>
               </Col>
               <Controller
                 control={control}

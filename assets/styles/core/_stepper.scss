@@ -26,7 +26,7 @@
         }
 
         &__text {
-          @apply animate hover:text-gray-600 text-gray-custom-503;
+          @apply text-sm animate hover:text-gray-600 text-gray-custom-503;
         }
 
         p {

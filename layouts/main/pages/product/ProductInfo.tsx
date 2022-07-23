@@ -1,7 +1,7 @@
 import Text from '../../../../core/Text';
-import {Button, QuantityPicker, ShowMoreTextToggler} from '../../../../core/Button';
-import {Box, Col, Row} from '../../../../core/Layout';
-import {Image} from '../../../../core';
+import { Button, QuantityPicker, ShowMoreTextToggler } from '../../../../core/Button';
+import { Box, Col, Row } from '../../../../core/Layout';
+import { Image } from '../../../../core';
 
 interface ProductProps {
   product: {
@@ -88,8 +88,8 @@ const ProductInfo = (props: ProductProps) => {
             numberOfItems={numberOfItems}
           />
           {/*<Text  classes='mt-3'>Available: {quantity}</Text>*/}
+          <Button size='lg' classes='mt-4' onClick={() => addItemToCart(product)}>Add to Cart</Button>
         </Box>
-        <Button size='lg' onClick={() => addItemToCart(product)}>Add to Cart</Button>
       </Col>
     </Col>
   )

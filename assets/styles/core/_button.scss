@@ -26,13 +26,13 @@
     @apply w-8 h-8 md:w-8 md:h-8 laptop:w-10 laptop:h-10
     block text-center border
     rounded-tl-lg rounded-bl-lg
-    animate focus:outline-none flex-center
+    animate focus:outline-none flex-center;
   }
 
   p {
     @apply w-8 h-8 laptop:w-10 laptop:h-10
     md:w-8 md:h-8 pt-[4px]
-    m-0 border-t border-b text-center flex-center
+    m-0 border-t border-b text-center flex-center;
   }
 
   button:last-child {
@@ -41,7 +41,7 @@
     rounded-br-lg rounded-tr-lg
     flex-center animate
     text-center border
-    focus:outline-none
+    focus:outline-none;
   }
 }
 

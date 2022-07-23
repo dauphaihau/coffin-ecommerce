@@ -89,24 +89,24 @@ const SearchModal = () => {
                       </div>
                       <Col justify='center' classes='ml-4 w-[65%]'>
                         <Link href={`/product/${slugify(item.name)}`}>
-                          <Text h1 sx='[17px]' classes="m-0 text-gray-600">
+                          <Text h1 size={17} classes="m-0 text-gray-600">
                             {item.name}
                           </Text>
                         </Link>
                         <Row>
                           {item.salePrice ?
                             <>
-                              <Text sx='[12px]' lg='2xl' weight='bold'
+                              <Text size={12} lg='2xl' weight='bold'
                                     classes="tracking-wide">{DENOMINATION + item.salePrice}</Text>
                               {
                                 item.price
                                 &&
-                                <Text sx='[12px]' md='base' classes='ml-[10px] line-through text-gray-400'
+                                <Text size={12} md='base' classes='ml-[10px] line-through text-gray-400'
                                       weight='light'>
                                   {DENOMINATION + item.price}</Text>
                               }
                             </>
-                            : <Text sx='[12px]' lg='2xl' weight='bold'
+                            : <Text size={12} lg='2xl' weight='bold'
                                     classes="tracking-wide">{DENOMINATION + item.price}</Text>
                           }
                         </Row>

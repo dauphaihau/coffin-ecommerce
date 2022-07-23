@@ -1,7 +1,7 @@
 .form-textarea-input {
   @apply mb-3;
   label {
-    @apply inline-block mb-2 text-gray-700 dark:text-white;;
+    @apply inline-block mb-2 text-gray-700 dark:text-white;
   }
 
   textarea {
@@ -14,7 +14,7 @@
     dark:bg-gray-custom-898 dark:text-white
     focus:border-black focus:outline-none
     focus:ring-black dark:focus:border-0 dark:focus:right-0
-    hover:border-black
+    hover:border-black;
   }
 }
 

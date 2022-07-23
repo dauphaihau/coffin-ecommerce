@@ -76,7 +76,7 @@ const ProductsPage = ({categories = []}) => {
           <meta name="description" content='Coffin ECommerce - All categories'/>
           <meta property="og:title" content="Coffin ECommerce - All Index" key="title"/>
         </Head>
-        <CarouselBanner/>
+        {/*<CarouselBanner/>*/}
         <Grid sx={5} classes='min-h-full'>
           <Filters categories={categories} quantityProd={products.length} launchSticky={undefined}/>
           <Box classes="w-full col-span-4">
